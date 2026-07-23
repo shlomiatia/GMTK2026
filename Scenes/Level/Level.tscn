@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ckdng33a7yyf8" path="res://Scenes/Level/level.gd" id="1_level"]
 [ext_resource type="PackedScene" uid="uid://bp3bbqdl6drvw" path="res://Scenes/Options/Options.tscn" id="2_optns"]
 [ext_resource type="PackedScene" uid="uid://cppmmjbl4yf8e" path="res://Scenes/Overlay/Overlay.tscn" id="3_overlay"]
+[ext_resource type="PackedScene" uid="uid://bbrs3ouymdwi8" path="res://Scenes/ShakingCamera/ShakingCamera.tscn" id="4_qp1lj"]
 
 [node name="Level" type="Node2D" unique_id=1740858742]
 script = ExtResource("1_level")
@@ -10,3 +11,6 @@ script = ExtResource("1_level")
 [node name="Options" parent="." unique_id=616999487 instance=ExtResource("2_optns")]
 
 [node name="Overlay" parent="." unique_id=519770986 instance=ExtResource("3_overlay")]
+
+[node name="ShakingCamera" parent="." unique_id=805263946 instance=ExtResource("4_qp1lj")]
+anchor_mode = 0

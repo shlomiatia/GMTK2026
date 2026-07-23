@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bemlcu6wijhau" path="res://Scenes/Goal/Goal.tscn" id="3_s4w2k"]
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="4_nmbxs"]
 [ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="5_brt6t"]
+[ext_resource type="PackedScene" uid="uid://cwx0g1q1k8g26" path="res://Scenes/Hazard/Hazard.tscn" id="6_8dxvk"]
 
 [node name="Level1" type="Node2D" unique_id=1733532608]
 
@@ -34,3 +35,12 @@ pivot_offset = Vector2(20, 540)
 offset_right = 40.0
 offset_bottom = 1080.0
 pivot_offset = Vector2(20, 540)
+
+[node name="Hazard" parent="." unique_id=1355887644 instance=ExtResource("6_8dxvk")]
+position = Vector2(450, 808)
+
+[node name="Hazard2" parent="." unique_id=1348867309 instance=ExtResource("6_8dxvk")]
+position = Vector2(771, 321)
+
+[node name="Hazard3" parent="." unique_id=1611277834 instance=ExtResource("6_8dxvk")]
+position = Vector2(1443, 477)
