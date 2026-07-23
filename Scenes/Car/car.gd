@@ -10,6 +10,16 @@ var _is_launched: bool = false
 var _cranking: bool = false
 var _last_angle: float = NAN
 var _using_mouse: bool = false
+var _virtual_mouse_pos: Vector2 = Vector2.ZERO
+
+
+func _input(event: InputEvent) -> void:
+	if !_cranking || !_using_mouse || Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		return
+	if !(event is InputEventMouseMotion):
+		return
+	var relative := (event as InputEventMouseMotion).relative
+	_virtual_mouse_pos += get_viewport().get_canvas_transform().affine_inverse().basis_xform(relative)
 
 
 func _process(_delta: float) -> void:
@@ -17,9 +27,14 @@ func _process(_delta: float) -> void:
 		return
 	if Input.is_action_just_pressed("crank"):
 		_using_mouse = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+		if _using_mouse:
+			_virtual_mouse_pos = get_global_mouse_position()
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		_cranking = true
 		_last_angle = _get_crank_angle()
 	elif Input.is_action_just_released("crank"):
+		if _using_mouse:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		_cranking = false
 		_launch()
 	elif _cranking:
@@ -34,7 +49,7 @@ func _process(_delta: float) -> void:
 
 func _get_crank_angle() -> float:
 	if _using_mouse:
-		return (get_global_mouse_position() - global_position).angle()
+		return (_virtual_mouse_pos - global_position).angle()
 	var stick := Vector2(
 		Input.get_joy_axis(0, JOY_AXIS_RIGHT_X),
 		Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
