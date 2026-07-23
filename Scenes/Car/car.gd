@@ -10,6 +10,7 @@ signal enemy_killed(enemy: Enemy)
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
+@onready var _virtual_mouse_icon: Sprite2D = $VirtualMouseIcon
 
 var _crank_degrees: float = 0.0
 var _last_full_rotations: int = 0
@@ -35,6 +36,7 @@ func _input(event: InputEvent) -> void:
         return
     var relative := (event as InputEventMouseMotion).relative
     _virtual_mouse_pos += get_viewport().get_canvas_transform().affine_inverse().basis_xform(relative)
+    _virtual_mouse_icon.global_position = _virtual_mouse_pos
 
 
 func _process(_delta: float) -> void:
@@ -48,11 +50,14 @@ func _process(_delta: float) -> void:
         if _using_mouse:
             _virtual_mouse_pos = get_global_mouse_position()
             Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+            _virtual_mouse_icon.global_position = _virtual_mouse_pos
+            _virtual_mouse_icon.visible = true
         _cranking = true
         _last_angle = _get_crank_angle()
     elif Input.is_action_just_released("crank"):
         if _using_mouse:
             Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+            _virtual_mouse_icon.visible = false
         _cranking = false
         _launch()
     elif _cranking:
