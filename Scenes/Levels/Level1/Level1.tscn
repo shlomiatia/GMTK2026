@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="3_cmk6n"]
 [ext_resource type="PackedScene" uid="uid://bemlcu6wijhau" path="res://Scenes/Goal/Goal.tscn" id="4_goal"]
 
-[node name="Main" type="Node2D" unique_id=1733532608]
+[node name="Level1" type="Node2D" unique_id=1733532608]
 
 [node name="Level" parent="." unique_id=76539942 instance=ExtResource("0_level")]
 

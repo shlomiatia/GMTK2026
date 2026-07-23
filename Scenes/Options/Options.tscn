@@ -67,6 +67,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 tooltip_text = "Degrees per second the car rotates via left/right before launching, in Set Rotation On Start mode."
+mouse_filter = 1
 text = "Rotate Speed"
 
 [node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/RotateSpeedRow" unique_id=300000007]
@@ -84,6 +85,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 tooltip_text = "Degrees per second the car turns in flight: via left/right in Free Steering mode, or at full crank strength in Rotation Crank mode."
+mouse_filter = 1
 text = "Steer Speed"
 
 [node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/SteerSpeedRow" unique_id=300000010]
@@ -101,6 +103,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 tooltip_text = "Full crank rotations, in either direction, needed on the steering crank to reach full steering strength."
+mouse_filter = 1
 text = "Max Steer Crank Rotations"
 
 [node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/MaxSteerCrankRotationsRow" unique_id=300000013]
@@ -109,7 +112,6 @@ layout_mode = 2
 tooltip_text = "Full crank rotations, in either direction, needed on the steering crank to reach full steering strength."
 min_value = 1.0
 max_value = 10.0
-step = 1.0
 value = 1.0
 
 [node name="MaxCrankDegreesRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=1768078139]
@@ -119,6 +121,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 tooltip_text = "Total degrees the crank must be turned to reach full launch power."
+mouse_filter = 1
 text = "Max Crank Degrees"
 
 [node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/MaxCrankDegreesRow" unique_id=1544485290]
@@ -137,6 +140,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 tooltip_text = "Top launch speed, in pixels per second, reached when the crank is fully charged."
+mouse_filter = 1
 text = "Max Speed"
 
 [node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/MaxSpeedRow" unique_id=1612507117]
@@ -154,6 +158,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 tooltip_text = "How quickly the car decelerates, in pixels per second squared, after launch."
+mouse_filter = 1
 text = "Friction"
 
 [node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/FrictionRow" unique_id=2068715094]
@@ -171,6 +176,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 tooltip_text = "Seconds it takes the crank sprite to visually reset to zero after launching."
+mouse_filter = 1
 text = "Reset Crank Seconds"
 
 [node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/ResetCrankSecondsRow" unique_id=985944500]
@@ -186,13 +192,13 @@ value = 0.1
 layout_mode = 2
 text = "Estimated max travel distance: 2320 px"
 
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxCrankDegreesRow/SpinBox" to="." method="_on_max_crank_degrees_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxSpeedRow/SpinBox" to="." method="_on_max_speed_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/FrictionRow/SpinBox" to="." method="_on_friction_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/ResetCrankSecondsRow/SpinBox" to="." method="_on_reset_crank_seconds_spin_box_value_changed"]
 [connection signal="toggled" from="Center/Panel/Margin/VBox/SteeringModeRotateOnStart" to="." method="_on_steering_mode_rotate_on_start_toggled"]
 [connection signal="toggled" from="Center/Panel/Margin/VBox/SteeringModeFreeSteering" to="." method="_on_steering_mode_free_steering_toggled"]
 [connection signal="toggled" from="Center/Panel/Margin/VBox/SteeringModeRotationCrank" to="." method="_on_steering_mode_rotation_crank_toggled"]
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/RotateSpeedRow/SpinBox" to="." method="_on_rotate_speed_spin_box_value_changed"]
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/SteerSpeedRow/SpinBox" to="." method="_on_steer_speed_spin_box_value_changed"]
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxSteerCrankRotationsRow/SpinBox" to="." method="_on_max_steer_crank_rotations_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxCrankDegreesRow/SpinBox" to="." method="_on_max_crank_degrees_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxSpeedRow/SpinBox" to="." method="_on_max_speed_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/FrictionRow/SpinBox" to="." method="_on_friction_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/ResetCrankSecondsRow/SpinBox" to="." method="_on_reset_crank_seconds_spin_box_value_changed"]
