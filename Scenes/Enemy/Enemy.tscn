@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cue5dvs0pxdio"]
+
+[ext_resource type="Texture2D" uid="uid://dmmy7eaivbrei" path="res://Textures/enemy.png" id="1_i1u57"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
+radius = 31.0
+height = 158.0
+
+[sub_resource type="Animation" id="Animation_3l8kd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i1u57"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3l8kd"]
+_data = {
+&"RESET": SubResource("Animation_3l8kd"),
+&"die": SubResource("Animation_i1u57")
+}
+
+[node name="Enemy" type="Node2D" unique_id=155100240]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1979803929]
+texture = ExtResource("1_i1u57")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=394617163]
+motion_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=559145016]
+shape = SubResource("CapsuleShape2D_ebdu8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=650948351]
+libraries/ = SubResource("AnimationLibrary_3l8kd")
