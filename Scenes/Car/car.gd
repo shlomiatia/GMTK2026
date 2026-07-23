@@ -1,5 +1,8 @@
 class_name Car extends CharacterBody2D
 
+signal launched
+signal rested
+
 @onready var _crank_sprite: Sprite2D = $Crank
 @onready var _crank_area_shape: CollisionShape2D = $Crank/Area2D/CollisionShape2D
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
@@ -78,6 +81,7 @@ func _physics_process(delta: float) -> void:
 		_is_launched = false
 		_crank_degrees = 0.0
 		_last_full_rotations = 0
+		rested.emit()
 
 
 func _advance_crank(new_angle: float, prev_angle: float) -> void:
@@ -99,6 +103,7 @@ func _launch() -> void:
 	if _crank_degrees <= 0.0 || _is_launched:
 		return
 	_is_launched = true
+	launched.emit()
 	var tween := create_tween()
 	tween.tween_property(_crank_sprite, "rotation_degrees", 0.0, Constants.reset_crank_seconds).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	velocity = - transform.y * (_crank_degrees / Constants.max_crank_degrees) * Constants.max_speed

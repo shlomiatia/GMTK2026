@@ -12,7 +12,7 @@ size = Vector2(22, 88)
 radius = 34.0
 height = 160.0
 
-[node name="Car" type="CharacterBody2D" unique_id=1734870916]
+[node name="Car" type="CharacterBody2D" unique_id=1734870916 groups=["car"]]
 script = ExtResource("1_a0hww")
 
 [node name="Car" type="Sprite2D" parent="." unique_id=1086041179]

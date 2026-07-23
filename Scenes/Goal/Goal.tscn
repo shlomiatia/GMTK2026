@@ -1,17 +1,19 @@
 [gd_scene format=3 uid="uid://bemlcu6wijhau"]
 
 [ext_resource type="Texture2D" uid="uid://miq6gwk8yajo" path="res://Textures/goal.png" id="1_duylk"]
+[ext_resource type="Script" path="res://Scenes/Goal/goal.gd" id="2_goal"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
 radius = 56.008926
 
-[node name="Goal" type="Node2D" unique_id=1279707322]
+[node name="Goal" type="Node2D" unique_id=1279707322 groups=["goal"]]
+script = ExtResource("2_goal")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=561926439]
 position = Vector2(5, -5)
 texture = ExtResource("1_duylk")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1845656939]
+[node name="Area2D" type="Area2D" parent="." unique_id=1845656939]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1363928716]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1363928716]
 shape = SubResource("CircleShape2D_ebdu8")
