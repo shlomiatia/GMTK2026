@@ -10,11 +10,11 @@
 [node name="Level" parent="." unique_id=76539942 instance=ExtResource("0_level")]
 
 [node name="Goal" parent="." unique_id=669960687 instance=ExtResource("4_goal")]
-position = Vector2(1746, 166)
+position = Vector2(1539, 281)
 
 [node name="Car" parent="." unique_id=1734870916 instance=ExtResource("1_p8rbg")]
-position = Vector2(137, 956)
-rotation = 1.0471976
+position = Vector2(141, 957)
+rotation = 1.0995574
 motion_mode = 1
 
 [node name="ColorRect" parent="." unique_id=1335257777 instance=ExtResource("3_cmk6n")]
