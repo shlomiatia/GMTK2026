@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://rf87cou38mpc"]
+
+[ext_resource type="Texture2D" uid="uid://ngp0tyj7vkfs" path="res://Textures/car.png" id="1_6tdsx"]
+[ext_resource type="Script" uid="uid://ds6mkts7batl7" path="res://Scenes/Car/car.gd" id="1_a0hww"]
+[ext_resource type="Texture2D" uid="uid://caq0pbv2v7vb5" path="res://Textures/crank.png" id="2_a0hww"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
+radius = 34.0
+height = 160.0
+
+[node name="Car" type="CharacterBody2D" unique_id=1734870916]
+script = ExtResource("1_a0hww")
+
+[node name="Car" type="Sprite2D" parent="." unique_id=1086041179]
+texture = ExtResource("1_6tdsx")
+
+[node name="Crank" type="Sprite2D" parent="." unique_id=2007681203]
+texture = ExtResource("2_a0hww")
+offset = Vector2(0, 34)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1938754536]
+shape = SubResource("CapsuleShape2D_ebdu8")

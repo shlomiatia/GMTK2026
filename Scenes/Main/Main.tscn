@@ -1,3 +1,9 @@
 [gd_scene format=3 uid="uid://cqw2ch4jr4drk"]
 
+[ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="1_p8rbg"]
+
 [node name="Main" type="Node2D" unique_id=38408157]
+
+[node name="Car" parent="." unique_id=1734870916 instance=ExtResource("1_p8rbg")]
+position = Vector2(103, 972)
+rotation = 1.0427078
