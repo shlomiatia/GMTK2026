@@ -119,11 +119,10 @@ func _physics_process(delta: float) -> void:
     velocity = velocity.move_toward(Vector2.ZERO, Constants.friction * delta)
     var collision = move_and_collide(velocity * delta)
     if collision:
-        var enemy := _get_enemy(collision.get_collider())
+        var enemy := collision.get_collider() as Enemy
         if enemy && velocity.length() >= Constants.enemy_kill_speed:
             enemy.die()
             enemy_killed.emit(enemy)
-        
         velocity = velocity.bounce(collision.get_normal())
 
     if velocity == Vector2.ZERO:
@@ -171,11 +170,6 @@ func _advance_steer_crank(new_angle: float, prev_angle: float) -> void:
     if full > _last_full_steer_rotations:
         _audio_stream_player.play()
     _last_full_steer_rotations = full
-
-
-func _get_enemy(collider: Object) -> Enemy:
-    var node := collider as Node
-    return node.owner as Enemy if node && node.owner is Enemy else null
 
 
 func get_bounding_radius() -> float:

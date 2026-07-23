@@ -43,16 +43,14 @@ _data = {
 &"die": SubResource("Animation_i1u57")
 }
 
-[node name="Enemy" type="Node2D" unique_id=155100240 groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D" unique_id=155100240 groups=["enemy"]]
+motion_mode = 1
 script = ExtResource("2_enemy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1979803929]
 texture = ExtResource("1_i1u57")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=394617163]
-motion_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=559145016]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=559145016]
 shape = SubResource("CapsuleShape2D_ebdu8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=650948351]
