@@ -5,5 +5,5 @@
 [node name="Main" type="Node2D" unique_id=38408157]
 
 [node name="Car" parent="." unique_id=1734870916 instance=ExtResource("1_p8rbg")]
-position = Vector2(103, 972)
-rotation = 1.0427078
+position = Vector2(89.00003, 1015)
+rotation = 1.0471976
