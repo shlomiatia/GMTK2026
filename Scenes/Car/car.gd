@@ -2,6 +2,7 @@ class_name Car extends CharacterBody2D
 
 signal launched
 signal rested
+signal steer_phase_started
 
 @onready var _crank_sprite: Sprite2D = $Crank
 @onready var _crank_area_shape: CollisionShape2D = $Crank/Area2D/CollisionShape2D
@@ -16,6 +17,11 @@ var _last_angle: float = NAN
 var _using_mouse: bool = false
 var _virtual_mouse_pos: Vector2 = Vector2.ZERO
 
+var _steer_phase: bool = false
+var _steer_crank_degrees: float = 0.0
+var _last_full_steer_rotations: int = 0
+var _steer_multiplier: float = 0.0
+
 
 func _input(event: InputEvent) -> void:
 	if !_cranking || !_using_mouse || Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
@@ -26,9 +32,10 @@ func _input(event: InputEvent) -> void:
 	_virtual_mouse_pos += get_viewport().get_canvas_transform().affine_inverse().basis_xform(relative)
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if _is_launched:
 		return
+	_process_rotate_on_start(delta)
 	if Input.is_action_just_pressed("crank"):
 		var mouse_pressed := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 		if mouse_pressed && !_is_mouse_over_crank_area():
@@ -43,15 +50,28 @@ func _process(_delta: float) -> void:
 		if _using_mouse:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		_cranking = false
-		_launch()
+		if Constants.steering_mode == Constants.SteeringMode.ROTATION_CRANK && !_steer_phase && _crank_degrees > 0.0:
+			_steer_phase = true
+			steer_phase_started.emit()
+		else:
+			_launch()
 	elif _cranking:
 		var angle := _get_crank_angle()
 		if is_nan(angle):
 			_last_angle = NAN
 		else:
 			if !is_nan(_last_angle):
-				_advance_crank(angle, _last_angle)
+				if _steer_phase:
+					_advance_steer_crank(angle, _last_angle)
+				else:
+					_advance_crank(angle, _last_angle)
 			_last_angle = angle
+
+
+func _process_rotate_on_start(delta: float) -> void:
+	if Constants.steering_mode != Constants.SteeringMode.ROTATE_ON_START:
+		return
+	rotation += deg_to_rad(Constants.rotate_speed) * Input.get_axis("left", "right") * delta
 
 
 func _is_mouse_over_crank_area() -> bool:
@@ -75,12 +95,22 @@ func _get_crank_angle() -> float:
 func _physics_process(delta: float) -> void:
 	if !_is_launched:
 		return
+	var dir := 0.0
+	if Constants.steering_mode == Constants.SteeringMode.FREE_STEERING:
+		dir = Input.get_axis("left", "right")
+	elif Constants.steering_mode == Constants.SteeringMode.ROTATION_CRANK:
+		dir = _steer_multiplier
+	if dir != 0.0:
+		var steer_angle := deg_to_rad(Constants.steer_speed) * dir * delta
+		rotation += steer_angle
+		velocity = velocity.rotated(steer_angle)
 	velocity = velocity.move_toward(Vector2.ZERO, Constants.friction * delta)
 	move_and_slide()
 	if velocity == Vector2.ZERO:
 		_is_launched = false
 		_crank_degrees = 0.0
 		_last_full_rotations = 0
+		_steer_multiplier = 0.0
 		rested.emit()
 
 
@@ -99,11 +129,27 @@ func _advance_crank(new_angle: float, prev_angle: float) -> void:
 		_audio_stream_player.play()
 
 
+func _advance_steer_crank(new_angle: float, prev_angle: float) -> void:
+	var delta := wrapf(new_angle - prev_angle, -PI, PI)
+	var max_degrees := Constants.max_steer_crank_rotations * 360.0
+	_steer_crank_degrees = clampf(_steer_crank_degrees + rad_to_deg(delta), -max_degrees, max_degrees)
+	_crank_sprite.rotation_degrees = _steer_crank_degrees
+	var full := int(absf(_steer_crank_degrees) / 360.0)
+	if full > _last_full_steer_rotations:
+		_audio_stream_player.play()
+	_last_full_steer_rotations = full
+
+
 func _launch() -> void:
 	if _crank_degrees <= 0.0 || _is_launched:
 		return
+	if Constants.steering_mode == Constants.SteeringMode.ROTATION_CRANK:
+		_steer_multiplier = _steer_crank_degrees / (Constants.max_steer_crank_rotations * 360.0)
 	_is_launched = true
 	launched.emit()
 	var tween := create_tween()
 	tween.tween_property(_crank_sprite, "rotation_degrees", 0.0, Constants.reset_crank_seconds).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	velocity = - transform.y * (_crank_degrees / Constants.max_crank_degrees) * Constants.max_speed
+	_steer_phase = false
+	_steer_crank_degrees = 0.0
+	_last_full_steer_rotations = 0

@@ -17,6 +17,8 @@ func _ready() -> void:
 	_goal = get_tree().get_first_node_in_group("goal") as Goal
 	_car.launched.connect(_on_car_launched)
 	_car.rested.connect(_on_car_rested)
+	_car.steer_phase_started.connect(_on_car_steer_phase_started)
+	_show_crank_hint()
 
 
 func _process(_delta: float) -> void:
@@ -25,6 +27,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_car_launched() -> void:
+	_overlay.hide_message()
 	if _game_over:
 		return
 	_attempts_left -= 1
@@ -38,6 +41,17 @@ func _on_car_rested() -> void:
 		_win()
 	elif _attempts_left <= 0:
 		_lose()
+	else:
+		_show_crank_hint()
+
+
+func _on_car_steer_phase_started() -> void:
+	_overlay.show_message("Click on crank and rotate to steer")
+
+
+func _show_crank_hint() -> void:
+	if Constants.steering_mode == Constants.SteeringMode.ROTATION_CRANK:
+		_overlay.show_message("Click on crank and rotate clockwise to set speed")
 
 
 func _win() -> void:

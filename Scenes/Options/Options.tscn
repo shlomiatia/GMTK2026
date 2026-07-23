@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dphp4vxgbnort" path="res://Scenes/Options/options.gd" id="1_opt"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_steering_mode"]
+
 [node name="Options" type="CanvasLayer" unique_id=211288680]
 process_mode = 3
 layer = 10
@@ -37,6 +39,78 @@ theme_override_constants/separation = 12
 layout_mode = 2
 text = "Options"
 horizontal_alignment = 1
+
+[node name="SteeringModeLabel" type="Label" parent="Center/Panel/Margin/VBox" unique_id=300000001]
+layout_mode = 2
+text = "Steering Mode"
+
+[node name="SteeringModeRotateOnStart" type="CheckBox" parent="Center/Panel/Margin/VBox" unique_id=300000002]
+layout_mode = 2
+button_pressed = true
+button_group = SubResource("ButtonGroup_steering_mode")
+text = "Set Rotation On Start"
+
+[node name="SteeringModeFreeSteering" type="CheckBox" parent="Center/Panel/Margin/VBox" unique_id=300000003]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_steering_mode")
+text = "Free Steering"
+
+[node name="SteeringModeRotationCrank" type="CheckBox" parent="Center/Panel/Margin/VBox" unique_id=300000004]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_steering_mode")
+text = "Rotation Crank"
+
+[node name="RotateSpeedRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=300000005]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/RotateSpeedRow" unique_id=300000006]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "Degrees per second the car rotates via left/right before launching, in Set Rotation On Start mode."
+text = "Rotate Speed"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/RotateSpeedRow" unique_id=300000007]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "Degrees per second the car rotates via left/right before launching, in Set Rotation On Start mode."
+min_value = 10.0
+max_value = 720.0
+value = 10.0
+
+[node name="SteerSpeedRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=300000008]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/SteerSpeedRow" unique_id=300000009]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "Degrees per second the car turns in flight: via left/right in Free Steering mode, or at full crank strength in Rotation Crank mode."
+text = "Steer Speed"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/SteerSpeedRow" unique_id=300000010]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "Degrees per second the car turns in flight: via left/right in Free Steering mode, or at full crank strength in Rotation Crank mode."
+min_value = 10.0
+max_value = 720.0
+value = 10.0
+
+[node name="MaxSteerCrankRotationsRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=300000011]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/MaxSteerCrankRotationsRow" unique_id=300000012]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "Full crank rotations, in either direction, needed on the steering crank to reach full steering strength."
+text = "Max Steer Crank Rotations"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/MaxSteerCrankRotationsRow" unique_id=300000013]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "Full crank rotations, in either direction, needed on the steering crank to reach full steering strength."
+min_value = 1.0
+max_value = 10.0
+step = 1.0
+value = 1.0
 
 [node name="MaxCrankDegreesRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=1768078139]
 layout_mode = 2
@@ -116,3 +190,9 @@ text = "Estimated max travel distance: 2320 px"
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxSpeedRow/SpinBox" to="." method="_on_max_speed_spin_box_value_changed"]
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/FrictionRow/SpinBox" to="." method="_on_friction_spin_box_value_changed"]
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/ResetCrankSecondsRow/SpinBox" to="." method="_on_reset_crank_seconds_spin_box_value_changed"]
+[connection signal="toggled" from="Center/Panel/Margin/VBox/SteeringModeRotateOnStart" to="." method="_on_steering_mode_rotate_on_start_toggled"]
+[connection signal="toggled" from="Center/Panel/Margin/VBox/SteeringModeFreeSteering" to="." method="_on_steering_mode_free_steering_toggled"]
+[connection signal="toggled" from="Center/Panel/Margin/VBox/SteeringModeRotationCrank" to="." method="_on_steering_mode_rotation_crank_toggled"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/RotateSpeedRow/SpinBox" to="." method="_on_rotate_speed_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/SteerSpeedRow/SpinBox" to="." method="_on_steer_speed_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxSteerCrankRotationsRow/SpinBox" to="." method="_on_max_steer_crank_rotations_spin_box_value_changed"]

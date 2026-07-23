@@ -11,3 +11,7 @@ func set_attempts(value: int) -> void:
 func show_message(text: String) -> void:
 	_message_label.text = text
 	_message_label.visible = true
+
+
+func hide_message() -> void:
+	_message_label.visible = false
