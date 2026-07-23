@@ -1,9 +1,8 @@
 class_name Level extends Node2D
 
-@export var attempts: int = 2
+@export var time_limit: float = 10.0
 @export var next_level: PackedScene
 
-var _attempts_left: int
 var _game_over: bool = false
 var _won: bool = false
 var _car: Car
@@ -12,11 +11,13 @@ var _enemies: Array[Enemy] = []
 
 @onready var _overlay: Overlay = $Overlay
 @onready var _shaking_camera: ShakingCamera = $ShakingCamera
+@onready var _timer: Timer = $Timer
 
 
 func _ready() -> void:
-    _attempts_left = attempts
-    _overlay.set_attempts(_attempts_left)
+    _timer.wait_time = time_limit
+    _timer.timeout.connect(_on_timer_timeout)
+    _timer.start()
     _car = get_tree().get_first_node_in_group("car") as Car
     _goal = get_tree().get_first_node_in_group("goal") as Goal
     _car.launched.connect(_on_car_launched)
@@ -38,7 +39,10 @@ func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("restart"):
         get_tree().reload_current_scene()
         return
-    if !_game_over && _is_car_out_of_bounds():
+    if _game_over:
+        return
+    _overlay.set_time(_timer.time_left)
+    if _is_car_out_of_bounds():
         _lose()
 
 
@@ -50,10 +54,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_car_launched() -> void:
     _overlay.hide_message()
-    if _game_over:
-        return
-    _attempts_left -= 1
-    _overlay.set_attempts(_attempts_left)
 
 
 func _on_car_rested() -> void:
@@ -61,8 +61,13 @@ func _on_car_rested() -> void:
         return
     if _goal && _goal.has_car():
         _win()
-    elif _attempts_left <= 0:
-        _lose()
+
+
+func _on_timer_timeout() -> void:
+    if _game_over:
+        return
+    _car.freeze()
+    _lose()
 
 
 func _on_enemy_killed(_enemy: Enemy) -> void:

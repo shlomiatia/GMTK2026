@@ -6,13 +6,13 @@
 layer = 5
 script = ExtResource("1_overlay")
 
-[node name="AttemptsLabel" type="Label" parent="." unique_id=1581230]
+[node name="TimeLabel" type="Label" parent="." unique_id=1581230]
 offset_left = 48.0
 offset_top = 48.0
 offset_right = 344.0
 offset_bottom = 93.0
 theme_override_font_sizes/font_size = 32
-text = "Attempts: 2"
+text = "Time: 10"
 
 [node name="MessageLabel" type="Label" parent="." unique_id=2050366886]
 visible = false

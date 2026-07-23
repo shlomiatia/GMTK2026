@@ -1,11 +1,11 @@
 class_name Overlay extends CanvasLayer
 
-@onready var _attempts_label: Label = $AttemptsLabel
+@onready var _time_label: Label = $TimeLabel
 @onready var _message_label: Label = $MessageLabel
 
 
-func set_attempts(value: int) -> void:
-	_attempts_label.text = "Attempts: %d" % value
+func set_time(value: float) -> void:
+	_time_label.text = "Time: %d" % ceili(value)
 
 
 func show_message(text: String) -> void:

@@ -14,3 +14,7 @@ script = ExtResource("1_level")
 
 [node name="ShakingCamera" parent="." unique_id=805263946 instance=ExtResource("4_qp1lj")]
 anchor_mode = 0
+
+[node name="Timer" type="Timer" parent="." unique_id=2378501234]
+wait_time = 10.0
+one_shot = true

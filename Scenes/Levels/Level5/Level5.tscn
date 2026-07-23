@@ -14,6 +14,7 @@ point_count = 3
 [node name="Level5" type="Node2D" unique_id=1733532608]
 
 [node name="Level" parent="." unique_id=76539942 instance=ExtResource("1_y121f")]
+time_limit = 20.0
 
 [node name="Car" parent="." unique_id=1734870916 instance=ExtResource("4_rgk6l")]
 position = Vector2(141, 957)

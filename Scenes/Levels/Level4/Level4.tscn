@@ -10,7 +10,7 @@
 [node name="Level4" type="Node2D" unique_id=1733532608]
 
 [node name="Level" parent="." unique_id=76539942 instance=ExtResource("1_dswjp")]
-attempts = 3
+time_limit = 20.0
 next_level = ExtResource("2_th7ch")
 
 [node name="Goal" parent="." unique_id=669960687 instance=ExtResource("3_s4w2k")]

@@ -144,6 +144,13 @@ func get_bounding_radius() -> float:
     return (_collision_shape.shape as CapsuleShape2D).height / 2.0
 
 
+func freeze() -> void:
+    set_process(false)
+    set_physics_process(false)
+    set_process_input(false)
+    velocity = Vector2.ZERO
+
+
 func die() -> void:
     if _is_dead:
         return
