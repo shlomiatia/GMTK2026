@@ -13,3 +13,17 @@ rotation = 1.0471976
 [node name="Options" parent="." unique_id=331299620 instance=ExtResource("2_optns")]
 
 [node name="ColorRect" parent="." unique_id=1335257777 instance=ExtResource("3_cmk6n")]
+
+[node name="ColorRect4" parent="." unique_id=1610803056 instance=ExtResource("3_cmk6n")]
+offset_top = 1040.0
+offset_bottom = 1080.0
+
+[node name="ColorRect2" parent="." unique_id=71233046 instance=ExtResource("3_cmk6n")]
+offset_left = 1880.0
+offset_bottom = 1080.0
+pivot_offset = Vector2(20, 540)
+
+[node name="ColorRect3" parent="." unique_id=440384900 instance=ExtResource("3_cmk6n")]
+offset_right = 40.0
+offset_bottom = 1080.0
+pivot_offset = Vector2(20, 540)

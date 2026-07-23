@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://cwd2r6a7k8grb"]
 
+[ext_resource type="Script" uid="uid://c312co24mxwl1" path="res://Scenes/Wall/wall.gd" id="1_wall"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
+resource_local_to_scene = true
 size = Vector2(1920, 40)
 
 [node name="ColorRect" type="ColorRect" unique_id=1335257777]
 offset_right = 1920.0
 offset_bottom = 40.0
+pivot_offset = Vector2(960, 20)
 mouse_filter = 2
+script = ExtResource("1_wall")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=167042665]
 position = Vector2(960, 20)
