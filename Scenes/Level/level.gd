@@ -21,14 +21,12 @@ func _ready() -> void:
     _goal = get_tree().get_first_node_in_group("goal") as Goal
     _car.launched.connect(_on_car_launched)
     _car.rested.connect(_on_car_rested)
-    _car.steer_phase_started.connect(_on_car_steer_phase_started)
     _car.died.connect(_on_car_died)
     _car.enemy_killed.connect(_on_enemy_killed)
     for hazard in get_tree().get_nodes_in_group("hazard"):
         (hazard as Hazard).car_entered.connect(_on_car_entered_hazard)
     for enemy in get_tree().get_nodes_in_group("enemy"):
         _enemies.append(enemy as Enemy)
-    _show_crank_hint()
 
 
 func _process(_delta: float) -> void:
@@ -62,8 +60,6 @@ func _on_car_rested() -> void:
         _win()
     elif _attempts_left <= 0:
         _lose()
-    else:
-        _show_crank_hint()
 
 
 func _on_enemy_killed(_enemy: Enemy) -> void:
@@ -83,10 +79,6 @@ func _all_enemies_dead() -> bool:
     return true
 
 
-func _on_car_steer_phase_started() -> void:
-    _overlay.show_message("Click on crank and rotate to steer")
-
-
 func _on_car_entered_hazard(car: Car) -> void:
     if _game_over:
         return
@@ -103,11 +95,6 @@ func _on_car_died() -> void:
 func _is_car_out_of_bounds() -> bool:
     var bounds := get_viewport().get_visible_rect().grow(_car.get_bounding_radius())
     return !bounds.has_point(_car.global_position)
-
-
-func _show_crank_hint() -> void:
-    if Constants.steering_mode == Constants.SteeringMode.ROTATION_CRANK:
-        _overlay.show_message("Click on crank and rotate clockwise to set speed")
 
 
 func _win() -> void:
