@@ -4,8 +4,8 @@ signal launched
 signal rested
 signal steer_phase_started
 
-@onready var _crank_sprite: Sprite2D = $Crank
-@onready var _crank_area_shape: CollisionShape2D = $Crank/Area2D/CollisionShape2D
+@onready var _crank_sprite: Sprite2D = $Car/Crank
+@onready var _crank_area_shape: CollisionShape2D = $Car/Crank/Area2D/CollisionShape2D
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 

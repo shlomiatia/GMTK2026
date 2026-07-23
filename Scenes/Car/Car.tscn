@@ -12,19 +12,55 @@ size = Vector2(22, 88)
 radius = 34.0
 height = 160.0
 
+[sub_resource type="Animation" id="Animation_dfrl7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Car:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_sbu84"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Car:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dfrl7"]
+_data = {
+&"RESET": SubResource("Animation_dfrl7"),
+&"die": SubResource("Animation_sbu84")
+}
+
 [node name="Car" type="CharacterBody2D" unique_id=1734870916 groups=["car"]]
 script = ExtResource("1_a0hww")
 
 [node name="Car" type="Sprite2D" parent="." unique_id=1086041179]
 texture = ExtResource("1_6tdsx")
 
-[node name="Crank" type="Sprite2D" parent="." unique_id=2007681203]
+[node name="Crank" type="Sprite2D" parent="Car" unique_id=2007681203]
 texture = ExtResource("2_a0hww")
 offset = Vector2(0, 34)
 
-[node name="Area2D" type="Area2D" parent="Crank" unique_id=1141421083]
+[node name="Area2D" type="Area2D" parent="Car/Crank" unique_id=1141421083]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crank/Area2D" unique_id=1747547457]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Car/Crank/Area2D" unique_id=1747547457]
 position = Vector2(0, 34)
 shape = SubResource("RectangleShape2D_ebdu8")
 
@@ -33,3 +69,6 @@ shape = SubResource("CapsuleShape2D_ebdu8")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=285597634]
 stream = ExtResource("4_sbu84")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1089803300]
+libraries/ = SubResource("AnimationLibrary_dfrl7")
