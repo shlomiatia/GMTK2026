@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cwx0g1q1k8g26"]
 
 [ext_resource type="Texture2D" uid="uid://bpobbpfbfv17q" path="res://Textures/hazard.png" id="1_pea3d"]
+[ext_resource type="Script" uid="uid://dsvslfb06sn4h" path="res://Scenes/Hazard/hazard.gd" id="2_hazrd"]
 
 [sub_resource type="Animation" id="Animation_27cge"]
 length = 0.001
@@ -42,15 +43,17 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
 radius = 45.276924
 
-[node name="Hazard" type="Node2D" unique_id=1355887644]
+[node name="Hazard" type="Node2D" unique_id=1355887644 groups=["hazard"]]
+script = ExtResource("2_hazrd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=641072676]
 texture = ExtResource("1_pea3d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2004718583]
 libraries/ = SubResource("AnimationLibrary_rpeia")
+autoplay = &"default"
 
-[node name="StaticBody2D" type="Area2D" parent="." unique_id=978768792]
+[node name="Area2D" type="Area2D" parent="." unique_id=978768792]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=332632740]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=332632740]
 shape = SubResource("CircleShape2D_ebdu8")

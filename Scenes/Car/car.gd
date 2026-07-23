@@ -3,15 +3,18 @@ class_name Car extends CharacterBody2D
 signal launched
 signal rested
 signal steer_phase_started
+signal died
 
 @onready var _crank_sprite: Sprite2D = $Car/Crank
 @onready var _crank_area_shape: CollisionShape2D = $Car/Crank/Area2D/CollisionShape2D
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 var _crank_degrees: float = 0.0
 var _last_full_rotations: int = 0
 var _is_launched: bool = false
+var _is_dead: bool = false
 
 var _cranking: bool = false
 var _last_angle: float = NAN
@@ -24,6 +27,10 @@ var _last_full_steer_rotations: int = 0
 var _steer_multiplier: float = 0.0
 
 
+func _ready() -> void:
+	_animation_player.animation_finished.connect(_on_animation_finished)
+
+
 func _input(event: InputEvent) -> void:
 	if !_cranking || !_using_mouse || Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		return
@@ -34,7 +41,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
-	if _is_launched:
+	if _is_dead || _is_launched:
 		return
 	_process_rotate_on_start(delta)
 	if Input.is_action_just_pressed("crank"):
@@ -94,7 +101,7 @@ func _get_crank_angle() -> float:
 
 
 func _physics_process(delta: float) -> void:
-	if !_is_launched:
+	if _is_dead || !_is_launched:
 		return
 	var dir := 0.0
 	if Constants.steering_mode == Constants.SteeringMode.FREE_STEERING:
@@ -107,7 +114,6 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.rotated(steer_angle)
 	velocity = velocity.move_toward(Vector2.ZERO, Constants.friction * delta)
 	move_and_slide()
-	prints(velocity)
 	if velocity == Vector2.ZERO:
 		_is_launched = false
 		_crank_degrees = 0.0
@@ -144,6 +150,20 @@ func _advance_steer_crank(new_angle: float, prev_angle: float) -> void:
 
 func get_bounding_radius() -> float:
 	return (_collision_shape.shape as CapsuleShape2D).height / 2.0
+
+
+func die() -> void:
+	if _is_dead:
+		return
+	_is_dead = true
+	_is_launched = false
+	velocity = Vector2.ZERO
+	_animation_player.play("die")
+
+
+func _on_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "die":
+		died.emit()
 
 
 func _launch() -> void:
