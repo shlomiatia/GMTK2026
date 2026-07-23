@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://b4r6gugu440h5" path="res://Audio/crank.mp3" id="4_sbu84"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
-size = Vector2(14, 80)
+size = Vector2(22, 88)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
 radius = 34.0
