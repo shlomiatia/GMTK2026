@@ -7,6 +7,7 @@ signal steer_phase_started
 @onready var _crank_sprite: Sprite2D = $Crank
 @onready var _crank_area_shape: CollisionShape2D = $Crank/Area2D/CollisionShape2D
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 
 var _crank_degrees: float = 0.0
 var _last_full_rotations: int = 0
@@ -106,6 +107,7 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.rotated(steer_angle)
 	velocity = velocity.move_toward(Vector2.ZERO, Constants.friction * delta)
 	move_and_slide()
+	prints(velocity)
 	if velocity == Vector2.ZERO:
 		_is_launched = false
 		_crank_degrees = 0.0
@@ -138,6 +140,10 @@ func _advance_steer_crank(new_angle: float, prev_angle: float) -> void:
 	if full > _last_full_steer_rotations:
 		_audio_stream_player.play()
 	_last_full_steer_rotations = full
+
+
+func get_bounding_radius() -> float:
+	return (_collision_shape.shape as CapsuleShape2D).height / 2.0
 
 
 func _launch() -> void:
