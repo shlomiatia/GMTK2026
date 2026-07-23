@@ -30,6 +30,9 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+    if Input.is_action_just_pressed("skip_level"):
+        _go_to_next_level()
+        return
     if _won:
         return
     if Input.is_action_just_pressed("restart"):
