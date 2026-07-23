@@ -7,12 +7,12 @@
 
 [node name="Main" type="Node2D" unique_id=38408157]
 
+[node name="Options" parent="." unique_id=331299620 instance=ExtResource("2_optns")]
+
 [node name="Car" parent="." unique_id=1734870916 instance=ExtResource("1_p8rbg")]
 position = Vector2(210.99997, 244.00006)
 rotation = -0.22753078
 motion_mode = 1
-
-[node name="Options" parent="." unique_id=331299620 instance=ExtResource("2_optns")]
 
 [node name="ColorRect" parent="." unique_id=1335257777 instance=ExtResource("3_cmk6n")]
 
