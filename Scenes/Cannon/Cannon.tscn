@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://ccy7aq7vhw0s6"]
 
+[ext_resource type="Texture2D" uid="uid://b4v3k0gjmd865" path="res://Textures/turret.png" id="1_0snwq"]
+
 [node name="Cannon" type="Node2D" unique_id=335970389]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=385181641]
+texture = ExtResource("1_0snwq")

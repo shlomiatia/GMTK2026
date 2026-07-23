@@ -8,7 +8,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_58vmc"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 297, 155, 0, 0, 0, 0, 1726, 157, 0, 0, 0, 0, 1735, 983)
+"points": PackedVector2Array(0, 0, 0, 0, 300, 150, 0, 0, 0, 0, 1730, 150, 0, 0, 0, 0, 1730, 980)
 }
 point_count = 3
 
@@ -44,3 +44,4 @@ curve = SubResource("Curve2D_58vmc")
 
 [node name="Enemy" parent="Path2D" unique_id=155100240 instance=ExtResource("5_58vmc")]
 rotation = 1.5707964
+loop = false
