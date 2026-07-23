@@ -3,6 +3,7 @@ class_name Car extends CharacterBody2D
 const MAX_CRANK_DEGREES := 5.0 * 360.0
 const MAX_SPEED := 1180.0
 const FRICTION := 300.0
+const RESET_CRANK_SECONDS := 1.0
 
 @onready var _crank_sprite: Sprite2D = $Crank
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
@@ -35,7 +36,6 @@ func _physics_process(delta: float) -> void:
         _is_launched = false
         _crank_degrees = 0.0
         _last_full_rotations = 0
-        _crank_sprite.rotation_degrees = 0.0
 
 
 func _handle_mouse_input() -> void:
@@ -97,4 +97,6 @@ func _launch() -> void:
     if _crank_degrees <= 0.0 || _is_launched:
         return
     _is_launched = true
+    var tween := create_tween()
+    tween.tween_property(_crank_sprite, "rotation_degrees", 0.0, RESET_CRANK_SECONDS).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
     velocity = - transform.y * (_crank_degrees / MAX_CRANK_DEGREES) * MAX_SPEED
