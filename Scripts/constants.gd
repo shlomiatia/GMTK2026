@@ -11,3 +11,5 @@ static var rotate_on_start := true
 static var rotate_speed := 120.0
 static var steer_speed := 120.0
 static var max_steer_crank_rotations := 3.0
+static var enemy_speed := 200.0
+static var enemy_kill_speed := 600.0

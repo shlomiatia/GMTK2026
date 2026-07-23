@@ -8,6 +8,7 @@ var _game_over: bool = false
 var _won: bool = false
 var _car: Car
 var _goal: Goal
+var _enemies: Array[Enemy] = []
 
 @onready var _overlay: Overlay = $Overlay
 @onready var _shaking_camera: ShakingCamera = $ShakingCamera
@@ -22,8 +23,11 @@ func _ready() -> void:
     _car.rested.connect(_on_car_rested)
     _car.steer_phase_started.connect(_on_car_steer_phase_started)
     _car.died.connect(_on_car_died)
+    _car.enemy_killed.connect(_on_enemy_killed)
     for hazard in get_tree().get_nodes_in_group("hazard"):
         (hazard as Hazard).car_entered.connect(_on_car_entered_hazard)
+    for enemy in get_tree().get_nodes_in_group("enemy"):
+        _enemies.append(enemy as Enemy)
     _show_crank_hint()
 
 
@@ -43,7 +47,6 @@ func _unhandled_input(event: InputEvent) -> void:
     if event.is_pressed() && !event.is_echo():
         _go_to_next_level()
 
-
 func _on_car_launched() -> void:
     _overlay.hide_message()
     if _game_over:
@@ -55,12 +58,29 @@ func _on_car_launched() -> void:
 func _on_car_rested() -> void:
     if _game_over:
         return
-    if _goal.has_car():
+    if _goal && _goal.has_car():
         _win()
     elif _attempts_left <= 0:
         _lose()
     else:
         _show_crank_hint()
+
+
+func _on_enemy_killed(_enemy: Enemy) -> void:
+    if _game_over:
+        return
+    _shaking_camera.start_screen_shake()
+    if _all_enemies_dead():
+        _win()
+
+
+func _all_enemies_dead() -> bool:
+    if _enemies.is_empty():
+        return false
+    for enemy in _enemies:
+        if !enemy.is_dead():
+            return false
+    return true
 
 
 func _on_car_steer_phase_started() -> void:

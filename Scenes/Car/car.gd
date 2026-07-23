@@ -4,6 +4,7 @@ signal launched
 signal rested
 signal steer_phase_started
 signal died
+signal enemy_killed(enemy: Enemy)
 
 @onready var _crank_sprite: Sprite2D = $Car/Crank
 @onready var _crank_area_shape: CollisionShape2D = $Car/Crank/Area2D/CollisionShape2D
@@ -118,6 +119,11 @@ func _physics_process(delta: float) -> void:
     velocity = velocity.move_toward(Vector2.ZERO, Constants.friction * delta)
     var collision = move_and_collide(velocity * delta)
     if collision:
+        var enemy := _get_enemy(collision.get_collider())
+        if enemy && velocity.length() >= Constants.enemy_kill_speed:
+            enemy.die()
+            enemy_killed.emit(enemy)
+        
         velocity = velocity.bounce(collision.get_normal())
 
     if velocity == Vector2.ZERO:
@@ -165,6 +171,11 @@ func _advance_steer_crank(new_angle: float, prev_angle: float) -> void:
     if full > _last_full_steer_rotations:
         _audio_stream_player.play()
     _last_full_steer_rotations = full
+
+
+func _get_enemy(collider: Object) -> Enemy:
+    var node := collider as Node
+    return node.owner as Enemy if node && node.owner is Enemy else null
 
 
 func get_bounding_radius() -> float:

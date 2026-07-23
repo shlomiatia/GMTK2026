@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cue5dvs0pxdio"]
 
 [ext_resource type="Texture2D" uid="uid://dmmy7eaivbrei" path="res://Textures/enemy.png" id="1_i1u57"]
+[ext_resource type="Script" path="res://Scenes/Enemy/enemy.gd" id="2_enemy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
 radius = 31.0
@@ -42,7 +43,8 @@ _data = {
 &"die": SubResource("Animation_i1u57")
 }
 
-[node name="Enemy" type="Node2D" unique_id=155100240]
+[node name="Enemy" type="Node2D" unique_id=155100240 groups=["enemy"]]
+script = ExtResource("2_enemy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1979803929]
 texture = ExtResource("1_i1u57")
