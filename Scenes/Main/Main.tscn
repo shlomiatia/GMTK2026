@@ -3,12 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="1_p8rbg"]
 [ext_resource type="PackedScene" uid="uid://bp3bbqdl6drvw" path="res://Scenes/Options/Options.tscn" id="2_optns"]
 [ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="3_cmk6n"]
+[ext_resource type="Texture2D" uid="uid://miq6gwk8yajo" path="res://Textures/goal.png" id="4_i3fi7"]
 
 [node name="Main" type="Node2D" unique_id=38408157]
 
 [node name="Car" parent="." unique_id=1734870916 instance=ExtResource("1_p8rbg")]
-position = Vector2(148, 960.00006)
-rotation = 1.0471976
+position = Vector2(210.99997, 244.00006)
+rotation = -0.22753078
+motion_mode = 1
 
 [node name="Options" parent="." unique_id=331299620 instance=ExtResource("2_optns")]
 
@@ -27,3 +29,7 @@ pivot_offset = Vector2(20, 540)
 offset_right = 40.0
 offset_bottom = 1080.0
 pivot_offset = Vector2(20, 540)
+
+[node name="Goal" type="Sprite2D" parent="." unique_id=669960687]
+position = Vector2(1630, 206)
+texture = ExtResource("4_i3fi7")
