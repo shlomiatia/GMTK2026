@@ -22,9 +22,8 @@ func _ready() -> void:
 	_steer_speed_spin_box.value = Constants.steer_speed
 	_max_steer_crank_rotations_spin_box.value = Constants.max_steer_crank_rotations
 	_update_distance_label()
+	_steering_mode_rotate_on_start.button_pressed = Constants.rotate_on_start
 	match Constants.steering_mode:
-		Constants.SteeringMode.ROTATE_ON_START:
-			_steering_mode_rotate_on_start.button_pressed = true
 		Constants.SteeringMode.FREE_STEERING:
 			_steering_mode_free_steering.button_pressed = true
 		Constants.SteeringMode.ROTATION_CRANK:
@@ -73,8 +72,11 @@ func _on_max_steer_crank_rotations_spin_box_value_changed(value: float) -> void:
 
 
 func _on_steering_mode_rotate_on_start_toggled(button_pressed: bool) -> void:
-	if button_pressed:
-		_set_steering_mode(Constants.SteeringMode.ROTATE_ON_START)
+	if Constants.rotate_on_start == button_pressed:
+		return
+	Constants.rotate_on_start = button_pressed
+	get_tree().paused = false
+	get_tree().reload_current_scene()
 
 
 func _on_steering_mode_free_steering_toggled(button_pressed: bool) -> void:

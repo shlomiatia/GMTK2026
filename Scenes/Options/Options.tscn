@@ -47,11 +47,11 @@ text = "Steering Mode"
 [node name="SteeringModeRotateOnStart" type="CheckBox" parent="Center/Panel/Margin/VBox" unique_id=300000002]
 layout_mode = 2
 button_pressed = true
-button_group = SubResource("ButtonGroup_steering_mode")
 text = "Set Rotation On Start"
 
 [node name="SteeringModeFreeSteering" type="CheckBox" parent="Center/Panel/Margin/VBox" unique_id=300000003]
 layout_mode = 2
+button_pressed = true
 button_group = SubResource("ButtonGroup_steering_mode")
 text = "Free Steering"
 
