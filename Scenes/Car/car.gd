@@ -1,6 +1,7 @@
 class_name Car extends CharacterBody2D
 
 @onready var _crank_sprite: Sprite2D = $Crank
+@onready var _crank_area_shape: CollisionShape2D = $Crank/Area2D/CollisionShape2D
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var _crank_degrees: float = 0.0
@@ -26,7 +27,10 @@ func _process(_delta: float) -> void:
 	if _is_launched:
 		return
 	if Input.is_action_just_pressed("crank"):
-		_using_mouse = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+		var mouse_pressed := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+		if mouse_pressed && !_is_mouse_over_crank_area():
+			return
+		_using_mouse = mouse_pressed
 		if _using_mouse:
 			_virtual_mouse_pos = get_global_mouse_position()
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -45,6 +49,12 @@ func _process(_delta: float) -> void:
 			if !is_nan(_last_angle):
 				_advance_crank(angle, _last_angle)
 			_last_angle = angle
+
+
+func _is_mouse_over_crank_area() -> bool:
+	var half := (_crank_area_shape.shape as RectangleShape2D).size / 2.0
+	var local := _crank_area_shape.to_local(get_global_mouse_position())
+	return absf(local.x) <= half.x && absf(local.y) <= half.y
 
 
 func _get_crank_angle() -> float:

@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://caq0pbv2v7vb5" path="res://Textures/crank.png" id="2_a0hww"]
 [ext_resource type="AudioStream" uid="uid://b4r6gugu440h5" path="res://Audio/crank.mp3" id="4_sbu84"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
+size = Vector2(14, 80)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
 radius = 34.0
 height = 160.0
@@ -18,6 +21,12 @@ texture = ExtResource("1_6tdsx")
 [node name="Crank" type="Sprite2D" parent="." unique_id=2007681203]
 texture = ExtResource("2_a0hww")
 offset = Vector2(0, 34)
+
+[node name="Area2D" type="Area2D" parent="Crank" unique_id=1141421083]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crank/Area2D" unique_id=1747547457]
+position = Vector2(0, 34)
+shape = SubResource("RectangleShape2D_ebdu8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1938754536]
 shape = SubResource("CapsuleShape2D_ebdu8")
