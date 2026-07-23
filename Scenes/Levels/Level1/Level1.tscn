@@ -9,7 +9,6 @@
 [node name="Level1" type="Node2D" unique_id=1733532608]
 
 [node name="Level" parent="." unique_id=76539942 instance=ExtResource("0_level")]
-process_mode = 0
 time_limit = 20.0
 next_level = ExtResource("5_level2")
 

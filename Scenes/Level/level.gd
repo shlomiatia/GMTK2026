@@ -26,6 +26,8 @@ func _ready() -> void:
     _car.enemy_killed.connect(_on_enemy_killed)
     for hazard in get_tree().get_nodes_in_group("hazard"):
         (hazard as Hazard).car_entered.connect(_on_car_entered_hazard)
+    for gear in get_tree().get_nodes_in_group("gear"):
+        (gear as Gear).collected.connect(_on_gear_collected)
     for enemy in get_tree().get_nodes_in_group("enemy"):
         _enemies.append(enemy as Enemy)
 
@@ -92,6 +94,12 @@ func _on_car_entered_hazard(car: Car) -> void:
         return
     car.die()
     _shaking_camera.start_screen_shake()
+
+
+func _on_gear_collected() -> void:
+    if _game_over:
+        return
+    _timer.start(_timer.time_left + Constants.gear_time_bonus)
 
 
 func _on_car_died() -> void:

@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b6wfreo7ajycp" path="res://Scenes/Level/Level.tscn" id="1_y121f"]
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="4_rgk6l"]
+[ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="5_6wcpx"]
 [ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="5_58vmc"]
 [ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="5_ohevy"]
 
@@ -42,3 +43,7 @@ curve = SubResource("Curve2D_58vmc")
 
 [node name="Enemy" parent="Path2D" unique_id=155100240 instance=ExtResource("5_58vmc")]
 rotation = 1.5707964
+
+[node name="Gear" parent="." unique_id=1297575356 instance=ExtResource("5_6wcpx")]
+position = Vector2(749, 837)
+scale = Vector2(1, 1)
