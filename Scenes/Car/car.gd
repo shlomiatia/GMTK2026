@@ -1,10 +1,5 @@
 class_name Car extends CharacterBody2D
 
-const MAX_CRANK_DEGREES := 5.0 * 360.0
-const MAX_SPEED := 1180.0
-const FRICTION := 300.0
-const RESET_CRANK_SECONDS := 1.0
-
 @onready var _crank_sprite: Sprite2D = $Crank
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
@@ -52,7 +47,7 @@ func _get_crank_angle() -> float:
 func _physics_process(delta: float) -> void:
 	if !_is_launched:
 		return
-	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	velocity = velocity.move_toward(Vector2.ZERO, Constants.friction * delta)
 	move_and_slide()
 	if velocity == Vector2.ZERO:
 		_is_launched = false
@@ -64,7 +59,7 @@ func _advance_crank(new_angle: float, prev_angle: float) -> void:
 	var delta := wrapf(new_angle - prev_angle, -PI, PI)
 	if delta <= 0.0:
 		return
-	var to_add := minf(rad_to_deg(delta), MAX_CRANK_DEGREES - _crank_degrees)
+	var to_add := minf(rad_to_deg(delta), Constants.max_crank_degrees - _crank_degrees)
 	if to_add <= 0.0:
 		return
 	_crank_degrees += to_add
@@ -80,5 +75,5 @@ func _launch() -> void:
 		return
 	_is_launched = true
 	var tween := create_tween()
-	tween.tween_property(_crank_sprite, "rotation_degrees", 0.0, RESET_CRANK_SECONDS).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	velocity = - transform.y * (_crank_degrees / MAX_CRANK_DEGREES) * MAX_SPEED
+	tween.tween_property(_crank_sprite, "rotation_degrees", 0.0, Constants.reset_crank_seconds).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	velocity = - transform.y * (_crank_degrees / Constants.max_crank_degrees) * Constants.max_speed

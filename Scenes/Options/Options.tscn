@@ -1,3 +1,118 @@
 [gd_scene format=3 uid="uid://bp3bbqdl6drvw"]
 
-[node name="Options" type="Node2D" unique_id=211288680]
+[ext_resource type="Script" uid="uid://dphp4vxgbnort" path="res://Scenes/Options/options.gd" id="1_opt"]
+
+[node name="Options" type="CanvasLayer" unique_id=211288680]
+process_mode = 3
+layer = 10
+visible = false
+script = ExtResource("1_opt")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=1061460685]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=846353865]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=418608671]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Center/Panel" unique_id=1999554019]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="Center/Panel/Margin" unique_id=2146016785]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Center/Panel/Margin/VBox" unique_id=130107128]
+layout_mode = 2
+text = "Options"
+horizontal_alignment = 1
+
+[node name="MaxCrankDegreesRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=1768078139]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/MaxCrankDegreesRow" unique_id=973664932]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "Total degrees the crank must be turned to reach full launch power."
+text = "Max Crank Degrees"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/MaxCrankDegreesRow" unique_id=1544485290]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "Total degrees the crank must be turned to reach full launch power."
+min_value = 360.0
+max_value = 3600.0
+step = 360.0
+value = 360.0
+
+[node name="MaxSpeedRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=2046202302]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/MaxSpeedRow" unique_id=1214035762]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "Top launch speed, in pixels per second, reached when the crank is fully charged."
+text = "Max Speed"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/MaxSpeedRow" unique_id=1612507117]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "Top launch speed, in pixels per second, reached when the crank is fully charged."
+min_value = 100.0
+max_value = 5000.0
+value = 100.0
+
+[node name="FrictionRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=1446116678]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/FrictionRow" unique_id=178690060]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "How quickly the car decelerates, in pixels per second squared, after launch."
+text = "Friction"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/FrictionRow" unique_id=2068715094]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "How quickly the car decelerates, in pixels per second squared, after launch."
+min_value = 10.0
+max_value = 2000.0
+value = 10.0
+
+[node name="ResetCrankSecondsRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472938]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/ResetCrankSecondsRow" unique_id=1698417536]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "Seconds it takes the crank sprite to visually reset to zero after launching."
+text = "Reset Crank Seconds"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/ResetCrankSecondsRow" unique_id=985944500]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "Seconds it takes the crank sprite to visually reset to zero after launching."
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 0.1
+
+[node name="DistanceLabel" type="Label" parent="Center/Panel/Margin/VBox" unique_id=50230963]
+layout_mode = 2
+text = "Estimated max travel distance: 2320 px"
+
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxCrankDegreesRow/SpinBox" to="." method="_on_max_crank_degrees_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxSpeedRow/SpinBox" to="." method="_on_max_speed_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/FrictionRow/SpinBox" to="." method="_on_friction_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/ResetCrankSecondsRow/SpinBox" to="." method="_on_reset_crank_seconds_spin_box_value_changed"]
