@@ -9,6 +9,7 @@ var _car: Car
 @onready var _overlay: Overlay = $Overlay
 @onready var _shaking_camera: ShakingCamera = $ShakingCamera
 @onready var _timer: Timer = $Timer
+@onready var _time_progress_bar: TextureProgressBar = $Time
 
 
 func _ready() -> void:
@@ -38,7 +39,7 @@ func _process(_delta: float) -> void:
         return
     if _game_over:
         return
-    _overlay.set_time(_timer.time_left)
+    _time_progress_bar.value = lerpf(Constants.time_progress_min_value, Constants.time_progress_max_value, _timer.time_left / time_limit)
     if _is_car_out_of_bounds():
         _lose()
 
