@@ -7,6 +7,7 @@ const ARRIVAL_DISTANCE := 4.0
 @export var loop: bool = true
 
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var _collision_shape2: CollisionShape2D = $CollisionShape2D2
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 var _path: Path2D
@@ -77,6 +78,7 @@ func die() -> void:
 	_is_dead = true
 	velocity = Vector2.ZERO
 	_collision_shape.set_deferred("disabled", true)
+	_collision_shape2.set_deferred("disabled", true)
 	_animation_player.play("die")
 	if _path_follow:
 		_path_follow.queue_free()
