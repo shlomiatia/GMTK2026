@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bfhqjunylvsn3"]
-
-[node name="CircularWall" type="StaticBody2D" unique_id=623488086]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1651412905]
-polygon = PackedVector2Array(247, -138, 796, -203, 592, 253)

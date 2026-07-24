@@ -4,9 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://c8eu4ktdrg8xd" path="res://Art/Assets/Play Scene/Items/Stairs.png" id="2_ljf6b"]
 [ext_resource type="Texture2D" uid="uid://b2ihfstxt4num" path="res://Art/Assets/Play Scene/Items/Stairs_Locked.png" id="3_cq5p3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_asnge"]
-size = Vector2(86, 88)
-
 [sub_resource type="Animation" id="Animation_v2brs"]
 length = 0.001
 tracks/0/type = "value"
@@ -58,8 +55,8 @@ texture = ExtResource("3_cq5p3")
 collision_layer = 16
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1363928716]
-shape = SubResource("RectangleShape2D_asnge")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=1746325638]
+polygon = PackedVector2Array(-43, -10, -25, -10, -19, -24, 5, -24, 12, -43, 43, -44, 43, 44, -42, 44)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=591045121]
 libraries/ = SubResource("AnimationLibrary_8wmlk")
