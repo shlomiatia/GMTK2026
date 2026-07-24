@@ -9,4 +9,6 @@
 texture = ExtResource("1_k0bsa")
 
 [node name="Turret" type="Sprite2D" parent="." unique_id=1986524268]
+position = Vector2(0, -12)
 texture = ExtResource("2_l6qg3")
+offset = Vector2(0, 12)
