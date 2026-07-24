@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cppmmjbl4yf8e" path="res://Scenes/Overlay/Overlay.tscn" id="3_overlay"]
 [ext_resource type="PackedScene" uid="uid://bbrs3ouymdwi8" path="res://Scenes/ShakingCamera/ShakingCamera.tscn" id="4_qp1lj"]
 [ext_resource type="Texture2D" uid="uid://c17yvvwu6qf5c" path="res://Art/Assets/Play Scene/TEMP Environment.png" id="5_k2uda"]
+[ext_resource type="PackedScene" uid="uid://b0q6g075ds0mt" path="res://Scenes/Arena/Arena.tscn" id="6_ksici"]
 
 [node name="Level" type="Node2D" unique_id=1740858742]
 script = ExtResource("1_level")
@@ -24,9 +25,7 @@ one_shot = true
 position = Vector2(960, 540)
 texture = ExtResource("5_k2uda")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=865415568]
+[node name="Arena" parent="." unique_id=2025930274 instance=ExtResource("6_ksici")]
 position = Vector2(960, 540)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1097397002]
-build_mode = 1
-polygon = PackedVector2Array(287, -471, 534, -279, 497, 468, -279, 515, -659, 154, -385, -436)
+radius = 532.0
+number_of_points = 48
