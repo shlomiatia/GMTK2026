@@ -58,7 +58,9 @@ func _physics_process(delta: float) -> void:
 	var to_target := _path_follow.global_position - global_position
 	var distance := to_target.length()
 	if distance > 0.0:
-		rotation = to_target.angle() - PI / 2.0
+		var target_rotation := to_target.angle() - PI / 2.0
+		var max_delta := deg_to_rad(Constants.enemy_turn_speed_degrees) * delta
+		rotation = rotate_toward(rotation, target_rotation, max_delta)
 	if distance <= ARRIVAL_DISTANCE:
 		return
 	velocity = to_target.normalized() * Constants.enemy_speed

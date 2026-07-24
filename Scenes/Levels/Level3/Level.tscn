@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://vfkry2a5qeii" path="res://Art/Assets/Play Scene/Levels/Lv 3.png" id="2_hy6v2"]
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_wsy0h"]
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="4_fhulb"]
+[ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="5_txuk4"]
 [ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="6_cumqq"]
 
 [sub_resource type="Curve2D" id="Curve2D_hy6v2"]
@@ -32,3 +33,27 @@ curve = SubResource("Curve2D_hy6v2")
 
 [node name="Enemy" parent="Path2D" unique_id=155100240 instance=ExtResource("6_cumqq")]
 loop = false
+
+[node name="Gear" parent="." unique_id=347710995 instance=ExtResource("5_txuk4")]
+position = Vector2(748, 826)
+
+[node name="Gear2" parent="." unique_id=924193619 instance=ExtResource("5_txuk4")]
+position = Vector2(612, 693)
+
+[node name="Gear3" parent="." unique_id=1730969799 instance=ExtResource("5_txuk4")]
+position = Vector2(615, 375)
+
+[node name="Gear4" parent="." unique_id=115460767 instance=ExtResource("5_txuk4")]
+position = Vector2(775, 195)
+
+[node name="Gear5" parent="." unique_id=795524389 instance=ExtResource("5_txuk4")]
+position = Vector2(1149, 825)
+
+[node name="Gear6" parent="." unique_id=84348242 instance=ExtResource("5_txuk4")]
+position = Vector2(1289, 670)
+
+[node name="Gear7" parent="." unique_id=255770415 instance=ExtResource("5_txuk4")]
+position = Vector2(1266, 379)
+
+[node name="Gear8" parent="." unique_id=828618247 instance=ExtResource("5_txuk4")]
+position = Vector2(1162, 201)

@@ -2,10 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://dxxifm4glmkiu" path="res://Art/Assets/Play Scene/Enemies/Minion.png" id="2_3l8kd"]
 [ext_resource type="Script" uid="uid://bdnryw5enmmnf" path="res://Scenes/Enemy/enemy.gd" id="2_enemy"]
+[ext_resource type="Texture2D" uid="uid://ed4em35gd3dy" path="res://Art/Assets/Play Scene/Items/Key.png" id="3_e0oyi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
 radius = 20.0
 height = 94.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
+radius = 32.0
 
 [sub_resource type="Animation" id="Animation_3l8kd"]
 length = 0.001
@@ -43,9 +47,6 @@ _data = {
 &"die": SubResource("Animation_i1u57")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
-radius = 32.0
-
 [node name="Enemy" type="CharacterBody2D" unique_id=155100240 groups=["enemy"]]
 collision_layer = 8
 motion_mode = 1
@@ -56,13 +57,19 @@ position = Vector2(-2, 0)
 texture = ExtResource("2_3l8kd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=559145016]
+top_level = true
 position = Vector2(0, 2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_ebdu8")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1075709246]
+top_level = true
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_ebdu8")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=650948351]
 libraries/ = SubResource("AnimationLibrary_3l8kd")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1075709246]
-position = Vector2(0, 2)
-shape = SubResource("CircleShape2D_ebdu8")
+[node name="Key" type="Sprite2D" parent="." unique_id=384311951]
+position = Vector2(0, -80)
+texture = ExtResource("3_e0oyi")

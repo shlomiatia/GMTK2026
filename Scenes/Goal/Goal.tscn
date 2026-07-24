@@ -2,9 +2,47 @@
 
 [ext_resource type="Script" uid="uid://d0x6tv8t8x0cx" path="res://Scenes/Goal/goal.gd" id="2_goal"]
 [ext_resource type="Texture2D" uid="uid://c8eu4ktdrg8xd" path="res://Art/Assets/Play Scene/Items/Stairs.png" id="2_ljf6b"]
+[ext_resource type="Texture2D" uid="uid://b2ihfstxt4num" path="res://Art/Assets/Play Scene/Items/Stairs_Locked.png" id="3_cq5p3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asnge"]
 size = Vector2(86, 88)
+
+[sub_resource type="Animation" id="Animation_v2brs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Locked:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i6c4o"]
+resource_name = "unlock"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Locked:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8wmlk"]
+_data = {
+&"RESET": SubResource("Animation_v2brs"),
+&"unlock": SubResource("Animation_i6c4o")
+}
 
 [node name="Goal" type="Node2D" unique_id=1279707322 groups=["goal"]]
 script = ExtResource("2_goal")
@@ -12,9 +50,16 @@ script = ExtResource("2_goal")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=561926439]
 texture = ExtResource("2_ljf6b")
 
+[node name="Locked" type="Sprite2D" parent="." unique_id=1613388447]
+visible = false
+texture = ExtResource("3_cq5p3")
+
 [node name="Area2D" type="Area2D" parent="." unique_id=1845656939]
 collision_layer = 16
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1363928716]
 shape = SubResource("RectangleShape2D_asnge")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=591045121]
+libraries/ = SubResource("AnimationLibrary_8wmlk")
