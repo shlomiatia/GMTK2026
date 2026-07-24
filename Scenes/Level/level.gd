@@ -13,6 +13,7 @@ var _won: bool = false
 var _car: Car
 var _goal: Goal
 var _key_enemies: Array[Enemy] = []
+var _keys: Array[Key] = []
 
 @onready var _overlay: Overlay = $Overlay
 @onready var _shaking_camera: ShakingCamera = $ShakingCamera
@@ -37,7 +38,10 @@ func _ready() -> void:
     for enemy in get_tree().get_nodes_in_group("enemy"):
         if (enemy as Enemy).key:
             _key_enemies.append(enemy)
-    if !_key_enemies.is_empty():
+    for key in get_tree().get_nodes_in_group("key"):
+        _keys.append(key as Key)
+        (key as Key).collected.connect(_on_key_collected.bind(key))
+    if !_key_enemies.is_empty() || !_keys.is_empty():
         _goal.lock.call_deferred()
     get_tree().get_first_node_in_group("objective").completed.connect(_win)
     for hazard in get_tree().get_nodes_in_group("hazard"):
@@ -90,8 +94,19 @@ func _on_enemy_killed(enemy: Enemy) -> void:
     _shaking_camera.start_screen_shake()
     if enemy.key:
         _key_enemies.erase(enemy)
-        if _key_enemies.is_empty():
-            _goal.unlock()
+        _try_unlock_goal()
+
+
+func _on_key_collected(key: Key) -> void:
+    if _game_over:
+        return
+    _keys.erase(key)
+    _try_unlock_goal()
+
+
+func _try_unlock_goal() -> void:
+    if _key_enemies.is_empty() && _keys.is_empty():
+        _goal.unlock()
 
 
 func _on_car_entered_hazard(car: Car) -> void:

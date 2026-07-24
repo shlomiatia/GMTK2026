@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c4krb1yubpltr"]
 
+[ext_resource type="Script" path="res://Scenes/Key/key.gd" id="1_key"]
 [ext_resource type="Texture2D" uid="uid://ed4em35gd3dy" path="res://Art/Assets/Play Scene/Items/Key.png" id="1_121ar"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
@@ -42,12 +43,15 @@ _data = {
 &"die": SubResource("Animation_121ar")
 }
 
-[node name="Key" type="Node2D" unique_id=903211971]
+[node name="Key" type="Node2D" unique_id=903211971 groups=["key"]]
+script = ExtResource("1_key")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1039080540]
 texture = ExtResource("1_121ar")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1783938954]
+collision_layer = 16
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2002072389]
 shape = SubResource("CircleShape2D_ebdu8")
