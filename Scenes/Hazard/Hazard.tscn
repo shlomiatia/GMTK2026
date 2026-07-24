@@ -31,7 +31,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 6.283185307179586]
+"values": [6.283185307179586, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rpeia"]

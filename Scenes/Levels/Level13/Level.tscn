@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://bcs4bsisihfhg"]
+
+[ext_resource type="PackedScene" uid="uid://b6wfreo7ajycp" path="res://Scenes/Level/Level.tscn" id="1_8pfvv"]
+[ext_resource type="Texture2D" uid="uid://dim3aruwvssi2" path="res://Art/Assets/Play Scene/Levels/Lv 13.png" id="2_iaad4"]
+[ext_resource type="PackedScene" uid="uid://bemlcu6wijhau" path="res://Scenes/Goal/Goal.tscn" id="2_sp0x7"]
+[ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_iaad4"]
+[ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="4_nvx3b"]
+[ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="5_yvsth"]
+[ext_resource type="PackedScene" uid="uid://b0q6g075ds0mt" path="res://Scenes/Arena/Arena.tscn" id="7_iaad4"]
+[ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="8_nvx3b"]
+[ext_resource type="PackedScene" uid="uid://bans3suovo6ei" path="res://Scenes/Hazard/BiggestHazard.tscn" id="9_yvsth"]
+[ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="10_ughe8"]
+
+[sub_resource type="Curve2D" id="Curve2D_ke2ao"]
+_data = {
+"points": PackedVector2Array(-162.53444, 358.1267, 162.53444, -358.1267, 581, 395, 7.7134986, -3.3057852, -7.7134986, 3.3057852, 1100, 160)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_ughe8"]
+_data = {
+"points": PackedVector2Array(120.60605, -367.2727, -120.60605, 367.2727, 1352, 658, -3.0303028, 24.848484, 3.0303028, -24.848484, 835, 927)
+}
+point_count = 2
+
+[node name="Level" type="Node2D" unique_id=1733532608]
+
+[node name="Level" parent="." unique_id=76539942 instance=ExtResource("1_8pfvv")]
+texture = ExtResource("2_iaad4")
+
+[node name="Goal" parent="." unique_id=669960687 instance=ExtResource("2_sp0x7")]
+position = Vector2(1317, 314)
+
+[node name="Car" parent="." unique_id=1734870916 instance=ExtResource("3_iaad4")]
+position = Vector2(585, 750.99994)
+rotation = -0.64903456
+motion_mode = 1
+
+[node name="GoalObjective" parent="." unique_id=1366670914 instance=ExtResource("4_nvx3b")]
+
+[node name="Gear" parent="." unique_id=347710995 instance=ExtResource("5_yvsth")]
+position = Vector2(965, 726)
+
+[node name="Gear2" parent="." unique_id=1612669469 instance=ExtResource("5_yvsth")]
+position = Vector2(782, 634)
+
+[node name="Gear3" parent="." unique_id=1712358846 instance=ExtResource("5_yvsth")]
+position = Vector2(1131, 634)
+
+[node name="Gear4" parent="." unique_id=265127167 instance=ExtResource("5_yvsth")]
+position = Vector2(782, 463)
+
+[node name="Gear5" parent="." unique_id=465184946 instance=ExtResource("5_yvsth")]
+position = Vector2(1134, 473)
+
+[node name="Gear6" parent="." unique_id=1272671926 instance=ExtResource("5_yvsth")]
+position = Vector2(955, 355)
+
+[node name="Arena2" parent="." unique_id=2025930274 instance=ExtResource("7_iaad4")]
+position = Vector2(960, 540)
+radius = 285.0
+number_of_points = 12
+width = 30.0
+offset_degrees = 131.0
+circum_degrees = 98.0
+
+[node name="Arena3" parent="." unique_id=358245078 instance=ExtResource("7_iaad4")]
+position = Vector2(960, 540)
+radius = 285.0
+number_of_points = 12
+width = 30.0
+offset_degrees = 313.0
+circum_degrees = 97.0
+
+[node name="ColorRect" parent="." unique_id=1335257777 instance=ExtResource("8_nvx3b")]
+offset_left = 567.17017
+offset_top = 815.5987
+offset_right = 782.4293
+offset_bottom = 847.1624
+rotation = -0.7853982
+pivot_offset = Vector2(107.62958, 15.78186)
+
+[node name="ColorRect2" parent="." unique_id=1392404359 instance=ExtResource("8_nvx3b")]
+offset_left = 1145.0
+offset_top = 240.00006
+offset_right = 1360.2592
+offset_bottom = 271.56378
+rotation = -0.7853982
+pivot_offset = Vector2(107.62958, 15.78186)
+
+[node name="BiggestHazard" parent="." unique_id=1355887644 instance=ExtResource("9_yvsth")]
+position = Vector2(960, 540)
+
+[node name="Path2D" type="Path2D" parent="." unique_id=1889344881]
+curve = SubResource("Curve2D_ke2ao")
+
+[node name="Enemy" parent="Path2D" unique_id=155100240 instance=ExtResource("10_ughe8")]
+loop = false
+key = true
+
+[node name="Path2D2" type="Path2D" parent="." unique_id=881555926]
+curve = SubResource("Curve2D_ughe8")
+
+[node name="Enemy" parent="Path2D2" unique_id=1876496380 instance=ExtResource("10_ughe8")]
+loop = false
+key = true

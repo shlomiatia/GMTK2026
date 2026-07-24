@@ -53,14 +53,14 @@ position = Vector2(1328, 512)
 [node name="BiggestHazard" parent="." unique_id=1355887644 instance=ExtResource("6_6hnkf")]
 position = Vector2(1127, 523)
 
-[node name="BiggestHazard2" parent="." unique_id=1594763330 instance=ExtResource("6_6hnkf")]
-position = Vector2(796, 710)
-
 [node name="BiggerHazard" parent="." unique_id=26844886 instance=ExtResource("7_7mw6r")]
 position = Vector2(1228, 187)
 
 [node name="BiggerHazard2" parent="." unique_id=515806126 instance=ExtResource("7_7mw6r")]
 position = Vector2(1010, 282)
+
+[node name="BiggerHazard4" parent="." unique_id=501298719 instance=ExtResource("7_7mw6r")]
+position = Vector2(795, 649)
 
 [node name="BiggerHazard3" parent="." unique_id=655486781 instance=ExtResource("7_7mw6r")]
 position = Vector2(652, 836)
@@ -70,3 +70,6 @@ position = Vector2(1120, 235)
 
 [node name="Hazard2" parent="." unique_id=1740342496 instance=ExtResource("8_6644q")]
 position = Vector2(1057, 391)
+
+[node name="Hazard3" parent="." unique_id=970323415 instance=ExtResource("8_6644q")]
+position = Vector2(742, 756)
