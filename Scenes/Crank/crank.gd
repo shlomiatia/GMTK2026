@@ -2,12 +2,13 @@ class_name Crank extends Node2D
 
 signal launched(power_ratio: float)
 
-@onready var _car: Node2D = get_parent()
+static var reset_crank_seconds := 1.0
+
 @onready var _crank_sprite: Sprite2D = $CrankSprite
-@onready var _crank_area_shape: CollisionShape2D = $CrankSprite/Area2D/CollisionShape2D
 @onready var _progress_bar: TextureProgressBar = $ProgressBar
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var _virtual_mouse_icon: Sprite2D = $VirtualMouseIcon
+@onready var _pivot_icon: Sprite2D = $PivotIcon
 
 var _crank_degrees: float = 0.0
 var _last_full_rotations: int = 0
@@ -15,6 +16,7 @@ var _cranking: bool = false
 var _last_angle: float = NAN
 var _using_mouse: bool = false
 var _virtual_mouse_pos: Vector2 = Vector2.ZERO
+var _crank_pivot: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -34,21 +36,22 @@ func _input(event: InputEvent) -> void:
 
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("crank"):
-        var mouse_pressed := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
-        if mouse_pressed && !_is_mouse_over_crank_area():
-            return
-        _using_mouse = mouse_pressed
+        _using_mouse = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
         if _using_mouse:
-            _virtual_mouse_pos = _crank_sprite.get_global_mouse_position()
+            _crank_pivot = _crank_sprite.get_global_mouse_position()
+            _virtual_mouse_pos = _crank_pivot
             Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
             _virtual_mouse_icon.global_position = _virtual_mouse_pos
             _virtual_mouse_icon.visible = true
+            _pivot_icon.global_position = _crank_pivot
+            _pivot_icon.visible = true
         _cranking = true
         _last_angle = _get_crank_angle()
     elif Input.is_action_just_released("crank"):
         if _using_mouse:
             Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
             _virtual_mouse_icon.visible = false
+            _pivot_icon.visible = false
         _cranking = false
         _try_launch()
     elif _cranking:
@@ -66,15 +69,9 @@ func set_enabled(value: bool) -> void:
     set_process_input(value)
 
 
-func _is_mouse_over_crank_area() -> bool:
-    var half := (_crank_area_shape.shape as RectangleShape2D).size / 2.0
-    var local := _crank_area_shape.to_local(_crank_area_shape.get_global_mouse_position())
-    return absf(local.x) <= half.x && absf(local.y) <= half.y
-
-
 func _get_crank_angle() -> float:
     if _using_mouse:
-        return (_virtual_mouse_pos - _car.global_position).angle()
+        return (_virtual_mouse_pos - _crank_pivot).angle()
     var stick := Vector2(
         Input.get_joy_axis(0, JOY_AXIS_RIGHT_X),
         Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
@@ -108,5 +105,9 @@ func _try_launch() -> void:
     _last_full_rotations = 0
     _progress_bar.value = 0.0
     var tween := create_tween()
-    tween.tween_property(_crank_sprite, "rotation_degrees", 0.0, Constants.reset_crank_seconds).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+    tween.tween_property(_crank_sprite, "rotation_degrees", 0.0, reset_crank_seconds).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
     launched.emit(power_ratio)
+
+
+func get_launch_speed() -> float:
+    return _crank_degrees / Constants.max_crank_degrees * Constants.max_speed

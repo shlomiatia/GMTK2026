@@ -9,6 +9,7 @@ enum State {IDLE, LAUNCHED, DEAD}
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _crank: Crank = $Car/Crank
+@onready var _sprite: Sprite2D = $Car
 
 var _state: State = State.IDLE
 var _angular_velocity: float = 0.0
@@ -19,7 +20,21 @@ func _ready() -> void:
 	_crank.launched.connect(_on_crank_launched)
 
 
+func _process(_delta: float) -> void:
+	if _state == State.DEAD:
+		return
+	var speed := velocity.length() if _state == State.LAUNCHED else _crank.get_launch_speed()
+	var t := clampf((speed - Constants.enemy_kill_speed) / (Constants.max_speed - Constants.enemy_kill_speed), 0.0, 1.0)
+	var amount := 0.0 if speed < Constants.enemy_kill_speed else lerpf(0.1, 1.0, t)
+	_sprite.self_modulate = Color(1.0, 1.0 - amount, 1.0 - amount)
+
+
 func _physics_process(delta: float) -> void:
+	if _state == State.IDLE:
+		var idle_dir := Input.get_axis("left", "right")
+		_angular_velocity = deg_to_rad(Constants.steer_speed) * idle_dir
+		_apply_angular_velocity(delta)
+		return
 	if _state != State.LAUNCHED:
 		return
 	var dir := Input.get_axis("left", "right")

@@ -5,6 +5,8 @@ signal died
 const ARRIVAL_DISTANCE := 4.0
 const KEY_OFFSET := Vector2(0.0, -80.0)
 
+static var enemy_turn_speed_degrees := 360.0
+
 @export var loop: bool = true
 @export var key: bool = false
 
@@ -70,7 +72,7 @@ func _physics_process(delta: float) -> void:
 	var distance := to_target.length()
 	if distance > 0.0:
 		var target_rotation := to_target.angle() - PI / 2.0
-		var max_delta := deg_to_rad(Constants.enemy_turn_speed_degrees) * delta
+		var max_delta := deg_to_rad(enemy_turn_speed_degrees) * delta
 		rotation = rotate_toward(rotation, target_rotation, max_delta)
 	if distance <= ARRIVAL_DISTANCE:
 		return

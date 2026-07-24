@@ -1,7 +1,10 @@
 @tool
 class_name Level extends Node2D
 
-@export var time_limit: float = 15.0
+static var time_progress_min_value := 3.33
+static var time_progress_max_value := 96.67
+
+@export var time_limit: float = Constants.default_level_time
 @export var texture: Texture2D:
     set(value):
         texture = value
@@ -60,7 +63,7 @@ func _process(_delta: float) -> void:
         return
     if _game_over:
         return
-    _time_progress_bar.value = lerpf(Constants.time_progress_min_value, Constants.time_progress_max_value, _timer.time_left / time_limit)
+    _time_progress_bar.value = lerpf(time_progress_min_value, time_progress_max_value, _timer.time_left / time_limit)
     if _is_car_out_of_bounds():
         _lose()
 

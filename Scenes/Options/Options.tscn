@@ -111,24 +111,133 @@ min_value = 10.0
 max_value = 2000.0
 value = 10.0
 
-[node name="ResetCrankSecondsRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472938]
+[node name="EnemySpeedRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472939]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/ResetCrankSecondsRow" unique_id=1698417536]
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/EnemySpeedRow" unique_id=1698417537]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
-tooltip_text = "Seconds it takes the crank sprite to visually reset to zero after launching."
+tooltip_text = "Pixels per second enemies travel along their path."
 mouse_filter = 1
-text = "Reset Crank Seconds"
+text = "Enemy Speed"
 
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/ResetCrankSecondsRow" unique_id=985944500]
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/EnemySpeedRow" unique_id=985944501]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
-tooltip_text = "Seconds it takes the crank sprite to visually reset to zero after launching."
-min_value = 0.1
-max_value = 5.0
-step = 0.1
-value = 0.1
+tooltip_text = "Pixels per second enemies travel along their path."
+min_value = 10.0
+max_value = 2000.0
+value = 200.0
+
+[node name="EnemyKillSpeedRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472940]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/EnemyKillSpeedRow" unique_id=1698417538]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "Minimum car speed, in pixels per second, required to kill an enemy on collision."
+mouse_filter = 1
+text = "Enemy Kill Speed"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/EnemyKillSpeedRow" unique_id=985944502]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "Minimum car speed, in pixels per second, required to kill an enemy on collision."
+min_value = 10.0
+max_value = 5000.0
+value = 600.0
+
+[node name="GearTimeBonusRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472941]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/GearTimeBonusRow" unique_id=1698417539]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "Seconds added to the level timer when a gear is collected."
+mouse_filter = 1
+text = "Gear Time Bonus"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/GearTimeBonusRow" unique_id=985944503]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "Seconds added to the level timer when a gear is collected."
+min_value = 0.0
+max_value = 60.0
+step = 0.5
+value = 3.0
+
+[node name="EnemyKillTimeBonusRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472942]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/EnemyKillTimeBonusRow" unique_id=1698417540]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "Seconds added to the level timer when an enemy is killed."
+mouse_filter = 1
+text = "Enemy Kill Time Bonus"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/EnemyKillTimeBonusRow" unique_id=985944504]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "Seconds added to the level timer when an enemy is killed."
+min_value = 0.0
+max_value = 60.0
+step = 0.5
+value = 3.0
+
+[node name="RestVelocityThresholdRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472943]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/RestVelocityThresholdRow" unique_id=1698417541]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "Speed, in pixels per second, below which the car is considered at rest after launch."
+mouse_filter = 1
+text = "Rest Velocity Threshold"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/RestVelocityThresholdRow" unique_id=985944505]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "Speed, in pixels per second, below which the car is considered at rest after launch."
+min_value = 0.0
+max_value = 1000.0
+value = 150.0
+
+[node name="CannonTurretSpeedDegreesRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472944]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/CannonTurretSpeedDegreesRow" unique_id=1698417542]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "Degrees per second the cannon turret rotates to track its target."
+mouse_filter = 1
+text = "Cannon Turret Speed"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/CannonTurretSpeedDegreesRow" unique_id=985944506]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "Degrees per second the cannon turret rotates to track its target."
+min_value = 10.0
+max_value = 720.0
+value = 90.0
+
+[node name="BulletSpeedRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472945]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/BulletSpeedRow" unique_id=1698417543]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+tooltip_text = "Pixels per second a fired bullet travels."
+mouse_filter = 1
+text = "Bullet Speed"
+
+[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/BulletSpeedRow" unique_id=985944507]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+tooltip_text = "Pixels per second a fired bullet travels."
+min_value = 10.0
+max_value = 3000.0
+value = 700.0
 
 [node name="DistanceLabel" type="Label" parent="Center/Panel/Margin/VBox" unique_id=50230963]
 layout_mode = 2
@@ -138,4 +247,10 @@ text = "Estimated max travel distance: 2320 px"
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxCrankDegreesRow/SpinBox" to="." method="_on_max_crank_degrees_spin_box_value_changed"]
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxSpeedRow/SpinBox" to="." method="_on_max_speed_spin_box_value_changed"]
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/FrictionRow/SpinBox" to="." method="_on_friction_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/ResetCrankSecondsRow/SpinBox" to="." method="_on_reset_crank_seconds_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/EnemySpeedRow/SpinBox" to="." method="_on_enemy_speed_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/EnemyKillSpeedRow/SpinBox" to="." method="_on_enemy_kill_speed_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/GearTimeBonusRow/SpinBox" to="." method="_on_gear_time_bonus_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/EnemyKillTimeBonusRow/SpinBox" to="." method="_on_enemy_kill_time_bonus_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/RestVelocityThresholdRow/SpinBox" to="." method="_on_rest_velocity_threshold_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/CannonTurretSpeedDegreesRow/SpinBox" to="." method="_on_cannon_turret_speed_degrees_spin_box_value_changed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/BulletSpeedRow/SpinBox" to="." method="_on_bullet_speed_spin_box_value_changed"]
