@@ -23,3 +23,10 @@ one_shot = true
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1046964283]
 position = Vector2(960, 540)
 texture = ExtResource("5_k2uda")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=865415568]
+position = Vector2(960, 540)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1097397002]
+build_mode = 1
+polygon = PackedVector2Array(287, -471, 534, -279, 497, 468, -279, 515, -659, 154, -385, -436)

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b0q6g075ds0mt"]
+
+[node name="Arena" type="StaticBody2D" unique_id=2025930274]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1224034591]
+build_mode = 1
+polygon = PackedVector2Array(-28, -28, 33, -22, -10, 31)
