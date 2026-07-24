@@ -8,3 +8,5 @@ static var steer_speed := 120.0
 static var enemy_speed := 200.0
 static var enemy_kill_speed := 600.0
 static var gear_time_bonus := 3.0
+static var time_progress_min_value := 3.33
+static var time_progress_max_value := 96.67

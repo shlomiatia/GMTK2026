@@ -4,8 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bp3bbqdl6drvw" path="res://Scenes/Options/Options.tscn" id="2_optns"]
 [ext_resource type="PackedScene" uid="uid://cppmmjbl4yf8e" path="res://Scenes/Overlay/Overlay.tscn" id="3_overlay"]
 [ext_resource type="PackedScene" uid="uid://bbrs3ouymdwi8" path="res://Scenes/ShakingCamera/ShakingCamera.tscn" id="4_qp1lj"]
-[ext_resource type="Texture2D" uid="uid://c17yvvwu6qf5c" path="res://Art/Assets/Play Scene/TEMP Environment.png" id="5_k2uda"]
+[ext_resource type="Texture2D" uid="uid://cvgf8n6rd2xlp" path="res://Art/Assets/Play Scene/Environment.png" id="5_ksici"]
 [ext_resource type="PackedScene" uid="uid://b0q6g075ds0mt" path="res://Scenes/Arena/Arena.tscn" id="6_ksici"]
+[ext_resource type="Texture2D" uid="uid://d2i42xbbqobcr" path="res://Art/Assets/Play Scene/Timer.png" id="7_8gphe"]
 
 [node name="Level" type="Node2D" unique_id=1740858742]
 script = ExtResource("1_level")
@@ -23,9 +24,17 @@ one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1046964283]
 position = Vector2(960, 540)
-texture = ExtResource("5_k2uda")
+texture = ExtResource("5_ksici")
 
 [node name="Arena" parent="." unique_id=2025930274 instance=ExtResource("6_ksici")]
 position = Vector2(960, 540)
-radius = 532.0
+radius = 517.0
 number_of_points = 48
+
+[node name="Time" type="TextureProgressBar" parent="." unique_id=1614410945]
+offset_right = 1920.0
+offset_bottom = 1080.0
+step = 0.01
+value = 96.67
+fill_mode = 5
+texture_progress = ExtResource("7_8gphe")
