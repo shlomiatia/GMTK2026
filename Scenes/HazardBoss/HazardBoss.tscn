@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dn2jjcl3amsjl"]
+
+[ext_resource type="Texture2D" uid="uid://dxxifm4glmkiu" path="res://Art/Assets/Play Scene/Enemies/Minion.png" id="1_4oj2i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6kyec"]
+radius = 45.01111
+
+[node name="HazardBoss" type="Node2D" unique_id=515765067]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1715055242]
+texture = ExtResource("1_4oj2i")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1026095742]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=957121119]
+shape = SubResource("CircleShape2D_6kyec")

@@ -9,6 +9,7 @@ static var enemy_turn_speed_degrees := 360.0
 
 @export var loop: bool = true
 @export var key: bool = false
+@export var start_disabled: bool = false
 
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _collision_shape2: CollisionShape2D = $CollisionShape2D2
@@ -19,10 +20,12 @@ var _path: Path2D
 var _path_follow: PathFollow2D
 var _direction: int = 1
 var _is_dead: bool = false
+var _active: bool = true
 
 
 func _ready() -> void:
 	_key_sprite.visible = key
+	_animation_player.animation_finished.connect(_on_animation_finished)
 	_path = get_parent() as Path2D
 	if !_path:
 		return
@@ -30,6 +33,8 @@ func _ready() -> void:
 	_path_follow.loop = loop
 	_path.add_child.call_deferred(_path_follow)
 	_snap_to_path_follow.call_deferred()
+	if start_disabled:
+		_spawn_in()
 
 
 func _snap_to_path_follow() -> void:
@@ -54,7 +59,7 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if _is_dead || !_path_follow:
+	if _is_dead || !_active || !_path_follow:
 		return
 	var length := _path.curve.get_baked_length()
 	if length <= 0.0:
@@ -88,8 +93,11 @@ func is_dead() -> bool:
 	return _is_dead
 
 
+func get_path2d() -> Path2D:
+	return _path
+
+
 func die() -> void:
-	prints("wtf")
 	if _is_dead:
 		return
 	_is_dead = true
@@ -101,3 +109,20 @@ func die() -> void:
 		_path_follow.queue_free()
 		_path_follow = null
 	died.emit()
+
+
+func _spawn_in() -> void:
+	_active = false
+	_collision_shape.set_deferred("disabled", true)
+	_collision_shape2.set_deferred("disabled", true)
+	_animation_player.play("fadein")
+	_animation_player.seek(0.0, true)
+
+
+func _on_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "die":
+		queue_free()
+	elif anim_name == "fadein":
+		_active = true
+		_collision_shape.set_deferred("disabled", false)
+		_collision_shape2.set_deferred("disabled", false)

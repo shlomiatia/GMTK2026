@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dxxifm4glmkiu" path="res://Art/Assets/Play Scene/Enemies/Minion.png" id="1_rpigv"]
 [ext_resource type="Script" path="res://Scenes/MinionBoss/minion_boss.gd" id="2_boss"]
+[ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="3_enemy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
 radius = 46.010868
@@ -44,6 +45,7 @@ _data = {
 
 [node name="MinionBoss" type="Node2D" unique_id=1828729893 groups=["boss"]]
 script = ExtResource("2_boss")
+enemy_scene = ExtResource("3_enemy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1905300873]
 texture = ExtResource("1_rpigv")
