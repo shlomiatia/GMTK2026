@@ -38,6 +38,7 @@ func _ready() -> void:
     _car.died.connect(_on_car_died)
     _car.enemy_killed.connect(_on_enemy_killed)
     _car.cannon_killed.connect(_on_cannon_killed)
+    _car.boss_hit.connect(_on_boss_hit)
     _goal = get_tree().get_first_node_in_group("goal") as Goal
     for enemy in get_tree().get_nodes_in_group("enemy"):
         if (enemy as Enemy).key:
@@ -93,6 +94,12 @@ func _on_enemy_killed(enemy: Enemy) -> void:
 
 
 func _on_cannon_killed(_cannon: Cannon) -> void:
+    if _game_over:
+        return
+    _shaking_camera.start_screen_shake()
+
+
+func _on_boss_hit(_boss: MinionBoss) -> void:
     if _game_over:
         return
     _shaking_camera.start_screen_shake()

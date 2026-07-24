@@ -12,3 +12,5 @@ static var rest_velocity_threshold := 150.0
 static var cannon_turret_speed_degrees := 90.0
 static var bullet_speed := 700.0
 static var default_level_time := 15.0
+static var minion_boss_hits_to_kill := 3
+static var minion_boss_invincibility_duration := 0.5

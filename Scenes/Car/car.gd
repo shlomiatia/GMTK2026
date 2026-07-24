@@ -4,6 +4,7 @@ signal launched
 signal died
 signal enemy_killed(enemy: Enemy)
 signal cannon_killed(cannon: Cannon)
+signal boss_hit(boss: MinionBoss)
 
 enum State {IDLE, LAUNCHED, DEAD}
 
@@ -62,6 +63,9 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
 	if cannon && velocity.length() >= Constants.enemy_kill_speed:
 		cannon.die()
 		cannon_killed.emit(cannon)
+	var boss := collision.get_collider().get_parent() as MinionBoss
+	if boss && velocity.length() >= Constants.enemy_kill_speed && boss.hit():
+		boss_hit.emit(boss)
 	velocity = velocity.bounce(collision.get_normal())
 
 
