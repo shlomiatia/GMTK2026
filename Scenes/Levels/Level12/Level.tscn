@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cmux8tr6ki1xk"]
+
+[ext_resource type="PackedScene" uid="uid://b6wfreo7ajycp" path="res://Scenes/Level/Level.tscn" id="1_tvdt5"]
+[ext_resource type="Texture2D" uid="uid://bbyor6i8vfrwr" path="res://Art/Assets/Play Scene/Levels/Lv 12.png" id="2_lbv0p"]
+[ext_resource type="PackedScene" uid="uid://bemlcu6wijhau" path="res://Scenes/Goal/Goal.tscn" id="2_q41kv"]
+[ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_lbv0p"]
+[ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="4_udrcm"]
+[ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="5_ltf2t"]
+[ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="7_lbv0p"]
+[ext_resource type="PackedScene" uid="uid://b0q6g075ds0mt" path="res://Scenes/Arena/Arena.tscn" id="8_udrcm"]
+[ext_resource type="PackedScene" uid="uid://ccy7aq7vhw0s6" path="res://Scenes/Cannon/Cannon.tscn" id="9_ltf2t"]
+
+[sub_resource type="Curve2D" id="Curve2D_q41kv"]
+_data = {
+"points": PackedVector2Array(-149.59334, 331.53116, 149.59334, -331.53116, 604, 385, 19.2823, -4.665073, -19.2823, 4.665073, 1071, 170)
+}
+point_count = 2
+
+[node name="Level" type="Node2D" unique_id=1733532608]
+
+[node name="Level" parent="." unique_id=76539942 instance=ExtResource("1_tvdt5")]
+position = Vector2(-1, 0)
+texture = ExtResource("2_lbv0p")
+
+[node name="Goal" parent="." unique_id=669960687 instance=ExtResource("2_q41kv")]
+position = Vector2(1287, 737)
+
+[node name="Car" parent="." unique_id=1734870916 instance=ExtResource("3_lbv0p")]
+position = Vector2(943, 962.00006)
+rotation = -0.006890714
+motion_mode = 1
+
+[node name="GoalObjective" parent="." unique_id=1366670914 instance=ExtResource("4_udrcm")]
+
+[node name="Gear" parent="." unique_id=347710995 instance=ExtResource("5_ltf2t")]
+position = Vector2(964, 540)
+
+[node name="Gear2" parent="." unique_id=1612669469 instance=ExtResource("5_ltf2t")]
+position = Vector2(946, 768)
+
+[node name="Gear3" parent="." unique_id=1712358846 instance=ExtResource("5_ltf2t")]
+position = Vector2(1163, 633)
+
+[node name="Gear4" parent="." unique_id=192389504 instance=ExtResource("5_ltf2t")]
+position = Vector2(759, 409)
+
+[node name="Gear5" parent="." unique_id=818532888 instance=ExtResource("5_ltf2t")]
+position = Vector2(1026, 327)
+
+[node name="Path2D" type="Path2D" parent="." unique_id=592901265]
+position = Vector2(1, 1)
+curve = SubResource("Curve2D_q41kv")
+
+[node name="Enemy" parent="Path2D" unique_id=155100240 instance=ExtResource("7_lbv0p")]
+loop = false
+key = true
+
+[node name="Arena" parent="." unique_id=2025930274 instance=ExtResource("8_udrcm")]
+position = Vector2(510, 743)
+radius = 300.0
+number_of_points = 48
+
+[node name="Arena2" parent="." unique_id=2075180899 instance=ExtResource("8_udrcm")]
+position = Vector2(1404, 338)
+radius = 300.0
+number_of_points = 48
+
+[node name="Cannon" parent="." unique_id=335970389 instance=ExtResource("9_ltf2t")]
+position = Vector2(609, 691)
+
+[node name="Cannon2" parent="." unique_id=991011807 instance=ExtResource("9_ltf2t")]
+position = Vector2(1303, 382)

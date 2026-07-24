@@ -9,7 +9,6 @@ class_name Level extends Node2D
             _sprite.texture = texture
 
 var _game_over: bool = false
-var _won: bool = false
 var _car: Car
 var _goal: Goal
 var _key_enemies: Array[Enemy] = []
@@ -49,6 +48,8 @@ func _ready() -> void:
         (hazard as Hazard).car_entered.connect(_on_car_entered_hazard)
     for gear in get_tree().get_nodes_in_group("gear"):
         (gear as Gear).collected.connect(_on_gear_collected)
+    _overlay.continue_pressed.connect(_go_to_next_level)
+    _overlay.restart_pressed.connect(_restart)
 
 
 func _process(_delta: float) -> void:
@@ -57,25 +58,11 @@ func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("skip_level"):
         _go_to_next_level()
         return
-    if _won:
-        return
-    if Input.is_action_just_pressed("restart"):
-        get_tree().reload_current_scene()
-        return
     if _game_over:
         return
     _time_progress_bar.value = lerpf(Constants.time_progress_min_value, Constants.time_progress_max_value, _timer.time_left / time_limit)
     if _is_car_out_of_bounds():
         _lose()
-
-
-func _unhandled_input(event: InputEvent) -> void:
-    if Engine.is_editor_hint():
-        return
-    if !_won:
-        return
-    if event.is_pressed() && !event.is_echo():
-        _go_to_next_level()
 
 
 func _on_car_launched() -> void:
@@ -85,7 +72,6 @@ func _on_car_launched() -> void:
 func _on_timer_timeout() -> void:
     if _game_over:
         return
-    _car.freeze()
     _lose()
 
 
@@ -152,14 +138,16 @@ func _win() -> void:
     if _game_over:
         return
     _game_over = true
-    _won = true
-    _car.freeze()
-    _overlay.show_message("You win! Press any key continue")
+    _overlay.show_win()
 
 
 func _lose() -> void:
     _game_over = true
-    _overlay.show_message("You lose! Press R to restart")
+    _overlay.show_lose()
+
+
+func _restart() -> void:
+    get_tree().reload_current_scene()
 
 
 func _go_to_next_level() -> void:
@@ -168,4 +156,5 @@ func _go_to_next_level() -> void:
     var level_number := current_path.get_base_dir().get_file().trim_prefix("Level").to_int()
     var next_level_path := "%s/Level%d/Level.tscn" % [levels_dir, level_number + 1]
     if ResourceLoader.exists(next_level_path):
+        get_tree().paused = false
         get_tree().change_scene_to_file(next_level_path)
