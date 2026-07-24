@@ -11,6 +11,8 @@ class_name Level extends Node2D
 var _game_over: bool = false
 var _won: bool = false
 var _car: Car
+var _goal: Goal
+var _key_enemies: Array[Enemy] = []
 
 @onready var _overlay: Overlay = $Overlay
 @onready var _shaking_camera: ShakingCamera = $ShakingCamera
@@ -31,6 +33,12 @@ func _ready() -> void:
     _car.launched.connect(_on_car_launched)
     _car.died.connect(_on_car_died)
     _car.enemy_killed.connect(_on_enemy_killed)
+    _goal = get_tree().get_first_node_in_group("goal") as Goal
+    for enemy in get_tree().get_nodes_in_group("enemy"):
+        if (enemy as Enemy).key:
+            _key_enemies.append(enemy)
+    if !_key_enemies.is_empty():
+        _goal.lock.call_deferred()
     get_tree().get_first_node_in_group("objective").completed.connect(_win)
     for hazard in get_tree().get_nodes_in_group("hazard"):
         (hazard as Hazard).car_entered.connect(_on_car_entered_hazard)
@@ -76,10 +84,14 @@ func _on_timer_timeout() -> void:
     _lose()
 
 
-func _on_enemy_killed(_enemy: Enemy) -> void:
+func _on_enemy_killed(enemy: Enemy) -> void:
     if _game_over:
         return
     _shaking_camera.start_screen_shake()
+    if enemy.key:
+        _key_enemies.erase(enemy)
+        if _key_enemies.is_empty():
+            _goal.unlock()
 
 
 func _on_car_entered_hazard(car: Car) -> void:

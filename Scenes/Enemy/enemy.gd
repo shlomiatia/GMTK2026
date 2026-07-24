@@ -3,12 +3,15 @@ class_name Enemy extends CharacterBody2D
 signal died
 
 const ARRIVAL_DISTANCE := 4.0
+const KEY_OFFSET := Vector2(0.0, -80.0)
 
 @export var loop: bool = true
+@export var key: bool = false
 
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _collision_shape2: CollisionShape2D = $CollisionShape2D2
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
+@onready var _key_sprite: Sprite2D = $Key
 
 var _path: Path2D
 var _path_follow: PathFollow2D
@@ -17,6 +20,7 @@ var _is_dead: bool = false
 
 
 func _ready() -> void:
+	_key_sprite.visible = key
 	_path = get_parent() as Path2D
 	if !_path:
 		return
@@ -39,6 +43,12 @@ func _set_initial_rotation() -> void:
 	var direction := p1 - p0
 	if direction.length() > 0.0:
 		rotation = direction.angle() - PI / 2.0
+
+
+func _process(_delta: float) -> void:
+	if !key:
+		return
+	_key_sprite.global_position = global_position + KEY_OFFSET
 
 
 func _physics_process(delta: float) -> void:
@@ -73,6 +83,7 @@ func is_dead() -> bool:
 
 
 func die() -> void:
+	prints("wtf")
 	if _is_dead:
 		return
 	_is_dead = true

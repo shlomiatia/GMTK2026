@@ -33,6 +33,7 @@ curve = SubResource("Curve2D_hy6v2")
 
 [node name="Enemy" parent="Path2D" unique_id=155100240 instance=ExtResource("6_cumqq")]
 loop = false
+key = true
 
 [node name="Gear" parent="." unique_id=347710995 instance=ExtResource("5_txuk4")]
 position = Vector2(748, 826)
