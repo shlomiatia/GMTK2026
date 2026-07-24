@@ -20,3 +20,5 @@ static var hazard_boss_hits_to_kill := 3
 static var hazard_boss_invincibility_duration := 0.5
 static var hazard_boss_spawn_interval := 3.0
 static var hazard_boss_hazard_count := 4
+static var cannon_boss_hits_to_kill := 3
+static var cannon_boss_invincibility_duration := 0.5

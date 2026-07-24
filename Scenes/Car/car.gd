@@ -47,9 +47,9 @@ func _physics_process(delta: float) -> void:
     velocity = velocity.move_toward(Vector2.ZERO, Constants.friction * delta)
     _handle_collision(move_and_collide(velocity * delta))
 
-    if velocity.length() < Constants.rest_velocity_threshold:
-        _state = State.IDLE
-        _crank.set_enabled(true)
+    #if velocity.length() < Constants.rest_velocity_threshold:
+    #    _state = State.IDLE
+    #    _crank.set_enabled(true)
 
 
 func _handle_collision(collision: KinematicCollision2D) -> void:

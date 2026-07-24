@@ -7,6 +7,7 @@ var _bosses: Array[Node] = []
 
 func _ready() -> void:
 	for boss in get_tree().get_nodes_in_group("boss"):
+		print("BossObjective found boss: ", boss.name, " class=", boss.get_class(), " script=", boss.get_script(), " has_died_signal=", boss.has_signal("died"))
 		_bosses.append(boss)
 		boss.connect("died", _on_boss_died)
 

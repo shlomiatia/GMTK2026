@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_n045t"]
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/BossObjective/BossObjective.tscn" id="4_oipt5"]
 [ext_resource type="PackedScene" uid="uid://bqm5v2s7k1n4x" path="res://Scenes/Pillar/Pillar.tscn" id="5_y5mql"]
+[ext_resource type="PackedScene" uid="uid://ba4itjqpmq4sd" path="res://Scenes/SubBoss/SubBoss.tscn" id="6_6yvoe"]
 
 [node name="Level" type="Node2D" unique_id=1733532608]
 
@@ -35,3 +36,7 @@ position = Vector2(666, 535)
 
 [node name="Pillar6" parent="." unique_id=118088714 instance=ExtResource("5_y5mql")]
 position = Vector2(1255, 535)
+
+[node name="SubBoss" parent="." unique_id=823265969 instance=ExtResource("6_6yvoe")]
+position = Vector2(960, 147)
+motion_mode = 1
