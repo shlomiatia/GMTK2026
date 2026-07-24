@@ -9,6 +9,7 @@ static var enemy_speed := 200.0
 static var enemy_turn_speed_degrees := 360.0
 static var enemy_kill_speed := 600.0
 static var gear_time_bonus := 3.0
+static var enemy_kill_time_bonus := 3.0
 static var rest_velocity_threshold := 150.0
 static var time_progress_min_value := 3.33
 static var time_progress_max_value := 96.67

@@ -79,6 +79,7 @@ func _on_enemy_killed(enemy: Enemy) -> void:
     if _game_over:
         return
     _shaking_camera.start_screen_shake()
+    _add_time_bonus(Constants.enemy_kill_time_bonus)
     if enemy.key:
         _key_enemies.erase(enemy)
         _try_unlock_goal()
@@ -106,10 +107,14 @@ func _on_car_entered_hazard(car: Car) -> void:
 func _on_gear_collected() -> void:
     if _game_over:
         return
+    _add_time_bonus(Constants.gear_time_bonus)
+
+
+func _add_time_bonus(amount: float) -> void:
     if _gear_time_tween:
         _gear_time_tween.kill()
     _timer.paused = true
-    var target_time: float = minf(_timer.time_left + Constants.gear_time_bonus, time_limit)
+    var target_time: float = minf(_timer.time_left + amount, time_limit)
     _gear_time_tween = create_tween()
     _gear_time_tween.tween_method(_set_timer_time, _timer.time_left, target_time, 0.5)
     _gear_time_tween.finished.connect(_on_gear_time_tween_finished)
