@@ -16,3 +16,7 @@ static var default_level_time := 15.0
 static var minion_boss_hits_to_kill := 3
 static var minion_boss_invincibility_duration := 0.5
 static var minion_respawn_delay := 2.0
+static var hazard_boss_hits_to_kill := 3
+static var hazard_boss_invincibility_duration := 0.5
+static var hazard_boss_spawn_interval := 3.0
+static var hazard_boss_hazard_count := 4

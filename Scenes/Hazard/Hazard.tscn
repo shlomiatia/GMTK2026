@@ -17,6 +17,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_xxxoc"]
 resource_name = "default"
@@ -34,10 +46,26 @@ tracks/0/keys = {
 "values": [6.283185307179586, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_fadein"]
+resource_name = "fadein"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rpeia"]
 _data = {
 &"RESET": SubResource("Animation_27cge"),
-&"default": SubResource("Animation_xxxoc")
+&"default": SubResource("Animation_xxxoc"),
+&"fadein": SubResource("Animation_fadein")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]

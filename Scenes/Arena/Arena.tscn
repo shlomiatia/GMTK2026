@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dueovtc6w3jje" path="res://Scenes/Arena/arena.gd" id="1_arena"]
 
-[node name="Arena" type="StaticBody2D" unique_id=2025930274]
+[node name="Arena" type="StaticBody2D" unique_id=2025930274 groups=["arena"]]
 script = ExtResource("1_arena")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1224034591]

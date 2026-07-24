@@ -5,7 +5,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_pillar"]
 radius = 50.0
 
-[node name="Pillar" type="Node2D" unique_id=614816137]
+[node name="Pillar" type="Node2D" unique_id=614816137 groups=["pillar"]]
 script = ExtResource("1_pillar")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=903538806]

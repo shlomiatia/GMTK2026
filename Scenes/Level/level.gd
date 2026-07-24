@@ -51,6 +51,7 @@ func _ready() -> void:
     get_tree().get_first_node_in_group("objective").completed.connect(_win)
     for hazard in get_tree().get_nodes_in_group("hazard"):
         (hazard as Hazard).car_entered.connect(_on_car_entered_hazard)
+    get_tree().node_added.connect(_on_node_added)
     for gear in get_tree().get_nodes_in_group("gear"):
         (gear as Gear).collected.connect(_on_gear_collected)
     _overlay.continue_pressed.connect(_go_to_next_level)
@@ -100,7 +101,7 @@ func _on_cannon_killed(_cannon: Cannon) -> void:
     _add_time_bonus(Constants.cannon_kill_time_bonus)
 
 
-func _on_boss_hit(_boss: MinionBoss) -> void:
+func _on_boss_hit(_boss: Node) -> void:
     if _game_over:
         return
     _shaking_camera.start_screen_shake()
@@ -116,6 +117,11 @@ func _on_key_collected(key: Key) -> void:
 func _try_unlock_goal() -> void:
     if _key_enemies.is_empty() && _keys.is_empty():
         _goal.unlock()
+
+
+func _on_node_added(node: Node) -> void:
+    if node.is_in_group("hazard"):
+        (node as Hazard).car_entered.connect(_on_car_entered_hazard)
 
 
 func _on_car_entered_hazard(car: Car) -> void:
