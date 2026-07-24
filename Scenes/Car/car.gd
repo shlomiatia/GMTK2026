@@ -47,9 +47,10 @@ func _physics_process(delta: float) -> void:
     velocity = velocity.move_toward(Vector2.ZERO, Constants.friction * delta)
     _handle_collision(move_and_collide(velocity * delta))
 
-    #if velocity.length() < Constants.rest_velocity_threshold:
-    #    _state = State.IDLE
-    #    _crank.set_enabled(true)
+    if velocity.length() < Constants.enemy_kill_speed:
+        _crank.set_enabled(true)
+    if velocity.length() == 0.0:
+        _state = State.IDLE
 
 
 func _handle_collision(collision: KinematicCollision2D) -> void:
@@ -63,7 +64,8 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
     if cannon && velocity.length() >= Constants.enemy_kill_speed:
         cannon.die()
         cannon_killed.emit(cannon)
-    var boss: Node = collision.get_collider().get_parent()
+    var collider: Node = collision.get_collider()
+    var boss: Node = collider if collider.is_in_group("boss") else collider.get_parent()
     if boss && boss.is_in_group("boss") && velocity.length() >= Constants.enemy_kill_speed && boss.call("hit"):
         boss_hit.emit(boss)
     velocity = velocity.bounce(collision.get_normal())

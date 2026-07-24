@@ -19,7 +19,6 @@ var _is_invincible: bool = false
 
 
 func _ready() -> void:
-    prints("hi")
     _car = get_tree().get_first_node_in_group("car") as Car
     _fire_timer.timeout.connect(_on_fire_timer_timeout)
     _animation_player.animation_finished.connect(_on_animation_finished)
