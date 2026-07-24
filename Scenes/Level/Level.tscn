@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bp3bbqdl6drvw" path="res://Scenes/Options/Options.tscn" id="2_optns"]
 [ext_resource type="PackedScene" uid="uid://cppmmjbl4yf8e" path="res://Scenes/Overlay/Overlay.tscn" id="3_overlay"]
 [ext_resource type="PackedScene" uid="uid://bbrs3ouymdwi8" path="res://Scenes/ShakingCamera/ShakingCamera.tscn" id="4_qp1lj"]
+[ext_resource type="Texture2D" uid="uid://c17yvvwu6qf5c" path="res://Art/Assets/Play Scene/TEMP Environment.png" id="5_k2uda"]
 
 [node name="Level" type="Node2D" unique_id=1740858742]
 script = ExtResource("1_level")
@@ -15,6 +16,10 @@ script = ExtResource("1_level")
 [node name="ShakingCamera" parent="." unique_id=805263946 instance=ExtResource("4_qp1lj")]
 anchor_mode = 0
 
-[node name="Timer" type="Timer" parent="." unique_id=2378501234]
+[node name="Timer" type="Timer" parent="." unique_id=-1916466062]
 wait_time = 10.0
 one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1046964283]
+position = Vector2(960, 540)
+texture = ExtResource("5_k2uda")

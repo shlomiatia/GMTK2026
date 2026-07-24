@@ -1,15 +1,8 @@
 [gd_scene format=3 uid="uid://rf87cou38mpc"]
 
 [ext_resource type="Script" uid="uid://ds6mkts7batl7" path="res://Scenes/Car/car.gd" id="1_a0hww"]
-[ext_resource type="Texture2D" uid="uid://caq0pbv2v7vb5" path="res://Textures/crank.png" id="2_a0hww"]
 [ext_resource type="Texture2D" uid="uid://ds52e3qriilca" path="res://Art/Assets/Play Scene/Player/Player.png" id="2_asnge"]
-[ext_resource type="AudioStream" uid="uid://b4r6gugu440h5" path="res://Audio/crank.mp3" id="4_sbu84"]
-[ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://icon.svg" id="5_vmouse"]
-[ext_resource type="Script" uid="uid://ck8h1cajiid02" path="res://Scenes/CrankControl/crank_control.gd" id="6_crank"]
-[ext_resource type="Texture2D" uid="uid://hq8381le5qxg" path="res://Art/Assets/Play Scene/Player/Wind-Up.png" id="7_kj2ht"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
-size = Vector2(30, 104)
+[ext_resource type="PackedScene" uid="uid://crroyrcw2et8j" path="res://Scenes/Crank/Crank.tscn" id="3_a0hww"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
 radius = 16.0
@@ -64,44 +57,14 @@ position = Vector2(0, 27)
 rotation = 3.1415927
 texture = ExtResource("2_asnge")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Car" unique_id=176709280]
-show_behind_parent = true
-offset_left = -41.000004
-offset_top = -19.999996
-offset_right = 40.999996
-offset_bottom = 60.000004
-fill_mode = 4
-texture_progress = ExtResource("7_kj2ht")
-
-[node name="Crank" type="Sprite2D" parent="Car" unique_id=2007681203]
-visible = false
-position = Vector2(-2, -4)
-texture = ExtResource("2_a0hww")
-offset = Vector2(0, 34)
-
-[node name="Area2D" type="Area2D" parent="Car/Crank" unique_id=1141421083]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Car/Crank/Area2D" unique_id=1747547457]
-position = Vector2(0, 34)
-shape = SubResource("RectangleShape2D_ebdu8")
+[node name="Crank" parent="Car" unique_id=1994099940 instance=ExtResource("3_a0hww")]
+rotation = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1938754536]
 shape = SubResource("CapsuleShape2D_ebdu8")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=285597634]
-stream = ExtResource("4_sbu84")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1089803300]
 libraries/ = SubResource("AnimationLibrary_dfrl7")
-
-[node name="VirtualMouseIcon" type="Sprite2D" parent="." unique_id=-1083982729]
-visible = false
-top_level = true
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("5_vmouse")
-
-[node name="CrankControl" type="Node" parent="." unique_id=-453959644]
-script = ExtResource("6_crank")
 
 [node name="SensorArea" type="Area2D" parent="." unique_id=671008190]
 position = Vector2(0, 9)

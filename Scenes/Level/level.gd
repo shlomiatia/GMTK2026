@@ -13,6 +13,7 @@ var _car: Car
 
 
 func _ready() -> void:
+    prints("hi")
     _timer.wait_time = time_limit
     _timer.timeout.connect(_on_timer_timeout)
     _timer.start()

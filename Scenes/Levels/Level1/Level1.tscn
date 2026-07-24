@@ -37,4 +37,4 @@ offset_right = 40.0
 offset_bottom = 1080.0
 pivot_offset = Vector2(20, 540)
 
-[node name="GoalObjective" parent="." instance=ExtResource("6_goal_obj")]
+[node name="GoalObjective" parent="." unique_id=1366670914 instance=ExtResource("6_goal_obj")]

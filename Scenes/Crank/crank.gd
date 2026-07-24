@@ -1,12 +1,13 @@
-class_name CrankControl extends Node
+class_name Crank extends Node2D
 
 signal launched(power_ratio: float)
 
 @onready var _car: Node2D = get_parent()
-@onready var _crank_sprite: Sprite2D = $"../Car/Crank"
-@onready var _crank_area_shape: CollisionShape2D = $"../Car/Crank/Area2D/CollisionShape2D"
-@onready var _virtual_mouse_icon: Sprite2D = $"../VirtualMouseIcon"
-@onready var _audio_stream_player: AudioStreamPlayer = $"../AudioStreamPlayer"
+@onready var _crank_sprite: Sprite2D = $CrankSprite
+@onready var _crank_area_shape: CollisionShape2D = $CrankSprite/Area2D/CollisionShape2D
+@onready var _progress_bar: TextureProgressBar = $ProgressBar
+@onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var _virtual_mouse_icon: Sprite2D = $VirtualMouseIcon
 
 var _crank_degrees: float = 0.0
 var _last_full_rotations: int = 0
@@ -17,6 +18,9 @@ var _virtual_mouse_pos: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+    _progress_bar.min_value = 0.0
+    _progress_bar.max_value = Constants.max_crank_degrees
+    _progress_bar.value = 0.0
 
 func _input(event: InputEvent) -> void:
     if !_cranking || !_using_mouse || Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
@@ -89,6 +93,7 @@ func _advance_crank(new_angle: float, prev_angle: float) -> void:
         return
     _crank_degrees += to_add
     _crank_sprite.rotation_degrees = _crank_degrees
+    _progress_bar.value = _crank_degrees
     var full := int(_crank_degrees / 360.0)
     if full > _last_full_rotations:
         _last_full_rotations = full
@@ -101,6 +106,7 @@ func _try_launch() -> void:
     var power_ratio := _crank_degrees / Constants.max_crank_degrees
     _crank_degrees = 0.0
     _last_full_rotations = 0
+    _progress_bar.value = 0.0
     var tween := create_tween()
     tween.tween_property(_crank_sprite, "rotation_degrees", 0.0, Constants.reset_crank_seconds).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
     launched.emit(power_ratio)
