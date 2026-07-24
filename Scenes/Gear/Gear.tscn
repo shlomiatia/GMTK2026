@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://culglce1hed48"]
 
-[ext_resource type="Texture2D" uid="uid://cg78qlmanin5s" path="res://Textures/gear.png" id="1_0fpd8"]
-[ext_resource type="Script" path="res://Scenes/Gear/gear.gd" id="2_gear"]
+[ext_resource type="Script" uid="uid://cyv8g7j4158nc" path="res://Scenes/Gear/gear.gd" id="2_gear"]
+[ext_resource type="Texture2D" uid="uid://b1gyuj32g4uq" path="res://Art/Assets/Play Scene/Items/Nut.png" id="2_swp82"]
 
 [sub_resource type="Animation" id="Animation_swp82"]
 length = 0.001
@@ -12,6 +12,18 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -33,6 +45,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dtd4c"]
 _data = {
@@ -41,14 +65,17 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
-radius = 28.0
+radius = 13.0
 
-[node name="Gear" type="Sprite2D" unique_id=1297575356 groups=["gear"]]
-texture = ExtResource("1_0fpd8")
+[node name="Gear" type="Node2D" unique_id=347710995 groups=["gear"]]
 script = ExtResource("2_gear")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=541205269]
 libraries/ = SubResource("AnimationLibrary_dtd4c")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=914141441]
+position = Vector2(0, 2)
+texture = ExtResource("2_swp82")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1714089240]
 
