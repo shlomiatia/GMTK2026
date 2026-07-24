@@ -8,21 +8,21 @@
 [ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="6_klelw"]
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/EnemiesObjective/EnemiesObjective.tscn" id="7_enemies_obj"]
 
-[sub_resource type="Curve2D" id="Curve2D_18d3l"]
+[sub_resource type="Curve2D" id="Curve2D_vx5k5"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, -82.84272, 0, 82.84272, 150, 0, 82.84272, -5.072486e-15, -82.84272, 5.072486e-15, 9.184548e-15, 150, 1.0144972e-14, 82.84272, -1.0144972e-14, -82.84272, -150, 1.8369095e-14, -82.84272, 1.5217457e-14, 82.84272, -1.5217457e-14, -2.7553643e-14, -150, -2.0289944e-14, -82.84272, 2.0289944e-14, 82.84272, 150, -3.673819e-14)
 }
 point_count = 5
 
-[sub_resource type="Curve2D" id="Curve2D_klelw"]
+[sub_resource type="Curve2D" id="Curve2D_to7n6"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, -220.91391, 0, 220.91391, 400, 0, 220.91391, -1.3526629e-14, -220.91391, 1.3526629e-14, 2.4492127e-14, 400, 2.7053258e-14, 220.91391, -2.7053258e-14, -220.91391, -400, 4.8984254e-14, -220.91391, 4.0579888e-14, 220.91391, -4.0579888e-14, -7.347638e-14, -400, -5.4106516e-14, -220.91391, 5.4106516e-14, 220.91391, 400, -9.796851e-14)
 }
 point_count = 5
 
-[node name="Level8" type="Node2D" unique_id=1733532608]
+[node name="Level" type="Node2D" unique_id=1733532608]
 
 [node name="Level" parent="." unique_id=76539942 instance=ExtResource("1_18d3l")]
 time_limit = 20.0
@@ -50,14 +50,14 @@ pivot_offset = Vector2(20, 540)
 
 [node name="CircularPath2d" parent="." unique_id=1401762397 instance=ExtResource("5_18d3l")]
 position = Vector2(960, 540)
-curve = SubResource("Curve2D_18d3l")
+curve = SubResource("Curve2D_vx5k5")
 radius = 150.0
 
 [node name="Enemy" parent="CircularPath2d" unique_id=155100240 instance=ExtResource("6_fo4bc")]
 
 [node name="CircularPath2d2" parent="." unique_id=282016514 instance=ExtResource("5_18d3l")]
 position = Vector2(960, 540)
-curve = SubResource("Curve2D_klelw")
+curve = SubResource("Curve2D_to7n6")
 radius = 400.0
 
 [node name="Enemy" parent="CircularPath2d2" unique_id=627786127 instance=ExtResource("6_fo4bc")]
@@ -65,4 +65,4 @@ radius = 400.0
 [node name="Gear" parent="." unique_id=1297575356 instance=ExtResource("6_klelw")]
 position = Vector2(960, 540)
 
-[node name="EnemiesObjective" parent="." instance=ExtResource("7_enemies_obj")]
+[node name="EnemiesObjective" parent="." unique_id=640813662 instance=ExtResource("7_enemies_obj")]
