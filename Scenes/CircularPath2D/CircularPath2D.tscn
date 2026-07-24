@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dom18jy1c3une"]
+
+[ext_resource type="Script" uid="uid://d31kjx2m0r1o6" path="res://Scenes/CircularPath2D/circular_path_2d.gd" id="1_circular_path_2d"]
+
+[sub_resource type="Curve2D" id="Curve2D_4od54"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, -55.228477, 0, 55.228477, 100, 0, 55.228477, -3.3816573e-15, -55.228477, 3.3816573e-15, 6.1230318e-15, 100, 6.7633146e-15, 55.228477, -6.7633146e-15, -55.228477, -100, 1.22460635e-14, -55.228477, 1.0144972e-14, 55.228477, -1.0144972e-14, -1.8369095e-14, -100, -1.3526629e-14, -55.228477, 1.3526629e-14, 55.228477, 100, -2.4492127e-14)
+}
+point_count = 5
+
+[node name="CircularPath2d" type="Path2D" unique_id=1401762397]
+curve = SubResource("Curve2D_4od54")
+script = ExtResource("1_circular_path_2d")

@@ -8,6 +8,9 @@ var _won: bool = false
 var _car: Car
 var _goal: Goal
 var _enemies: Array[Enemy] = []
+var _win_on_gears: bool = false
+var _gears_total: int = 0
+var _gears_collected: int = 0
 
 @onready var _overlay: Overlay = $Overlay
 @onready var _shaking_camera: ShakingCamera = $ShakingCamera
@@ -26,8 +29,13 @@ func _ready() -> void:
     _car.enemy_killed.connect(_on_enemy_killed)
     for hazard in get_tree().get_nodes_in_group("hazard"):
         (hazard as Hazard).car_entered.connect(_on_car_entered_hazard)
+    var gears := get_tree().get_nodes_in_group("gear")
+    _gears_total = gears.size()
+    for gear in gears:
+        (gear as Gear).collected.connect(_on_gear_collected)
     for enemy in get_tree().get_nodes_in_group("enemy"):
         _enemies.append(enemy as Enemy)
+    _win_on_gears = !_goal && _enemies.is_empty() && _gears_total > 0
 
 
 func _process(_delta: float) -> void:
@@ -92,6 +100,15 @@ func _on_car_entered_hazard(car: Car) -> void:
         return
     car.die()
     _shaking_camera.start_screen_shake()
+
+
+func _on_gear_collected() -> void:
+    if _game_over:
+        return
+    _timer.start(_timer.time_left + Constants.gear_time_bonus)
+    _gears_collected += 1
+    if _win_on_gears && _gears_collected >= _gears_total:
+        _win()
 
 
 func _on_car_died() -> void:

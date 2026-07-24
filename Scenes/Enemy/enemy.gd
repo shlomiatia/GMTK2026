@@ -2,42 +2,53 @@ class_name Enemy extends CharacterBody2D
 
 signal died
 
-const WAYPOINT_ARRIVAL_DISTANCE := 4.0
+const ARRIVAL_DISTANCE := 4.0
+
+@export var loop: bool = true
 
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 var _path: Path2D
-var _waypoint_index: int = 0
+var _path_follow: PathFollow2D
 var _direction: int = 1
 var _is_dead: bool = false
 
 
 func _ready() -> void:
 	_path = get_parent() as Path2D
-	if _path && _path.curve.point_count > 0:
-		global_position = _path.global_transform * _path.curve.get_point_position(_waypoint_index)
+	if !_path:
+		return
+	_path_follow = PathFollow2D.new()
+	_path_follow.loop = loop
+	_path.add_child.call_deferred(_path_follow)
+	_snap_to_path_follow.call_deferred()
+
+
+func _snap_to_path_follow() -> void:
+	global_position = _path_follow.global_position
 
 
 func _physics_process(delta: float) -> void:
-	if _is_dead || !_path || _path.curve.point_count < 2:
+	if _is_dead || !_path_follow:
 		return
-	var target := _path.global_transform * _path.curve.get_point_position(_waypoint_index)
-	var to_target := target - global_position
-	if to_target.length() <= WAYPOINT_ARRIVAL_DISTANCE:
-		_advance_waypoint()
+	var length := _path.curve.get_baked_length()
+	if length <= 0.0:
+		return
+	var ratio := _path_follow.progress_ratio + Constants.enemy_speed * delta * _direction / length
+	if !loop:
+		if ratio >= 1.0:
+			ratio = 1.0
+			_direction = -1
+		elif ratio <= 0.0:
+			ratio = 0.0
+			_direction = 1
+	_path_follow.progress_ratio = ratio
+	var to_target := _path_follow.global_position - global_position
+	if to_target.length() <= ARRIVAL_DISTANCE:
 		return
 	velocity = to_target.normalized() * Constants.enemy_speed
 	move_and_collide(velocity * delta)
-
-
-func _advance_waypoint() -> void:
-	var last_index := _path.curve.point_count - 1
-	if _waypoint_index >= last_index:
-		_direction = -1
-	elif _waypoint_index <= 0:
-		_direction = 1
-	_waypoint_index += _direction
 
 
 func is_dead() -> bool:
@@ -51,4 +62,7 @@ func die() -> void:
 	velocity = Vector2.ZERO
 	_collision_shape.set_deferred("disabled", true)
 	_animation_player.play("die")
+	if _path_follow:
+		_path_follow.queue_free()
+		_path_follow = null
 	died.emit()
