@@ -1,6 +1,12 @@
+@tool
 class_name Level extends Node2D
 
 @export var time_limit: float = 10.0
+@export var texture: Texture2D:
+    set(value):
+        texture = value
+        if texture && is_node_ready():
+            _sprite.texture = texture
 
 var _game_over: bool = false
 var _won: bool = false
@@ -10,10 +16,14 @@ var _car: Car
 @onready var _shaking_camera: ShakingCamera = $ShakingCamera
 @onready var _timer: Timer = $Timer
 @onready var _time_progress_bar: TextureProgressBar = $Time
+@onready var _sprite: Sprite2D = $Sprite2D
 
 
 func _ready() -> void:
-    prints("hi")
+    if texture:
+        _sprite.texture = texture
+    if Engine.is_editor_hint():
+        return
     _timer.wait_time = time_limit
     _timer.timeout.connect(_on_timer_timeout)
     _timer.start()
@@ -29,6 +39,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+    if Engine.is_editor_hint():
+        return
     if Input.is_action_just_pressed("skip_level"):
         _go_to_next_level()
         return
@@ -45,6 +57,8 @@ func _process(_delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+    if Engine.is_editor_hint():
+        return
     if !_won:
         return
     if event.is_pressed() && !event.is_echo():

@@ -17,8 +17,3 @@ func _update() -> void:
 	if !is_node_ready():
 		return
 	(_collision_shape.shape as CircleShape2D).radius = radius
-	queue_redraw()
-
-
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, radius, Color.BLACK)
