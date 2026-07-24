@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dyvfc1c5x7ray" path="res://Art/Assets/Play Scene/Enemies/Turret Base.png" id="1_k0bsa"]
 [ext_resource type="Texture2D" uid="uid://bsh7ldf3xag3o" path="res://Art/Assets/Play Scene/Enemies/Turret Head.png" id="2_l6qg3"]
+[ext_resource type="Script" path="res://Scenes/Cannon/cannon.gd" id="3_cannon"]
+[ext_resource type="PackedScene" uid="uid://cxy5qr35i2yve" path="res://Scenes/Bullet/Bullet.tscn" id="4_bullet"]
 
 [sub_resource type="Animation" id="Animation_l6qg3"]
 length = 0.001
@@ -45,6 +47,8 @@ _data = {
 radius = 36.0
 
 [node name="Cannon" type="Node2D" unique_id=335970389]
+script = ExtResource("3_cannon")
+bullet_scene = ExtResource("4_bullet")
 
 [node name="Base" type="Sprite2D" parent="." unique_id=385181641]
 texture = ExtResource("1_k0bsa")
@@ -59,6 +63,14 @@ position = Vector2(1, 55)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1869932999]
 libraries/ = SubResource("AnimationLibrary_l6qg3")
+
+[node name="FireTimer" type="Timer" parent="." unique_id=1246879520]
+wait_time = 3.0
+autostart = true
+
+[node name="BulletDelayTimer" type="Timer" parent="." unique_id=1246879521]
+wait_time = 1.0
+one_shot = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1611511170]
 position = Vector2(0, -11)

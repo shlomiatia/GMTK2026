@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://c1sxbmr6iqyof"]
+
+[ext_resource type="PackedScene" uid="uid://b6wfreo7ajycp" path="res://Scenes/Level/Level.tscn" id="1_5p1rv"]
+[ext_resource type="Texture2D" uid="uid://buggw5rrtdleg" path="res://Art/Assets/Play Scene/Levels/Lv 9.png" id="2_klrvk"]
+[ext_resource type="PackedScene" uid="uid://bemlcu6wijhau" path="res://Scenes/Goal/Goal.tscn" id="2_npoox"]
+[ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_klrvk"]
+[ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="4_rxlmw"]
+[ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="5_ibkl5"]
+[ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="7_klrvk"]
+[ext_resource type="PackedScene" uid="uid://ccy7aq7vhw0s6" path="res://Scenes/Cannon/Cannon.tscn" id="8_rxlmw"]
+
+[node name="Level" type="Node2D" unique_id=1733532608]
+
+[node name="Level" parent="." unique_id=76539942 instance=ExtResource("1_5p1rv")]
+texture = ExtResource("2_klrvk")
+
+[node name="Goal" parent="." unique_id=669960687 instance=ExtResource("2_npoox")]
+position = Vector2(960, 356)
+
+[node name="Car" parent="." unique_id=1734870916 instance=ExtResource("3_klrvk")]
+position = Vector2(1073.0001, 925.0001)
+rotation = 1.1997092
+motion_mode = 1
+
+[node name="GoalObjective" parent="." unique_id=1366670914 instance=ExtResource("4_rxlmw")]
+
+[node name="Gear" parent="." unique_id=347710995 instance=ExtResource("5_ibkl5")]
+position = Vector2(1272, 801)
+
+[node name="Gear2" parent="." unique_id=1612669469 instance=ExtResource("5_ibkl5")]
+position = Vector2(1358, 553)
+
+[node name="Gear3" parent="." unique_id=1712358846 instance=ExtResource("5_ibkl5")]
+position = Vector2(1253, 261)
+
+[node name="Gear4" parent="." unique_id=1265835408 instance=ExtResource("5_ibkl5")]
+position = Vector2(970, 139)
+
+[node name="Gear5" parent="." unique_id=1540675068 instance=ExtResource("5_ibkl5")]
+position = Vector2(666, 259)
+
+[node name="Gear6" parent="." unique_id=2026112536 instance=ExtResource("5_ibkl5")]
+position = Vector2(656, 808)
+
+[node name="Gear7" parent="." unique_id=958088162 instance=ExtResource("5_ibkl5")]
+position = Vector2(537, 533)
+
+[node name="ColorRect" parent="." unique_id=1335257777 instance=ExtResource("7_klrvk")]
+offset_left = 945.0
+offset_top = 810.0
+offset_right = 978.0
+offset_bottom = 1056.0
+pivot_offset = Vector2(16.5, 123)
+
+[node name="Cannon" parent="." unique_id=335970389 instance=ExtResource("8_rxlmw")]
+position = Vector2(960, 540)
