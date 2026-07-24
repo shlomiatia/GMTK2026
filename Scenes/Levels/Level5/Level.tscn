@@ -93,5 +93,6 @@ loop = false
 
 [node name="MinionBoss" parent="." unique_id=1828729893 instance=ExtResource("5_8ua28")]
 position = Vector2(960, 145)
+enemy_scene = null
 
 [node name="BossObjective" parent="." unique_id=1828729895 instance=ExtResource("7_boss_obj")]

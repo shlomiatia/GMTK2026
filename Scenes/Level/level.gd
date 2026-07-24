@@ -97,6 +97,7 @@ func _on_cannon_killed(_cannon: Cannon) -> void:
     if _game_over:
         return
     _shaking_camera.start_screen_shake()
+    _add_time_bonus(Constants.cannon_kill_time_bonus)
 
 
 func _on_boss_hit(_boss: MinionBoss) -> void:
