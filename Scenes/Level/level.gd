@@ -123,6 +123,7 @@ func _win() -> void:
         return
     _game_over = true
     _won = true
+    _car.freeze()
     _overlay.show_message("You win! Press any key continue")
 
 

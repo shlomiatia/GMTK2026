@@ -42,7 +42,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
-radius = 62.0
+radius = 61.0
 
 [node name="BiggerHazard" type="Node2D" unique_id=1355887644 groups=["hazard"]]
 script = ExtResource("1_ksgcf")

@@ -1,5 +1,7 @@
 class_name Goal extends Node2D
 
+signal car_entered
+
 @export var locked: bool = false
 
 @onready var _area: Area2D = $Area2D
@@ -9,6 +11,7 @@ class_name Goal extends Node2D
 
 func _ready() -> void:
     _locked_sprite.visible = locked
+    _area.area_entered.connect(_on_area_entered)
 
 
 func has_car() -> bool:
@@ -30,3 +33,12 @@ func unlock() -> void:
         return
     locked = false
     _animation_player.play("unlock")
+    if has_car():
+        car_entered.emit()
+
+
+func _on_area_entered(area: Area2D) -> void:
+    if locked:
+        return
+    if area.get_collision_layer_value(CollisionLayers.CAR_SENSOR):
+        car_entered.emit()
