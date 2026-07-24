@@ -78,6 +78,8 @@ position = Vector2(0, 2)
 texture = ExtResource("2_swp82")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1714089240]
+collision_layer = 16
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=143139351]
 shape = SubResource("CircleShape2D_ebdu8")

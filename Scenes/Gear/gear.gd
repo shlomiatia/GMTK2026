@@ -8,12 +8,12 @@ signal collected
 
 
 func _ready() -> void:
-    _area.body_entered.connect(_on_body_entered)
+    _area.area_entered.connect(_on_area_entered)
     _animation_player.animation_finished.connect(_on_animation_finished)
 
 
-func _on_body_entered(body: Node2D) -> void:
-    if !(body is Car):
+func _on_area_entered(area: Area2D) -> void:
+    if !area.get_collision_layer_value(CollisionLayers.CAR_SENSOR):
         return
     _collision_shape.set_deferred("disabled", true)
     _animation_player.play("die")

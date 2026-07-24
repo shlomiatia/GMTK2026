@@ -15,6 +15,8 @@ var _last_angle: float = NAN
 var _using_mouse: bool = false
 var _virtual_mouse_pos: Vector2 = Vector2.ZERO
 
+func _ready() -> void:
+    Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _input(event: InputEvent) -> void:
     if !_cranking || !_using_mouse || Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:

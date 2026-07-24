@@ -54,6 +54,8 @@ _data = {
 radius = 38.0
 
 [node name="Car" type="CharacterBody2D" unique_id=1734870916 groups=["car"]]
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_a0hww")
 
 [node name="Car" type="Sprite2D" parent="." unique_id=1086041179]
@@ -62,7 +64,6 @@ rotation = 3.1415927
 texture = ExtResource("2_asnge")
 
 [node name="Crank" type="Sprite2D" parent="Car" unique_id=2007681203]
-visible = false
 position = Vector2(-2, -4)
 texture = ExtResource("2_a0hww")
 offset = Vector2(0, 34)
@@ -91,8 +92,11 @@ texture = ExtResource("5_vmouse")
 [node name="CrankControl" type="Node" parent="." unique_id=-453959644]
 script = ExtResource("6_crank")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=671008190]
+[node name="SensorArea" type="Area2D" parent="." unique_id=671008190]
 position = Vector2(0, 9)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1873419351]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SensorArea" unique_id=1873419351]
 shape = SubResource("CircleShape2D_xl6da")

@@ -4,7 +4,7 @@ class_name Goal extends Node2D
 
 
 func has_car() -> bool:
-	for body in _area.get_overlapping_bodies():
-		if body is Car:
+	for area in _area.get_overlapping_areas():
+		if area.get_collision_layer_value(CollisionLayers.CAR_SENSOR):
 			return true
 	return false
