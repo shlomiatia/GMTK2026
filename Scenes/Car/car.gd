@@ -31,9 +31,7 @@ func _physics_process(delta: float) -> void:
 	_handle_collision(move_and_collide(velocity * delta))
 
 	if velocity.length() < Constants.rest_velocity_threshold:
-		velocity = Vector2.ZERO
 		_state = State.IDLE
-		_angular_velocity = 0.0
 		_crank.set_enabled(true)
 
 
