@@ -1,14 +1,18 @@
 class_name Cannon extends Node2D
 
+signal died
+
 @export var bullet_scene: PackedScene
 
 @onready var _turret: Sprite2D = $Turret
 @onready var _muzzle: Node2D = $Turret/Node2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _fire_timer: Timer = $FireTimer
+@onready var _collision_shape: CollisionShape2D = $StaticBody2D/CollisionShape2D
 
 var _car: Car
 var _rotating: bool = true
+var _is_dead: bool = false
 
 
 func _ready() -> void:
@@ -29,6 +33,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_fire_timer_timeout() -> void:
+	if _is_dead:
+		return
 	_rotating = false
 	_animation_player.play("fire")
 
@@ -40,6 +46,21 @@ func fire() -> void:
 	bullet.rotation = _muzzle.global_rotation
 
 
+func is_dead() -> bool:
+	return _is_dead
+
+
+func die() -> void:
+	if _is_dead:
+		return
+	_is_dead = true
+	_rotating = false
+	_fire_timer.stop()
+	_collision_shape.set_deferred("disabled", true)
+	_animation_player.play("die")
+	died.emit()
+
+
 func _on_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "fire":
+	if anim_name == "fire" && !_is_dead:
 		_rotating = true

@@ -3,6 +3,7 @@ class_name Car extends CharacterBody2D
 signal launched
 signal died
 signal enemy_killed(enemy: Enemy)
+signal cannon_killed(cannon: Cannon)
 
 enum State {IDLE, LAUNCHED, DEAD}
 
@@ -57,6 +58,10 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
 	if enemy && velocity.length() >= Constants.enemy_kill_speed:
 		enemy.die()
 		enemy_killed.emit(enemy)
+	var cannon := collision.get_collider().get_parent() as Cannon
+	if cannon && velocity.length() >= Constants.enemy_kill_speed:
+		cannon.die()
+		cannon_killed.emit(cannon)
 	velocity = velocity.bounce(collision.get_normal())
 
 
