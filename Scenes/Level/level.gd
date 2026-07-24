@@ -1,7 +1,6 @@
 class_name Level extends Node2D
 
 @export var time_limit: float = 10.0
-@export var next_level: PackedScene
 
 var _game_over: bool = false
 var _won: bool = false
@@ -13,6 +12,7 @@ var _car: Car
 
 
 func _ready() -> void:
+    prints("hi")
     _timer.wait_time = time_limit
     _timer.timeout.connect(_on_timer_timeout)
     _timer.start()
@@ -105,5 +105,9 @@ func _lose() -> void:
 
 
 func _go_to_next_level() -> void:
-    if next_level:
-        get_tree().change_scene_to_packed(next_level)
+    var current_path := get_tree().current_scene.scene_file_path
+    var levels_dir := current_path.get_base_dir().get_base_dir()
+    var level_number := current_path.get_base_dir().get_file().trim_prefix("Level").to_int()
+    var next_level_path := "%s/Level%d/Level.tscn" % [levels_dir, level_number + 1]
+    if ResourceLoader.exists(next_level_path):
+        get_tree().change_scene_to_file(next_level_path)

@@ -5,11 +5,11 @@ signal rested
 signal died
 signal enemy_killed(enemy: Enemy)
 
-enum State { IDLE, LAUNCHED, DEAD }
+enum State {IDLE, LAUNCHED, DEAD}
 
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
-@onready var _crank_control: CrankControl = $CrankControl
+@onready var _crank: Crank = $Car/Crank
 
 var _state: State = State.IDLE
 var _angular_velocity: float = 0.0
@@ -17,7 +17,7 @@ var _angular_velocity: float = 0.0
 
 func _ready() -> void:
     _animation_player.animation_finished.connect(_on_animation_finished)
-    _crank_control.launched.connect(_on_crank_launched)
+    _crank.launched.connect(_on_crank_launched)
 
 
 func _physics_process(delta: float) -> void:
@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
     if velocity == Vector2.ZERO:
         _state = State.IDLE
         _angular_velocity = 0.0
-        _crank_control.set_enabled(true)
+        _crank.set_enabled(true)
         rested.emit()
 
 
@@ -64,7 +64,7 @@ func _on_crank_launched(power_ratio: float) -> void:
     if _state != State.IDLE:
         return
     _state = State.LAUNCHED
-    _crank_control.set_enabled(false)
+    _crank.set_enabled(false)
     velocity = - transform.y * power_ratio * Constants.max_speed
     launched.emit()
 
@@ -75,7 +75,7 @@ func get_bounding_radius() -> float:
 
 func freeze() -> void:
     set_physics_process(false)
-    _crank_control.set_enabled(false)
+    _crank.set_enabled(false)
     velocity = Vector2.ZERO
 
 
@@ -83,7 +83,7 @@ func die() -> void:
     if _state == State.DEAD:
         return
     _state = State.DEAD
-    _crank_control.set_enabled(false)
+    _crank.set_enabled(false)
     velocity = Vector2.ZERO
     _animation_player.play("die")
 

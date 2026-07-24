@@ -1,4 +1,4 @@
-class_name Gear extends Sprite2D
+class_name Gear extends Node2D
 
 signal collected
 
@@ -8,18 +8,18 @@ signal collected
 
 
 func _ready() -> void:
-	_area.body_entered.connect(_on_body_entered)
-	_animation_player.animation_finished.connect(_on_animation_finished)
+    _area.area_entered.connect(_on_area_entered)
+    _animation_player.animation_finished.connect(_on_animation_finished)
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if !(body is Car):
-		return
-	_collision_shape.set_deferred("disabled", true)
-	_animation_player.play("die")
-	collected.emit()
+func _on_area_entered(area: Area2D) -> void:
+    if !area.get_collision_layer_value(CollisionLayers.CAR_SENSOR):
+        return
+    _collision_shape.set_deferred("disabled", true)
+    _animation_player.play("die")
+    collected.emit()
 
 
 func _on_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "die":
-		queue_free()
+    if anim_name == "die":
+        queue_free()

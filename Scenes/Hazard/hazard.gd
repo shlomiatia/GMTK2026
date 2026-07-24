@@ -10,5 +10,6 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Car:
-		car_entered.emit(body)
+	if !(body as CollisionObject2D).get_collision_layer_value(CollisionLayers.CAR_BODY):
+		return
+	car_entered.emit(body as Car)

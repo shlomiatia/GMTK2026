@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://ccy7aq7vhw0s6"]
 
-[ext_resource type="Texture2D" uid="uid://b4v3k0gjmd865" path="res://Textures/turret.png" id="1_0snwq"]
+[ext_resource type="Texture2D" uid="uid://dyvfc1c5x7ray" path="res://Art/Assets/Play Scene/Enemies/Turret Base.png" id="1_k0bsa"]
+[ext_resource type="Texture2D" uid="uid://bsh7ldf3xag3o" path="res://Art/Assets/Play Scene/Enemies/Turret Head.png" id="2_l6qg3"]
 
 [node name="Cannon" type="Node2D" unique_id=335970389]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=385181641]
-texture = ExtResource("1_0snwq")
+[node name="Base" type="Sprite2D" parent="." unique_id=385181641]
+texture = ExtResource("1_k0bsa")
+
+[node name="Turret" type="Sprite2D" parent="." unique_id=1986524268]
+position = Vector2(0, -12)
+texture = ExtResource("2_l6qg3")
+offset = Vector2(0, 12)

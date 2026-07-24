@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0q6g075ds0mt"]
+
+[ext_resource type="Script" path="res://Scenes/Arena/arena.gd" id="1_arena"]
+
+[node name="Arena" type="StaticBody2D" unique_id=2025930274]
+script = ExtResource("1_arena")
+radius = 10.0
+number_of_points = 24
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1224034591]
+build_mode = 1

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://crroyrcw2et8j"]
+
+[ext_resource type="Script" uid="uid://16cfxt05t408" path="res://Scenes/Crank/crank.gd" id="1_crank"]
+[ext_resource type="Texture2D" uid="uid://caq0pbv2v7vb5" path="res://Textures/crank.png" id="2_sprite"]
+[ext_resource type="Texture2D" uid="uid://hq8381le5qxg" path="res://Art/Assets/Play Scene/Player/Wind-Up.png" id="3_progress"]
+[ext_resource type="AudioStream" uid="uid://b4r6gugu440h5" path="res://Audio/crank.mp3" id="4_audio"]
+[ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://icon.svg" id="5_vmouse"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
+size = Vector2(30, 104)
+
+[node name="Crank" type="Node2D" unique_id=1994099940]
+rotation = 3.1415927
+script = ExtResource("1_crank")
+
+[node name="CrankSprite" type="Sprite2D" parent="." unique_id=959162804]
+position = Vector2(-2, -4)
+texture = ExtResource("2_sprite")
+offset = Vector2(0, 34)
+
+[node name="Area2D" type="Area2D" parent="CrankSprite" unique_id=959673156]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrankSprite/Area2D" unique_id=1812286883]
+position = Vector2(0, 34)
+shape = SubResource("RectangleShape2D_ebdu8")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="." unique_id=884719568]
+show_behind_parent = true
+offset_left = -41.000004
+offset_top = -19.999996
+offset_right = 40.999996
+offset_bottom = 60.000004
+fill_mode = 4
+texture_progress = ExtResource("3_progress")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=816633301]
+stream = ExtResource("4_audio")
+
+[node name="VirtualMouseIcon" type="Sprite2D" parent="." unique_id=2034613234]
+visible = false
+top_level = true
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_vmouse")

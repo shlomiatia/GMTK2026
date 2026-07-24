@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://cwx0g1q1k8g26"]
+[gd_scene format=3 uid="uid://b8dlysmmnu6em"]
 
-[ext_resource type="Script" uid="uid://dsvslfb06sn4h" path="res://Scenes/Hazard/hazard.gd" id="2_hazrd"]
-[ext_resource type="Texture2D" uid="uid://cdpc0itp7xrdi" path="res://Art/Assets/Play Scene/Enemies/Gear_Small.png" id="2_i8x5p"]
+[ext_resource type="Script" uid="uid://dsvslfb06sn4h" path="res://Scenes/Hazard/hazard.gd" id="1_ksgcf"]
+[ext_resource type="Texture2D" uid="uid://dg85lksa88vji" path="res://Art/Assets/Play Scene/Enemies/Gear_Medium.png" id="2_ksgcf"]
 
 [sub_resource type="Animation" id="Animation_27cge"]
 length = 0.001
@@ -20,6 +20,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_xxxoc"]
 resource_name = "default"
+length = 2.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -28,7 +29,7 @@ tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 6.283185307179586]
@@ -41,13 +42,13 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
-radius = 31.0
+radius = 62.0
 
-[node name="Hazard" type="Node2D" unique_id=1355887644 groups=["hazard"]]
-script = ExtResource("2_hazrd")
+[node name="BiggerHazard" type="Node2D" unique_id=1355887644 groups=["hazard"]]
+script = ExtResource("1_ksgcf")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=641072676]
-texture = ExtResource("2_i8x5p")
+texture = ExtResource("2_ksgcf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2004718583]
 libraries/ = SubResource("AnimationLibrary_rpeia")

@@ -1,18 +1,12 @@
 [gd_scene format=3 uid="uid://rf87cou38mpc"]
 
-[ext_resource type="Texture2D" uid="uid://ngp0tyj7vkfs" path="res://Textures/car.png" id="1_6tdsx"]
 [ext_resource type="Script" uid="uid://ds6mkts7batl7" path="res://Scenes/Car/car.gd" id="1_a0hww"]
-[ext_resource type="Texture2D" uid="uid://caq0pbv2v7vb5" path="res://Textures/crank.png" id="2_a0hww"]
-[ext_resource type="AudioStream" uid="uid://b4r6gugu440h5" path="res://Audio/crank.mp3" id="4_sbu84"]
-[ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://icon.svg" id="5_vmouse"]
-[ext_resource type="Script" path="res://Scenes/CrankControl/crank_control.gd" id="6_crank"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
-size = Vector2(22, 88)
+[ext_resource type="Texture2D" uid="uid://ds52e3qriilca" path="res://Art/Assets/Play Scene/Player/Player.png" id="2_asnge"]
+[ext_resource type="PackedScene" uid="uid://crroyrcw2et8j" path="res://Scenes/Crank/Crank.tscn" id="3_a0hww"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
-radius = 34.0
-height = 160.0
+radius = 16.0
+height = 48.0
 
 [sub_resource type="Animation" id="Animation_dfrl7"]
 length = 0.001
@@ -50,36 +44,33 @@ _data = {
 &"die": SubResource("Animation_sbu84")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xl6da"]
+radius = 38.0
+
 [node name="Car" type="CharacterBody2D" unique_id=1734870916 groups=["car"]]
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_a0hww")
 
 [node name="Car" type="Sprite2D" parent="." unique_id=1086041179]
-texture = ExtResource("1_6tdsx")
+position = Vector2(0, 27)
+rotation = 3.1415927
+texture = ExtResource("2_asnge")
 
-[node name="Crank" type="Sprite2D" parent="Car" unique_id=2007681203]
-texture = ExtResource("2_a0hww")
-offset = Vector2(0, 34)
-
-[node name="Area2D" type="Area2D" parent="Car/Crank" unique_id=1141421083]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Car/Crank/Area2D" unique_id=1747547457]
-position = Vector2(0, 34)
-shape = SubResource("RectangleShape2D_ebdu8")
+[node name="Crank" parent="Car" unique_id=1994099940 instance=ExtResource("3_a0hww")]
+rotation = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1938754536]
 shape = SubResource("CapsuleShape2D_ebdu8")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=285597634]
-stream = ExtResource("4_sbu84")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1089803300]
 libraries/ = SubResource("AnimationLibrary_dfrl7")
 
-[node name="VirtualMouseIcon" type="Sprite2D" parent="." unique_id=3210984567]
-top_level = true
-visible = false
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("5_vmouse")
+[node name="SensorArea" type="Area2D" parent="." unique_id=671008190]
+position = Vector2(0, 9)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
 
-[node name="CrankControl" type="Node" parent="." unique_id=3841007652]
-script = ExtResource("6_crank")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SensorArea" unique_id=1873419351]
+shape = SubResource("CircleShape2D_xl6da")
