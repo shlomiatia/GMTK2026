@@ -81,6 +81,12 @@ func _on_crank_launched(power_ratio: float) -> void:
 	launched.emit()
 
 
+func push(motion: Vector2) -> void:
+	if _state == State.DEAD:
+		return
+	move_and_collide(motion)
+
+
 func get_bounding_radius() -> float:
 	return (_collision_shape.shape as CapsuleShape2D).height / 2.0
 

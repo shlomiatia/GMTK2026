@@ -61,6 +61,9 @@ func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("skip_level"):
         _go_to_next_level()
         return
+    if Input.is_action_just_pressed("restart"):
+        _restart()
+        return
     if _game_over:
         return
     _time_progress_bar.value = lerpf(time_progress_min_value, time_progress_max_value, _timer.time_left / time_limit)

@@ -77,7 +77,11 @@ func _physics_process(delta: float) -> void:
 	if distance <= ARRIVAL_DISTANCE:
 		return
 	velocity = to_target.normalized() * Constants.enemy_speed
-	move_and_collide(velocity * delta)
+	var collision := move_and_collide(velocity * delta)
+	if collision:
+		var car := collision.get_collider() as Car
+		if car:
+			car.push(velocity * delta)
 
 
 func is_dead() -> bool:
