@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="5_srv0a"]
 [ext_resource type="PackedScene" uid="uid://bqm5v2s7k1n4x" path="res://Scenes/Pillar/Pillar.tscn" id="6_4x5hw"]
 [ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="7_wxxdq"]
+[ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="8_goal_obj"]
 
 [node name="Level6" type="Node2D" unique_id=1733532608]
 
@@ -68,3 +69,5 @@ position = Vector2(1525, 530)
 
 [node name="Gear9" parent="." unique_id=1811034651 instance=ExtResource("7_wxxdq")]
 position = Vector2(1537, 417)
+
+[node name="GoalObjective" parent="." instance=ExtResource("8_goal_obj")]

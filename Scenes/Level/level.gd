@@ -6,11 +6,6 @@ class_name Level extends Node2D
 var _game_over: bool = false
 var _won: bool = false
 var _car: Car
-var _goal: Goal
-var _enemies: Array[Enemy] = []
-var _win_on_gears: bool = false
-var _gears_total: int = 0
-var _gears_collected: int = 0
 
 @onready var _overlay: Overlay = $Overlay
 @onready var _shaking_camera: ShakingCamera = $ShakingCamera
@@ -22,20 +17,14 @@ func _ready() -> void:
     _timer.timeout.connect(_on_timer_timeout)
     _timer.start()
     _car = get_tree().get_first_node_in_group("car") as Car
-    _goal = get_tree().get_first_node_in_group("goal") as Goal
     _car.launched.connect(_on_car_launched)
-    _car.rested.connect(_on_car_rested)
     _car.died.connect(_on_car_died)
     _car.enemy_killed.connect(_on_enemy_killed)
+    get_tree().get_first_node_in_group("objective").completed.connect(_win)
     for hazard in get_tree().get_nodes_in_group("hazard"):
         (hazard as Hazard).car_entered.connect(_on_car_entered_hazard)
-    var gears := get_tree().get_nodes_in_group("gear")
-    _gears_total = gears.size()
-    for gear in gears:
+    for gear in get_tree().get_nodes_in_group("gear"):
         (gear as Gear).collected.connect(_on_gear_collected)
-    for enemy in get_tree().get_nodes_in_group("enemy"):
-        _enemies.append(enemy as Enemy)
-    _win_on_gears = !_goal && _enemies.is_empty() && _gears_total > 0
 
 
 func _process(_delta: float) -> void:
@@ -60,15 +49,9 @@ func _unhandled_input(event: InputEvent) -> void:
     if event.is_pressed() && !event.is_echo():
         _go_to_next_level()
 
+
 func _on_car_launched() -> void:
     _overlay.hide_message()
-
-
-func _on_car_rested() -> void:
-    if _game_over:
-        return
-    if _goal && _goal.has_car():
-        _win()
 
 
 func _on_timer_timeout() -> void:
@@ -82,17 +65,6 @@ func _on_enemy_killed(_enemy: Enemy) -> void:
     if _game_over:
         return
     _shaking_camera.start_screen_shake()
-    if _all_enemies_dead():
-        _win()
-
-
-func _all_enemies_dead() -> bool:
-    if _enemies.is_empty():
-        return false
-    for enemy in _enemies:
-        if !enemy.is_dead():
-            return false
-    return true
 
 
 func _on_car_entered_hazard(car: Car) -> void:
@@ -106,9 +78,6 @@ func _on_gear_collected() -> void:
     if _game_over:
         return
     _timer.start(_timer.time_left + Constants.gear_time_bonus)
-    _gears_collected += 1
-    if _win_on_gears && _gears_collected >= _gears_total:
-        _win()
 
 
 func _on_car_died() -> void:
@@ -123,6 +92,8 @@ func _is_car_out_of_bounds() -> bool:
 
 
 func _win() -> void:
+    if _game_over:
+        return
     _game_over = true
     _won = true
     _overlay.show_message("You win! Press any key continue")

@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/Objectives/EnemiesObjective/enemies_objective.gd" id="1_enemies_obj"]
+
+[node name="EnemiesObjective" type="Node" groups=["objective"]]
+script = ExtResource("1_enemies_obj")

@@ -5,91 +5,23 @@ signal rested
 signal died
 signal enemy_killed(enemy: Enemy)
 
-@onready var _crank_sprite: Sprite2D = $Car/Crank
-@onready var _crank_area_shape: CollisionShape2D = $Car/Crank/Area2D/CollisionShape2D
-@onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+enum State { IDLE, LAUNCHED, DEAD }
+
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
-@onready var _virtual_mouse_icon: Sprite2D = $VirtualMouseIcon
+@onready var _crank_control: CrankControl = $CrankControl
 
-var _crank_degrees: float = 0.0
-var _last_full_rotations: int = 0
-var _is_launched: bool = false
-var _is_dead: bool = false
-
-var _cranking: bool = false
-var _last_angle: float = NAN
-var _using_mouse: bool = false
-var _virtual_mouse_pos: Vector2 = Vector2.ZERO
-
+var _state: State = State.IDLE
 var _angular_velocity: float = 0.0
 
 
 func _ready() -> void:
     _animation_player.animation_finished.connect(_on_animation_finished)
-
-
-func _input(event: InputEvent) -> void:
-    if !_cranking || !_using_mouse || Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
-        return
-    if !(event is InputEventMouseMotion):
-        return
-    var relative := (event as InputEventMouseMotion).relative
-    _virtual_mouse_pos += get_viewport().get_canvas_transform().affine_inverse().basis_xform(relative)
-    _virtual_mouse_icon.global_position = _virtual_mouse_pos
-
-
-func _process(_delta: float) -> void:
-    if _is_dead || _is_launched:
-        return
-    if Input.is_action_just_pressed("crank"):
-        var mouse_pressed := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
-        if mouse_pressed && !_is_mouse_over_crank_area():
-            return
-        _using_mouse = mouse_pressed
-        if _using_mouse:
-            _virtual_mouse_pos = get_global_mouse_position()
-            Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-            _virtual_mouse_icon.global_position = _virtual_mouse_pos
-            _virtual_mouse_icon.visible = true
-        _cranking = true
-        _last_angle = _get_crank_angle()
-    elif Input.is_action_just_released("crank"):
-        if _using_mouse:
-            Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-            _virtual_mouse_icon.visible = false
-        _cranking = false
-        _launch()
-    elif _cranking:
-        var angle := _get_crank_angle()
-        if is_nan(angle):
-            _last_angle = NAN
-        else:
-            if !is_nan(_last_angle):
-                _advance_crank(angle, _last_angle)
-            _last_angle = angle
-
-
-func _is_mouse_over_crank_area() -> bool:
-    var half := (_crank_area_shape.shape as RectangleShape2D).size / 2.0
-    var local := _crank_area_shape.to_local(get_global_mouse_position())
-    return absf(local.x) <= half.x && absf(local.y) <= half.y
-
-
-func _get_crank_angle() -> float:
-    if _using_mouse:
-        return (_virtual_mouse_pos - global_position).angle()
-    var stick := Vector2(
-        Input.get_joy_axis(0, JOY_AXIS_RIGHT_X),
-        Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
-    )
-    if stick.length() > 0.3:
-        return stick.angle()
-    return NAN
+    _crank_control.launched.connect(_on_crank_launched)
 
 
 func _physics_process(delta: float) -> void:
-    if _is_dead || !_is_launched:
+    if _state != State.LAUNCHED:
         return
     var dir := Input.get_axis("left", "right")
     _angular_velocity = deg_to_rad(Constants.steer_speed) * dir
@@ -97,20 +29,23 @@ func _physics_process(delta: float) -> void:
     if steer_angle != 0.0:
         velocity = velocity.rotated(steer_angle)
     velocity = velocity.move_toward(Vector2.ZERO, Constants.friction * delta)
-    var collision = move_and_collide(velocity * delta)
-    if collision:
-        var enemy := collision.get_collider() as Enemy
-        if enemy && velocity.length() >= Constants.enemy_kill_speed:
-            enemy.die()
-            enemy_killed.emit(enemy)
-        velocity = velocity.bounce(collision.get_normal())
+    _handle_collision(move_and_collide(velocity * delta))
 
     if velocity == Vector2.ZERO:
-        _is_launched = false
-        _crank_degrees = 0.0
-        _last_full_rotations = 0
+        _state = State.IDLE
         _angular_velocity = 0.0
+        _crank_control.set_enabled(true)
         rested.emit()
+
+
+func _handle_collision(collision: KinematicCollision2D) -> void:
+    if !collision:
+        return
+    var enemy := collision.get_collider() as Enemy
+    if enemy && velocity.length() >= Constants.enemy_kill_speed:
+        enemy.die()
+        enemy_killed.emit(enemy)
+    velocity = velocity.bounce(collision.get_normal())
 
 
 func _apply_angular_velocity(delta: float) -> float:
@@ -125,19 +60,13 @@ func _apply_angular_velocity(delta: float) -> float:
     return angle_delta
 
 
-func _advance_crank(new_angle: float, prev_angle: float) -> void:
-    var delta := wrapf(new_angle - prev_angle, -PI, PI)
-    if delta <= 0.0:
+func _on_crank_launched(power_ratio: float) -> void:
+    if _state != State.IDLE:
         return
-    var to_add := minf(rad_to_deg(delta), Constants.max_crank_degrees - _crank_degrees)
-    if to_add <= 0.0:
-        return
-    _crank_degrees += to_add
-    _crank_sprite.rotation_degrees = _crank_degrees
-    var full := int(_crank_degrees / 360.0)
-    if full > _last_full_rotations:
-        _last_full_rotations = full
-        _audio_stream_player.play()
+    _state = State.LAUNCHED
+    _crank_control.set_enabled(false)
+    velocity = - transform.y * power_ratio * Constants.max_speed
+    launched.emit()
 
 
 func get_bounding_radius() -> float:
@@ -145,17 +74,16 @@ func get_bounding_radius() -> float:
 
 
 func freeze() -> void:
-    set_process(false)
     set_physics_process(false)
-    set_process_input(false)
+    _crank_control.set_enabled(false)
     velocity = Vector2.ZERO
 
 
 func die() -> void:
-    if _is_dead:
+    if _state == State.DEAD:
         return
-    _is_dead = true
-    _is_launched = false
+    _state = State.DEAD
+    _crank_control.set_enabled(false)
     velocity = Vector2.ZERO
     _animation_player.play("die")
 
@@ -163,13 +91,3 @@ func die() -> void:
 func _on_animation_finished(anim_name: StringName) -> void:
     if anim_name == "die":
         died.emit()
-
-
-func _launch() -> void:
-    if _crank_degrees <= 0.0 || _is_launched:
-        return
-    _is_launched = true
-    launched.emit()
-    var tween := create_tween()
-    tween.tween_property(_crank_sprite, "rotation_degrees", 0.0, Constants.reset_crank_seconds).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-    velocity = - transform.y * (_crank_degrees / Constants.max_crank_degrees) * Constants.max_speed

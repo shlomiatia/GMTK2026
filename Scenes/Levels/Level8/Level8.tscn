@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="5_ak2h8"]
 [ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="6_fo4bc"]
 [ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="6_klelw"]
+[ext_resource type="PackedScene" path="res://Scenes/Objectives/EnemiesObjective/EnemiesObjective.tscn" id="7_enemies_obj"]
 
 [sub_resource type="Curve2D" id="Curve2D_18d3l"]
 resource_local_to_scene = true
@@ -63,3 +64,5 @@ radius = 400.0
 
 [node name="Gear" parent="." unique_id=1297575356 instance=ExtResource("6_klelw")]
 position = Vector2(960, 540)
+
+[node name="EnemiesObjective" parent="." instance=ExtResource("7_enemies_obj")]

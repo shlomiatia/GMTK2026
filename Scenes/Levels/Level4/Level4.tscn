@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="4_nmbxs"]
 [ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="5_brt6t"]
 [ext_resource type="PackedScene" uid="uid://cwx0g1q1k8g26" path="res://Scenes/Hazard/Hazard.tscn" id="6_8dxvk"]
+[ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="7_goal_obj"]
 
 [node name="Level4" type="Node2D" unique_id=1733532608]
 
@@ -45,3 +46,5 @@ position = Vector2(774, 276)
 
 [node name="Hazard3" parent="." unique_id=1611277834 instance=ExtResource("6_8dxvk")]
 position = Vector2(1467, 455)
+
+[node name="GoalObjective" parent="." instance=ExtResource("7_goal_obj")]
