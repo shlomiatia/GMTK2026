@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://b4r6gugu440h5" path="res://Audio/crank.mp3" id="4_sbu84"]
 [ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://icon.svg" id="5_vmouse"]
 [ext_resource type="Script" uid="uid://ck8h1cajiid02" path="res://Scenes/CrankControl/crank_control.gd" id="6_crank"]
+[ext_resource type="Texture2D" uid="uid://hq8381le5qxg" path="res://Art/Assets/Play Scene/Player/Wind-Up.png" id="7_kj2ht"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
 size = Vector2(30, 104)
@@ -63,7 +64,17 @@ position = Vector2(0, 27)
 rotation = 3.1415927
 texture = ExtResource("2_asnge")
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Car" unique_id=176709280]
+show_behind_parent = true
+offset_left = -41.000004
+offset_top = -19.999996
+offset_right = 40.999996
+offset_bottom = 60.000004
+fill_mode = 4
+texture_progress = ExtResource("7_kj2ht")
+
 [node name="Crank" type="Sprite2D" parent="Car" unique_id=2007681203]
+visible = false
 position = Vector2(-2, -4)
 texture = ExtResource("2_a0hww")
 offset = Vector2(0, 34)
