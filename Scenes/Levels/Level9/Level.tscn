@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="5_ibkl5"]
 [ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="7_klrvk"]
 [ext_resource type="PackedScene" uid="uid://ccy7aq7vhw0s6" path="res://Scenes/Cannon/Cannon.tscn" id="8_rxlmw"]
+[ext_resource type="PackedScene" uid="uid://b0q6g075ds0mt" path="res://Scenes/Arena/Arena.tscn" id="9_ibkl5"]
 
 [node name="Level" type="Node2D" unique_id=1733532608]
 
@@ -54,3 +55,11 @@ pivot_offset = Vector2(16.5, 123)
 
 [node name="Cannon" parent="." unique_id=335970389 instance=ExtResource("8_rxlmw")]
 position = Vector2(960, 540)
+
+[node name="Arena" parent="." unique_id=2025930274 instance=ExtResource("9_ibkl5")]
+position = Vector2(960, 540)
+radius = 286.0
+number_of_points = 48
+width = 30.0
+offset_degrees = 129.0
+circum_degrees = 317.0

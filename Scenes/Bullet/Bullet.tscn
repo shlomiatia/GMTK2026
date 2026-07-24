@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cxy5qr35i2yve"]
 
 [ext_resource type="Texture2D" uid="uid://dehnxawlsk4xs" path="res://Art/Assets/Play Scene/Enemies/Bullet.png" id="1_7u3a6"]
-[ext_resource type="Script" path="res://Scenes/Bullet/bullet.gd" id="2_bullet"]
+[ext_resource type="Script" uid="uid://cvutu8rhx3hvn" path="res://Scenes/Bullet/bullet.gd" id="2_bullet"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
 radius = 7.0
@@ -16,7 +16,7 @@ texture = ExtResource("1_7u3a6")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2022326930]
 collision_layer = 0
-collision_mask = 3
+collision_mask = 34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1684678788]
 shape = SubResource("CapsuleShape2D_ebdu8")

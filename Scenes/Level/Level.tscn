@@ -28,6 +28,7 @@ texture = ExtResource("5_ksici")
 
 [node name="Arena" parent="." unique_id=2025930274 instance=ExtResource("6_ksici")]
 position = Vector2(960, 540)
+collision_layer = 33
 radius = 517.0
 number_of_points = 48
 

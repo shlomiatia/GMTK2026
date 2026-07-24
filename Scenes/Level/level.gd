@@ -14,6 +14,7 @@ var _car: Car
 var _goal: Goal
 var _key_enemies: Array[Enemy] = []
 var _keys: Array[Key] = []
+var _gear_time_tween: Tween
 
 @onready var _overlay: Overlay = $Overlay
 @onready var _shaking_camera: ShakingCamera = $ShakingCamera
@@ -119,7 +120,21 @@ func _on_car_entered_hazard(car: Car) -> void:
 func _on_gear_collected() -> void:
     if _game_over:
         return
-    _timer.start(_timer.time_left + Constants.gear_time_bonus)
+    if _gear_time_tween:
+        _gear_time_tween.kill()
+    _timer.paused = true
+    var target_time: float = minf(_timer.time_left + Constants.gear_time_bonus, time_limit)
+    _gear_time_tween = create_tween()
+    _gear_time_tween.tween_method(_set_timer_time, _timer.time_left, target_time, 0.5)
+    _gear_time_tween.finished.connect(_on_gear_time_tween_finished)
+
+
+func _set_timer_time(time: float) -> void:
+    _timer.start(time)
+
+
+func _on_gear_time_tween_finished() -> void:
+    _timer.paused = false
 
 
 func _on_car_died() -> void:

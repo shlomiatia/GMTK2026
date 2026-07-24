@@ -6,7 +6,6 @@ class_name Cannon extends Node2D
 @onready var _muzzle: Node2D = $Turret/Node2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _fire_timer: Timer = $FireTimer
-@onready var _bullet_delay_timer: Timer = $BulletDelayTimer
 
 var _car: Car
 var _rotating: bool = true
@@ -15,7 +14,6 @@ var _rotating: bool = true
 func _ready() -> void:
 	_car = get_tree().get_first_node_in_group("car") as Car
 	_fire_timer.timeout.connect(_on_fire_timer_timeout)
-	_bullet_delay_timer.timeout.connect(_on_bullet_delay_timer_timeout)
 	_animation_player.animation_finished.connect(_on_animation_finished)
 
 
@@ -33,10 +31,9 @@ func _physics_process(delta: float) -> void:
 func _on_fire_timer_timeout() -> void:
 	_rotating = false
 	_animation_player.play("fire")
-	_bullet_delay_timer.start()
 
 
-func _on_bullet_delay_timer_timeout() -> void:
+func fire() -> void:
 	var bullet := bullet_scene.instantiate() as Node2D
 	get_tree().current_scene.add_child(bullet)
 	bullet.global_position = _muzzle.global_position
