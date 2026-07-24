@@ -27,6 +27,17 @@ func _ready() -> void:
 
 func _snap_to_path_follow() -> void:
 	global_position = _path_follow.global_position
+	_set_initial_rotation()
+
+
+func _set_initial_rotation() -> void:
+	if _path.curve.point_count < 2:
+		return
+	var p0 := _path.to_global(_path.curve.get_point_position(0))
+	var p1 := _path.to_global(_path.curve.get_point_position(1))
+	var direction := p1 - p0
+	if direction.length() > 0.0:
+		rotation = direction.angle() - PI / 2.0
 
 
 func _physics_process(delta: float) -> void:
@@ -45,7 +56,10 @@ func _physics_process(delta: float) -> void:
 			_direction = 1
 	_path_follow.progress_ratio = ratio
 	var to_target := _path_follow.global_position - global_position
-	if to_target.length() <= ARRIVAL_DISTANCE:
+	var distance := to_target.length()
+	if distance > 0.0:
+		rotation = to_target.angle() - PI / 2.0
+	if distance <= ARRIVAL_DISTANCE:
 		return
 	velocity = to_target.normalized() * Constants.enemy_speed
 	move_and_collide(velocity * delta)

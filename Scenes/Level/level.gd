@@ -1,7 +1,7 @@
 @tool
 class_name Level extends Node2D
 
-@export var time_limit: float = 10.0
+@export var time_limit: float = 15.0
 @export var texture: Texture2D:
     set(value):
         texture = value

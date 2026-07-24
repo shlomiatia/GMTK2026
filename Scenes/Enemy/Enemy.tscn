@@ -47,14 +47,12 @@ _data = {
 radius = 32.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=155100240 groups=["enemy"]]
-motion_mode = 1
 collision_layer = 8
-collision_mask = 1
+motion_mode = 1
 script = ExtResource("2_enemy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1979803929]
 position = Vector2(-2, 0)
-rotation = 3.1415927
 texture = ExtResource("2_3l8kd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=559145016]
