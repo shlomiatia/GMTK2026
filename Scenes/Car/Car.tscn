@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://crroyrcw2et8j" path="res://Scenes/Crank/Crank.tscn" id="3_a0hww"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
-radius = 16.0
-height = 48.0
+radius = 20.0
+height = 64.0
 
 [sub_resource type="Animation" id="Animation_dfrl7"]
 length = 0.001
@@ -53,7 +53,7 @@ collision_mask = 9
 script = ExtResource("1_a0hww")
 
 [node name="Car" type="Sprite2D" parent="." unique_id=1086041179]
-position = Vector2(0, 27)
+position = Vector2(-1, 27)
 rotation = 3.1415927
 texture = ExtResource("2_asnge")
 
@@ -61,6 +61,7 @@ texture = ExtResource("2_asnge")
 rotation = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1938754536]
+position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_ebdu8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1089803300]

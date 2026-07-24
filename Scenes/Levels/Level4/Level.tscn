@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://cmchtp1xues85"]
+
+[ext_resource type="PackedScene" uid="uid://b6wfreo7ajycp" path="res://Scenes/Level/Level.tscn" id="1_60ts7"]
+[ext_resource type="PackedScene" uid="uid://bemlcu6wijhau" path="res://Scenes/Goal/Goal.tscn" id="2_dwfge"]
+[ext_resource type="Texture2D" uid="uid://402j3fb6fj3t" path="res://Art/Assets/Play Scene/Levels/Lv 4.png" id="2_vqoj4"]
+[ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_vqoj4"]
+[ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="4_6tj17"]
+[ext_resource type="PackedScene" uid="uid://dom18jy1c3une" path="res://Scenes/CircularPath2D/CircularPath2D.tscn" id="6_6tj17"]
+[ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="7_vfwuj"]
+
+[sub_resource type="Curve2D" id="Curve2D_wsy0h"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, -104.38182, 0, 104.38182, 189, 0, 104.38182, -6.391332e-15, -104.38182, 6.391332e-15, 1.157253e-14, 189, 1.2782664e-14, 104.38182, -1.2782664e-14, -104.38182, -189, 2.314506e-14, -104.38182, 1.9173997e-14, 104.38182, -1.9173997e-14, -3.471759e-14, -189, -2.5565328e-14, -104.38182, 2.5565328e-14, 104.38182, 189, -4.629012e-14)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_fhulb"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, -156.29659, 0, 156.29659, 283, 0, 156.29659, -9.57009e-15, -156.29659, 9.57009e-15, 1.732818e-14, 283, 1.914018e-14, 156.29659, -1.914018e-14, -156.29659, -283, 3.465636e-14, -156.29659, 2.871027e-14, 156.29659, -2.871027e-14, -5.198454e-14, -283, -3.828036e-14, -156.29659, 3.828036e-14, 156.29659, 283, -6.931272e-14)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_txuk4"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, -212.62964, 0, 212.62964, 385, 0, 212.62964, -1.301938e-14, -212.62964, 1.301938e-14, 2.3573672e-14, 385, 2.603876e-14, 212.62964, -2.603876e-14, -212.62964, -385, 4.7147345e-14, -212.62964, 3.9058143e-14, 212.62964, -3.9058143e-14, -7.072102e-14, -385, -5.207752e-14, -212.62964, 5.207752e-14, 212.62964, 385, -9.429469e-14)
+}
+point_count = 5
+
+[node name="Level" type="Node2D" unique_id=1733532608]
+
+[node name="Level" parent="." unique_id=76539942 instance=ExtResource("1_60ts7")]
+time_limit = 30.0
+texture = ExtResource("2_vqoj4")
+
+[node name="Goal" parent="." unique_id=669960687 instance=ExtResource("2_dwfge")]
+position = Vector2(960, 540)
+
+[node name="Car" parent="." unique_id=1734870916 instance=ExtResource("3_vqoj4")]
+position = Vector2(963, 108)
+rotation = 3.1415927
+motion_mode = 1
+
+[node name="GoalObjective" parent="." unique_id=1366670914 instance=ExtResource("4_6tj17")]
+
+[node name="CircularPath2d" parent="." unique_id=1401762397 instance=ExtResource("6_6tj17")]
+position = Vector2(960, 540)
+curve = SubResource("Curve2D_wsy0h")
+radius = 189.0
+
+[node name="Enemy" parent="CircularPath2d" unique_id=155100240 instance=ExtResource("7_vfwuj")]
+key = true
+
+[node name="CircularPath2d2" parent="." unique_id=2134656309 instance=ExtResource("6_6tj17")]
+position = Vector2(960, 540)
+curve = SubResource("Curve2D_fhulb")
+radius = 283.0
+
+[node name="Enemy" parent="CircularPath2d2" unique_id=2093848873 instance=ExtResource("7_vfwuj")]
+key = true
+
+[node name="CircularPath2d3" parent="." unique_id=818050995 instance=ExtResource("6_6tj17")]
+position = Vector2(960, 540)
+curve = SubResource("Curve2D_txuk4")
+radius = 385.0
+
+[node name="Enemy" parent="CircularPath2d3" unique_id=1372893251 instance=ExtResource("7_vfwuj")]
+key = true
