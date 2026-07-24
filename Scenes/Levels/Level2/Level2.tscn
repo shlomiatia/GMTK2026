@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bmatx4ckq0mw5" path="res://Scenes/Levels/Level3/Level3.tscn" id="2_fhg1i"]
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_fhg1i"]
 [ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="4_p5ydk"]
+[ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="5_goal_obj"]
 
 [node name="Level2" type="Node2D" unique_id=1733532608]
 
@@ -31,3 +32,5 @@ offset_bottom = 1080.0
 offset_right = 40.0
 offset_bottom = 1080.0
 pivot_offset = Vector2(20, 540)
+
+[node name="GoalObjective" parent="." instance=ExtResource("5_goal_obj")]

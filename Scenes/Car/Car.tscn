@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://caq0pbv2v7vb5" path="res://Textures/crank.png" id="2_a0hww"]
 [ext_resource type="AudioStream" uid="uid://b4r6gugu440h5" path="res://Audio/crank.mp3" id="4_sbu84"]
 [ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://icon.svg" id="5_vmouse"]
+[ext_resource type="Script" path="res://Scenes/CrankControl/crank_control.gd" id="6_crank"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
 size = Vector2(22, 88)
@@ -79,3 +80,6 @@ top_level = true
 visible = false
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_vmouse")
+
+[node name="CrankControl" type="Node" parent="." unique_id=3841007652]
+script = ExtResource("6_crank")

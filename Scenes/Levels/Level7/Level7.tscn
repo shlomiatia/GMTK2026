@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="5_auydu"]
 [ext_resource type="PackedScene" uid="uid://bqm5v2s7k1n4x" path="res://Scenes/Pillar/Pillar.tscn" id="5_ut7mb"]
 [ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="6_jpr41"]
+[ext_resource type="PackedScene" path="res://Scenes/Objectives/GearsObjective/GearsObjective.tscn" id="7_gears_obj"]
 
 [node name="Level7" type="Node2D" unique_id=1733532608]
 
@@ -53,3 +54,5 @@ position = Vector2(1115, 197)
 
 [node name="Gear4" parent="." unique_id=899802279 instance=ExtResource("6_jpr41")]
 position = Vector2(1436, 419)
+
+[node name="GearsObjective" parent="." instance=ExtResource("7_gears_obj")]

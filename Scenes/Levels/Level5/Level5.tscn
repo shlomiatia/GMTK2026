@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="4_rgk6l"]
 [ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="5_58vmc"]
 [ext_resource type="PackedScene" uid="uid://cwd2r6a7k8grb" path="res://Scenes/Wall/Wall.tscn" id="5_ohevy"]
+[ext_resource type="PackedScene" path="res://Scenes/Objectives/EnemiesObjective/EnemiesObjective.tscn" id="6_enemies_obj"]
 
 [sub_resource type="Curve2D" id="Curve2D_58vmc"]
 _data = {
@@ -45,3 +46,5 @@ curve = SubResource("Curve2D_58vmc")
 [node name="Enemy" parent="Path2D" unique_id=155100240 instance=ExtResource("5_58vmc")]
 rotation = 1.5707964
 loop = false
+
+[node name="EnemiesObjective" parent="." instance=ExtResource("6_enemies_obj")]
