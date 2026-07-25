@@ -66,7 +66,7 @@ func _advance_launch(delta: float) -> void:
     _handle_collision(move_and_collide(velocity * delta))
     if _core.is_dead():
         return
-    if velocity.length() < Constants.rest_velocity_threshold:
+    if velocity.length() == 0.0:
         _state = State.AIMING
         _sprite.self_modulate = Color(1.0, 1.0, 1.0)
         _aim_timer.start()

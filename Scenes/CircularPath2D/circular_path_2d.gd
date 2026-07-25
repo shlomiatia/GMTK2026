@@ -8,6 +8,11 @@ const _CIRCLE_MAGIC := 0.552284749831
 		radius = value
 		_update()
 
+@export var counter_clockwise: bool = false:
+	set(value):
+		counter_clockwise = value
+		_update()
+
 
 func _ready() -> void:
 	_update()
@@ -18,8 +23,9 @@ func _update() -> void:
 		return
 	curve.clear_points()
 	var segment_count := 4
+	var direction_sign := -1.0 if counter_clockwise else 1.0
 	for i in range(segment_count + 1):
-		var angle := TAU * i / float(segment_count)
+		var angle := TAU * i / float(segment_count) * direction_sign
 		var direction := Vector2(cos(angle), sin(angle))
-		var tangent := Vector2(-sin(angle), cos(angle)) * radius * _CIRCLE_MAGIC
+		var tangent := Vector2(-sin(angle), cos(angle)) * radius * _CIRCLE_MAGIC * direction_sign
 		curve.add_point(direction * radius, -tangent, tangent)
