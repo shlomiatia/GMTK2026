@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="3_bosscore"]
 [ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="4_gearspawner"]
 [ext_resource type="Texture2D" uid="uid://cy1jiymeivcbx" path="res://Art/Generated/Sub Boss Shadow.png" id="5_1c02f"]
-[ext_resource type="Texture2D" uid="uid://cy5x0v0boss1g" path="res://Scenes/BossIntro/BossGlow.tres" id="5_glow"]
 [ext_resource type="PackedScene" uid="uid://dbossintro01" path="res://Scenes/BossIntro/BossIntro.tscn" id="6_intro"]
 
 [sub_resource type="Animation" id="Animation_reset"]
@@ -85,10 +84,6 @@ polygon = PackedVector2Array(4, -97, 23, -86, 30, -69, 40, -58, 45, -37, 58, -28
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=268689695]
 energy = 0.0
 texture = ExtResource("5_1c02f")
-
-[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1645143103]
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("5_glow")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=869433270]
 color = Color(0, 0, 0, 1)

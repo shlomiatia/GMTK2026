@@ -16,13 +16,14 @@ func _ready() -> void:
     _level_player.play()
 
 
-func silence_level_music() -> void:
+func fade_out_level_music(duration: float) -> void:
     if _fade_tween:
         _fade_tween.kill()
-    _level_player.volume_db = _mute_db
+    _fade_tween = create_tween()
+    _fade_tween.tween_property(_level_player, "volume_db", _mute_db, duration)
 
 
-func set_boss_level(is_boss: bool) -> void:
+func set_boss_level(is_boss: bool, fade_seconds: float) -> void:
     if is_boss == boss_active:
         return
     boss_active = is_boss
@@ -32,9 +33,9 @@ func set_boss_level(is_boss: bool) -> void:
     if is_boss:
         _boss_player.volume_db = _mute_db
         _boss_player.play()
-        _fade_tween.tween_property(_level_player, "volume_db", _mute_db, Constants.music_fade_seconds)
-        _fade_tween.tween_property(_boss_player, "volume_db", 0.0, Constants.music_fade_seconds)
+        _fade_tween.tween_property(_level_player, "volume_db", _mute_db, fade_seconds)
+        _fade_tween.tween_property(_boss_player, "volume_db", 0.0, fade_seconds)
     else:
-        _fade_tween.tween_property(_level_player, "volume_db", 0.0, Constants.music_fade_seconds)
-        _fade_tween.tween_property(_boss_player, "volume_db", _mute_db, Constants.music_fade_seconds)
+        _fade_tween.tween_property(_level_player, "volume_db", 0.0, fade_seconds)
+        _fade_tween.tween_property(_boss_player, "volume_db", _mute_db, fade_seconds)
         _fade_tween.chain().tween_callback(_boss_player.stop)

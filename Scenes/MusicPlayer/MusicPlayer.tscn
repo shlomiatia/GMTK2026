@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cmkb56p21d8rp" path="res://Audio/boss music.mp3" id="3_boss"]
 
 [node name="MusicPlayer" type="Node" unique_id=803707913]
+process_mode = 3
 script = ExtResource("1_music")
 
 [node name="LevelMusicPlayer" type="AudioStreamPlayer" parent="." unique_id=660742727]

@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="3_enemy"]
 [ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="4_bosscore"]
 [ext_resource type="Texture2D" uid="uid://c4ir74kyqyv8e" path="res://Art/Generated/Minion Boss Shadow.png" id="5_shadow"]
-[ext_resource type="Texture2D" path="res://Scenes/BossIntro/BossGlow.tres" id="6_glow"]
 [ext_resource type="PackedScene" path="res://Scenes/BossIntro/BossIntro.tscn" id="7_intro"]
 
 [sub_resource type="Animation" id="Animation_reset"]
@@ -79,10 +78,6 @@ position = Vector2(0, 120)
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.0
 texture = ExtResource("5_shadow")
-
-[node name="PointLight2D2" type="PointLight2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("6_glow")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)

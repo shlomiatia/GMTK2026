@@ -30,6 +30,6 @@ static var boss_intro_flicker_energy := 0.5
 static var boss_intro_rise_seconds := 1.0
 static var boss_intro_peak_energy := 5.0
 static var boss_intro_glow_seconds := 3.0
-static var boss_intro_glow_scale := 50.0
 static var boss_intro_glow_delay_seconds := 0.0
 static var boss_intro_death_fade_seconds := 1.0
+static var boss_intro_music_fade_seconds := 3.0

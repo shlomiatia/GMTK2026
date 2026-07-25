@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="3_xw47l"]
 [ext_resource type="Script" uid="uid://b866uyitsi1ce" path="res://Scenes/FinalBoss/final_boss.gd" id="4_finalboss"]
 [ext_resource type="Texture2D" uid="uid://bm4ny5fpfmnn0" path="res://Art/Generated/Final Boss Shadow.png" id="5_65wqp"]
-[ext_resource type="Texture2D" uid="uid://cy5x0v0boss1g" path="res://Scenes/BossIntro/BossGlow.tres" id="5_glow"]
 [ext_resource type="PackedScene" uid="uid://dbossintro01" path="res://Scenes/BossIntro/BossIntro.tscn" id="6_intro"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
@@ -136,12 +135,7 @@ libraries/ = SubResource("AnimationLibrary_finalboss")
 energy = 0.0
 texture = ExtResource("5_65wqp")
 
-[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1055820690]
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("5_glow")
-
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=921817352]
-visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="BossIntro" parent="." unique_id=1393171479 instance=ExtResource("6_intro")]
