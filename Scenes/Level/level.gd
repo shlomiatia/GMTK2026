@@ -53,6 +53,12 @@ func _ready() -> void:
     get_tree().node_added.connect(_on_node_added)
     for gear in get_tree().get_nodes_in_group("gear"):
         (gear as Collectible).collected.connect(_on_gear_collected)
+    for cannon in get_tree().get_nodes_in_group("cannon"):
+        (cannon as Cannon).fired.connect(_on_cannon_fired)
+    for boss in get_tree().get_nodes_in_group("boss"):
+        var cannon_boss := boss as CannonBoss
+        if cannon_boss:
+            cannon_boss.fired.connect(_on_cannon_fired)
     _overlay.continue_pressed.connect(_go_to_next_level)
     _overlay.restart_pressed.connect(_restart)
 
@@ -123,12 +129,32 @@ func _on_node_added(node: Node) -> void:
         (node as Hazard).car_entered.connect(_on_car_entered_hazard)
     elif node.is_in_group("gear"):
         (node as Collectible).collected.connect(_on_gear_collected)
+    elif node.is_in_group("bullet"):
+        (node as Bullet).car_hit.connect(_on_bullet_car_hit)
+    elif node.is_in_group("cannon"):
+        (node as Cannon).fired.connect(_on_cannon_fired)
+    elif node.is_in_group("boss"):
+        var cannon_boss := node as CannonBoss
+        if cannon_boss:
+            cannon_boss.fired.connect(_on_cannon_fired)
 
 
 func _on_car_entered_hazard(car: Car) -> void:
     if _game_over:
         return
     car.die()
+    _shaking_camera.start_screen_shake()
+
+
+func _on_bullet_car_hit(_car: Car) -> void:
+    if _game_over:
+        return
+    _shaking_camera.start_screen_shake()
+
+
+func _on_cannon_fired() -> void:
+    if _game_over:
+        return
     _shaking_camera.start_screen_shake()
 
 

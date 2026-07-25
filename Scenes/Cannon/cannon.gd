@@ -1,6 +1,7 @@
 class_name Cannon extends Node2D
 
 signal died
+signal fired
 
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _collision_shape: CollisionShape2D = $StaticBody2D/CollisionShape2D
@@ -11,6 +12,7 @@ var _is_dead: bool = false
 
 func fire() -> void:
 	_turret.fire()
+	fired.emit()
 
 
 func is_dead() -> bool:
