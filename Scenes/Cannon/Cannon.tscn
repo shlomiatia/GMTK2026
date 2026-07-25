@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bsh7ldf3xag3o" path="res://Art/Assets/Play Scene/Enemies/Turret Head.png" id="2_l6qg3"]
 [ext_resource type="Script" uid="uid://beq1ug6w7w4ga" path="res://Scenes/Cannon/cannon.gd" id="3_cannon"]
 [ext_resource type="PackedScene" uid="uid://cxy5qr35i2yve" path="res://Scenes/Bullet/Bullet.tscn" id="4_bullet"]
+[ext_resource type="PackedScene" path="res://Scenes/Turret/Turret.tscn" id="5_turret"]
 
 [sub_resource type="Animation" id="Animation_l6qg3"]
 length = 0.001
@@ -114,7 +115,6 @@ radius = 36.0
 
 [node name="Cannon" type="Node2D" unique_id=335970389]
 script = ExtResource("3_cannon")
-bullet_scene = ExtResource("4_bullet")
 
 [node name="Base" type="Sprite2D" parent="." unique_id=385181641]
 texture = ExtResource("1_k0bsa")
@@ -139,3 +139,6 @@ position = Vector2(0, -11)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1393236247]
 shape = SubResource("CircleShape2D_ebdu8")
+
+[node name="TurretController" parent="." instance=ExtResource("5_turret")]
+bullet_scene = ExtResource("4_bullet")

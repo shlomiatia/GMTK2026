@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c4krb1yubpltr"]
 
-[ext_resource type="Script" path="res://Scenes/Key/key.gd" id="1_key"]
+[ext_resource type="Script" path="res://Scenes/Collectible/collectible.gd" id="1_key"]
 [ext_resource type="Texture2D" uid="uid://ed4em35gd3dy" path="res://Art/Assets/Play Scene/Items/Key.png" id="1_121ar"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]

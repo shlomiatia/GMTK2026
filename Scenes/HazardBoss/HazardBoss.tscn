@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dxxifm4glmkiu" path="res://Art/Assets/Play Scene/Enemies/Minion.png" id="1_4oj2i"]
 [ext_resource type="Script" path="res://Scenes/HazardBoss/hazard_boss.gd" id="2_hzboss"]
 [ext_resource type="PackedScene" uid="uid://cwx0g1q1k8g26" path="res://Scenes/Hazard/Hazard.tscn" id="3_hazard"]
+[ext_resource type="PackedScene" path="res://Scenes/BossCore/BossCore.tscn" id="4_bosscore"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6kyec"]
 radius = 45.01111
@@ -58,9 +59,9 @@ shape = SubResource("CircleShape2D_6kyec")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1926485372]
 libraries/ = SubResource("AnimationLibrary_boss")
 
-[node name="InvincibilityTimer" type="Timer" parent="." unique_id=1926485373]
-wait_time = 0.5
-one_shot = true
-
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1926485374]
 wait_time = 3.0
+
+[node name="BossCore" parent="." instance=ExtResource("4_bosscore")]
+hits_to_kill = 3
+invincibility_duration = 0.5

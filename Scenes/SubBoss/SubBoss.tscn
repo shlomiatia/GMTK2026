@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dxxifm4glmkiu" path="res://Art/Assets/Play Scene/Enemies/Minion.png" id="1_5idvj"]
 [ext_resource type="Script" uid="uid://dduagibg1fjnn" path="res://Scenes/SubBoss/sub_boss.gd" id="2_boss"]
+[ext_resource type="PackedScene" path="res://Scenes/BossCore/BossCore.tscn" id="3_bosscore"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
 radius = 45.099888
@@ -56,10 +57,8 @@ shape = SubResource("CircleShape2D_ebdu8")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1246858610]
 libraries/ = SubResource("AnimationLibrary_boss")
 
-[node name="InvincibilityTimer" type="Timer" parent="." unique_id=1246858611]
-wait_time = 0.5
-one_shot = true
-
 [node name="AimTimer" type="Timer" parent="." unique_id=1246858612]
 wait_time = 3.0
 one_shot = true
+
+[node name="BossCore" parent="." unique_id=1747566252 instance=ExtResource("3_bosscore")]

@@ -8,18 +8,14 @@ const SPAWN_ATTEMPTS := 20
 
 @onready var _collision_shape: CollisionShape2D = $StaticBody2D/CollisionShape2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
-@onready var _invincibility_timer: Timer = $InvincibilityTimer
 @onready var _spawn_timer: Timer = $SpawnTimer
+@onready var _core: BossCore = $BossCore
 
-var _hits_taken: int = 0
-var _is_dead: bool = false
-var _is_invincible: bool = false
 var _pending_hazards: Array = []
 
 
 func _ready() -> void:
-    _invincibility_timer.wait_time = Constants.hazard_boss_invincibility_duration
-    _invincibility_timer.timeout.connect(_on_invincibility_timer_timeout)
+    _core.killed.connect(_die)
     _animation_player.animation_finished.connect(_on_animation_finished)
     _spawn_timer.wait_time = Constants.hazard_boss_spawn_interval
     _spawn_timer.timeout.connect(_on_spawn_timer_timeout)
@@ -29,29 +25,14 @@ func _ready() -> void:
 
 
 func is_dead() -> bool:
-    return _is_dead
+    return _core.is_dead()
 
 
 func hit() -> bool:
-    if _is_dead || _is_invincible:
-        return false
-    _hits_taken += 1
-    if _hits_taken >= Constants.hazard_boss_hits_to_kill:
-        die()
-        return true
-    _is_invincible = true
-    _invincibility_timer.start()
-    return true
+    return _core.hit()
 
 
-func _on_invincibility_timer_timeout() -> void:
-    _is_invincible = false
-
-
-func die() -> void:
-    if _is_dead:
-        return
-    _is_dead = true
+func _die() -> void:
     _collision_shape.set_deferred("disabled", true)
     _animation_player.play("die")
 
@@ -62,7 +43,7 @@ func _on_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_spawn_timer_timeout() -> void:
-    if _is_dead:
+    if _core.is_dead():
         return
     _spawn_hazard(true)
 

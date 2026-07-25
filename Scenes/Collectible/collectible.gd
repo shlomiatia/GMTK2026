@@ -1,4 +1,4 @@
-class_name Key extends Node2D
+class_name Collectible extends Node2D
 
 signal collected
 

@@ -15,7 +15,7 @@ var _game_over: bool = false
 var _car: Car
 var _goal: Goal
 var _key_enemies: Array[Enemy] = []
-var _keys: Array[Key] = []
+var _keys: Array[Collectible] = []
 var _gear_time_tween: Tween
 
 @onready var _overlay: Overlay = $Overlay
@@ -44,8 +44,8 @@ func _ready() -> void:
         if (enemy as Enemy).key:
             _key_enemies.append(enemy)
     for key in get_tree().get_nodes_in_group("key"):
-        _keys.append(key as Key)
-        (key as Key).collected.connect(_on_key_collected.bind(key))
+        _keys.append(key as Collectible)
+        (key as Collectible).collected.connect(_on_key_collected.bind(key))
     if !_key_enemies.is_empty() || !_keys.is_empty():
         _goal.lock.call_deferred()
     get_tree().get_first_node_in_group("objective").completed.connect(_win)
@@ -53,7 +53,7 @@ func _ready() -> void:
         (hazard as Hazard).car_entered.connect(_on_car_entered_hazard)
     get_tree().node_added.connect(_on_node_added)
     for gear in get_tree().get_nodes_in_group("gear"):
-        (gear as Gear).collected.connect(_on_gear_collected)
+        (gear as Collectible).collected.connect(_on_gear_collected)
     _overlay.continue_pressed.connect(_go_to_next_level)
     _overlay.restart_pressed.connect(_restart)
 
@@ -107,7 +107,7 @@ func _on_boss_hit(_boss: Node) -> void:
     _shaking_camera.start_screen_shake()
 
 
-func _on_key_collected(key: Key) -> void:
+func _on_key_collected(key: Collectible) -> void:
     if _game_over:
         return
     _keys.erase(key)

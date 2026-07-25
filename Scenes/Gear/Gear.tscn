@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://culglce1hed48"]
 
-[ext_resource type="Script" uid="uid://cyv8g7j4158nc" path="res://Scenes/Gear/gear.gd" id="2_gear"]
+[ext_resource type="Script" path="res://Scenes/Collectible/collectible.gd" id="2_gear"]
 [ext_resource type="Texture2D" uid="uid://b1gyuj32g4uq" path="res://Art/Assets/Play Scene/Items/Nut.png" id="2_swp82"]
 
 [sub_resource type="Animation" id="Animation_swp82"]

@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bsh7ldf3xag3o" path="res://Art/Assets/Play Scene/Enemies/Turret Head.png" id="2_w8mfg"]
 [ext_resource type="Script" uid="uid://iotrm540h22c" path="res://Scenes/CannonBoss/cannon_boss.gd" id="3_boss"]
 [ext_resource type="PackedScene" uid="uid://cxy5qr35i2yve" path="res://Scenes/Bullet/Bullet.tscn" id="4_bullet"]
+[ext_resource type="PackedScene" path="res://Scenes/Turret/Turret.tscn" id="5_turret"]
+[ext_resource type="PackedScene" path="res://Scenes/BossCore/BossCore.tscn" id="6_bosscore"]
 
 [sub_resource type="Animation" id="Animation_l6qg3"]
 length = 0.001
@@ -120,7 +122,6 @@ radius = 36.0
 
 [node name="CannonBoss" type="Node2D" unique_id=335970389 groups=["boss"]]
 script = ExtResource("3_boss")
-bullet_scene = ExtResource("4_bullet")
 
 [node name="Base" type="Sprite2D" parent="." unique_id=385181641]
 texture = ExtResource("1_2bhnl")
@@ -146,6 +147,9 @@ position = Vector2(0, -11)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1393236247]
 shape = SubResource("CircleShape2D_ebdu8")
 
-[node name="InvincibilityTimer" type="Timer" parent="." unique_id=1828729896]
-wait_time = 0.5
-one_shot = true
+[node name="TurretController" parent="." instance=ExtResource("5_turret")]
+bullet_scene = ExtResource("4_bullet")
+
+[node name="BossCore" parent="." instance=ExtResource("6_bosscore")]
+hits_to_kill = 3
+invincibility_duration = 0.5
