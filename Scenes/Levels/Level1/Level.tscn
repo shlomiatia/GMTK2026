@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="4_5xhxf"]
 [ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="5_yf681"]
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="6_8f3wn"]
+[ext_resource type="PackedScene" path="res://Scenes/Tutorial/Tutorial.tscn" id="7_tutorial"]
 
 [node name="Level" type="Node2D" unique_id=1733532608]
 
@@ -28,3 +29,5 @@ position = Vector2(812, 692)
 
 [node name="Gear3" parent="." unique_id=1712358846 instance=ExtResource("5_yf681")]
 position = Vector2(1133, 374)
+
+[node name="Tutorial" parent="." instance=ExtResource("7_tutorial")]

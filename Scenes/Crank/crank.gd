@@ -1,6 +1,9 @@
 class_name Crank extends Node2D
 
 signal launched(power_ratio: float)
+signal crank_pressed
+signal crank_released(degrees: float)
+signal cycle_completed
 
 static var reset_crank_seconds := 1.0
 
@@ -48,13 +51,16 @@ func _process(delta: float) -> void:
             _pivot_icon.visible = true
         _cranking = true
         _last_angle = _get_crank_angle()
+        crank_pressed.emit()
     elif Input.is_action_just_released("crank"):
         if _using_mouse:
             Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
             _virtual_mouse_icon.visible = false
             _pivot_icon.visible = false
         _cranking = false
+        var degrees_before_launch := _crank_degrees
         _try_launch()
+        crank_released.emit(degrees_before_launch)
     elif _cranking:
         var angle := _get_crank_angle()
         if is_nan(angle):
@@ -111,6 +117,7 @@ func _add_crank_degrees(degrees: float) -> void:
     if full > _last_full_rotations:
         _last_full_rotations = full
         _audio_stream_player.play()
+        cycle_completed.emit()
 
 
 func _try_launch() -> void:

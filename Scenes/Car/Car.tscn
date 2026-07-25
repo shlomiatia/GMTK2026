@@ -58,7 +58,7 @@ position = Vector2(-1, 27)
 rotation = 3.1415927
 texture = ExtResource("2_asnge")
 
-[node name="Crank" parent="Car" unique_id=1994099940 instance=ExtResource("3_a0hww")]
+[node name="Crank" parent="Car" unique_id=1994099940 groups=["crank"] instance=ExtResource("3_a0hww")]
 position = Vector2(-2.0000005, -5)
 rotation = 0.0
 
