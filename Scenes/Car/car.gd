@@ -82,7 +82,9 @@ func _apply_angular_velocity(delta: float) -> float:
 
 
 func _on_crank_launched(power_ratio: float) -> void:
-    if _state != State.IDLE:
+    if _state == State.DEAD:
+        return
+    if _state == State.LAUNCHED && velocity.length() >= Constants.enemy_kill_speed:
         return
     _state = State.LAUNCHED
     _crank.set_enabled(false)
