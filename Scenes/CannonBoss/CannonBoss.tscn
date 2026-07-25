@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="6_bosscore"]
 [ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="7_gearspawner"]
 [ext_resource type="Texture2D" uid="uid://b4inti5ah74tg" path="res://Art/Generated/Turret Boss Head Shadow.png" id="8_shadow"]
-[ext_resource type="Texture2D" path="res://Scenes/BossIntro/BossGlow.tres" id="9_glow"]
-[ext_resource type="PackedScene" path="res://Scenes/BossIntro/BossIntro.tscn" id="10_intro"]
+[ext_resource type="Texture2D" uid="uid://cy5x0v0boss1g" path="res://Scenes/BossIntro/BossGlow.tres" id="9_glow"]
+[ext_resource type="PackedScene" uid="uid://dbossintro01" path="res://Scenes/BossIntro/BossIntro.tscn" id="10_intro"]
 
 [sub_resource type="Animation" id="Animation_l6qg3"]
 length = 0.001
@@ -212,6 +212,11 @@ offset = Vector2(0, -29)
 [node name="Node2D" type="Node2D" parent="Turret" unique_id=1279782099]
 position = Vector2(0, 42)
 
+[node name="PointLight2D" type="PointLight2D" parent="Turret" unique_id=1890016631]
+position = Vector2(0, -29)
+energy = 0.0
+texture = ExtResource("8_shadow")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1869932999]
 libraries/ = SubResource("AnimationLibrary_l6qg3")
 
@@ -232,15 +237,11 @@ position = Vector2(0, 95)
 
 [node name="GearSpawner" parent="." unique_id=1823115262 instance=ExtResource("7_gearspawner")]
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.0
-texture = ExtResource("8_shadow")
-
-[node name="PointLight2D2" type="PointLight2D" parent="."]
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1234801870]
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("9_glow")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=361131515]
 color = Color(0, 0, 0, 1)
 
-[node name="BossIntro" parent="." instance=ExtResource("10_intro")]
+[node name="BossIntro" parent="." unique_id=439108365 instance=ExtResource("10_intro")]

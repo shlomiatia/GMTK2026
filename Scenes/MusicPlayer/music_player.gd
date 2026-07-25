@@ -5,7 +5,7 @@ const _mute_db := -80.0
 @onready var _level_player: AudioStreamPlayer = $LevelMusicPlayer
 @onready var _boss_player: AudioStreamPlayer = $BossMusicPlayer
 
-var _boss_active: bool = false
+var boss_active: bool = false
 var _fade_tween: Tween
 
 
@@ -16,10 +16,16 @@ func _ready() -> void:
     _level_player.play()
 
 
+func silence_level_music() -> void:
+    if _fade_tween:
+        _fade_tween.kill()
+    _level_player.volume_db = _mute_db
+
+
 func set_boss_level(is_boss: bool) -> void:
-    if is_boss == _boss_active:
+    if is_boss == boss_active:
         return
-    _boss_active = is_boss
+    boss_active = is_boss
     if _fade_tween:
         _fade_tween.kill()
     _fade_tween = create_tween().set_parallel(true)

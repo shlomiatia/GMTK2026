@@ -27,6 +27,9 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+    if Input.is_action_just_pressed("auto_crank"):
+        _skip()
+        return
     if _cycle_completed && !_rotated && (Input.is_action_just_pressed("left") || Input.is_action_just_pressed("right")):
         _rotated = true
         if _launched:
@@ -62,4 +65,11 @@ func _on_crank_released(_degrees: float) -> void:
 
 func _finish() -> void:
     _message_label.visible = false
+    queue_free()
+
+
+func _skip() -> void:
+    _message_label.visible = false
+    _car.process_mode = Node.PROCESS_MODE_INHERIT
+    get_tree().paused = false
     queue_free()
