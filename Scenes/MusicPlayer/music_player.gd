@@ -6,6 +6,7 @@ const _mute_db := -80.0
 @onready var _boss_player: AudioStreamPlayer = $BossMusicPlayer
 
 var boss_active: bool = false
+var active_boss_path: String = ""
 var _fade_tween: Tween
 
 

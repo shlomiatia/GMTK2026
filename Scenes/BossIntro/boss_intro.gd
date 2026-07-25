@@ -8,10 +8,11 @@ extends Node
 
 func _ready() -> void:
     _boss_core.killed.connect(_on_boss_killed)
-    if MusicPlayer.boss_active:
+    if MusicPlayer.boss_active && MusicPlayer.active_boss_path == _boss.scene_file_path:
         _skip_intro()
         _end_intro()
         return
+    MusicPlayer.active_boss_path = _boss.scene_file_path
     get_tree().paused = true
     _boss.process_mode = Node.PROCESS_MODE_PAUSABLE
     var tween := create_tween()
