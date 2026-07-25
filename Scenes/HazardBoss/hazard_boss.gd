@@ -7,11 +7,10 @@ signal died
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _core: BossCore = $BossCore
 
-var _boss_radius: float
+var _boss_radius: float = -1.0
 
 
 func _ready() -> void:
-    _boss_radius = MathUtils.polygon_bounding_radius(_collision_shape.polygon)
     _core.killed.connect(_die)
     _core.hit_taken.connect(_flash)
     _animation_player.animation_finished.connect(_on_animation_finished)
@@ -32,6 +31,9 @@ func _flash() -> void:
 
 
 func get_radius() -> float:
+    if _boss_radius < 0.0:
+        var collision_polygon := get_node("StaticBody2D/CollisionPolygon2D") as CollisionPolygon2D
+        _boss_radius = MathUtils.polygon_bounding_radius(collision_polygon.polygon)
     return _boss_radius
 
 

@@ -12,11 +12,9 @@ const SPAWN_ATTEMPTS := 20
 @onready var _boss: Node2D = get_parent() as Node2D
 
 var _pending_hazards: Array = []
-var _boss_radius: float
 
 
 func _ready() -> void:
-    _boss_radius = _boss.call("get_radius")
     _spawn_timer.wait_time = Constants.hazard_spawner_interval
     _spawn_timer.timeout.connect(_on_spawn_timer_timeout)
     _spawn_timer.start()
@@ -75,7 +73,8 @@ func _find_spawn_position(arena: Arena, hazard_radius: float) -> Variant:
 
 
 func _is_position_valid(candidate: Vector2, hazard_radius: float) -> bool:
-    if candidate.distance_to(_boss.global_position) < hazard_radius + _boss_radius:
+    var boss_radius: float = _boss.call("get_radius")
+    if candidate.distance_to(_boss.global_position) < hazard_radius + boss_radius:
         return false
     for pillar in get_tree().get_nodes_in_group("pillar"):
         var p := pillar as Pillar

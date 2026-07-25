@@ -26,4 +26,5 @@ texture_progress = ExtResource("3_progress")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=816633301]
 stream = ExtResource("4_audio")
 
-[node name="VirtualCursor" parent="." instance=ExtResource("5_cursor")]
+[node name="VirtualCursor" parent="." unique_id=1193706290 instance=ExtResource("5_cursor")]
+visible = false
