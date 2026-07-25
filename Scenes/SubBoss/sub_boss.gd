@@ -14,7 +14,6 @@ enum State {AIMING, CRANKING, LAUNCHED}
 var _car: Car
 var _state: State = State.AIMING
 var _crank_elapsed: float = 0.0
-var _flash_time_left: float = 0.0
 
 
 func _ready() -> void:

@@ -62,6 +62,9 @@ func _ready() -> void:
         var sub_boss := boss as SubBoss
         if sub_boss:
             sub_boss.car_hit.connect(_on_sub_boss_car_hit)
+        var final_boss := boss as FinalBoss
+        if final_boss:
+            final_boss.car_hit.connect(_on_final_boss_car_hit)
     _overlay.continue_pressed.connect(_go_to_next_level)
     _overlay.restart_pressed.connect(_restart)
 
@@ -121,6 +124,12 @@ func _on_sub_boss_car_hit() -> void:
     _shaking_camera.start_screen_shake()
 
 
+func _on_final_boss_car_hit() -> void:
+    if _game_over:
+        return
+    _shaking_camera.start_screen_shake()
+
+
 func _on_key_collected(key: Collectible) -> void:
     if _game_over:
         return
@@ -149,6 +158,9 @@ func _on_node_added(node: Node) -> void:
         var sub_boss := node as SubBoss
         if sub_boss:
             sub_boss.car_hit.connect(_on_sub_boss_car_hit)
+        var final_boss := node as FinalBoss
+        if final_boss:
+            final_boss.car_hit.connect(_on_final_boss_car_hit)
 
 
 func _on_car_entered_hazard(car: Car) -> void:

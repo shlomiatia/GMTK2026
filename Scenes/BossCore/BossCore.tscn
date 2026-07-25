@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://demslo7f0kcrx"]
 
 [ext_resource type="Script" uid="uid://hcrd88ihorl6" path="res://Scenes/BossCore/boss_core.gd" id="1_core"]
-[ext_resource type="PackedScene" path="res://Scenes/BossHpDisplay/BossHpDisplay.tscn" id="2_bosshp"]
+[ext_resource type="PackedScene" uid="uid://wvrt5d53jrk5" path="res://Scenes/BossHpDisplay/BossHpDisplay.tscn" id="2_bosshp"]
 
 [node name="BossCore" type="Node2D" unique_id=579576738]
 script = ExtResource("1_core")
