@@ -1,14 +1,12 @@
 [gd_scene format=3 uid="uid://dn2jjcl3amsjl"]
 
 [ext_resource type="Script" uid="uid://cmv72mgxadca5" path="res://Scenes/HazardBoss/hazard_boss.gd" id="2_hzboss"]
-[ext_resource type="PackedScene" uid="uid://cwx0g1q1k8g26" path="res://Scenes/Hazard/Hazard.tscn" id="3_hazard"]
 [ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="4_bosscore"]
 [ext_resource type="Texture2D" uid="uid://cpq3k1hihi4d7" path="res://Art/Assets/Play Scene/Enemies/Hazard Boss.png" id="5_4ykeu"]
-[ext_resource type="PackedScene" uid="uid://b8dlysmmnu6em" path="res://Scenes/Hazard/BiggerHazard.tscn" id="5_biggerhazard"]
-[ext_resource type="PackedScene" uid="uid://bans3suovo6ei" path="res://Scenes/Hazard/BiggestHazard.tscn" id="6_biggesthazard"]
 [ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="7_gearspawner"]
 [ext_resource type="Texture2D" uid="uid://cwgltui2wjmys" path="res://Art/Generated/Hazard Boss Shadow.png" id="8_shadow"]
-[ext_resource type="PackedScene" path="res://Scenes/BossIntro/BossIntro.tscn" id="10_intro"]
+[ext_resource type="PackedScene" uid="uid://dbossintro01" path="res://Scenes/BossIntro/BossIntro.tscn" id="10_intro"]
+[ext_resource type="PackedScene" path="res://Scenes/HazardSpawner/HazardSpawner.tscn" id="11_hazardspawner"]
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -61,9 +59,6 @@ _data = {
 [node name="HazardBoss" type="Node2D" unique_id=515765067 groups=["boss"]]
 process_mode = 3
 script = ExtResource("2_hzboss")
-hazard_scene = ExtResource("3_hazard")
-bigger_hazard_scene = ExtResource("5_biggerhazard")
-biggest_hazard_scene = ExtResource("6_biggesthazard")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1715055242]
 texture = ExtResource("5_4ykeu")
@@ -76,19 +71,18 @@ polygon = PackedVector2Array(37, -155, 63, -121, 114, -121, 141, -113, 149, -101
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1926485372]
 libraries/ = SubResource("AnimationLibrary_boss")
 
-[node name="SpawnTimer" type="Timer" parent="." unique_id=1926485374]
-wait_time = 3.0
-
 [node name="BossCore" parent="." unique_id=1189583335 instance=ExtResource("4_bosscore")]
 position = Vector2(0, 171)
 
 [node name="GearSpawner" parent="." unique_id=455135234 instance=ExtResource("7_gearspawner")]
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="HazardSpawner" parent="." unique_id=583134976 instance=ExtResource("11_hazardspawner")]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=828428196]
 energy = 0.0
 texture = ExtResource("8_shadow")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1416945174]
 color = Color(0, 0, 0, 1)
 
-[node name="BossIntro" parent="." instance=ExtResource("10_intro")]
+[node name="BossIntro" parent="." unique_id=1951920081 instance=ExtResource("10_intro")]

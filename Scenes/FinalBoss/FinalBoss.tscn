@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://b866uyitsi1ce" path="res://Scenes/FinalBoss/final_boss.gd" id="4_finalboss"]
 [ext_resource type="Texture2D" uid="uid://bm4ny5fpfmnn0" path="res://Art/Generated/Final Boss Shadow.png" id="5_65wqp"]
 [ext_resource type="PackedScene" uid="uid://dbossintro01" path="res://Scenes/BossIntro/BossIntro.tscn" id="6_intro"]
+[ext_resource type="PackedScene" path="res://Scenes/HazardSpawner/HazardSpawner.tscn" id="7_hazardspawner"]
+[ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="8_gearspawner"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
 size = Vector2(20, 498)
@@ -139,3 +141,7 @@ texture = ExtResource("5_65wqp")
 color = Color(0, 0, 0, 1)
 
 [node name="BossIntro" parent="." unique_id=1393171479 instance=ExtResource("6_intro")]
+
+[node name="HazardSpawner" parent="." unique_id=781202549 instance=ExtResource("7_hazardspawner")]
+
+[node name="GearSpawner" parent="." instance=ExtResource("8_gearspawner")]

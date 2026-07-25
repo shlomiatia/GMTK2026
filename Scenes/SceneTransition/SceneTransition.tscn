@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bhx7gut5fhpri"]
 
 [ext_resource type="Shader" uid="uid://bx322iqq0qjts" path="res://Shaders/transition.gdshader" id="1_shader"]
-[ext_resource type="Texture2D" uid="uid://7o3dyyuyram8" path="res://Art/Generated/GearTexture/04_blurred.png" id="2_mask"]
+[ext_resource type="Texture2D" uid="uid://cvfakgge67js4" path="res://Art/Generated/GearTexture/04_blurred.png" id="2_mask"]
 [ext_resource type="Script" uid="uid://dxomv4q8o5f57" path="res://Scenes/SceneTransition/scene_transition.gd" id="3_script"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]

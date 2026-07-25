@@ -33,10 +33,16 @@ func hit() -> bool:
     return _core.hit()
 
 
+func get_radius() -> float:
+    return (($StaticBody2D/CollisionShape2D as CollisionShape2D).shape as CapsuleShape2D).radius
+
+
 func _flash() -> void:
     _body_sprite.self_modulate = Color(1.0, 1.0, 1.0, 0.3)
+    _dial.self_modulate = Color(1.0, 1.0, 1.0, 0.3)
     var tween := create_tween()
     tween.tween_property(_body_sprite, "self_modulate", Color(1.0, 1.0, 1.0, 1.0), _core.invincibility_duration)
+    tween.parallel().tween_property(_dial, "self_modulate", Color(1.0, 1.0, 1.0, 1.0), _core.invincibility_duration)
 
 
 func _on_dial_body_entered(body: Node2D) -> void:
