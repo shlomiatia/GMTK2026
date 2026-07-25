@@ -4,18 +4,15 @@ signal died
 
 @export var enemy_scene: PackedScene
 
-@onready var _collision_shape: CollisionShape2D = $StaticBody2D/CollisionShape2D
+@onready var _sprite: Sprite2D = $Sprite2D
+@onready var _collision_shape: CollisionPolygon2D = $StaticBody2D/CollisionPolygon2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
-@onready var _invincibility_timer: Timer = $InvincibilityTimer
-
-var _hits_taken: int = 0
-var _is_dead: bool = false
-var _is_invincible: bool = false
+@onready var _core: BossCore = $BossCore
 
 
 func _ready() -> void:
-    _invincibility_timer.wait_time = Constants.minion_boss_invincibility_duration
-    _invincibility_timer.timeout.connect(_on_invincibility_timer_timeout)
+    _core.killed.connect(_die)
+    _core.hit_taken.connect(_flash)
     _animation_player.animation_finished.connect(_on_animation_finished)
     for enemy in get_tree().get_nodes_in_group("enemy"):
         _connect_enemy(enemy as Enemy)
@@ -34,6 +31,8 @@ func _on_enemy_died(enemy: Enemy) -> void:
     var loop := enemy.loop
     var key := enemy.key
     await get_tree().create_timer(Constants.minion_respawn_delay).timeout
+    if _core.is_dead():
+        return
     _spawn_enemy(path, loop, key)
 
 
@@ -47,29 +46,20 @@ func _spawn_enemy(path: Path2D, loop: bool, key: bool) -> void:
 
 
 func is_dead() -> bool:
-    return _is_dead
+    return _core.is_dead()
 
 
 func hit() -> bool:
-    if _is_dead || _is_invincible:
-        return false
-    _hits_taken += 1
-    if _hits_taken >= Constants.minion_boss_hits_to_kill:
-        die()
-        return true
-    _is_invincible = true
-    _invincibility_timer.start()
-    return true
+    return _core.hit()
 
 
-func _on_invincibility_timer_timeout() -> void:
-    _is_invincible = false
+func _flash() -> void:
+    _sprite.self_modulate = Color(1.0, 1.0, 1.0, 0.3)
+    var tween := create_tween()
+    tween.tween_property(_sprite, "self_modulate", Color(1.0, 1.0, 1.0, 1.0), _core.invincibility_duration)
 
 
-func die() -> void:
-    if _is_dead:
-        return
-    _is_dead = true
+func _die() -> void:
     _collision_shape.set_deferred("disabled", true)
     _animation_player.play("die")
 

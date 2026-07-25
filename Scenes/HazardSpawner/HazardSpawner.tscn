@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/HazardSpawner/hazard_spawner.gd" id="1_spawner"]
+[ext_resource type="PackedScene" uid="uid://cwx0g1q1k8g26" path="res://Scenes/Hazard/Hazard.tscn" id="2_hazard"]
+[ext_resource type="PackedScene" uid="uid://b8dlysmmnu6em" path="res://Scenes/Hazard/BiggerHazard.tscn" id="3_biggerhazard"]
+[ext_resource type="PackedScene" uid="uid://bans3suovo6ei" path="res://Scenes/Hazard/BiggestHazard.tscn" id="4_biggesthazard"]
+
+[node name="HazardSpawner" type="Node"]
+script = ExtResource("1_spawner")
+hazard_scene = ExtResource("2_hazard")
+bigger_hazard_scene = ExtResource("3_biggerhazard")
+biggest_hazard_scene = ExtResource("4_biggesthazard")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 3.0

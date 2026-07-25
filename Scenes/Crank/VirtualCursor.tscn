@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/Crank/VirtualCursor.gd" id="1_cursor"]
+[ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://icon.svg" id="2_vmouse"]
+
+[node name="VirtualCursor" type="Sprite2D" groups=["menu_pause_exempt"]]
+process_mode = 3
+top_level = true
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_vmouse")
+script = ExtResource("1_cursor")

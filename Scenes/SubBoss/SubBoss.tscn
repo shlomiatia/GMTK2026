@@ -1,17 +1,18 @@
 [gd_scene format=3 uid="uid://ba4itjqpmq4sd"]
 
-[ext_resource type="Texture2D" uid="uid://dxxifm4glmkiu" path="res://Art/Assets/Play Scene/Enemies/Minion.png" id="1_5idvj"]
 [ext_resource type="Script" uid="uid://dduagibg1fjnn" path="res://Scenes/SubBoss/sub_boss.gd" id="2_boss"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
-radius = 45.099888
+[ext_resource type="Texture2D" uid="uid://bkyel1rfkistw" path="res://Art/Assets/Play Scene/Enemies/Sub Boss.png" id="2_gebj6"]
+[ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="3_bosscore"]
+[ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="4_gearspawner"]
+[ext_resource type="Texture2D" uid="uid://cy1jiymeivcbx" path="res://Art/Generated/Sub Boss Shadow.png" id="5_1c02f"]
+[ext_resource type="PackedScene" uid="uid://dbossintro01" path="res://Scenes/BossIntro/BossIntro.tscn" id="6_intro"]
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("Sprite2D:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,10 +27,22 @@ resource_name = "die"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("Sprite2D:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossCore:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -43,23 +56,36 @@ _data = {
 }
 
 [node name="SubBoss" type="CharacterBody2D" unique_id=823265969 groups=["boss"]]
+process_mode = 3
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("2_boss")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1246858609]
-texture = ExtResource("1_5idvj")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=239834297]
-shape = SubResource("CircleShape2D_ebdu8")
+z_index = 1
+texture = ExtResource("2_gebj6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1246858610]
 libraries/ = SubResource("AnimationLibrary_boss")
 
-[node name="InvincibilityTimer" type="Timer" parent="." unique_id=1246858611]
-wait_time = 0.5
-one_shot = true
-
 [node name="AimTimer" type="Timer" parent="." unique_id=1246858612]
 wait_time = 3.0
 one_shot = true
+
+[node name="BossCore" parent="." unique_id=1747566252 instance=ExtResource("3_bosscore")]
+top_level = true
+position = Vector2(0, 56)
+
+[node name="GearSpawner" parent="." unique_id=1418771055 instance=ExtResource("4_gearspawner")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2091529842]
+polygon = PackedVector2Array(4, -97, 23, -86, 30, -69, 40, -58, 45, -37, 58, -28, 60, -9, 71, 4, 69, 25, 55, 38, 21, 42, -36, 42, -51, 95, -72, 16, -53, 8, -54, -1, -67, -11, -63, -31, -52, -36, -44, -63, -20, -93)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=268689695]
+energy = 0.0
+texture = ExtResource("5_1c02f")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=869433270]
+color = Color(0, 0, 0, 1)
+
+[node name="BossIntro" parent="." unique_id=1979154801 instance=ExtResource("6_intro")]

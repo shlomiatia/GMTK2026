@@ -1,5 +1,7 @@
 class_name Bullet extends Node2D
 
+signal car_hit(car: Car)
+
 @onready var _area: Area2D = $Area2D
 
 
@@ -15,4 +17,5 @@ func _on_body_entered(body: Node2D) -> void:
 	var car := body as Car
 	if car:
 		car.die()
+		car_hit.emit(car)
 	queue_free()

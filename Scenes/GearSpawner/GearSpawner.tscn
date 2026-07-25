@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/GearSpawner/gear_spawner.gd" id="1_spawner"]
+[ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="2_gear"]
+
+[node name="GearSpawner" type="Node"]
+script = ExtResource("1_spawner")
+gear_scene = ExtResource("2_gear")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 3.0

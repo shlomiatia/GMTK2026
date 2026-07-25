@@ -26,9 +26,7 @@ func _process(_delta: float) -> void:
     if _state == State.DEAD:
         return
     var speed := velocity.length() if _state == State.LAUNCHED else _crank.get_launch_speed()
-    var t := clampf((speed - Constants.enemy_kill_speed) / (Constants.max_speed - Constants.enemy_kill_speed), 0.0, 1.0)
-    var amount := 0.0 if speed < Constants.enemy_kill_speed else lerpf(0.1, 1.0, t)
-    _sprite.self_modulate = Color(1.0, 1.0 - amount, 1.0 - amount)
+    _sprite.self_modulate = MathUtils.speed_to_lethal_color(speed)
 
 
 func _physics_process(delta: float) -> void:
@@ -68,7 +66,7 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
     var boss: Node = collider if collider.is_in_group("boss") else collider.get_parent()
     if boss && boss.is_in_group("boss") && velocity.length() >= Constants.enemy_kill_speed && boss.call("hit"):
         boss_hit.emit(boss)
-    velocity = velocity.bounce(collision.get_normal())
+    velocity = velocity.bounce(collision.get_normal()) * 0.75
 
 
 func _apply_angular_velocity(delta: float) -> float:
@@ -84,7 +82,9 @@ func _apply_angular_velocity(delta: float) -> float:
 
 
 func _on_crank_launched(power_ratio: float) -> void:
-    if _state != State.IDLE:
+    if _state == State.DEAD:
+        return
+    if _state == State.LAUNCHED && velocity.length() >= Constants.enemy_kill_speed:
         return
     _state = State.LAUNCHED
     _crank.set_enabled(false)

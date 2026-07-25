@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://dn2jjcl3amsjl"]
 
-[ext_resource type="Texture2D" uid="uid://dxxifm4glmkiu" path="res://Art/Assets/Play Scene/Enemies/Minion.png" id="1_4oj2i"]
-[ext_resource type="Script" path="res://Scenes/HazardBoss/hazard_boss.gd" id="2_hzboss"]
-[ext_resource type="PackedScene" uid="uid://cwx0g1q1k8g26" path="res://Scenes/Hazard/Hazard.tscn" id="3_hazard"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_6kyec"]
-radius = 45.01111
+[ext_resource type="Script" uid="uid://cmv72mgxadca5" path="res://Scenes/HazardBoss/hazard_boss.gd" id="2_hzboss"]
+[ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="4_bosscore"]
+[ext_resource type="Texture2D" uid="uid://cpq3k1hihi4d7" path="res://Art/Assets/Play Scene/Enemies/Hazard Boss.png" id="5_4ykeu"]
+[ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="7_gearspawner"]
+[ext_resource type="Texture2D" uid="uid://cwgltui2wjmys" path="res://Art/Generated/Hazard Boss Shadow.png" id="8_shadow"]
+[ext_resource type="PackedScene" uid="uid://dbossintro01" path="res://Scenes/BossIntro/BossIntro.tscn" id="10_intro"]
+[ext_resource type="PackedScene" path="res://Scenes/HazardSpawner/HazardSpawner.tscn" id="11_hazardspawner"]
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -36,6 +37,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossCore:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_boss"]
 _data = {
@@ -44,23 +57,32 @@ _data = {
 }
 
 [node name="HazardBoss" type="Node2D" unique_id=515765067 groups=["boss"]]
+process_mode = 3
 script = ExtResource("2_hzboss")
-hazard_scene = ExtResource("3_hazard")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1715055242]
-texture = ExtResource("1_4oj2i")
+texture = ExtResource("5_4ykeu")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1026095742]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=957121119]
-shape = SubResource("CircleShape2D_6kyec")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=526713425]
+polygon = PackedVector2Array(37, -155, 63, -121, 114, -121, 141, -113, 149, -101, 147, -43, 131, -25, 121, -19, 132, 15, 146, 18, 185, 102, 196, 106, 219, 131, 195, 150, 156, 137, 140, 136, 112, 147, 83, 146, 51, 141, 17, 157, -20, 157, -56, 141, -84, 145, -110, 148, -143, 135, -178, 144, -194, 151, -216, 138, -217, 129, -193, 104, -186, 104, -148, 20, -130, 14, -120, -20, -142, -34, -148, -62, -147, -102, -138, -113, -113, -121, -64, -122, -38, -156)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1926485372]
 libraries/ = SubResource("AnimationLibrary_boss")
 
-[node name="InvincibilityTimer" type="Timer" parent="." unique_id=1926485373]
-wait_time = 0.5
-one_shot = true
+[node name="BossCore" parent="." unique_id=1189583335 instance=ExtResource("4_bosscore")]
+position = Vector2(0, 171)
 
-[node name="SpawnTimer" type="Timer" parent="." unique_id=1926485374]
-wait_time = 3.0
+[node name="GearSpawner" parent="." unique_id=455135234 instance=ExtResource("7_gearspawner")]
+
+[node name="HazardSpawner" parent="." unique_id=583134976 instance=ExtResource("11_hazardspawner")]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=828428196]
+energy = 0.0
+texture = ExtResource("8_shadow")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1416945174]
+color = Color(0, 0, 0, 1)
+
+[node name="BossIntro" parent="." unique_id=1951920081 instance=ExtResource("10_intro")]

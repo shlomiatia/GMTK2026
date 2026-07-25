@@ -7,10 +7,11 @@
 radius = 7.0
 height = 28.0
 
-[node name="Bullet" type="Node2D" unique_id=609893403]
+[node name="Bullet" type="Node2D" unique_id=609893403 groups=["bullet"]]
 script = ExtResource("2_bullet")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1028141028]
+z_index = 2
 position = Vector2(0, 1)
 texture = ExtResource("1_7u3a6")
 

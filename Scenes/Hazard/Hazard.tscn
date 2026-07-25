@@ -61,11 +61,27 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_fadeout"]
+resource_name = "fadeout"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rpeia"]
 _data = {
 &"RESET": SubResource("Animation_27cge"),
 &"default": SubResource("Animation_xxxoc"),
-&"fadein": SubResource("Animation_fadein")
+&"fadein": SubResource("Animation_fadein"),
+&"fadeout": SubResource("Animation_fadeout")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]

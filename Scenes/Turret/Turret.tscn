@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/Turret/turret.gd" id="1_turret"]
+
+[node name="Turret" type="Node"]
+script = ExtResource("1_turret")
