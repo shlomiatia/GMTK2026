@@ -105,6 +105,7 @@ process_mode = 3
 script = ExtResource("4_finalboss")
 
 [node name="Dial" type="Sprite2D" parent="." unique_id=754509279]
+z_index = 1
 rotation = -1.5707964
 texture = ExtResource("2_xw47l")
 offset = Vector2(0, 266)
@@ -119,6 +120,7 @@ position = Vector2(0, 241)
 shape = SubResource("RectangleShape2D_ebdu8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1753513047]
+z_index = 1
 texture = ExtResource("1_j6a7x")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=212480805]
@@ -144,4 +146,4 @@ color = Color(0, 0, 0, 1)
 
 [node name="HazardSpawner" parent="." unique_id=781202549 instance=ExtResource("7_hazardspawner")]
 
-[node name="GearSpawner" parent="." instance=ExtResource("8_gearspawner")]
+[node name="GearSpawner" parent="." unique_id=1136378483 instance=ExtResource("8_gearspawner")]

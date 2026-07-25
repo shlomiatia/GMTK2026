@@ -10,6 +10,7 @@ func _ready() -> void:
     _boss_core.killed.connect(_on_boss_killed)
     if MusicPlayer.boss_active:
         _skip_intro()
+        _end_intro()
         return
     get_tree().paused = true
     _boss.process_mode = Node.PROCESS_MODE_PAUSABLE
