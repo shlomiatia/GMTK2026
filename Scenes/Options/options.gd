@@ -1,6 +1,7 @@
 class_name Options extends CanvasLayer
 
 var original_paused_state = false
+var _suppressed: Dictionary = {}
 
 @onready var _max_crank_degrees_spin_box: SpinBox = $Center/Panel/Margin/VBox/MaxCrankDegreesRow/SpinBox
 @onready var _max_speed_spin_box: SpinBox = $Center/Panel/Margin/VBox/MaxSpeedRow/SpinBox
@@ -38,9 +39,30 @@ func _process(_delta: float) -> void:
             original_paused_state = get_tree().paused
             Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
             get_tree().paused = true
+            _suppress_always_nodes()
         else:
+            _restore_always_nodes()
             Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
             get_tree().paused = original_paused_state
+
+
+func _suppress_always_nodes() -> void:
+    _suppressed.clear()
+    if !get_tree().current_scene:
+        return
+    for node in get_tree().current_scene.find_children("*", "", true, false):
+        if node == self || node.is_in_group("menu_pause_exempt"):
+            continue
+        if node.process_mode == Node.PROCESS_MODE_ALWAYS:
+            _suppressed[node] = node.process_mode
+            node.process_mode = Node.PROCESS_MODE_PAUSABLE
+
+
+func _restore_always_nodes() -> void:
+    for node in _suppressed:
+        if is_instance_valid(node):
+            node.process_mode = _suppressed[node]
+    _suppressed.clear()
 
 
 func _on_max_crank_degrees_spin_box_value_changed(value: float) -> void:
