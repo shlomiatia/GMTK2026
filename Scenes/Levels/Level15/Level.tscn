@@ -18,6 +18,6 @@ motion_mode = 1
 [node name="FinalBoss" parent="." unique_id=416965398 instance=ExtResource("3_2pyfl")]
 position = Vector2(960, 540)
 
-[node name="BossObjective" parent="." unique_id=211046973 instance=ExtResource("4_oqf08")]
+[node name="GearSpawner" parent="FinalBoss" unique_id=1838167398 instance=ExtResource("5_3kj04")]
 
-[node name="GearSpawner" parent="." unique_id=1838167398 instance=ExtResource("5_3kj04")]
+[node name="BossObjective" parent="." unique_id=211046973 instance=ExtResource("4_oqf08")]
