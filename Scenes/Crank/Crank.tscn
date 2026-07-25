@@ -27,13 +27,6 @@ texture_progress = ExtResource("3_progress")
 stream = ExtResource("4_audio")
 
 [node name="VirtualMouseIcon" type="Sprite2D" parent="." unique_id=2034613234]
-visible = false
-top_level = true
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("5_vmouse")
-
-[node name="PivotIcon" type="Sprite2D" parent="." unique_id=2034613235]
-visible = false
 top_level = true
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_vmouse")
