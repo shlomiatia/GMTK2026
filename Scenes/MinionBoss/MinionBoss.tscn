@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b8mctqanfchfv" path="res://Scenes/MinionBoss/minion_boss.gd" id="2_boss"]
 [ext_resource type="Texture2D" uid="uid://cj7t2tcm3jnsp" path="res://Art/Assets/Play Scene/Enemies/Minion Boss.png" id="3_3qjh2"]
 [ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="3_enemy"]
-[ext_resource type="PackedScene" path="res://Scenes/BossCore/BossCore.tscn" id="4_bosscore"]
+[ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="4_bosscore"]
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -59,3 +59,4 @@ polygon = PackedVector2Array(-34, -89, 43, -88, 50, -54, 61, -41, 56, -33, 63, -
 libraries/ = SubResource("AnimationLibrary_boss")
 
 [node name="BossCore" parent="." unique_id=1185930564 instance=ExtResource("4_bosscore")]
+position = Vector2(0, 120)

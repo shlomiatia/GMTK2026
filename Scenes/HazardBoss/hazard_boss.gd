@@ -9,7 +9,7 @@ const SPAWN_ATTEMPTS := 20
 @export var biggest_hazard_scene: PackedScene
 
 @onready var _sprite: Sprite2D = $Sprite2D
-@onready var _collision_shape: CollisionShape2D = $StaticBody2D/CollisionShape2D
+@onready var _collision_shape: CollisionPolygon2D = $StaticBody2D/CollisionPolygon2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _spawn_timer: Timer = $SpawnTimer
 @onready var _core: BossCore = $BossCore

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://demslo7f0kcrx"]
 
 [ext_resource type="Script" uid="uid://hcrd88ihorl6" path="res://Scenes/BossCore/boss_core.gd" id="1_core"]
+[ext_resource type="PackedScene" path="res://Scenes/BossHpDisplay/BossHpDisplay.tscn" id="2_bosshp"]
 
 [node name="BossCore" type="Node2D" unique_id=579576738]
 script = ExtResource("1_core")
@@ -8,3 +9,5 @@ script = ExtResource("1_core")
 [node name="InvincibilityTimer" type="Timer" parent="." unique_id=982992727]
 wait_time = 0.5
 one_shot = true
+
+[node name="BossHpDisplay" parent="." unique_id=1068258019 instance=ExtResource("2_bosshp")]
