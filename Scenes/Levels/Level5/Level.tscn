@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_wr1xv"]
 [ext_resource type="PackedScene" uid="uid://cnr8l732xosm2" path="res://Scenes/MinionBoss/MinionBoss.tscn" id="5_8ua28"]
 [ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="6_pac26"]
+[ext_resource type="Texture2D" uid="uid://c4ir74kyqyv8e" path="res://Art/Generated/Minion Boss Shadow.png" id="6_wr1xv"]
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/BossObjective/BossObjective.tscn" id="7_boss_obj"]
 
 [sub_resource type="Curve2D" id="Curve2D_8ua28"]
@@ -41,6 +42,14 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 651, 347, 0, 0, 0, 0, 654, 972)
 }
 point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_wr1xv"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wr1xv"]
+gradient = SubResource("Gradient_wr1xv")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Level" type="Node2D" unique_id=1733532608]
 
@@ -92,6 +101,15 @@ loop = false
 
 [node name="MinionBoss" parent="." unique_id=1828729893 instance=ExtResource("5_8ua28")]
 position = Vector2(960, 145)
-enemy_scene = ExtResource("6_pac26")
+
+[node name="PointLight2D" type="PointLight2D" parent="MinionBoss" unique_id=521511860]
+texture = ExtResource("6_wr1xv")
+
+[node name="PointLight2D2" type="PointLight2D" parent="MinionBoss" unique_id=1319612998]
+scale = Vector2(19, 19)
+texture = SubResource("GradientTexture2D_wr1xv")
 
 [node name="BossObjective" parent="." unique_id=1828729895 instance=ExtResource("7_boss_obj")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2104768551]
+color = Color(0, 0, 0, 1)
