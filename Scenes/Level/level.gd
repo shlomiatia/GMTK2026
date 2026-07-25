@@ -1,19 +1,35 @@
+@tool
 class_name Level extends Node2D
 
-@export var time_limit: float = 10.0
+static var time_progress_min_value := 3.33
+static var time_progress_max_value := 96.67
+
+@export var time_limit: float = Constants.default_level_time
+@export var texture: Texture2D:
+    set(value):
+        texture = value
+        if texture && is_node_ready():
+            _sprite.texture = texture
 
 var _game_over: bool = false
-var _won: bool = false
 var _car: Car
+var _goal: Goal
+var _key_enemies: Array[Enemy] = []
+var _keys: Array[Key] = []
+var _gear_time_tween: Tween
 
 @onready var _overlay: Overlay = $Overlay
 @onready var _shaking_camera: ShakingCamera = $ShakingCamera
 @onready var _timer: Timer = $Timer
 @onready var _time_progress_bar: TextureProgressBar = $Time
+@onready var _sprite: Sprite2D = $Sprite2D
 
 
 func _ready() -> void:
-    prints("hi")
+    if texture:
+        _sprite.texture = texture
+    if Engine.is_editor_hint():
+        return
     _timer.wait_time = time_limit
     _timer.timeout.connect(_on_timer_timeout)
     _timer.start()
@@ -21,34 +37,41 @@ func _ready() -> void:
     _car.launched.connect(_on_car_launched)
     _car.died.connect(_on_car_died)
     _car.enemy_killed.connect(_on_enemy_killed)
+    _car.cannon_killed.connect(_on_cannon_killed)
+    _car.boss_hit.connect(_on_boss_hit)
+    _goal = get_tree().get_first_node_in_group("goal") as Goal
+    for enemy in get_tree().get_nodes_in_group("enemy"):
+        if (enemy as Enemy).key:
+            _key_enemies.append(enemy)
+    for key in get_tree().get_nodes_in_group("key"):
+        _keys.append(key as Key)
+        (key as Key).collected.connect(_on_key_collected.bind(key))
+    if !_key_enemies.is_empty() || !_keys.is_empty():
+        _goal.lock.call_deferred()
     get_tree().get_first_node_in_group("objective").completed.connect(_win)
     for hazard in get_tree().get_nodes_in_group("hazard"):
         (hazard as Hazard).car_entered.connect(_on_car_entered_hazard)
+    get_tree().node_added.connect(_on_node_added)
     for gear in get_tree().get_nodes_in_group("gear"):
         (gear as Gear).collected.connect(_on_gear_collected)
+    _overlay.continue_pressed.connect(_go_to_next_level)
+    _overlay.restart_pressed.connect(_restart)
 
 
 func _process(_delta: float) -> void:
+    if Engine.is_editor_hint():
+        return
     if Input.is_action_just_pressed("skip_level"):
         _go_to_next_level()
         return
-    if _won:
-        return
     if Input.is_action_just_pressed("restart"):
-        get_tree().reload_current_scene()
+        _restart()
         return
     if _game_over:
         return
-    _time_progress_bar.value = lerpf(Constants.time_progress_min_value, Constants.time_progress_max_value, _timer.time_left / time_limit)
+    _time_progress_bar.value = lerpf(time_progress_min_value, time_progress_max_value, _timer.time_left / time_limit)
     if _is_car_out_of_bounds():
         _lose()
-
-
-func _unhandled_input(event: InputEvent) -> void:
-    if !_won:
-        return
-    if event.is_pressed() && !event.is_echo():
-        _go_to_next_level()
 
 
 func _on_car_launched() -> void:
@@ -58,14 +81,47 @@ func _on_car_launched() -> void:
 func _on_timer_timeout() -> void:
     if _game_over:
         return
-    _car.freeze()
     _lose()
 
 
-func _on_enemy_killed(_enemy: Enemy) -> void:
+func _on_enemy_killed(enemy: Enemy) -> void:
     if _game_over:
         return
     _shaking_camera.start_screen_shake()
+    _add_time_bonus(Constants.enemy_kill_time_bonus)
+    if enemy.key:
+        _key_enemies.erase(enemy)
+        _try_unlock_goal()
+
+
+func _on_cannon_killed(_cannon: Cannon) -> void:
+    if _game_over:
+        return
+    _shaking_camera.start_screen_shake()
+    _add_time_bonus(Constants.cannon_kill_time_bonus)
+
+
+func _on_boss_hit(_boss: Node) -> void:
+    if _game_over:
+        return
+    _shaking_camera.start_screen_shake()
+
+
+func _on_key_collected(key: Key) -> void:
+    if _game_over:
+        return
+    _keys.erase(key)
+    _try_unlock_goal()
+
+
+func _try_unlock_goal() -> void:
+    if _key_enemies.is_empty() && _keys.is_empty():
+        _goal.unlock()
+
+
+func _on_node_added(node: Node) -> void:
+    if node.is_in_group("hazard"):
+        (node as Hazard).car_entered.connect(_on_car_entered_hazard)
 
 
 func _on_car_entered_hazard(car: Car) -> void:
@@ -78,7 +134,25 @@ func _on_car_entered_hazard(car: Car) -> void:
 func _on_gear_collected() -> void:
     if _game_over:
         return
-    _timer.start(_timer.time_left + Constants.gear_time_bonus)
+    _add_time_bonus(Constants.gear_time_bonus)
+
+
+func _add_time_bonus(amount: float) -> void:
+    if _gear_time_tween:
+        _gear_time_tween.kill()
+    _timer.paused = true
+    var target_time: float = minf(_timer.time_left + amount, time_limit)
+    _gear_time_tween = create_tween()
+    _gear_time_tween.tween_method(_set_timer_time, _timer.time_left, target_time, 0.5)
+    _gear_time_tween.finished.connect(_on_gear_time_tween_finished)
+
+
+func _set_timer_time(time: float) -> void:
+    _timer.start(time)
+
+
+func _on_gear_time_tween_finished() -> void:
+    _timer.paused = false
 
 
 func _on_car_died() -> void:
@@ -96,13 +170,16 @@ func _win() -> void:
     if _game_over:
         return
     _game_over = true
-    _won = true
-    _overlay.show_message("You win! Press any key continue")
+    _overlay.show_win()
 
 
 func _lose() -> void:
     _game_over = true
-    _overlay.show_message("You lose! Press R to restart")
+    _overlay.show_lose()
+
+
+func _restart() -> void:
+    get_tree().reload_current_scene()
 
 
 func _go_to_next_level() -> void:
@@ -111,4 +188,5 @@ func _go_to_next_level() -> void:
     var level_number := current_path.get_base_dir().get_file().trim_prefix("Level").to_int()
     var next_level_path := "%s/Level%d/Level.tscn" % [levels_dir, level_number + 1]
     if ResourceLoader.exists(next_level_path):
+        get_tree().paused = false
         get_tree().change_scene_to_file(next_level_path)

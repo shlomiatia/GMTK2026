@@ -3,19 +3,28 @@
 [ext_resource type="PackedScene" uid="uid://b6wfreo7ajycp" path="res://Scenes/Level/Level.tscn" id="1_rhr84"]
 [ext_resource type="PackedScene" uid="uid://bemlcu6wijhau" path="res://Scenes/Goal/Goal.tscn" id="3_m31i0"]
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="4_5xhxf"]
+[ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="5_yf681"]
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="6_8f3wn"]
 
 [node name="Level" type="Node2D" unique_id=1733532608]
 
 [node name="Level" parent="." unique_id=76539942 instance=ExtResource("1_rhr84")]
-time_limit = 20.0
 
 [node name="Goal" parent="." unique_id=669960687 instance=ExtResource("3_m31i0")]
-position = Vector2(1289, 237)
+position = Vector2(1277, 229)
 
 [node name="Car" parent="." unique_id=1734870916 instance=ExtResource("4_5xhxf")]
-position = Vector2(628, 828)
-rotation = 0.82819176
+position = Vector2(666, 840)
+rotation = 0.7853982
 motion_mode = 1
 
 [node name="GoalObjective" parent="." unique_id=1366670914 instance=ExtResource("6_8f3wn")]
+
+[node name="Gear" parent="." unique_id=347710995 instance=ExtResource("5_yf681")]
+position = Vector2(964, 540)
+
+[node name="Gear2" parent="." unique_id=1612669469 instance=ExtResource("5_yf681")]
+position = Vector2(812, 692)
+
+[node name="Gear3" parent="." unique_id=1712358846 instance=ExtResource("5_yf681")]
+position = Vector2(1133, 374)

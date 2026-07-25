@@ -1,15 +1,17 @@
 class_name Car extends CharacterBody2D
 
 signal launched
-signal rested
 signal died
 signal enemy_killed(enemy: Enemy)
+signal cannon_killed(cannon: Cannon)
+signal boss_hit(boss: Node)
 
 enum State {IDLE, LAUNCHED, DEAD}
 
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _crank: Crank = $Car/Crank
+@onready var _sprite: Sprite2D = $Car
 
 var _state: State = State.IDLE
 var _angular_velocity: float = 0.0
@@ -20,7 +22,21 @@ func _ready() -> void:
     _crank.launched.connect(_on_crank_launched)
 
 
+func _process(_delta: float) -> void:
+    if _state == State.DEAD:
+        return
+    var speed := velocity.length() if _state == State.LAUNCHED else _crank.get_launch_speed()
+    var t := clampf((speed - Constants.enemy_kill_speed) / (Constants.max_speed - Constants.enemy_kill_speed), 0.0, 1.0)
+    var amount := 0.0 if speed < Constants.enemy_kill_speed else lerpf(0.1, 1.0, t)
+    _sprite.self_modulate = Color(1.0, 1.0 - amount, 1.0 - amount)
+
+
 func _physics_process(delta: float) -> void:
+    if _state == State.IDLE:
+        var idle_dir := Input.get_axis("left", "right")
+        _angular_velocity = deg_to_rad(Constants.steer_speed) * idle_dir
+        _apply_angular_velocity(delta)
+        return
     if _state != State.LAUNCHED:
         return
     var dir := Input.get_axis("left", "right")
@@ -31,11 +47,10 @@ func _physics_process(delta: float) -> void:
     velocity = velocity.move_toward(Vector2.ZERO, Constants.friction * delta)
     _handle_collision(move_and_collide(velocity * delta))
 
-    if velocity == Vector2.ZERO:
-        _state = State.IDLE
-        _angular_velocity = 0.0
+    if velocity.length() < Constants.enemy_kill_speed:
         _crank.set_enabled(true)
-        rested.emit()
+    if velocity.length() == 0.0:
+        _state = State.IDLE
 
 
 func _handle_collision(collision: KinematicCollision2D) -> void:
@@ -45,6 +60,14 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
     if enemy && velocity.length() >= Constants.enemy_kill_speed:
         enemy.die()
         enemy_killed.emit(enemy)
+    var cannon := collision.get_collider().get_parent() as Cannon
+    if cannon && velocity.length() >= Constants.enemy_kill_speed:
+        cannon.die()
+        cannon_killed.emit(cannon)
+    var collider: Node = collision.get_collider()
+    var boss: Node = collider if collider.is_in_group("boss") else collider.get_parent()
+    if boss && boss.is_in_group("boss") && velocity.length() >= Constants.enemy_kill_speed && boss.call("hit"):
+        boss_hit.emit(boss)
     velocity = velocity.bounce(collision.get_normal())
 
 
@@ -69,14 +92,14 @@ func _on_crank_launched(power_ratio: float) -> void:
     launched.emit()
 
 
+func push(motion: Vector2) -> void:
+    if _state == State.DEAD:
+        return
+    move_and_collide(motion)
+
+
 func get_bounding_radius() -> float:
     return (_collision_shape.shape as CapsuleShape2D).height / 2.0
-
-
-func freeze() -> void:
-    set_physics_process(false)
-    _crank.set_enabled(false)
-    velocity = Vector2.ZERO
 
 
 func die() -> void:

@@ -3,17 +3,31 @@ class_name Options extends CanvasLayer
 @onready var _max_crank_degrees_spin_box: SpinBox = $Center/Panel/Margin/VBox/MaxCrankDegreesRow/SpinBox
 @onready var _max_speed_spin_box: SpinBox = $Center/Panel/Margin/VBox/MaxSpeedRow/SpinBox
 @onready var _friction_spin_box: SpinBox = $Center/Panel/Margin/VBox/FrictionRow/SpinBox
-@onready var _reset_crank_seconds_spin_box: SpinBox = $Center/Panel/Margin/VBox/ResetCrankSecondsRow/SpinBox
 @onready var _distance_label: Label = $Center/Panel/Margin/VBox/DistanceLabel
 @onready var _steer_speed_spin_box: SpinBox = $Center/Panel/Margin/VBox/SteerSpeedRow/SpinBox
+@onready var _enemy_speed_spin_box: SpinBox = $Center/Panel/Margin/VBox/EnemySpeedRow/SpinBox
+@onready var _enemy_kill_speed_spin_box: SpinBox = $Center/Panel/Margin/VBox/EnemyKillSpeedRow/SpinBox
+@onready var _gear_time_bonus_spin_box: SpinBox = $Center/Panel/Margin/VBox/GearTimeBonusRow/SpinBox
+@onready var _enemy_kill_time_bonus_spin_box: SpinBox = $Center/Panel/Margin/VBox/EnemyKillTimeBonusRow/SpinBox
+@onready var _cannon_kill_time_bonus_spin_box: SpinBox = $Center/Panel/Margin/VBox/CannonKillTimeBonusRow/SpinBox
+@onready var _rest_velocity_threshold_spin_box: SpinBox = $Center/Panel/Margin/VBox/RestVelocityThresholdRow/SpinBox
+@onready var _cannon_turret_speed_degrees_spin_box: SpinBox = $Center/Panel/Margin/VBox/CannonTurretSpeedDegreesRow/SpinBox
+@onready var _bullet_speed_spin_box: SpinBox = $Center/Panel/Margin/VBox/BulletSpeedRow/SpinBox
 
 
 func _ready() -> void:
 	_max_crank_degrees_spin_box.value = Constants.max_crank_degrees
 	_max_speed_spin_box.value = Constants.max_speed
 	_friction_spin_box.value = Constants.friction
-	_reset_crank_seconds_spin_box.value = Constants.reset_crank_seconds
 	_steer_speed_spin_box.value = Constants.steer_speed
+	_enemy_speed_spin_box.value = Constants.enemy_speed
+	_enemy_kill_speed_spin_box.value = Constants.enemy_kill_speed
+	_gear_time_bonus_spin_box.value = Constants.gear_time_bonus
+	_enemy_kill_time_bonus_spin_box.value = Constants.enemy_kill_time_bonus
+	_cannon_kill_time_bonus_spin_box.value = Constants.cannon_kill_time_bonus
+	_rest_velocity_threshold_spin_box.value = Constants.rest_velocity_threshold
+	_cannon_turret_speed_degrees_spin_box.value = Constants.cannon_turret_speed_degrees
+	_bullet_speed_spin_box.value = Constants.bullet_speed
 	_update_distance_label()
 
 
@@ -37,10 +51,6 @@ func _on_friction_spin_box_value_changed(value: float) -> void:
 	_update_distance_label()
 
 
-func _on_reset_crank_seconds_spin_box_value_changed(value: float) -> void:
-	Constants.reset_crank_seconds = value
-
-
 func _update_distance_label() -> void:
 	var distance := (Constants.max_speed * Constants.max_speed) / (2.0 * Constants.friction)
 	_distance_label.text = "Estimated max travel distance: %d px" % distance
@@ -48,3 +58,35 @@ func _update_distance_label() -> void:
 
 func _on_steer_speed_spin_box_value_changed(value: float) -> void:
 	Constants.steer_speed = value
+
+
+func _on_enemy_speed_spin_box_value_changed(value: float) -> void:
+	Constants.enemy_speed = value
+
+
+func _on_enemy_kill_speed_spin_box_value_changed(value: float) -> void:
+	Constants.enemy_kill_speed = value
+
+
+func _on_gear_time_bonus_spin_box_value_changed(value: float) -> void:
+	Constants.gear_time_bonus = value
+
+
+func _on_enemy_kill_time_bonus_spin_box_value_changed(value: float) -> void:
+	Constants.enemy_kill_time_bonus = value
+
+
+func _on_cannon_kill_time_bonus_spin_box_value_changed(value: float) -> void:
+	Constants.cannon_kill_time_bonus = value
+
+
+func _on_rest_velocity_threshold_spin_box_value_changed(value: float) -> void:
+	Constants.rest_velocity_threshold = value
+
+
+func _on_cannon_turret_speed_degrees_spin_box_value_changed(value: float) -> void:
+	Constants.cannon_turret_speed_degrees = value
+
+
+func _on_bullet_speed_spin_box_value_changed(value: float) -> void:
+	Constants.bullet_speed = value

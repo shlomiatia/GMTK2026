@@ -1,11 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0q6g075ds0mt"]
+[gd_scene format=3 uid="uid://b0q6g075ds0mt"]
 
-[ext_resource type="Script" path="res://Scenes/Arena/arena.gd" id="1_arena"]
+[ext_resource type="Script" uid="uid://dueovtc6w3jje" path="res://Scenes/Arena/arena.gd" id="1_arena"]
 
-[node name="Arena" type="StaticBody2D" unique_id=2025930274]
+[node name="Arena" type="StaticBody2D" unique_id=2025930274 groups=["arena"]]
 script = ExtResource("1_arena")
-radius = 10.0
-number_of_points = 24
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1224034591]
 build_mode = 1
+polygon = PackedVector2Array(10, 0, 9.629172, 2.6979675, 8.544194, 5.1958394, 6.825532, 7.3083596, 4.6006503, 8.878852, 2.0345602, 9.790841, -0.6824242, 9.976687, -3.3487961, 9.422609, -5.766803, 8.169699, -7.757113, 6.3108797, -9.172113, 3.9840107, -9.906859, 1.3616664, -9.906859, -1.3616664, -9.172113, -3.9840107, -7.757113, -6.3108797, -5.766803, -8.169699, -3.3487961, -9.422609, -0.6824242, -9.976687, 2.0345602, -9.790841, 4.6006503, -8.878852, 6.825532, -7.3083596, 8.544194, -5.1958394, 9.629172, -2.6979675, 10, -2.4492127e-15)

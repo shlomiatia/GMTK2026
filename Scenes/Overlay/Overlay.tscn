@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dk6m5qx0q7kkb" path="res://Scenes/Overlay/overlay.gd" id="1_overlay"]
 
 [node name="Overlay" type="CanvasLayer" unique_id=875396185]
+process_mode = 3
 layer = 5
 script = ExtResource("1_overlay")
 
