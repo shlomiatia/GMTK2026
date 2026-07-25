@@ -20,6 +20,10 @@ func _on_area_entered(area: Area2D) -> void:
     collected.emit()
 
 
+func get_radius() -> float:
+    return (($Area2D/CollisionShape2D as CollisionShape2D).shape as CircleShape2D).radius
+
+
 func _on_animation_finished(anim_name: StringName) -> void:
     if anim_name == "die":
         queue_free()

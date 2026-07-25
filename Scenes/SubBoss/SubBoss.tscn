@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dxxifm4glmkiu" path="res://Art/Assets/Play Scene/Enemies/Minion.png" id="1_5idvj"]
 [ext_resource type="Script" uid="uid://dduagibg1fjnn" path="res://Scenes/SubBoss/sub_boss.gd" id="2_boss"]
 [ext_resource type="PackedScene" path="res://Scenes/BossCore/BossCore.tscn" id="3_bosscore"]
+[ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="4_gearspawner"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
 radius = 45.099888
@@ -62,3 +63,5 @@ wait_time = 3.0
 one_shot = true
 
 [node name="BossCore" parent="." unique_id=1747566252 instance=ExtResource("3_bosscore")]
+
+[node name="GearSpawner" parent="." instance=ExtResource("4_gearspawner")]

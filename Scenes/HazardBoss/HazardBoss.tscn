@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/BossCore/BossCore.tscn" id="4_bosscore"]
 [ext_resource type="PackedScene" uid="uid://b8dlysmmnu6em" path="res://Scenes/Hazard/BiggerHazard.tscn" id="5_biggerhazard"]
 [ext_resource type="PackedScene" uid="uid://bans3suovo6ei" path="res://Scenes/Hazard/BiggestHazard.tscn" id="6_biggesthazard"]
+[ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="7_gearspawner"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6kyec"]
 radius = 45.01111
@@ -69,3 +70,5 @@ wait_time = 3.0
 [node name="BossCore" parent="." instance=ExtResource("4_bosscore")]
 hits_to_kill = 3
 invincibility_duration = 0.5
+
+[node name="GearSpawner" parent="." instance=ExtResource("7_gearspawner")]

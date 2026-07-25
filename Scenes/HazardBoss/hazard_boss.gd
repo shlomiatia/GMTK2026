@@ -34,6 +34,10 @@ func hit() -> bool:
     return _core.hit()
 
 
+func get_radius() -> float:
+    return (($StaticBody2D/CollisionShape2D as CollisionShape2D).shape as CircleShape2D).radius
+
+
 func _die() -> void:
     _collision_shape.set_deferred("disabled", true)
     _animation_player.play("die")

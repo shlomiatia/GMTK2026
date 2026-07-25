@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cxy5qr35i2yve" path="res://Scenes/Bullet/Bullet.tscn" id="4_bullet"]
 [ext_resource type="PackedScene" path="res://Scenes/Turret/Turret.tscn" id="5_turret"]
 [ext_resource type="PackedScene" path="res://Scenes/BossCore/BossCore.tscn" id="6_bosscore"]
+[ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="7_gearspawner"]
 
 [sub_resource type="Animation" id="Animation_l6qg3"]
 length = 0.001
@@ -153,3 +154,5 @@ bullet_scene = ExtResource("4_bullet")
 [node name="BossCore" parent="." instance=ExtResource("6_bosscore")]
 hits_to_kill = 3
 invincibility_duration = 0.5
+
+[node name="GearSpawner" parent="." instance=ExtResource("7_gearspawner")]

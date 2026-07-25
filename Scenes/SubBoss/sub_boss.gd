@@ -89,6 +89,10 @@ func hit() -> bool:
     return _core.hit()
 
 
+func get_radius() -> float:
+    return (($CollisionShape2D as CollisionShape2D).shape as CircleShape2D).radius
+
+
 func _die() -> void:
     _aim_timer.stop()
     velocity = Vector2.ZERO

@@ -18,3 +18,5 @@ static var hazard_boss_spawn_interval := 3.0
 static var hazard_boss_hazard_count := 4
 static var sub_boss_aim_duration := 3.0
 static var sub_boss_crank_duration := 1.0
+static var gear_spawner_interval := 3.0
+static var gear_spawner_initial_count := 4

@@ -122,6 +122,8 @@ func _try_unlock_goal() -> void:
 func _on_node_added(node: Node) -> void:
     if node.is_in_group("hazard"):
         (node as Hazard).car_entered.connect(_on_car_entered_hazard)
+    elif node.is_in_group("gear"):
+        (node as Collectible).collected.connect(_on_gear_collected)
 
 
 func _on_car_entered_hazard(car: Car) -> void:

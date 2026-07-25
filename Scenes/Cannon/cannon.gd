@@ -17,6 +17,10 @@ func is_dead() -> bool:
 	return _is_dead
 
 
+func get_radius() -> float:
+	return (($StaticBody2D/CollisionShape2D as CollisionShape2D).shape as CircleShape2D).radius
+
+
 func die() -> void:
 	if _is_dead:
 		return
