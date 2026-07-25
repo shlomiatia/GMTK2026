@@ -7,6 +7,8 @@ static var _shown: bool = false
 var _car: Car
 var _crank: Crank
 var _cycle_completed: bool = false
+var _rotated: bool = false
+var _launched: bool = false
 
 
 func _ready() -> void:
@@ -24,24 +26,40 @@ func _ready() -> void:
     _show_message("Your goal is to reach the stairs before time runs out.\nTo get started, hold down the left mouse button")
 
 
+func _process(_delta: float) -> void:
+    if _cycle_completed && !_rotated && (Input.is_action_just_pressed("left") || Input.is_action_just_pressed("right")):
+        _rotated = true
+        if _launched:
+            _finish()
+        else:
+            _show_message("Release to launch!")
+
+
 func _show_message(text: String) -> void:
     _message_label.text = text
     _message_label.visible = true
 
 
 func _on_crank_pressed() -> void:
-    _show_message("Keeping your finger on the button,\nmove the mouse in a circular motion to wind it up.")
+    _show_message("Keeping your finger on the button,\nmove the mouse in a circular motion to wind it up.\nThe more you wind it up, the farther you’ll go")
 
 
 func _on_cycle_completed() -> void:
     _cycle_completed = true
-    _show_message("Release to launch!")
+    _show_message("Don't forget to aim! Use A to turn left and D to turn right.")
 
 
 func _on_crank_released(_degrees: float) -> void:
     if !_cycle_completed:
         _show_message("Hold left mouse button to start!")
         return
+    _launched = true
     _car.process_mode = Node.PROCESS_MODE_INHERIT
     get_tree().paused = false
+    if _rotated:
+        _finish()
+
+
+func _finish() -> void:
+    _message_label.visible = false
     queue_free()
