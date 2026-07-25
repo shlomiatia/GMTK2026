@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://Scenes/HazardBoss/hazard_boss.gd" id="2_hzboss"]
 [ext_resource type="PackedScene" uid="uid://cwx0g1q1k8g26" path="res://Scenes/Hazard/Hazard.tscn" id="3_hazard"]
 [ext_resource type="PackedScene" path="res://Scenes/BossCore/BossCore.tscn" id="4_bosscore"]
+[ext_resource type="PackedScene" uid="uid://b8dlysmmnu6em" path="res://Scenes/Hazard/BiggerHazard.tscn" id="5_biggerhazard"]
+[ext_resource type="PackedScene" uid="uid://bans3suovo6ei" path="res://Scenes/Hazard/BiggestHazard.tscn" id="6_biggesthazard"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6kyec"]
 radius = 45.01111
@@ -47,6 +49,8 @@ _data = {
 [node name="HazardBoss" type="Node2D" unique_id=515765067 groups=["boss"]]
 script = ExtResource("2_hzboss")
 hazard_scene = ExtResource("3_hazard")
+bigger_hazard_scene = ExtResource("5_biggerhazard")
+biggest_hazard_scene = ExtResource("6_biggesthazard")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1715055242]
 texture = ExtResource("1_4oj2i")

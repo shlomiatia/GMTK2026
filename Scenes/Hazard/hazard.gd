@@ -26,6 +26,12 @@ func get_radius() -> float:
 	return (($Area2D/CollisionShape2D as CollisionShape2D).shape as CircleShape2D).radius
 
 
+func despawn() -> void:
+	remove_from_group("hazard")
+	_collision_shape.set_deferred("disabled", true)
+	_animation_player.play("fadeout")
+
+
 func _spawn_in() -> void:
 	_collision_shape.set_deferred("disabled", true)
 	_animation_player.play("fadein")
@@ -36,3 +42,5 @@ func _on_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fadein":
 		_collision_shape.set_deferred("disabled", false)
 		_animation_player.play("default")
+	elif anim_name == "fadeout":
+		queue_free()
