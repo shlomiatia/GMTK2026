@@ -23,7 +23,7 @@ func _ready() -> void:
     _crank.crank_released.connect(_on_crank_released)
     _crank.cycle_completed.connect(_on_cycle_completed)
     get_tree().paused = true
-    _show_message("Your goal is to reach the stairs before time runs out.\nTo get started, hold down the left mouse button")
+    _show_message("To get started, hold down the left mouse button.\nDon't let go until you're ready to launch.")
 
 
 func _process(_delta: float) -> void:
@@ -41,7 +41,7 @@ func _show_message(text: String) -> void:
 
 
 func _on_crank_pressed() -> void:
-    _show_message("Keeping your finger on the button,\nmove the mouse in a circular motion to wind it up.\nThe more you wind it up, the farther you’ll go")
+    _show_message("Wind up the mouse by making a circular motion.\nThe more you wind it up, the farther you'll go.")
 
 
 func _on_cycle_completed() -> void:
