@@ -24,10 +24,11 @@ func _ready() -> void:
     _aim_timer.wait_time = Constants.sub_boss_aim_duration
     _aim_timer.timeout.connect(_on_aim_timer_timeout)
     _aim_timer.start()
+    _update_core_position()
 
 
 func _physics_process(delta: float) -> void:
-    _core.global_position = global_position + Vector2(0.0, 56.0)
+    _update_core_position()
     if _core.is_dead() || !_car:
         return
     match _state:
@@ -37,6 +38,10 @@ func _physics_process(delta: float) -> void:
             _advance_crank(delta)
         State.LAUNCHED:
             _advance_launch(delta)
+
+
+func _update_core_position() -> void:
+    _core.global_position = global_position + Vector2(0.0, 56.0)
 
 
 func _rotate_toward_car(delta: float) -> void:

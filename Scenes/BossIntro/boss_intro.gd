@@ -13,7 +13,7 @@ func _ready() -> void:
         _end_intro()
         return
     if MusicPlayer.boss_active:
-        MusicPlayer.set_boss_level(false, Constants.boss_intro_music_fade_seconds)
+        MusicPlayer.stop_boss_music(Constants.boss_intro_music_fade_seconds)
     MusicPlayer.active_boss_path = _boss.scene_file_path
     get_tree().paused = true
     _boss.process_mode = Node.PROCESS_MODE_PAUSABLE
