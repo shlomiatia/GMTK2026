@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bkyel1rfkistw" path="res://Art/Assets/Play Scene/Enemies/Sub Boss.png" id="2_gebj6"]
 [ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="3_bosscore"]
 [ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="4_gearspawner"]
+[ext_resource type="Texture2D" path="res://Scenes/BossIntro/BossGlow.tres" id="5_glow"]
+[ext_resource type="PackedScene" path="res://Scenes/BossIntro/BossIntro.tscn" id="6_intro"]
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -78,3 +80,15 @@ position = Vector2(0, 56)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2091529842]
 polygon = PackedVector2Array(4, -97, 23, -86, 30, -69, 40, -58, 45, -37, 58, -28, 60, -9, 71, 4, 69, 25, 55, 38, 21, 42, -36, 42, -51, 95, -72, 16, -53, 8, -54, -1, -67, -11, -63, -31, -52, -36, -44, -63, -20, -93)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("5_glow")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="BossIntro" parent="." instance=ExtResource("6_intro")]

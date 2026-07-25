@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://b8dlysmmnu6em" path="res://Scenes/Hazard/BiggerHazard.tscn" id="5_biggerhazard"]
 [ext_resource type="PackedScene" uid="uid://bans3suovo6ei" path="res://Scenes/Hazard/BiggestHazard.tscn" id="6_biggesthazard"]
 [ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="7_gearspawner"]
+[ext_resource type="Texture2D" uid="uid://cwgltui2wjmys" path="res://Art/Generated/Hazard Boss Shadow.png" id="8_shadow"]
+[ext_resource type="Texture2D" path="res://Scenes/BossIntro/BossGlow.tres" id="9_glow"]
+[ext_resource type="PackedScene" path="res://Scenes/BossIntro/BossIntro.tscn" id="10_intro"]
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -81,3 +84,16 @@ wait_time = 3.0
 position = Vector2(0, 171)
 
 [node name="GearSpawner" parent="." unique_id=455135234 instance=ExtResource("7_gearspawner")]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.0
+texture = ExtResource("8_shadow")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("9_glow")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="BossIntro" parent="." instance=ExtResource("10_intro")]

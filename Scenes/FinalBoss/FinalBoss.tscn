@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://br7rxxe5r1roh" path="res://Art/Assets/Play Scene/Enemies/Final Boss Spoke.png" id="2_xw47l"]
 [ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="3_xw47l"]
 [ext_resource type="Script" uid="uid://b866uyitsi1ce" path="res://Scenes/FinalBoss/final_boss.gd" id="4_finalboss"]
+[ext_resource type="Texture2D" path="res://Scenes/BossIntro/BossGlow.tres" id="5_glow"]
+[ext_resource type="PackedScene" path="res://Scenes/BossIntro/BossIntro.tscn" id="6_intro"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
 size = Vector2(20, 498)
@@ -128,3 +130,15 @@ position = Vector2(0, 186)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1917774229]
 libraries/ = SubResource("AnimationLibrary_finalboss")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("5_glow")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="BossIntro" parent="." instance=ExtResource("6_intro")]

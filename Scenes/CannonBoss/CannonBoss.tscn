@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" path="res://Scenes/Turret/Turret.tscn" id="5_turret"]
 [ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="6_bosscore"]
 [ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="7_gearspawner"]
+[ext_resource type="Texture2D" uid="uid://b4inti5ah74tg" path="res://Art/Generated/Turret Boss Head Shadow.png" id="8_shadow"]
+[ext_resource type="Texture2D" path="res://Scenes/BossIntro/BossGlow.tres" id="9_glow"]
+[ext_resource type="PackedScene" path="res://Scenes/BossIntro/BossIntro.tscn" id="10_intro"]
 
 [sub_resource type="Animation" id="Animation_l6qg3"]
 length = 0.001
@@ -228,3 +231,16 @@ bullet_scene = ExtResource("4_bullet")
 position = Vector2(0, 95)
 
 [node name="GearSpawner" parent="." unique_id=1823115262 instance=ExtResource("7_gearspawner")]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.0
+texture = ExtResource("8_shadow")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("9_glow")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="BossIntro" parent="." instance=ExtResource("10_intro")]

@@ -66,7 +66,8 @@ func _ready() -> void:
         var final_boss := boss as FinalBoss
         if final_boss:
             final_boss.car_hit.connect(_on_final_boss_car_hit)
-    MusicPlayer.set_boss_level(!get_tree().get_nodes_in_group("boss").is_empty())
+    if get_tree().get_nodes_in_group("boss").is_empty():
+        MusicPlayer.set_boss_level(false)
     _overlay.continue_pressed.connect(_go_to_next_level)
     _overlay.restart_pressed.connect(_restart)
     _level_skip.skip_requested.connect(_go_to_next_level)
