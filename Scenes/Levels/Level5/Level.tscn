@@ -45,7 +45,6 @@ point_count = 2
 [node name="Level" type="Node2D" unique_id=1733532608]
 
 [node name="Level" parent="." unique_id=76539942 instance=ExtResource("1_8ua28")]
-time_limit = 15.0
 texture = ExtResource("2_8ua28")
 
 [node name="Car" parent="." unique_id=1734870916 instance=ExtResource("3_wr1xv")]

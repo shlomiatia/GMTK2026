@@ -4,7 +4,6 @@ class_name Level extends Node2D
 static var time_progress_min_value := 3.33
 static var time_progress_max_value := 96.67
 
-@export var time_limit: float = Constants.default_level_time
 @export var texture: Texture2D:
     set(value):
         texture = value
@@ -30,7 +29,7 @@ func _ready() -> void:
         _sprite.texture = texture
     if Engine.is_editor_hint():
         return
-    _timer.wait_time = time_limit
+    _timer.wait_time = Constants.default_level_time
     _timer.timeout.connect(_on_timer_timeout)
     _timer.start()
     _car = get_tree().get_first_node_in_group("car") as Car
@@ -69,7 +68,7 @@ func _process(_delta: float) -> void:
         return
     if _game_over:
         return
-    _time_progress_bar.value = lerpf(time_progress_min_value, time_progress_max_value, _timer.time_left / time_limit)
+    _time_progress_bar.value = lerpf(time_progress_min_value, time_progress_max_value, _timer.time_left / Constants.default_level_time)
     if _is_car_out_of_bounds():
         _lose()
 
@@ -143,7 +142,7 @@ func _add_time_bonus(amount: float) -> void:
     if _gear_time_tween:
         _gear_time_tween.kill()
     _timer.paused = true
-    var target_time: float = minf(_timer.time_left + amount, time_limit)
+    var target_time: float = minf(_timer.time_left + amount, Constants.default_level_time)
     _gear_time_tween = create_tween()
     _gear_time_tween.tween_method(_set_timer_time, _timer.time_left, target_time, 0.5)
     _gear_time_tween.finished.connect(_on_gear_time_tween_finished)
