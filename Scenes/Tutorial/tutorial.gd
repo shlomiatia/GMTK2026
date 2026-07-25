@@ -2,7 +2,7 @@ class_name Tutorial extends CanvasLayer
 
 static var _shown: bool = false
 
-@onready var _message_label: Label = $MessageLabel
+@onready var _message_label: Label = $MarginContainer/MessageLabel
 
 var _car: Car
 var _crank: Crank
@@ -21,7 +21,7 @@ func _ready() -> void:
     _crank.crank_released.connect(_on_crank_released)
     _crank.cycle_completed.connect(_on_cycle_completed)
     get_tree().paused = true
-    _show_message("To get started, hold down the left mouse button")
+    _show_message("Your goal is to reach the stairs before time runs out.\nTo get started, hold down the left mouse button")
 
 
 func _show_message(text: String) -> void:
