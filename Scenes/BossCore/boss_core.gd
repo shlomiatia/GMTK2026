@@ -5,7 +5,7 @@ signal hit_taken
 signal hp_changed(hits_remaining: int)
 
 @export var hits_to_kill: int = 3
-@export var invincibility_duration: float = 0.5
+@export var invincibility_duration: float = 1
 
 @onready var _invincibility_timer: Timer = $InvincibilityTimer
 
