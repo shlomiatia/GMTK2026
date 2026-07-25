@@ -1,12 +1,9 @@
 [gd_scene format=3 uid="uid://cnr8l732xosm2"]
 
-[ext_resource type="Texture2D" uid="uid://dxxifm4glmkiu" path="res://Art/Assets/Play Scene/Enemies/Minion.png" id="1_rpigv"]
-[ext_resource type="Script" path="res://Scenes/MinionBoss/minion_boss.gd" id="2_boss"]
+[ext_resource type="Script" uid="uid://b8mctqanfchfv" path="res://Scenes/MinionBoss/minion_boss.gd" id="2_boss"]
+[ext_resource type="Texture2D" uid="uid://cj7t2tcm3jnsp" path="res://Art/Assets/Play Scene/Enemies/Minion Boss.png" id="3_3qjh2"]
 [ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="3_enemy"]
 [ext_resource type="PackedScene" path="res://Scenes/BossCore/BossCore.tscn" id="4_bosscore"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
-radius = 46.010868
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -50,16 +47,15 @@ script = ExtResource("2_boss")
 enemy_scene = ExtResource("3_enemy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1905300873]
-texture = ExtResource("1_rpigv")
+texture = ExtResource("3_3qjh2")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=68409507]
+position = Vector2(1, -9)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=558297479]
-shape = SubResource("CircleShape2D_ebdu8")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1498492570]
+polygon = PackedVector2Array(-34, -89, 43, -88, 50, -54, 61, -41, 56, -33, 63, -12, 67, -3, 78, 11, 78, 21, 88, 47, 107, 64, 105, 81, 74, 90, 60, 110, 44, 106, 29, 93, 0, 96, -19, 91, -44, 110, -51, 108, -67, 96, -111, 67, -93, 42, -78, 49, -68, 22, -70, 11, -52, -5, -48, -33, -52, -40, -40, -56)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1828729894]
 libraries/ = SubResource("AnimationLibrary_boss")
 
-[node name="BossCore" parent="." instance=ExtResource("4_bosscore")]
-hits_to_kill = 3
-invincibility_duration = 0.5
+[node name="BossCore" parent="." unique_id=1185930564 instance=ExtResource("4_bosscore")]

@@ -4,13 +4,15 @@ signal died
 
 @export var enemy_scene: PackedScene
 
-@onready var _collision_shape: CollisionShape2D = $StaticBody2D/CollisionShape2D
+@onready var _sprite: Sprite2D = $Sprite2D
+@onready var _collision_shape: CollisionPolygon2D = $StaticBody2D/CollisionPolygon2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _core: BossCore = $BossCore
 
 
 func _ready() -> void:
     _core.killed.connect(_die)
+    _core.hit_taken.connect(_flash)
     _animation_player.animation_finished.connect(_on_animation_finished)
     for enemy in get_tree().get_nodes_in_group("enemy"):
         _connect_enemy(enemy as Enemy)
@@ -49,6 +51,12 @@ func is_dead() -> bool:
 
 func hit() -> bool:
     return _core.hit()
+
+
+func _flash() -> void:
+    _sprite.self_modulate = Color(1.0, 0.0, 0.0)
+    var tween := create_tween()
+    tween.tween_property(_sprite, "self_modulate", Color(1.0, 1.0, 1.0), Constants.boss_hit_flash_duration)
 
 
 func _die() -> void:

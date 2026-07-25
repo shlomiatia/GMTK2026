@@ -26,9 +26,7 @@ func _process(_delta: float) -> void:
     if _state == State.DEAD:
         return
     var speed := velocity.length() if _state == State.LAUNCHED else _crank.get_launch_speed()
-    var t := clampf((speed - Constants.enemy_kill_speed) / (Constants.max_speed - Constants.enemy_kill_speed), 0.0, 1.0)
-    var amount := 0.0 if speed < Constants.enemy_kill_speed else lerpf(0.1, 1.0, t)
-    _sprite.self_modulate = Color(1.0, 1.0 - amount, 1.0 - amount)
+    _sprite.self_modulate = MathUtils.speed_to_lethal_color(speed)
 
 
 func _physics_process(delta: float) -> void:

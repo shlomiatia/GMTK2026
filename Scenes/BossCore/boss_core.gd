@@ -1,6 +1,7 @@
 class_name BossCore extends Node
 
 signal killed
+signal hit_taken
 
 @export var hits_to_kill: int = 3
 @export var invincibility_duration: float = 0.5
@@ -24,6 +25,7 @@ func is_dead() -> bool:
 func hit() -> bool:
     if _is_dead || _is_invincible:
         return false
+    hit_taken.emit()
     _hits_taken += 1
     if _hits_taken >= hits_to_kill:
         _is_dead = true

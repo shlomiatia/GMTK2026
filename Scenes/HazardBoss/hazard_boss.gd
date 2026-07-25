@@ -8,6 +8,7 @@ const SPAWN_ATTEMPTS := 20
 @export var bigger_hazard_scene: PackedScene
 @export var biggest_hazard_scene: PackedScene
 
+@onready var _sprite: Sprite2D = $Sprite2D
 @onready var _collision_shape: CollisionShape2D = $StaticBody2D/CollisionShape2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _spawn_timer: Timer = $SpawnTimer
@@ -18,6 +19,7 @@ var _pending_hazards: Array = []
 
 func _ready() -> void:
     _core.killed.connect(_die)
+    _core.hit_taken.connect(_flash)
     _animation_player.animation_finished.connect(_on_animation_finished)
     _spawn_timer.wait_time = Constants.hazard_boss_spawn_interval
     _spawn_timer.timeout.connect(_on_spawn_timer_timeout)
@@ -32,6 +34,12 @@ func is_dead() -> bool:
 
 func hit() -> bool:
     return _core.hit()
+
+
+func _flash() -> void:
+    _sprite.self_modulate = Color(1.0, 0.0, 0.0)
+    var tween := create_tween()
+    tween.tween_property(_sprite, "self_modulate", Color(1.0, 1.0, 1.0), Constants.boss_hit_flash_duration)
 
 
 func get_radius() -> float:

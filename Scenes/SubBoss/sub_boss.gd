@@ -13,11 +13,13 @@ enum State {AIMING, CRANKING, LAUNCHED}
 var _car: Car
 var _state: State = State.AIMING
 var _crank_elapsed: float = 0.0
+var _flash_time_left: float = 0.0
 
 
 func _ready() -> void:
     _car = get_tree().get_first_node_in_group("car") as Car
     _core.killed.connect(_die)
+    _core.hit_taken.connect(_on_hit_taken)
     _animation_player.animation_finished.connect(_on_animation_finished)
     _aim_timer.wait_time = Constants.sub_boss_aim_duration
     _aim_timer.timeout.connect(_on_aim_timer_timeout)
@@ -34,6 +36,9 @@ func _physics_process(delta: float) -> void:
             _advance_crank(delta)
         State.LAUNCHED:
             _advance_launch(delta)
+    if _flash_time_left > 0.0:
+        _flash_time_left = maxf(_flash_time_left - delta, 0.0)
+        _sprite.self_modulate = Color(1.0, 0.0, 0.0)
 
 
 func _rotate_toward_car(delta: float) -> void:
@@ -63,12 +68,12 @@ func _launch() -> void:
 
 func _advance_launch(delta: float) -> void:
     velocity = velocity.move_toward(Vector2.ZERO, Constants.friction * delta)
+    _sprite.self_modulate = MathUtils.speed_to_lethal_color(velocity.length())
     _handle_collision(move_and_collide(velocity * delta))
     if _core.is_dead():
         return
     if velocity.length() == 0.0:
         _state = State.AIMING
-        _sprite.self_modulate = Color(1.0, 1.0, 1.0)
         _aim_timer.start()
 
 
@@ -87,6 +92,10 @@ func is_dead() -> bool:
 
 func hit() -> bool:
     return _core.hit()
+
+
+func _on_hit_taken() -> void:
+    _flash_time_left = Constants.boss_hit_flash_duration
 
 
 func get_radius() -> float:

@@ -5,3 +5,9 @@ static func aim_toward(current_rotation: float, to_target: Vector2, speed_degree
         return current_rotation
     var target_rotation := to_target.angle() - PI / 2.0
     return rotate_toward(current_rotation, target_rotation, deg_to_rad(speed_degrees) * delta)
+
+
+static func speed_to_lethal_color(speed: float) -> Color:
+    var t := clampf((speed - Constants.enemy_kill_speed) / (Constants.max_speed - Constants.enemy_kill_speed), 0.0, 1.0)
+    var amount := 0.0 if speed < Constants.enemy_kill_speed else lerpf(0.1, 1.0, t)
+    return Color(1.0, 1.0 - amount, 1.0 - amount)
