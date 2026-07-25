@@ -41,4 +41,11 @@ value = 96.67
 fill_mode = 5
 texture_progress = ExtResource("7_8gphe")
 
-[node name="LevelSkip" parent="." instance=ExtResource("8_lvlskip")]
+[node name="LevelSkip" parent="." unique_id=119981012 instance=ExtResource("8_lvlskip")]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=481806845]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
