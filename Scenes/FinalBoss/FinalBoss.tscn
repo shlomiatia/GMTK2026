@@ -145,5 +145,7 @@ color = Color(0, 0, 0, 1)
 [node name="BossIntro" parent="." unique_id=1393171479 instance=ExtResource("6_intro")]
 
 [node name="HazardSpawner" parent="." unique_id=781202549 instance=ExtResource("7_hazardspawner")]
+hazard_chance = 0.6
+bigger_hazard_chance = 0.4
 
 [node name="GearSpawner" parent="." unique_id=1136378483 instance=ExtResource("8_gearspawner")]

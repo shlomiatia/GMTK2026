@@ -5,6 +5,8 @@ const SPAWN_ATTEMPTS := 20
 @export var hazard_scene: PackedScene
 @export var bigger_hazard_scene: PackedScene
 @export var biggest_hazard_scene: PackedScene
+@export var hazard_chance: float = 0.5
+@export var bigger_hazard_chance: float = 0.3
 
 @onready var _spawn_timer: Timer = $SpawnTimer
 @onready var _boss: Node2D = get_parent() as Node2D
@@ -39,9 +41,9 @@ func _despawn_random_hazard() -> void:
 
 func _pick_hazard_scene() -> PackedScene:
     var roll := randf()
-    if roll < 0.5:
+    if roll < hazard_chance:
         return hazard_scene
-    if roll < 0.8:
+    if roll < hazard_chance + bigger_hazard_chance:
         return bigger_hazard_scene
     return biggest_hazard_scene
 
