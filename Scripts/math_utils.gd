@@ -11,3 +11,10 @@ static func speed_to_lethal_color(speed: float) -> Color:
     var t := clampf((speed - Constants.enemy_kill_speed) / (Constants.max_speed - Constants.enemy_kill_speed), 0.0, 1.0)
     var amount := 0.0 if speed < Constants.enemy_kill_speed else lerpf(0.1, 1.0, t)
     return Color(1.0, 1.0 - amount, 1.0 - amount)
+
+
+static func polygon_bounding_radius(polygon: PackedVector2Array) -> float:
+    var radius := 0.0
+    for point in polygon:
+        radius = maxf(radius, point.length())
+    return radius

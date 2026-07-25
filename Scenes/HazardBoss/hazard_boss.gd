@@ -15,9 +15,11 @@ const SPAWN_ATTEMPTS := 20
 @onready var _core: BossCore = $BossCore
 
 var _pending_hazards: Array = []
+var _boss_radius: float
 
 
 func _ready() -> void:
+    _boss_radius = MathUtils.polygon_bounding_radius(_collision_shape.polygon)
     _core.killed.connect(_die)
     _core.hit_taken.connect(_flash)
     _animation_player.animation_finished.connect(_on_animation_finished)
@@ -43,7 +45,7 @@ func _flash() -> void:
 
 
 func get_radius() -> float:
-    return (($StaticBody2D/CollisionShape2D as CollisionShape2D).shape as CircleShape2D).radius
+    return _boss_radius
 
 
 func _die() -> void:
@@ -107,8 +109,7 @@ func _find_spawn_position(arena: Arena, hazard_radius: float) -> Variant:
 
 
 func _is_position_valid(candidate: Vector2, hazard_radius: float) -> bool:
-    var boss_radius := (_collision_shape.shape as CircleShape2D).radius
-    if candidate.distance_to(global_position) < hazard_radius + boss_radius:
+    if candidate.distance_to(global_position) < hazard_radius + _boss_radius:
         return false
     for pillar in get_tree().get_nodes_in_group("pillar"):
         var p := pillar as Pillar

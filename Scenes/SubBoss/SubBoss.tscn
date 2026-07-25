@@ -1,12 +1,9 @@
 [gd_scene format=3 uid="uid://ba4itjqpmq4sd"]
 
-[ext_resource type="Texture2D" uid="uid://dxxifm4glmkiu" path="res://Art/Assets/Play Scene/Enemies/Minion.png" id="1_5idvj"]
 [ext_resource type="Script" uid="uid://dduagibg1fjnn" path="res://Scenes/SubBoss/sub_boss.gd" id="2_boss"]
-[ext_resource type="PackedScene" path="res://Scenes/BossCore/BossCore.tscn" id="3_bosscore"]
+[ext_resource type="Texture2D" uid="uid://bkyel1rfkistw" path="res://Art/Assets/Play Scene/Enemies/Sub Boss.png" id="2_gebj6"]
+[ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="3_bosscore"]
 [ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="4_gearspawner"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
-radius = 45.099888
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -51,10 +48,7 @@ collision_mask = 3
 script = ExtResource("2_boss")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1246858609]
-texture = ExtResource("1_5idvj")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=239834297]
-shape = SubResource("CircleShape2D_ebdu8")
+texture = ExtResource("2_gebj6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1246858610]
 libraries/ = SubResource("AnimationLibrary_boss")
@@ -64,5 +58,9 @@ wait_time = 3.0
 one_shot = true
 
 [node name="BossCore" parent="." unique_id=1747566252 instance=ExtResource("3_bosscore")]
+position = Vector2(0, 56)
 
-[node name="GearSpawner" parent="." instance=ExtResource("4_gearspawner")]
+[node name="GearSpawner" parent="." unique_id=1418771055 instance=ExtResource("4_gearspawner")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2091529842]
+polygon = PackedVector2Array(4, -97, 23, -86, 30, -69, 40, -58, 45, -37, 58, -28, 60, -9, 71, 4, 69, 25, 55, 38, 21, 42, -36, 42, -51, 95, -72, 16, -53, 8, -54, -1, -67, -11, -63, -31, -52, -36, -44, -63, -20, -93)

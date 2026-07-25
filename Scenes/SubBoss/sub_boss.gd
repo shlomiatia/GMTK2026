@@ -5,7 +5,7 @@ signal died
 enum State {AIMING, CRANKING, LAUNCHED}
 
 @onready var _sprite: Sprite2D = $Sprite2D
-@onready var _collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var _collision_shape: CollisionPolygon2D = $CollisionPolygon2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _aim_timer: Timer = $AimTimer
 @onready var _core: BossCore = $BossCore
@@ -99,7 +99,7 @@ func _on_hit_taken() -> void:
 
 
 func get_radius() -> float:
-    return (($CollisionShape2D as CollisionShape2D).shape as CircleShape2D).radius
+    return 0
 
 
 func _die() -> void:
