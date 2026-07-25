@@ -1,75 +1,6 @@
 [gd_scene format=3 uid="uid://cppmmjbl4yf8e"]
 
 [ext_resource type="Script" uid="uid://dk6m5qx0q7kkb" path="res://Scenes/Overlay/overlay.gd" id="1_overlay"]
-[ext_resource type="Shader" uid="uid://bx322iqq0qjts" path="res://Shaders/transition.gdshader" id="2_nid6n"]
-[ext_resource type="Texture2D" uid="uid://7o3dyyuyram8" path="res://Art/Generated/GearTexture/04_blurred.png" id="3_ef26q"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tkyga"]
-shader = ExtResource("2_nid6n")
-shader_parameter/mask_texture = ExtResource("3_ef26q")
-shader_parameter/progress = 0.0
-shader_parameter/invert = false
-
-[sub_resource type="Animation" id="Animation_ef26q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:material:shader_parameter/invert")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_nid6n"]
-resource_name = "fadeout"
-length = 1.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.6, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 1.0, 1.0, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:material:shader_parameter/invert")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ef26q"]
-_data = {
-&"RESET": SubResource("Animation_ef26q"),
-&"fadeout": SubResource("Animation_nid6n")
-}
 
 [node name="Overlay" type="CanvasLayer" unique_id=875396185]
 process_mode = 3
@@ -84,15 +15,3 @@ anchor_bottom = 1.0
 theme_override_font_sizes/font_size = 64
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1660900946]
-material = SubResource("ShaderMaterial_tkyga")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1818078968]
-libraries/ = SubResource("AnimationLibrary_ef26q")

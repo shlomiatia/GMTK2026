@@ -239,5 +239,4 @@ func _go_to_next_level() -> void:
     var level_number := current_path.get_base_dir().get_file().trim_prefix("Level").to_int()
     var next_level_path := "%s/Level%d/Level.tscn" % [levels_dir, level_number + 1]
     if ResourceLoader.exists(next_level_path):
-        get_tree().paused = false
-        get_tree().change_scene_to_file(next_level_path)
+        SceneTransition.transition_to_scene(next_level_path)

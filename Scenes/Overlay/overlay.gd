@@ -33,6 +33,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _end_state == EndState.NONE || !event.is_pressed() || event.is_echo():
 		return
 	if _end_state == EndState.WON:
+		_end_state = EndState.NONE
 		continue_pressed.emit()
 	elif event.is_action("restart"):
 		get_tree().paused = false
