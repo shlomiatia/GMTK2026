@@ -59,6 +59,9 @@ func _ready() -> void:
         var cannon_boss := boss as CannonBoss
         if cannon_boss:
             cannon_boss.fired.connect(_on_cannon_fired)
+        var sub_boss := boss as SubBoss
+        if sub_boss:
+            sub_boss.car_hit.connect(_on_sub_boss_car_hit)
     _overlay.continue_pressed.connect(_go_to_next_level)
     _overlay.restart_pressed.connect(_restart)
 
@@ -112,6 +115,12 @@ func _on_boss_hit(_boss: Node) -> void:
     _shaking_camera.start_screen_shake()
 
 
+func _on_sub_boss_car_hit() -> void:
+    if _game_over:
+        return
+    _shaking_camera.start_screen_shake()
+
+
 func _on_key_collected(key: Collectible) -> void:
     if _game_over:
         return
@@ -137,6 +146,9 @@ func _on_node_added(node: Node) -> void:
         var cannon_boss := node as CannonBoss
         if cannon_boss:
             cannon_boss.fired.connect(_on_cannon_fired)
+        var sub_boss := node as SubBoss
+        if sub_boss:
+            sub_boss.car_hit.connect(_on_sub_boss_car_hit)
 
 
 func _on_car_entered_hazard(car: Car) -> void:

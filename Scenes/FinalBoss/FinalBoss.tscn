@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ounxg8je0wnq"]
+
+[ext_resource type="Texture2D" uid="uid://37636l85xo46" path="res://Art/Assets/Play Scene/Enemies/Final Boss.png" id="1_j6a7x"]
+[ext_resource type="Texture2D" uid="uid://br7rxxe5r1roh" path="res://Art/Assets/Play Scene/Enemies/Final Boss Spoke.png" id="2_xw47l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a04kq"]
+radius = 130.0
+height = 300.0
+
+[node name="FinalBoss" type="Node2D" unique_id=416965398]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1753513047]
+texture = ExtResource("1_j6a7x")
+
+[node name="Dial" type="Sprite2D" parent="." unique_id=754509279]
+rotation = 4.712389
+texture = ExtResource("2_xw47l")
+offset = Vector2(0, 437)
+flip_h = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=212480805]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2135298603]
+position = Vector2(0, 20)
+shape = SubResource("CapsuleShape2D_a04kq")

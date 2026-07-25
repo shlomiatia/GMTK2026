@@ -10,7 +10,6 @@ class_name Options extends CanvasLayer
 @onready var _gear_time_bonus_spin_box: SpinBox = $Center/Panel/Margin/VBox/GearTimeBonusRow/SpinBox
 @onready var _enemy_kill_time_bonus_spin_box: SpinBox = $Center/Panel/Margin/VBox/EnemyKillTimeBonusRow/SpinBox
 @onready var _cannon_kill_time_bonus_spin_box: SpinBox = $Center/Panel/Margin/VBox/CannonKillTimeBonusRow/SpinBox
-@onready var _rest_velocity_threshold_spin_box: SpinBox = $Center/Panel/Margin/VBox/RestVelocityThresholdRow/SpinBox
 @onready var _cannon_turret_speed_degrees_spin_box: SpinBox = $Center/Panel/Margin/VBox/CannonTurretSpeedDegreesRow/SpinBox
 @onready var _bullet_speed_spin_box: SpinBox = $Center/Panel/Margin/VBox/BulletSpeedRow/SpinBox
 
@@ -25,7 +24,6 @@ func _ready() -> void:
 	_gear_time_bonus_spin_box.value = Constants.gear_time_bonus
 	_enemy_kill_time_bonus_spin_box.value = Constants.enemy_kill_time_bonus
 	_cannon_kill_time_bonus_spin_box.value = Constants.cannon_kill_time_bonus
-	_rest_velocity_threshold_spin_box.value = Constants.rest_velocity_threshold
 	_cannon_turret_speed_degrees_spin_box.value = Constants.cannon_turret_speed_degrees
 	_bullet_speed_spin_box.value = Constants.bullet_speed
 	_update_distance_label()
@@ -78,10 +76,6 @@ func _on_enemy_kill_time_bonus_spin_box_value_changed(value: float) -> void:
 
 func _on_cannon_kill_time_bonus_spin_box_value_changed(value: float) -> void:
 	Constants.cannon_kill_time_bonus = value
-
-
-func _on_rest_velocity_threshold_spin_box_value_changed(value: float) -> void:
-	Constants.rest_velocity_threshold = value
 
 
 func _on_cannon_turret_speed_degrees_spin_box_value_changed(value: float) -> void:

@@ -48,6 +48,7 @@ collision_mask = 3
 script = ExtResource("2_boss")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1246858609]
+z_index = 1
 texture = ExtResource("2_gebj6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1246858610]
@@ -58,6 +59,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="BossCore" parent="." unique_id=1747566252 instance=ExtResource("3_bosscore")]
+top_level = true
 position = Vector2(0, 56)
 
 [node name="GearSpawner" parent="." unique_id=1418771055 instance=ExtResource("4_gearspawner")]

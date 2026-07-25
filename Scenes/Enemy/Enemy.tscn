@@ -125,5 +125,6 @@ libraries/ = SubResource("AnimationLibrary_3l8kd")
 [node name="Key" type="Sprite2D" parent="." unique_id=384311951]
 visible = false
 top_level = true
+z_index = 3
 position = Vector2(0, -80)
 texture = ExtResource("3_e0oyi")

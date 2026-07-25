@@ -204,24 +204,6 @@ max_value = 60.0
 step = 0.5
 value = 3.0
 
-[node name="RestVelocityThresholdRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472943]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/RestVelocityThresholdRow" unique_id=1698417541]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-tooltip_text = "Speed, in pixels per second, below which the car is considered at rest after launch."
-mouse_filter = 1
-text = "Rest Velocity Threshold"
-
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/RestVelocityThresholdRow" unique_id=985944505]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-tooltip_text = "Speed, in pixels per second, below which the car is considered at rest after launch."
-min_value = 0.0
-max_value = 1000.0
-value = 150.0
-
 [node name="CannonTurretSpeedDegreesRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472944]
 layout_mode = 2
 
@@ -271,6 +253,5 @@ text = "Estimated max travel distance: 2320 px"
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/GearTimeBonusRow/SpinBox" to="." method="_on_gear_time_bonus_spin_box_value_changed"]
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/EnemyKillTimeBonusRow/SpinBox" to="." method="_on_enemy_kill_time_bonus_spin_box_value_changed"]
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/CannonKillTimeBonusRow/SpinBox" to="." method="_on_cannon_kill_time_bonus_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/RestVelocityThresholdRow/SpinBox" to="." method="_on_rest_velocity_threshold_spin_box_value_changed"]
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/CannonTurretSpeedDegreesRow/SpinBox" to="." method="_on_cannon_turret_speed_degrees_spin_box_value_changed"]
 [connection signal="value_changed" from="Center/Panel/Margin/VBox/BulletSpeedRow/SpinBox" to="." method="_on_bullet_speed_spin_box_value_changed"]

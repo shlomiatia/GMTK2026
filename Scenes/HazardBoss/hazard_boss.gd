@@ -39,9 +39,9 @@ func hit() -> bool:
 
 
 func _flash() -> void:
-    _sprite.self_modulate = Color(1.0, 0.0, 0.0)
+    _sprite.self_modulate = Color(1.0, 1.0, 1.0, 0.3)
     var tween := create_tween()
-    tween.tween_property(_sprite, "self_modulate", Color(1.0, 1.0, 1.0), Constants.boss_hit_flash_duration)
+    tween.tween_property(_sprite, "self_modulate", Color(1.0, 1.0, 1.0, 1.0), _core.invincibility_duration)
 
 
 func get_radius() -> float:

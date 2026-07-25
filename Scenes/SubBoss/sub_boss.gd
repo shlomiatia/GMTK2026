@@ -1,6 +1,7 @@
 class_name SubBoss extends CharacterBody2D
 
 signal died
+signal car_hit
 
 enum State {AIMING, CRANKING, LAUNCHED}
 
@@ -27,6 +28,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+    _core.global_position = global_position + Vector2(0.0, 56.0)
     if _core.is_dead() || !_car:
         return
     match _state:
@@ -38,7 +40,7 @@ func _physics_process(delta: float) -> void:
             _advance_launch(delta)
     if _flash_time_left > 0.0:
         _flash_time_left = maxf(_flash_time_left - delta, 0.0)
-        _sprite.self_modulate = Color(1.0, 0.0, 0.0)
+        _sprite.self_modulate = Color(1.0, 1.0, 1.0, 0.3)
 
 
 func _rotate_toward_car(delta: float) -> void:
@@ -81,8 +83,10 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
     if !collision:
         return
     var car := collision.get_collider() as Car
-    if car && velocity.length() >= Constants.enemy_kill_speed:
-        car.die()
+    if car:
+        car_hit.emit()
+        if velocity.length() >= Constants.enemy_kill_speed:
+            car.die()
     velocity = velocity.bounce(collision.get_normal())
 
 
@@ -95,7 +99,7 @@ func hit() -> bool:
 
 
 func _on_hit_taken() -> void:
-    _flash_time_left = Constants.boss_hit_flash_duration
+    _flash_time_left = _core.invincibility_duration
 
 
 func get_radius() -> float:
