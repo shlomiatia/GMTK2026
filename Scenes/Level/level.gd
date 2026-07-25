@@ -70,7 +70,6 @@ func _ready() -> void:
         MusicPlayer.set_boss_level(false, Constants.music_fade_seconds)
     else:
         MusicPlayer.fade_out_level_music(Constants.boss_intro_music_fade_seconds)
-    _overlay.continue_pressed.connect(_go_to_next_level)
     _overlay.restart_pressed.connect(_restart)
     _level_skip.skip_requested.connect(_go_to_next_level)
 
@@ -224,7 +223,8 @@ func _win() -> void:
     if _game_over:
         return
     _game_over = true
-    _overlay.show_win()
+    get_tree().paused = true
+    _go_to_next_level()
 
 
 func _lose() -> void:
