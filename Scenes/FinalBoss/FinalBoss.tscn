@@ -2,6 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://37636l85xo46" path="res://Art/Assets/Play Scene/Enemies/Final Boss.png" id="1_j6a7x"]
 [ext_resource type="Texture2D" uid="uid://br7rxxe5r1roh" path="res://Art/Assets/Play Scene/Enemies/Final Boss Spoke.png" id="2_xw47l"]
+[ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="3_xw47l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
+size = Vector2(20, 498)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a04kq"]
 radius = 130.0
@@ -18,8 +22,17 @@ texture = ExtResource("2_xw47l")
 offset = Vector2(0, 437)
 flip_h = true
 
+[node name="Area2D" type="Area2D" parent="Dial" unique_id=1365696179]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dial/Area2D" unique_id=1548258271]
+position = Vector2(0, 422)
+shape = SubResource("RectangleShape2D_ebdu8")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=212480805]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2135298603]
 position = Vector2(0, 20)
 shape = SubResource("CapsuleShape2D_a04kq")
+
+[node name="BossCore" parent="." unique_id=579576738 instance=ExtResource("3_xw47l")]
+position = Vector2(0, 186)

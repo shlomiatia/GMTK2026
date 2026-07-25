@@ -37,10 +37,8 @@ func hit() -> bool:
         return true
     _is_invincible = true
     _invincibility_timer.start()
-    Engine.time_scale = Constants.boss_hit_time_scale
     return true
 
 
 func _on_invincibility_timer_timeout() -> void:
     _is_invincible = false
-    Engine.time_scale = 1.0

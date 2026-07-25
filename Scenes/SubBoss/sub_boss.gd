@@ -38,9 +38,6 @@ func _physics_process(delta: float) -> void:
             _advance_crank(delta)
         State.LAUNCHED:
             _advance_launch(delta)
-    if _flash_time_left > 0.0:
-        _flash_time_left = maxf(_flash_time_left - delta, 0.0)
-        _sprite.self_modulate = Color(1.0, 1.0, 1.0, 0.3)
 
 
 func _rotate_toward_car(delta: float) -> void:
@@ -99,7 +96,9 @@ func hit() -> bool:
 
 
 func _on_hit_taken() -> void:
-    _flash_time_left = _core.invincibility_duration
+    _sprite.modulate = Color(1.0, 1.0, 1.0, 0.3)
+    var tween := create_tween()
+    tween.tween_property(_sprite, "modulate", Color(1.0, 1.0, 1.0, 1.0), _core.invincibility_duration)
 
 
 func get_radius() -> float:
