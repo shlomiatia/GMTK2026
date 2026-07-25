@@ -45,6 +45,7 @@ _data = {
 }
 
 [node name="MinionBoss" type="Node2D" unique_id=1828729893 groups=["boss"]]
+process_mode = 3
 script = ExtResource("2_boss")
 enemy_scene = ExtResource("3_enemy")
 

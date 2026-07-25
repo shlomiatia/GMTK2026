@@ -58,6 +58,7 @@ rotation = 3.1415927
 texture = ExtResource("2_asnge")
 
 [node name="Crank" parent="Car" unique_id=1994099940 instance=ExtResource("3_a0hww")]
+position = Vector2(-2.0000005, -5)
 rotation = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1938754536]

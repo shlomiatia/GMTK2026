@@ -48,6 +48,7 @@ _data = {
 }
 
 [node name="HazardBoss" type="Node2D" unique_id=515765067 groups=["boss"]]
+process_mode = 3
 script = ExtResource("2_hzboss")
 hazard_scene = ExtResource("3_hazard")
 bigger_hazard_scene = ExtResource("5_biggerhazard")

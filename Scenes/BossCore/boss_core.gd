@@ -27,6 +27,7 @@ func hit() -> bool:
     _hits_taken += 1
     if _hits_taken >= hits_to_kill:
         _is_dead = true
+        get_tree().paused = true
         killed.emit()
         return true
     _is_invincible = true

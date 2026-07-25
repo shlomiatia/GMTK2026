@@ -29,6 +29,8 @@ func _on_enemy_died(enemy: Enemy) -> void:
     var loop := enemy.loop
     var key := enemy.key
     await get_tree().create_timer(Constants.minion_respawn_delay).timeout
+    if _core.is_dead():
+        return
     _spawn_enemy(path, loop, key)
 
 
