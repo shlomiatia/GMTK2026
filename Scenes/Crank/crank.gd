@@ -11,7 +11,7 @@ static var min_move_pixels := 3.0
 @onready var _crank_sprite: Sprite2D = $CrankSprite
 @onready var _progress_bar: TextureProgressBar = $ProgressBar
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
-@onready var _virtual_mouse_icon: Sprite2D = $VirtualMouseIcon
+@onready var _virtual_cursor: VirtualCursor = $VirtualCursor
 
 var _crank_degrees: float = 0.0
 var _last_full_rotations: int = 0
@@ -20,23 +20,16 @@ var _auto_cranking: bool = false
 var _last_angle: float = NAN
 var _last_move_angle: float = NAN
 var _using_mouse: bool = false
-var _virtual_mouse_pos: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
-    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-    _virtual_mouse_pos = _crank_sprite.get_global_mouse_position()
-    _virtual_mouse_icon.global_position = _virtual_mouse_pos
+    _virtual_cursor.moved.connect(_on_virtual_cursor_moved)
     _progress_bar.min_value = 0.0
     _progress_bar.max_value = Constants.max_crank_degrees
     _progress_bar.value = 0.0
 
-func _input(event: InputEvent) -> void:
-    if !(event is InputEventMouseMotion):
+func _on_virtual_cursor_moved(relative: Vector2) -> void:
+    if !can_process():
         return
-    var relative := (event as InputEventMouseMotion).relative
-    _virtual_mouse_pos += get_viewport().get_canvas_transform().affine_inverse().basis_xform(relative)
-    _clamp_virtual_mouse_pos()
-    _virtual_mouse_icon.global_position = _virtual_mouse_pos
     if !_cranking || !_using_mouse:
         return
     if relative.length() < min_move_pixels:
@@ -45,15 +38,6 @@ func _input(event: InputEvent) -> void:
     if !is_nan(_last_move_angle):
         _advance_crank(move_angle, _last_move_angle)
     _last_move_angle = move_angle
-
-
-func _clamp_virtual_mouse_pos() -> void:
-    var transform := get_viewport().get_canvas_transform().affine_inverse()
-    var visible_rect := get_viewport().get_visible_rect()
-    var corner_a := transform * visible_rect.position
-    var corner_b := transform * visible_rect.end
-    _virtual_mouse_pos.x = clampf(_virtual_mouse_pos.x, minf(corner_a.x, corner_b.x), maxf(corner_a.x, corner_b.x))
-    _virtual_mouse_pos.y = clampf(_virtual_mouse_pos.y, minf(corner_a.y, corner_b.y), maxf(corner_a.y, corner_b.y))
 
 
 func _process(delta: float) -> void:
@@ -89,7 +73,6 @@ func _process(delta: float) -> void:
 
 func set_enabled(value: bool) -> void:
     set_process(value)
-    set_process_input(value)
     if !value:
         _cranking = false
         _auto_cranking = false
