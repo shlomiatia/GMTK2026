@@ -66,7 +66,7 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
     var boss: Node = collider if collider.is_in_group("boss") else collider.get_parent()
     if boss && boss.is_in_group("boss") && velocity.length() >= Constants.enemy_kill_speed && boss.call("hit"):
         boss_hit.emit(boss)
-    velocity = velocity.bounce(collision.get_normal())
+    velocity = velocity.bounce(collision.get_normal()) * 0.75
 
 
 func _apply_angular_velocity(delta: float) -> float:
