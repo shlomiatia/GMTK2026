@@ -22,6 +22,7 @@ var _gear_time_tween: Tween
 @onready var _timer: Timer = $Timer
 @onready var _time_progress_bar: TextureProgressBar = $Time
 @onready var _sprite: Sprite2D = $Sprite2D
+@onready var _level_skip: LevelSkip = $LevelSkip
 
 
 func _ready() -> void:
@@ -68,13 +69,11 @@ func _ready() -> void:
     MusicPlayer.set_boss_level(!get_tree().get_nodes_in_group("boss").is_empty())
     _overlay.continue_pressed.connect(_go_to_next_level)
     _overlay.restart_pressed.connect(_restart)
+    _level_skip.skip_requested.connect(_go_to_next_level)
 
 
 func _process(_delta: float) -> void:
     if Engine.is_editor_hint():
-        return
-    if Input.is_action_just_pressed("skip_level"):
-        _go_to_next_level()
         return
     if Input.is_action_just_pressed("restart"):
         _restart()
