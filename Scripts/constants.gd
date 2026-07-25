@@ -1,6 +1,7 @@
 class_name Constants
 
 static var max_crank_degrees := 3.0 * 360.0
+static var auto_crank_degrees_per_second := 720.0
 static var max_speed := 1180.0
 static var friction := 600.0
 static var steer_speed := 200.0
