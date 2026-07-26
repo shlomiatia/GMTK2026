@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cnr8l732xosm2"]
 
 [ext_resource type="Script" uid="uid://b8mctqanfchfv" path="res://Scenes/MinionBoss/minion_boss.gd" id="2_boss"]
-[ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="3_enemy"]
+[ext_resource type="PackedScene" uid="uid://swgb7gesjg1m" path="res://Scenes/Enemy/enemy.tscn" id="3_enemy"]
 [ext_resource type="Texture2D" uid="uid://b64lhexptsnvt" path="res://Art/Assets/Play Scene/Enemies/Minion Boss Attack.png" id="3_h51hv"]
 [ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="4_bosscore"]
 [ext_resource type="Texture2D" uid="uid://84c1qjmesabo" path="res://Art/Assets/Play Scene/Enemies/Minion Boss Idle.png" id="4_jfw1m"]

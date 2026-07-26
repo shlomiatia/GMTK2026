@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_lbv0p"]
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="4_udrcm"]
 [ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="5_ltf2t"]
-[ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="7_lbv0p"]
+[ext_resource type="PackedScene" uid="uid://swgb7gesjg1m" path="res://Scenes/Enemy/enemy.tscn" id="7_lbv0p"]
 [ext_resource type="PackedScene" uid="uid://b0q6g075ds0mt" path="res://Scenes/Arena/Arena.tscn" id="8_udrcm"]
 [ext_resource type="PackedScene" uid="uid://ccy7aq7vhw0s6" path="res://Scenes/Cannon/Cannon.tscn" id="9_ltf2t"]
 
