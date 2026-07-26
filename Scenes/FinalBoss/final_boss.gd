@@ -10,6 +10,7 @@ signal car_hit
 @onready var _collision_shape: CollisionShape2D = $StaticBody2D/CollisionShape2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _core: BossCore = $BossCore
+@onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -49,6 +50,7 @@ func _on_dial_body_entered(body: Node2D) -> void:
     if !(body as CollisionObject2D).get_collision_layer_value(CollisionLayers.CAR_BODY):
         return
     (body as Car).die()
+    _audio_stream_player.play()
     car_hit.emit()
 
 

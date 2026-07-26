@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="4_gearspawner"]
 [ext_resource type="Texture2D" uid="uid://cy1jiymeivcbx" path="res://Art/Generated/Sub Boss Shadow.png" id="5_1c02f"]
 [ext_resource type="PackedScene" uid="uid://dbossintro01" path="res://Scenes/BossIntro/BossIntro.tscn" id="6_intro"]
+[ext_resource type="AudioStream" path="res://Audio/SFX V1/Wall collision-001.wav" id="7_wall1"]
+[ext_resource type="AudioStream" path="res://Audio/SFX V1/Wall collision-002.wav" id="8_wall2"]
+[ext_resource type="AudioStream" path="res://Audio/SFX V1/Enemy Collision.wav" id="9_enemy"]
 
 [sub_resource type="Animation" id="Animation_reset"]
 length = 0.001
@@ -89,3 +92,6 @@ texture = ExtResource("5_1c02f")
 color = Color(0, 0, 0, 1)
 
 [node name="BossIntro" parent="." unique_id=1979154801 instance=ExtResource("6_intro")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3

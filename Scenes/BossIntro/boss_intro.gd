@@ -13,12 +13,15 @@ func _ready() -> void:
         _skip_intro()
         _end_intro()
         return
-    _audio_stream_player.play()
     if MusicPlayer.boss_active:
         MusicPlayer.stop_boss_music(Constants.boss_intro_music_fade_seconds)
     MusicPlayer.active_boss_path = _boss.scene_file_path
     get_tree().paused = true
     _boss.process_mode = Node.PROCESS_MODE_PAUSABLE
+    var audio_tween := create_tween()
+    audio_tween.tween_interval(Constants.boss_intro_delay_seconds - 0.5)
+    audio_tween.tween_callback(_audio_stream_player.play)
+    
     var tween := create_tween()
     tween.tween_interval(Constants.boss_intro_delay_seconds)
     tween.tween_property(_point_light, "energy", Constants.boss_intro_flicker_energy, Constants.boss_intro_flicker_up_seconds)

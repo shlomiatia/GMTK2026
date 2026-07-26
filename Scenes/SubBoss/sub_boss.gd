@@ -5,15 +5,23 @@ signal car_hit
 
 enum State {AIMING, CRANKING, LAUNCHED}
 
+const _wall_collision_sfx := [
+    preload("res://Audio/SFX V1/Wall collision-001.wav"),
+    preload("res://Audio/SFX V1/Wall collision-002.wav"),
+]
+const _enemy_collision_sfx := preload("res://Audio/SFX V1/Enemy Collision.wav")
+
 @onready var _sprite: Sprite2D = $Sprite2D
 @onready var _collision_shape: CollisionPolygon2D = $CollisionPolygon2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _aim_timer: Timer = $AimTimer
 @onready var _core: BossCore = $BossCore
+@onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var _car: Car
 var _state: State = State.AIMING
 var _crank_elapsed: float = 0.0
+var _wall_sfx_index: int = 0
 
 
 func _ready() -> void:
@@ -84,10 +92,18 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
     if !collision:
         return
     var car := collision.get_collider() as Car
+    var killed := false
     if car:
         car_hit.emit()
         if velocity.length() >= Constants.enemy_kill_speed:
             car.die()
+            killed = true
+    if killed:
+        _audio_stream_player.stream = _enemy_collision_sfx
+    else:
+        _audio_stream_player.stream = _wall_collision_sfx[_wall_sfx_index]
+        _wall_sfx_index = 1 - _wall_sfx_index
+    _audio_stream_player.play()
     velocity = velocity.bounce(collision.get_normal())
 
 
