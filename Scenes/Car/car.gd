@@ -94,10 +94,6 @@ func _apply_angular_velocity(delta: float) -> float:
 	var angle_delta := _angular_velocity * delta
 	if angle_delta == 0.0:
 		return 0.0
-	var target_transform := Transform2D(rotation + angle_delta, global_position)
-	if test_move(target_transform, Vector2.ZERO, null, 0.08, true):
-		_angular_velocity = 0.0
-		return 0.0
 	rotation += angle_delta
 	return angle_delta
 
