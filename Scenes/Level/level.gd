@@ -225,14 +225,16 @@ func _is_car_out_of_bounds() -> bool:
 func _win() -> void:
     if _game_over:
         return
+    var have_next_level := ResourceLoader.exists(_next_level_path())
     _game_over = true
     if _objective is BossObjective:
-        await get_tree().create_timer(Constants.final_boss_victory_delay_seconds, true).timeout
+        if !have_next_level:
+            await get_tree().create_timer(Constants.final_boss_victory_delay_seconds, true).timeout
     else:
         SfxPlayer.play_win_stair()
     get_tree().paused = true
     GameState.mark_completed(_current_level_number())
-    if ResourceLoader.exists(_next_level_path()):
+    if have_next_level:
         _go_to_next_level()
     else:
         _overlay.show_win()
