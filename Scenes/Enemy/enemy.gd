@@ -15,6 +15,7 @@ static var enemy_turn_speed_degrees := 360.0
 @onready var _collision_shape2: CollisionShape2D = $CollisionShape2D2
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _key_sprite: Sprite2D = $Key
+@onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var _path: Path2D
 var _path_follow: PathFollow2D
@@ -102,6 +103,8 @@ func die() -> void:
 	_collision_shape.set_deferred("disabled", true)
 	_collision_shape2.set_deferred("disabled", true)
 	_animation_player.play("die")
+	if key:
+		_audio_stream_player.play()
 	if _path_follow:
 		_path_follow.queue_free()
 		_path_follow = null
@@ -118,7 +121,10 @@ func _spawn_in() -> void:
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "die":
-		queue_free()
+		if _audio_stream_player.playing:
+			_audio_stream_player.finished.connect(queue_free)
+		else:
+			queue_free()
 	elif anim_name == "fadein":
 		_active = true
 		_collision_shape.set_deferred("disabled", false)

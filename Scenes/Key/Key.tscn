@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Collectible/collectible.gd" id="1_key"]
 [ext_resource type="Texture2D" uid="uid://ed4em35gd3dy" path="res://Art/Assets/Play Scene/Items/Key.png" id="1_121ar"]
+[ext_resource type="AudioStream" path="res://Audio/SFX V1/Key Collect.wav" id="2_sfx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
 radius = 28.160255
@@ -58,3 +59,7 @@ shape = SubResource("CircleShape2D_ebdu8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1991024836]
 libraries/ = SubResource("AnimationLibrary_eu5gn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("2_sfx")

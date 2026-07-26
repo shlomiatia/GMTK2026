@@ -13,6 +13,7 @@ static var time_progress_max_value := 96.67
 var _game_over: bool = false
 var _car: Car
 var _goal: Goal
+var _objective: Node
 var _key_enemies: Array[Enemy] = []
 var _keys: Array[Collectible] = []
 var _gear_time_tween: Tween
@@ -48,7 +49,8 @@ func _ready() -> void:
         (key as Collectible).collected.connect(_on_key_collected.bind(key))
     if !_key_enemies.is_empty() || !_keys.is_empty():
         _goal.lock.call_deferred()
-    get_tree().get_first_node_in_group("objective").completed.connect(_win)
+    _objective = get_tree().get_first_node_in_group("objective")
+    _objective.completed.connect(_win)
     for hazard in get_tree().get_nodes_in_group("hazard"):
         (hazard as Hazard).car_entered.connect(_on_car_entered_hazard)
     get_tree().node_added.connect(_on_node_added)
@@ -224,6 +226,10 @@ func _win() -> void:
     if _game_over:
         return
     _game_over = true
+    if _objective is BossObjective:
+        SfxPlayer.play_win_boss()
+    else:
+        SfxPlayer.play_win_stair()
     get_tree().paused = true
     GameState.mark_completed(_current_level_number())
     if ResourceLoader.exists(_next_level_path()):
@@ -234,10 +240,12 @@ func _win() -> void:
 
 func _lose() -> void:
     _game_over = true
+    SfxPlayer.play_loss()
     _overlay.show_lose()
 
 
 func _restart() -> void:
+    SfxPlayer.play_restart()
     get_tree().reload_current_scene()
 
 

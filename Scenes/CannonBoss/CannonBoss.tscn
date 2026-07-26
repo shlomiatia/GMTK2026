@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="7_gearspawner"]
 [ext_resource type="Texture2D" uid="uid://b4inti5ah74tg" path="res://Art/Generated/Turret Boss Head Shadow.png" id="8_shadow"]
 [ext_resource type="PackedScene" uid="uid://dbossintro01" path="res://Scenes/BossIntro/BossIntro.tscn" id="10_intro"]
+[ext_resource type="AudioStream" path="res://Audio/SFX V1/bullet shot.wav" id="11_sfx"]
 
 [sub_resource type="Animation" id="Animation_l6qg3"]
 length = 0.001
@@ -240,3 +241,7 @@ position = Vector2(0, 95)
 color = Color(0, 0, 0, 1)
 
 [node name="BossIntro" parent="." unique_id=439108365 instance=ExtResource("10_intro")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("11_sfx")

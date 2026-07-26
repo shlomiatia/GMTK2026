@@ -1,7 +1,12 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://Scenes/BossIntro/boss_intro.gd" id="1_bossintro"]
+[ext_resource type="AudioStream" path="res://Audio/SFX V1/Boss Intro.wav" id="2_sfx"]
 
 [node name="BossIntro" type="Node"]
 process_mode = 3
 script = ExtResource("1_bossintro")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("2_sfx")

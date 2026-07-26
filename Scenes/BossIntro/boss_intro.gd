@@ -4,6 +4,7 @@ extends Node
 @onready var _point_light: PointLight2D = _boss.find_child("PointLight2D", true, false) as PointLight2D
 @onready var _canvas_modulate: CanvasModulate = _boss.find_child("CanvasModulate", true, false) as CanvasModulate
 @onready var _boss_core: BossCore = _boss.find_child("BossCore", true, false) as BossCore
+@onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -12,6 +13,7 @@ func _ready() -> void:
         _skip_intro()
         _end_intro()
         return
+    _audio_stream_player.play()
     if MusicPlayer.boss_active:
         MusicPlayer.stop_boss_music(Constants.boss_intro_music_fade_seconds)
     MusicPlayer.active_boss_path = _boss.scene_file_path

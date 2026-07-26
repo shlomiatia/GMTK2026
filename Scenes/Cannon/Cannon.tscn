@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://beq1ug6w7w4ga" path="res://Scenes/Cannon/cannon.gd" id="3_cannon"]
 [ext_resource type="PackedScene" uid="uid://cxy5qr35i2yve" path="res://Scenes/Bullet/Bullet.tscn" id="4_bullet"]
 [ext_resource type="PackedScene" path="res://Scenes/Turret/Turret.tscn" id="5_turret"]
+[ext_resource type="AudioStream" path="res://Audio/SFX V1/bullet shot.wav" id="6_sfx"]
 
 [sub_resource type="Animation" id="Animation_l6qg3"]
 length = 0.001
@@ -202,3 +203,7 @@ shape = SubResource("CircleShape2D_ebdu8")
 
 [node name="TurretController" parent="." unique_id=2094528461 instance=ExtResource("5_turret")]
 bullet_scene = ExtResource("4_bullet")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("6_sfx")

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dsvslfb06sn4h" path="res://Scenes/Hazard/hazard.gd" id="1_ksgcf"]
 [ext_resource type="Texture2D" uid="uid://dg85lksa88vji" path="res://Art/Assets/Play Scene/Enemies/Gear_Medium.png" id="2_ksgcf"]
+[ext_resource type="AudioStream" path="res://Audio/SFX V1/Hazard Collision.wav" id="3_sfx"]
 
 [sub_resource type="Animation" id="Animation_27cge"]
 length = 0.001
@@ -104,3 +105,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=332632740]
 shape = SubResource("CircleShape2D_ebdu8")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("3_sfx")

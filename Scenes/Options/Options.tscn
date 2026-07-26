@@ -41,6 +41,7 @@ texture = ExtResource("2_lvlsel")
 
 [node name="Level1" type="TextureButton" parent="LevelSelect" unique_id=300000101]
 visible = false
+layout_mode = 0
 offset_left = 56.0
 offset_top = 174.0
 offset_right = 384.0
@@ -52,6 +53,7 @@ script = ExtResource("4_hover")
 
 [node name="Level2" type="TextureButton" parent="LevelSelect" unique_id=300000102]
 visible = false
+layout_mode = 0
 offset_left = 415.0
 offset_top = 174.0
 offset_right = 743.0
@@ -63,6 +65,7 @@ script = ExtResource("4_hover")
 
 [node name="Level3" type="TextureButton" parent="LevelSelect" unique_id=300000103]
 visible = false
+layout_mode = 0
 offset_left = 774.0
 offset_top = 174.0
 offset_right = 1102.0
@@ -74,6 +77,7 @@ script = ExtResource("4_hover")
 
 [node name="Level4" type="TextureButton" parent="LevelSelect" unique_id=300000104]
 visible = false
+layout_mode = 0
 offset_left = 1133.0
 offset_top = 174.0
 offset_right = 1461.0
@@ -85,6 +89,7 @@ script = ExtResource("4_hover")
 
 [node name="Level5" type="TextureButton" parent="LevelSelect" unique_id=300000105]
 visible = false
+layout_mode = 0
 offset_left = 1492.0
 offset_top = 174.0
 offset_right = 1820.0
@@ -96,6 +101,7 @@ script = ExtResource("4_hover")
 
 [node name="Level6" type="TextureButton" parent="LevelSelect" unique_id=300000106]
 visible = false
+layout_mode = 0
 offset_left = 56.0
 offset_top = 406.0
 offset_right = 384.0
@@ -107,6 +113,7 @@ script = ExtResource("4_hover")
 
 [node name="Level7" type="TextureButton" parent="LevelSelect" unique_id=300000107]
 visible = false
+layout_mode = 0
 offset_left = 415.0
 offset_top = 406.0
 offset_right = 743.0
@@ -118,6 +125,7 @@ script = ExtResource("4_hover")
 
 [node name="Level8" type="TextureButton" parent="LevelSelect" unique_id=300000108]
 visible = false
+layout_mode = 0
 offset_left = 774.0
 offset_top = 406.0
 offset_right = 1102.0
@@ -129,6 +137,7 @@ script = ExtResource("4_hover")
 
 [node name="Level9" type="TextureButton" parent="LevelSelect" unique_id=300000109]
 visible = false
+layout_mode = 0
 offset_left = 1133.0
 offset_top = 406.0
 offset_right = 1461.0
@@ -140,6 +149,7 @@ script = ExtResource("4_hover")
 
 [node name="Level10" type="TextureButton" parent="LevelSelect" unique_id=300000110]
 visible = false
+layout_mode = 0
 offset_left = 1492.0
 offset_top = 406.0
 offset_right = 1820.0
@@ -151,6 +161,7 @@ script = ExtResource("4_hover")
 
 [node name="Level11" type="TextureButton" parent="LevelSelect" unique_id=300000111]
 visible = false
+layout_mode = 0
 offset_left = 56.0
 offset_top = 638.0
 offset_right = 384.0
@@ -162,6 +173,7 @@ script = ExtResource("4_hover")
 
 [node name="Level12" type="TextureButton" parent="LevelSelect" unique_id=300000112]
 visible = false
+layout_mode = 0
 offset_left = 415.0
 offset_top = 638.0
 offset_right = 743.0
@@ -173,6 +185,7 @@ script = ExtResource("4_hover")
 
 [node name="Level13" type="TextureButton" parent="LevelSelect" unique_id=300000113]
 visible = false
+layout_mode = 0
 offset_left = 774.0
 offset_top = 638.0
 offset_right = 1102.0
@@ -184,6 +197,7 @@ script = ExtResource("4_hover")
 
 [node name="Level14" type="TextureButton" parent="LevelSelect" unique_id=300000114]
 visible = false
+layout_mode = 0
 offset_left = 1133.0
 offset_top = 638.0
 offset_right = 1461.0
@@ -195,6 +209,7 @@ script = ExtResource("4_hover")
 
 [node name="Level15" type="TextureButton" parent="LevelSelect" unique_id=300000115]
 visible = false
+layout_mode = 0
 offset_left = 1492.0
 offset_top = 638.0
 offset_right = 1820.0
@@ -205,17 +220,18 @@ texture_normal = ExtResource("19_lvl15")
 script = ExtResource("4_hover")
 
 [node name="AutoCrankButton" type="TextureButton" parent="LevelSelect" unique_id=300000200]
-offset_left = 1807.0
-offset_top = 97.0
-offset_right = 1853.0
-offset_bottom = 143.0
+layout_mode = 0
+offset_left = 1787.0
+offset_top = 75.0
+offset_right = 1832.5
+offset_bottom = 120.5
 mouse_default_cursor_shape = 2
 
 [node name="CheckMark" type="TextureRect" parent="LevelSelect/AutoCrankButton" unique_id=300000201]
-visible = false
-offset_left = 8.5
-offset_top = 9.0
-offset_right = 37.5
-offset_bottom = 37.0
+layout_mode = 0
+offset_left = 7.5
+offset_top = 8.5
+offset_right = 36.5
+offset_bottom = 36.5
 mouse_filter = 2
 texture = ExtResource("3_chk")

@@ -3,6 +3,8 @@ class_name Bullet extends Node2D
 signal car_hit(car: Car)
 
 @onready var _area: Area2D = $Area2D
+@onready var _sprite: Sprite2D = $Sprite2D
+@onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -18,4 +20,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if car:
 		car.die()
 		car_hit.emit(car)
-	queue_free()
+	_sprite.visible = false
+	_area.set_deferred("monitoring", false)
+	set_physics_process(false)
+	_audio_stream_player.finished.connect(queue_free)
+	_audio_stream_player.play()

@@ -8,6 +8,19 @@ signal cycle_completed
 static var reset_crank_seconds := 1.0
 static var min_move_pixels := 3.0
 
+const _winder_click_sfx := preload("res://Audio/SFX V1/Winder Click.wav")
+const _wind_sfx := [
+	preload("res://Audio/SFX V1/Wind 1.wav"),
+	preload("res://Audio/SFX V1/Wind 2.wav"),
+	preload("res://Audio/SFX V1/Wind 3.wav"),
+]
+const _launch_sfx := [
+	preload("res://Audio/SFX V1/Launch 0 Winds.wav"),
+	preload("res://Audio/SFX V1/Launch 1 Winds.wav"),
+	preload("res://Audio/SFX V1/Launch 2 Winds.wav"),
+	preload("res://Audio/SFX V1/Launch 3 Winds.wav"),
+]
+
 @onready var _crank_sprite: Sprite2D = $CrankSprite
 @onready var _progress_bar: TextureProgressBar = $ProgressBar
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
@@ -43,6 +56,8 @@ func _process(delta: float) -> void:
     if GameState.auto_crank_enabled:
         if Input.is_action_just_pressed("crank"):
             _cranking = true
+            _audio_stream_player.stream = _winder_click_sfx
+            _audio_stream_player.play()
             crank_pressed.emit()
         elif Input.is_action_just_released("crank"):
             _cranking = false
@@ -59,6 +74,8 @@ func _process(delta: float) -> void:
         if !_using_mouse:
             _last_angle = _get_crank_angle()
         _cranking = true
+        _audio_stream_player.stream = _winder_click_sfx
+        _audio_stream_player.play()
         crank_pressed.emit()
     elif Input.is_action_just_released("crank"):
         _cranking = false
@@ -108,11 +125,14 @@ func _add_crank_degrees(degrees: float) -> void:
     var full := int(_crank_degrees / 360.0)
     if full > _last_full_rotations:
         _last_full_rotations = full
+        _audio_stream_player.stream = _wind_sfx[mini(_last_full_rotations, 3) - 1]
         _audio_stream_player.play()
         cycle_completed.emit()
 
 
 func _try_launch() -> void:
+    _audio_stream_player.stream = _launch_sfx[mini(_last_full_rotations, 3)]
+    _audio_stream_player.play()
     if _crank_degrees <= 0.0:
         return
     var power_ratio := _crank_degrees / Constants.max_crank_degrees

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d0x6tv8t8x0cx" path="res://Scenes/Goal/goal.gd" id="2_goal"]
 [ext_resource type="Texture2D" uid="uid://c8eu4ktdrg8xd" path="res://Art/Assets/Play Scene/Items/Stairs.png" id="2_ljf6b"]
 [ext_resource type="Texture2D" uid="uid://b2ihfstxt4num" path="res://Art/Assets/Play Scene/Items/Stairs_Locked.png" id="3_cq5p3"]
+[ext_resource type="AudioStream" path="res://Audio/SFX V1/Stair Unlock.wav" id="4_sfx"]
 
 [sub_resource type="Animation" id="Animation_v2brs"]
 length = 0.001
@@ -65,3 +66,7 @@ libraries/ = SubResource("AnimationLibrary_8wmlk")
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1012400191]
 polygon = PackedVector2Array(-43, -10, -25, -10, -19, -24, 5, -24, 12, -43, 43, -44, 43, 44, -42, 44)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("4_sfx")

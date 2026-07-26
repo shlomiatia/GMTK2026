@@ -6,12 +6,14 @@ signal fired
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _collision_shape: CollisionShape2D = $StaticBody2D/CollisionShape2D
 @onready var _turret: Turret = $TurretController
+@onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var _is_dead: bool = false
 
 
 func fire() -> void:
 	_turret.fire()
+	_audio_stream_player.play()
 	fired.emit()
 
 

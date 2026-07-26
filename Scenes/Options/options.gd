@@ -23,6 +23,7 @@ func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("options"):
         visible = !visible
         if visible:
+            SfxPlayer.play_pause()
             _refresh()
             original_paused_state = get_tree().paused
             Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

@@ -7,6 +7,7 @@ signal car_entered
 @onready var _area: Area2D = $Area2D
 @onready var _locked_sprite: Sprite2D = $Locked
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
+@onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -33,6 +34,7 @@ func unlock() -> void:
         return
     locked = false
     _animation_player.play("unlock")
+    _audio_stream_player.play()
     if has_car():
         car_entered.emit()
 
