@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://crroyrcw2et8j" path="res://Scenes/Crank/Crank.tscn" id="3_a0hww"]
 [ext_resource type="Texture2D" uid="uid://ncs7nhhr0476" path="res://Art/Assets/Play Scene/Player/Player_Hit.png" id="3_dfrl7"]
 [ext_resource type="Texture2D" uid="uid://c88m7hdq6sgpt" path="res://Art/Assets/Play Scene/VFX/Attack.png" id="4_sbu84"]
-[ext_resource type="PackedScene" path="res://Scenes/SmokeParticleEmitter/SmokeParticleEmitter.tscn" id="5_smoke"]
+[ext_resource type="PackedScene" uid="uid://dbmypk4a1h3tq" path="res://Scenes/SmokeParticleEmitter/SmokeParticleEmitter.tscn" id="5_smoke"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
 radius = 20.0

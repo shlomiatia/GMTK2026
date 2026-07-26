@@ -17,6 +17,7 @@ const _enemy_collision_sfx := preload("res://Audio/SFX V1/Enemy Collision.wav")
 @onready var _aim_timer: Timer = $AimTimer
 @onready var _core: BossCore = $BossCore
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var _smoke: SmokeParticleEmitter = $SmokeParticleEmitter
 
 var _car: Car
 var _state: State = State.AIMING
@@ -37,6 +38,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
     _update_core_position()
+    _smoke.emitting = _state == State.LAUNCHED && velocity.length() > Constants.enemy_kill_speed
     if _core.is_dead() || !_car:
         return
     match _state:

@@ -23,7 +23,6 @@ var _gear_time_tween: Tween
 @onready var _timer: Timer = $Timer
 @onready var _time_progress_bar: TextureProgressBar = $Time
 @onready var _sprite: Sprite2D = $Sprite2D
-@onready var _level_skip: LevelSkip = $LevelSkip
 
 
 func _ready() -> void:
@@ -74,8 +73,6 @@ func _ready() -> void:
         MusicPlayer.fade_out_level_music(Constants.boss_intro_music_fade_seconds)
     _overlay.restart_pressed.connect(_restart)
     _overlay.win_confirmed.connect(_on_win_confirmed)
-    _level_skip.skip_requested.connect(_go_to_next_level)
-
 
 func _process(_delta: float) -> void:
     if Engine.is_editor_hint():

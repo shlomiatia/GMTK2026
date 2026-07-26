@@ -16,6 +16,7 @@ static var enemy_turn_speed_degrees := 360.0
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _key_sprite: Sprite2D = $Key
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var _smoke: SmokeParticleEmitter = $SmokeParticleEmitter
 
 var _path: Path2D
 var _path_follow: PathFollow2D
@@ -99,6 +100,7 @@ func die() -> void:
 	if _is_dead:
 		return
 	_is_dead = true
+	_smoke.emitting = false
 	velocity = Vector2.ZERO
 	_collision_shape.set_deferred("disabled", true)
 	_collision_shape2.set_deferred("disabled", true)

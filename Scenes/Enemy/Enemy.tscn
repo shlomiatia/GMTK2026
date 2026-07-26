@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ubbryy2gcy8c" path="res://Art/Assets/Play Scene/Enemies/Minion_Damage.png" id="2_fw0yv"]
 [ext_resource type="Texture2D" uid="uid://ed4em35gd3dy" path="res://Art/Assets/Play Scene/Items/Key.png" id="3_e0oyi"]
 [ext_resource type="AudioStream" uid="uid://1tvghvdh6axt" path="res://Audio/SFX V1/Key Collect.wav" id="4_key_sfx"]
+[ext_resource type="PackedScene" uid="uid://dbmypk4a1h3tq" path="res://Scenes/SmokeParticleEmitter/SmokeParticleEmitter.tscn" id="5_smoke"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_02vxf"]
 atlas = ExtResource("2_e0oyi")
@@ -256,3 +257,8 @@ texture = ExtResource("3_e0oyi")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=785768943]
 process_mode = 3
 stream = ExtResource("4_key_sfx")
+
+[node name="SmokeParticleEmitter" parent="." instance=ExtResource("5_smoke")]
+position = Vector2(0, -55)
+direction = Vector2(0, -1)
+emitting = true
