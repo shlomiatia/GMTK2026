@@ -16,7 +16,6 @@ static var min_move_pixels := 3.0
 var _crank_degrees: float = 0.0
 var _last_full_rotations: int = 0
 var _cranking: bool = false
-var _auto_cranking: bool = false
 var _last_angle: float = NAN
 var _last_move_angle: float = NAN
 var _using_mouse: bool = false
@@ -41,6 +40,19 @@ func _on_virtual_cursor_moved(relative: Vector2) -> void:
 
 
 func _process(delta: float) -> void:
+    if GameState.auto_crank_enabled:
+        if Input.is_action_just_pressed("crank"):
+            _cranking = true
+            crank_pressed.emit()
+        elif Input.is_action_just_released("crank"):
+            _cranking = false
+            var degrees_before_launch := _crank_degrees
+            _try_launch()
+            crank_released.emit(degrees_before_launch)
+        elif _cranking:
+            _add_crank_degrees(Constants.auto_crank_degrees_per_second * delta)
+        return
+
     if Input.is_action_just_pressed("crank"):
         _using_mouse = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
         _last_move_angle = NAN
@@ -62,20 +74,11 @@ func _process(delta: float) -> void:
                 _advance_crank(angle, _last_angle)
             _last_angle = angle
 
-    if Input.is_action_just_pressed("auto_crank"):
-        _auto_cranking = true
-    elif Input.is_action_just_released("auto_crank"):
-        _auto_cranking = false
-        _try_launch()
-    elif _auto_cranking:
-        _add_crank_degrees(Constants.auto_crank_degrees_per_second * delta)
-
 
 func set_enabled(value: bool) -> void:
     set_process(value)
     if !value:
         _cranking = false
-        _auto_cranking = false
 
 
 func _get_crank_angle() -> float:

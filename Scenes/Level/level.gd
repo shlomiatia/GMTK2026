@@ -225,6 +225,7 @@ func _win() -> void:
         return
     _game_over = true
     get_tree().paused = true
+    GameState.mark_completed(_current_level_number())
     if ResourceLoader.exists(_next_level_path()):
         _go_to_next_level()
     else:
@@ -249,8 +250,12 @@ func _go_to_next_level() -> void:
 func _next_level_path() -> String:
     var current_path := get_tree().current_scene.scene_file_path
     var levels_dir := current_path.get_base_dir().get_base_dir()
-    var level_number := current_path.get_base_dir().get_file().trim_prefix("Level").to_int()
-    return "%s/Level%d/Level.tscn" % [levels_dir, level_number + 1]
+    return "%s/Level%d/Level.tscn" % [levels_dir, _current_level_number() + 1]
+
+
+func _current_level_number() -> int:
+    var current_path := get_tree().current_scene.scene_file_path
+    return current_path.get_base_dir().get_file().trim_prefix("Level").to_int()
 
 
 func _on_win_confirmed() -> void:

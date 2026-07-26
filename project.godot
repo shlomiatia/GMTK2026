@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 MusicPlayer="*res://Scenes/MusicPlayer/MusicPlayer.tscn"
 SceneTransition="*res://Scenes/SceneTransition/SceneTransition.tscn"
+GameState="*res://Scenes/GameState/GameState.tscn"
 
 [display]
 

@@ -1,6 +1,24 @@
 [gd_scene format=3 uid="uid://bp3bbqdl6drvw"]
 
 [ext_resource type="Script" uid="uid://dphp4vxgbnort" path="res://Scenes/Options/options.gd" id="1_opt"]
+[ext_resource type="Texture2D" uid="uid://gi87m76gntel" path="res://Art/Assets/Title Screen/Level Select.png" id="2_lvlsel"]
+[ext_resource type="Texture2D" uid="uid://ooa01ll8wyxt" path="res://Art/Assets/Title Screen/Level Check Mark.png" id="3_chk"]
+[ext_resource type="Script" uid="uid://d16lnu1cnoofy" path="res://Scenes/TitleScreen/hover_button.gd" id="4_hover"]
+[ext_resource type="Texture2D" uid="uid://dvnp63ng0nnc8" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level1.png" id="5_lvl1"]
+[ext_resource type="Texture2D" uid="uid://c6r5xrqcxuwp0" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level2.png" id="6_lvl2"]
+[ext_resource type="Texture2D" uid="uid://lolep2jabdqg" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level3.png" id="7_lvl3"]
+[ext_resource type="Texture2D" uid="uid://j8xxoacfxa1j" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level4.png" id="8_lvl4"]
+[ext_resource type="Texture2D" uid="uid://dp346445ticc0" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level5.png" id="9_lvl5"]
+[ext_resource type="Texture2D" uid="uid://dummt53tvp68g" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level6.png" id="10_lvl6"]
+[ext_resource type="Texture2D" uid="uid://bmds8a5kvtf3y" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level7.png" id="11_lvl7"]
+[ext_resource type="Texture2D" uid="uid://bjr4ppmyrurmp" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level8.png" id="12_lvl8"]
+[ext_resource type="Texture2D" uid="uid://4wx3d6orfvh3" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level9.png" id="13_lvl9"]
+[ext_resource type="Texture2D" uid="uid://uid033vk4y8l" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level10.png" id="14_lvl10"]
+[ext_resource type="Texture2D" uid="uid://d2qexl0un8kp2" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level11.png" id="15_lvl11"]
+[ext_resource type="Texture2D" uid="uid://dx5cy8k7p6kn1" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level12.png" id="16_lvl12"]
+[ext_resource type="Texture2D" uid="uid://bgicfltgkayvf" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level13.png" id="17_lvl13"]
+[ext_resource type="Texture2D" uid="uid://ccjns0djklk85" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level14.png" id="18_lvl14"]
+[ext_resource type="Texture2D" uid="uid://02q6g422tgnf" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level15.png" id="19_lvl15"]
 
 [node name="Options" type="CanvasLayer" unique_id=211288680]
 process_mode = 3
@@ -14,244 +32,190 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0, 0, 0, 0.6)
 
-[node name="Center" type="CenterContainer" parent="." unique_id=846353865]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="LevelSelect" type="TextureRect" parent="." unique_id=846353865]
+offset_left = 14.5
+offset_top = 95.5
+offset_right = 1905.5
+offset_bottom = 984.5
+texture = ExtResource("2_lvlsel")
 
-[node name="Panel" type="PanelContainer" parent="Center" unique_id=418608671]
-layout_mode = 2
+[node name="Level1" type="TextureButton" parent="LevelSelect" unique_id=300000101]
+visible = false
+offset_left = 56.0
+offset_top = 174.0
+offset_right = 384.0
+offset_bottom = 360.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_lvl1")
+script = ExtResource("4_hover")
 
-[node name="Margin" type="MarginContainer" parent="Center/Panel" unique_id=1999554019]
-layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
+[node name="Level2" type="TextureButton" parent="LevelSelect" unique_id=300000102]
+visible = false
+offset_left = 415.0
+offset_top = 174.0
+offset_right = 743.0
+offset_bottom = 360.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_lvl2")
+script = ExtResource("4_hover")
 
-[node name="VBox" type="VBoxContainer" parent="Center/Panel/Margin" unique_id=2146016785]
-layout_mode = 2
-theme_override_constants/separation = 12
+[node name="Level3" type="TextureButton" parent="LevelSelect" unique_id=300000103]
+visible = false
+offset_left = 774.0
+offset_top = 174.0
+offset_right = 1102.0
+offset_bottom = 360.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_lvl3")
+script = ExtResource("4_hover")
 
-[node name="Title" type="Label" parent="Center/Panel/Margin/VBox" unique_id=130107128]
-layout_mode = 2
-text = "Options"
-horizontal_alignment = 1
+[node name="Level4" type="TextureButton" parent="LevelSelect" unique_id=300000104]
+visible = false
+offset_left = 1133.0
+offset_top = 174.0
+offset_right = 1461.0
+offset_bottom = 360.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("8_lvl4")
+script = ExtResource("4_hover")
 
-[node name="SteerSpeedRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=300000008]
-layout_mode = 2
+[node name="Level5" type="TextureButton" parent="LevelSelect" unique_id=300000105]
+visible = false
+offset_left = 1492.0
+offset_top = 174.0
+offset_right = 1820.0
+offset_bottom = 360.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("9_lvl5")
+script = ExtResource("4_hover")
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/SteerSpeedRow" unique_id=300000009]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-tooltip_text = "Degrees per second the car turns in flight via left/right."
-mouse_filter = 1
-text = "Steer Speed"
+[node name="Level6" type="TextureButton" parent="LevelSelect" unique_id=300000106]
+visible = false
+offset_left = 56.0
+offset_top = 406.0
+offset_right = 384.0
+offset_bottom = 592.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("10_lvl6")
+script = ExtResource("4_hover")
 
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/SteerSpeedRow" unique_id=300000010]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-tooltip_text = "Degrees per second the car turns in flight via left/right."
-min_value = 10.0
-max_value = 720.0
-value = 10.0
+[node name="Level7" type="TextureButton" parent="LevelSelect" unique_id=300000107]
+visible = false
+offset_left = 415.0
+offset_top = 406.0
+offset_right = 743.0
+offset_bottom = 592.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("11_lvl7")
+script = ExtResource("4_hover")
 
-[node name="MaxCrankDegreesRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=1768078139]
-layout_mode = 2
+[node name="Level8" type="TextureButton" parent="LevelSelect" unique_id=300000108]
+visible = false
+offset_left = 774.0
+offset_top = 406.0
+offset_right = 1102.0
+offset_bottom = 592.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_lvl8")
+script = ExtResource("4_hover")
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/MaxCrankDegreesRow" unique_id=973664932]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-tooltip_text = "Total degrees the crank must be turned to reach full launch power."
-mouse_filter = 1
-text = "Max Crank Degrees"
+[node name="Level9" type="TextureButton" parent="LevelSelect" unique_id=300000109]
+visible = false
+offset_left = 1133.0
+offset_top = 406.0
+offset_right = 1461.0
+offset_bottom = 592.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("13_lvl9")
+script = ExtResource("4_hover")
 
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/MaxCrankDegreesRow" unique_id=1544485290]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-tooltip_text = "Total degrees the crank must be turned to reach full launch power."
-min_value = 360.0
-max_value = 3600.0
-step = 360.0
-value = 360.0
+[node name="Level10" type="TextureButton" parent="LevelSelect" unique_id=300000110]
+visible = false
+offset_left = 1492.0
+offset_top = 406.0
+offset_right = 1820.0
+offset_bottom = 592.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("14_lvl10")
+script = ExtResource("4_hover")
 
-[node name="MaxSpeedRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=2046202302]
-layout_mode = 2
+[node name="Level11" type="TextureButton" parent="LevelSelect" unique_id=300000111]
+visible = false
+offset_left = 56.0
+offset_top = 638.0
+offset_right = 384.0
+offset_bottom = 824.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("15_lvl11")
+script = ExtResource("4_hover")
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/MaxSpeedRow" unique_id=1214035762]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-tooltip_text = "Top launch speed, in pixels per second, reached when the crank is fully charged."
-mouse_filter = 1
-text = "Max Speed"
+[node name="Level12" type="TextureButton" parent="LevelSelect" unique_id=300000112]
+visible = false
+offset_left = 415.0
+offset_top = 638.0
+offset_right = 743.0
+offset_bottom = 824.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("16_lvl12")
+script = ExtResource("4_hover")
 
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/MaxSpeedRow" unique_id=1612507117]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-tooltip_text = "Top launch speed, in pixels per second, reached when the crank is fully charged."
-min_value = 100.0
-max_value = 5000.0
-value = 100.0
+[node name="Level13" type="TextureButton" parent="LevelSelect" unique_id=300000113]
+visible = false
+offset_left = 774.0
+offset_top = 638.0
+offset_right = 1102.0
+offset_bottom = 824.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("17_lvl13")
+script = ExtResource("4_hover")
 
-[node name="FrictionRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=1446116678]
-layout_mode = 2
+[node name="Level14" type="TextureButton" parent="LevelSelect" unique_id=300000114]
+visible = false
+offset_left = 1133.0
+offset_top = 638.0
+offset_right = 1461.0
+offset_bottom = 824.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("18_lvl14")
+script = ExtResource("4_hover")
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/FrictionRow" unique_id=178690060]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-tooltip_text = "How quickly the car decelerates, in pixels per second squared, after launch."
-mouse_filter = 1
-text = "Friction"
+[node name="Level15" type="TextureButton" parent="LevelSelect" unique_id=300000115]
+visible = false
+offset_left = 1492.0
+offset_top = 638.0
+offset_right = 1820.0
+offset_bottom = 824.0
+pivot_offset = Vector2(164, 93)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("19_lvl15")
+script = ExtResource("4_hover")
 
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/FrictionRow" unique_id=2068715094]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-tooltip_text = "How quickly the car decelerates, in pixels per second squared, after launch."
-min_value = 10.0
-max_value = 2000.0
-value = 10.0
+[node name="AutoCrankButton" type="TextureButton" parent="LevelSelect" unique_id=300000200]
+offset_left = 1807.0
+offset_top = 97.0
+offset_right = 1853.0
+offset_bottom = 143.0
+mouse_default_cursor_shape = 2
 
-[node name="EnemySpeedRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472939]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/EnemySpeedRow" unique_id=1698417537]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-tooltip_text = "Pixels per second enemies travel along their path."
-mouse_filter = 1
-text = "Enemy Speed"
-
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/EnemySpeedRow" unique_id=985944501]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-tooltip_text = "Pixels per second enemies travel along their path."
-min_value = 10.0
-max_value = 2000.0
-value = 200.0
-
-[node name="EnemyKillSpeedRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472940]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/EnemyKillSpeedRow" unique_id=1698417538]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-tooltip_text = "Minimum car speed, in pixels per second, required to kill an enemy on collision."
-mouse_filter = 1
-text = "Enemy Kill Speed"
-
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/EnemyKillSpeedRow" unique_id=985944502]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-tooltip_text = "Minimum car speed, in pixels per second, required to kill an enemy on collision."
-min_value = 10.0
-max_value = 5000.0
-value = 600.0
-
-[node name="GearTimeBonusRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472941]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/GearTimeBonusRow" unique_id=1698417539]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-tooltip_text = "Seconds added to the level timer when a gear is collected."
-mouse_filter = 1
-text = "Gear Time Bonus"
-
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/GearTimeBonusRow" unique_id=985944503]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-tooltip_text = "Seconds added to the level timer when a gear is collected."
-min_value = 0.0
-max_value = 60.0
-step = 0.5
-value = 3.0
-
-[node name="EnemyKillTimeBonusRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472942]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/EnemyKillTimeBonusRow" unique_id=1698417540]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-tooltip_text = "Seconds added to the level timer when an enemy is killed."
-mouse_filter = 1
-text = "Enemy Kill Time Bonus"
-
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/EnemyKillTimeBonusRow" unique_id=985944504]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-tooltip_text = "Seconds added to the level timer when an enemy is killed."
-min_value = 0.0
-max_value = 60.0
-step = 0.5
-value = 3.0
-
-[node name="CannonKillTimeBonusRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472946]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/CannonKillTimeBonusRow" unique_id=1698417544]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-tooltip_text = "Seconds added to the level timer when a cannon is killed."
-mouse_filter = 1
-text = "Cannon Kill Time Bonus"
-
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/CannonKillTimeBonusRow" unique_id=985944508]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-tooltip_text = "Seconds added to the level timer when a cannon is killed."
-min_value = 0.0
-max_value = 60.0
-step = 0.5
-value = 3.0
-
-[node name="CannonTurretSpeedDegreesRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472944]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/CannonTurretSpeedDegreesRow" unique_id=1698417542]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-tooltip_text = "Degrees per second the cannon turret rotates to track its target."
-mouse_filter = 1
-text = "Cannon Turret Speed"
-
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/CannonTurretSpeedDegreesRow" unique_id=985944506]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-tooltip_text = "Degrees per second the cannon turret rotates to track its target."
-min_value = 10.0
-max_value = 720.0
-value = 90.0
-
-[node name="BulletSpeedRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=450472945]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Center/Panel/Margin/VBox/BulletSpeedRow" unique_id=1698417543]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-tooltip_text = "Pixels per second a fired bullet travels."
-mouse_filter = 1
-text = "Bullet Speed"
-
-[node name="SpinBox" type="SpinBox" parent="Center/Panel/Margin/VBox/BulletSpeedRow" unique_id=985944507]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-tooltip_text = "Pixels per second a fired bullet travels."
-min_value = 10.0
-max_value = 3000.0
-value = 700.0
-
-[node name="DistanceLabel" type="Label" parent="Center/Panel/Margin/VBox" unique_id=50230963]
-layout_mode = 2
-text = "Estimated max travel distance: 2320 px"
-
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/SteerSpeedRow/SpinBox" to="." method="_on_steer_speed_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxCrankDegreesRow/SpinBox" to="." method="_on_max_crank_degrees_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/MaxSpeedRow/SpinBox" to="." method="_on_max_speed_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/FrictionRow/SpinBox" to="." method="_on_friction_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/EnemySpeedRow/SpinBox" to="." method="_on_enemy_speed_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/EnemyKillSpeedRow/SpinBox" to="." method="_on_enemy_kill_speed_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/GearTimeBonusRow/SpinBox" to="." method="_on_gear_time_bonus_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/EnemyKillTimeBonusRow/SpinBox" to="." method="_on_enemy_kill_time_bonus_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/CannonKillTimeBonusRow/SpinBox" to="." method="_on_cannon_kill_time_bonus_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/CannonTurretSpeedDegreesRow/SpinBox" to="." method="_on_cannon_turret_speed_degrees_spin_box_value_changed"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/BulletSpeedRow/SpinBox" to="." method="_on_bullet_speed_spin_box_value_changed"]
+[node name="CheckMark" type="TextureRect" parent="LevelSelect/AutoCrankButton" unique_id=300000201]
+visible = false
+offset_left = 8.5
+offset_top = 9.0
+offset_right = 37.5
+offset_bottom = 37.0
+mouse_filter = 2
+texture = ExtResource("3_chk")
