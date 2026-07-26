@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bv78p3ypc3cif"
+path="res://.godot/imported/Stair Unlock.wav-4ca0b7811a8c342a5dfa8c6371a81cb1.sample"
+
+[deps]
+
+source_file="res://Audio/SFX V1/Stair Unlock.wav"
+dest_files=["res://.godot/imported/Stair Unlock.wav-4ca0b7811a8c342a5dfa8c6371a81cb1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
