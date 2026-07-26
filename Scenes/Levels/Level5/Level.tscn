@@ -55,7 +55,6 @@ motion_mode = 1
 curve = SubResource("Curve2D_8ua28")
 
 [node name="Enemy" parent="Path2D" unique_id=155100240 instance=ExtResource("6_pac26")]
-collision_mask = 1
 loop = false
 
 [node name="Path2D2" type="Path2D" parent="." unique_id=273495832]
@@ -63,7 +62,6 @@ position = Vector2(614, 6)
 curve = SubResource("Curve2D_8j7rd")
 
 [node name="Enemy" parent="Path2D2" unique_id=1678588905 instance=ExtResource("6_pac26")]
-collision_mask = 1
 loop = false
 
 [node name="Path2D3" type="Path2D" parent="." unique_id=1179607694]
@@ -71,7 +69,6 @@ position = Vector2(451, 2)
 curve = SubResource("Curve2D_pac26")
 
 [node name="Enemy" parent="Path2D3" unique_id=812215421 instance=ExtResource("6_pac26")]
-collision_mask = 1
 loop = false
 
 [node name="Path2D4" type="Path2D" parent="." unique_id=1425626051]
@@ -79,7 +76,6 @@ position = Vector2(158, 2)
 curve = SubResource("Curve2D_wr1xv")
 
 [node name="Enemy" parent="Path2D4" unique_id=76624504 instance=ExtResource("6_pac26")]
-collision_mask = 1
 loop = false
 
 [node name="Path2D5" type="Path2D" parent="." unique_id=1115547643]
@@ -87,7 +83,6 @@ position = Vector2(309, 7)
 curve = SubResource("Curve2D_kxpr5")
 
 [node name="Enemy" parent="Path2D5" unique_id=1877653156 instance=ExtResource("6_pac26")]
-collision_mask = 1
 loop = false
 
 [node name="MinionBoss" parent="." unique_id=1828729893 instance=ExtResource("5_8ua28")]

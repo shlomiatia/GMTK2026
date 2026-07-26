@@ -74,6 +74,5 @@ func _on_animation_finished(anim_name: StringName) -> void:
         died.emit()
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-    prints(_sprite.animation)
     if _sprite.animation == "attack":
         _sprite.play("idle")
