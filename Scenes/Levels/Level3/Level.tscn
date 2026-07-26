@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="4_fhulb"]
 [ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="5_txuk4"]
 [ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="6_cumqq"]
+[ext_resource type="PackedScene" uid="uid://by0ynjbjyico" path="res://Scenes/Tutorial/Tutorial.tscn" id="7_tutorial"]
 
 [sub_resource type="Curve2D" id="Curve2D_hy6v2"]
 _data = {
@@ -58,3 +59,8 @@ position = Vector2(1266, 379)
 
 [node name="Gear8" parent="." unique_id=828618247 instance=ExtResource("5_txuk4")]
 position = Vector2(1162, 201)
+
+[node name="Tutorial" parent="." instance=ExtResource("7_tutorial")]
+mode = 1
+simple_message = "Hit minions hard to get the key!"
+fade_trigger = 1

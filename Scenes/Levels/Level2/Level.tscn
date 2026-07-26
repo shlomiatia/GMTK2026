@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="5_goal_obj"]
 [ext_resource type="PackedScene" uid="uid://bqm5v2s7k1n4x" path="res://Scenes/Pillar/Pillar.tscn" id="5_kon66"]
 [ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="7_pwtql"]
+[ext_resource type="PackedScene" uid="uid://by0ynjbjyico" path="res://Scenes/Tutorial/Tutorial.tscn" id="8_tutorial"]
 
 [node name="Level" type="Node2D" unique_id=1733532608]
 
@@ -41,3 +42,8 @@ position = Vector2(1293, 400)
 
 [node name="Gear5" parent="." unique_id=1845234820 instance=ExtResource("7_pwtql")]
 position = Vector2(1166, 235)
+
+[node name="Tutorial" parent="." instance=ExtResource("8_tutorial")]
+mode = 1
+simple_message = "Don't forget to aim! Use A to turn left and D to turn right."
+fade_trigger = 0
