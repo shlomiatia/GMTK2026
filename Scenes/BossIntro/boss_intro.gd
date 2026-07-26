@@ -30,7 +30,7 @@ func _ready() -> void:
     tween.set_parallel(true)
     tween.tween_property(_point_light, "energy", Constants.boss_intro_peak_energy, Constants.boss_intro_rise_seconds)
     tween.tween_property(_canvas_modulate, "color", Color(1, 1, 1, 1), Constants.boss_intro_glow_seconds).set_delay(Constants.boss_intro_glow_delay_seconds)
-    tween.tween_callback(_start_music).set_delay(Constants.boss_intro_glow_delay_seconds)
+    tween.tween_callback(_start_music).set_delay(Constants.boss_intro_glow_delay_seconds + 0.5)
     tween.set_parallel(false)
     tween.tween_callback(_end_intro)
 

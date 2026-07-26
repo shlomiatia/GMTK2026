@@ -227,7 +227,7 @@ func _win() -> void:
         return
     _game_over = true
     if _objective is BossObjective:
-        SfxPlayer.play_win_boss()
+        await get_tree().create_timer(Constants.final_boss_victory_delay_seconds, true).timeout
     else:
         SfxPlayer.play_win_stair()
     get_tree().paused = true

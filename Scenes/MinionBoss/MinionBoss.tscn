@@ -73,13 +73,14 @@ polygon = PackedVector2Array(-34, -89, 43, -88, 50, -54, 61, -41, 56, -33, 63, -
 libraries/ = SubResource("AnimationLibrary_boss")
 
 [node name="BossCore" parent="." unique_id=1185930564 instance=ExtResource("4_bosscore")]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(0, 120)
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=32421724]
 energy = 0.0
 texture = ExtResource("5_shadow")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1346783469]
 color = Color(0, 0, 0, 1)
 
-[node name="BossIntro" parent="." instance=ExtResource("7_intro")]
+[node name="BossIntro" parent="." unique_id=656583831 instance=ExtResource("7_intro")]

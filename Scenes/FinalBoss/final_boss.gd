@@ -59,6 +59,7 @@ func _die() -> void:
     _dial_collision_shape.set_deferred("disabled", true)
     _animation_player.play("die")
     MusicPlayer.stop_boss_music(Constants.boss_intro_music_fade_seconds)
+    SfxPlayer.play_win_boss()
 
 
 func _on_animation_finished(anim_name: StringName) -> void:
