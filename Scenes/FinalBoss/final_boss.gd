@@ -55,11 +55,12 @@ func _on_dial_body_entered(body: Node2D) -> void:
 
 
 func _die() -> void:
+    _body_sprite.pause()
     _collision_shape.set_deferred("disabled", true)
     _dial_collision_shape.set_deferred("disabled", true)
     _animation_player.play("die")
     MusicPlayer.stop_boss_music(Constants.boss_intro_music_fade_seconds)
-    SfxPlayer.play_win_boss()
+    SfxPlayer.play_win_stair()
 
 
 func _on_animation_finished(anim_name: StringName) -> void:

@@ -3,8 +3,8 @@ class_name Bullet extends Node2D
 signal car_hit(car: Car)
 
 const _wall_collision_sfx := [
-	preload("res://Audio/SFX V1/Wall collision-001.wav"),
-	preload("res://Audio/SFX V1/Wall collision-002.wav"),
+	preload("res://Audio/SFX V1/Bullet Wall Collision-001.wav"),
+	preload("res://Audio/SFX V1/Bullet Wall Collision-002.wav"),
 ]
 
 @onready var _area: Area2D = $Area2D

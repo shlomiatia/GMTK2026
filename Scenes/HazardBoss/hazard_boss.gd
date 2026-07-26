@@ -47,6 +47,7 @@ func get_radius() -> float:
 
 
 func _die() -> void:
+    _sprite.pause()
     _collision_shape.set_deferred("disabled", true)
     _animation_player.play("die")
     SfxPlayer.play_win_boss()
