@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dtbqsa6dvd3jt" path="res://Art/Assets/Play Scene/Levels/Lv 5.png" id="2_8ua28"]
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_wr1xv"]
 [ext_resource type="PackedScene" uid="uid://cnr8l732xosm2" path="res://Scenes/MinionBoss/MinionBoss.tscn" id="5_8ua28"]
-[ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="6_pac26"]
+[ext_resource type="PackedScene" uid="uid://swgb7gesjg1m" path="res://Scenes/Enemy/enemy.tscn" id="6_pac26"]
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/BossObjective/BossObjective.tscn" id="7_boss_obj"]
 
 [sub_resource type="Curve2D" id="Curve2D_8ua28"]

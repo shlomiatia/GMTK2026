@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_vqoj4"]
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="4_6tj17"]
 [ext_resource type="PackedScene" uid="uid://dom18jy1c3une" path="res://Scenes/CircularPath2D/CircularPath2D.tscn" id="6_6tj17"]
-[ext_resource type="PackedScene" uid="uid://cue5dvs0pxdio" path="res://Scenes/Enemy/Enemy.tscn" id="7_vfwuj"]
+[ext_resource type="PackedScene" uid="uid://swgb7gesjg1m" path="res://Scenes/Enemy/enemy.tscn" id="7_vfwuj"]
 
 [sub_resource type="Curve2D" id="Curve2D_vqoj4"]
 resource_local_to_scene = true
