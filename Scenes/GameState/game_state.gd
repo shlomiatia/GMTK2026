@@ -1,12 +1,14 @@
 extends Node
 
 const SAVE_PATH := "user://progress.cfg"
+const _cursor_texture := preload("res://Art/Assets/Cursor/Pinhole.png")
 
 var completed_levels: Dictionary = {}
 var auto_crank_enabled: bool = false
 
 
 func _ready() -> void:
+    Input.set_custom_mouse_cursor(_cursor_texture, Input.CURSOR_POINTING_HAND)
     _load()
 
 

@@ -29,6 +29,8 @@ func hit() -> bool:
 
 func play_attack() -> void:
     _sprite.play("attack")
+    await get_tree().create_timer(0.5).timeout
+    SfxPlayer.play_boss_collision()
 
 
 func _flash() -> void:

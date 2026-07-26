@@ -1,17 +1,158 @@
 [gd_scene format=3 uid="uid://ounxg8je0wnq"]
 
-[ext_resource type="Texture2D" uid="uid://37636l85xo46" path="res://Art/Assets/Play Scene/Enemies/Final Boss.png" id="1_j6a7x"]
 [ext_resource type="Texture2D" uid="uid://br7rxxe5r1roh" path="res://Art/Assets/Play Scene/Enemies/Final Boss Spoke.png" id="2_xw47l"]
+[ext_resource type="Texture2D" uid="uid://c6jhjwnq3ehcs" path="res://Art/Assets/Play Scene/Enemies/Final Boss Idle.png" id="3_nsy3v"]
 [ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="3_xw47l"]
 [ext_resource type="Script" uid="uid://b866uyitsi1ce" path="res://Scenes/FinalBoss/final_boss.gd" id="4_finalboss"]
 [ext_resource type="Texture2D" uid="uid://bm4ny5fpfmnn0" path="res://Art/Generated/Final Boss Shadow.png" id="5_65wqp"]
-[ext_resource type="PackedScene" uid="uid://dbossintro01" path="res://Scenes/BossIntro/BossIntro.tscn" id="6_intro"]
+[ext_resource type="PackedScene" path="res://Scenes/BossIntro/BossIntro.tscn" id="6_intro"]
 [ext_resource type="PackedScene" path="res://Scenes/HazardSpawner/HazardSpawner.tscn" id="7_hazardspawner"]
 [ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="8_gearspawner"]
-[ext_resource type="AudioStream" path="res://Audio/SFX V1/Hazard Collision.wav" id="9_sfx"]
+[ext_resource type="AudioStream" uid="uid://crpjr7ecdoqm" path="res://Audio/SFX V1/Hazard Collision.wav" id="9_sfx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebdu8"]
 size = Vector2(20, 498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppyn3"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(0, 0, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ux3eb"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(268, 0, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57wsb"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(536, 0, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0la8"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(804, 0, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi6xo"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(1072, 0, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlhyf"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(0, 342, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nw6u"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(268, 342, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmrg7"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(536, 342, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtcgl"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(804, 342, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyftx"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(1072, 342, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b16bb"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(0, 684, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6e8gq"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(268, 684, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csftr"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(536, 684, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4pepm"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(804, 684, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnw7a"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(1072, 684, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_831rm"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(0, 1026, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqbk6"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(268, 1026, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vniot"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(536, 1026, 268, 342)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7v4xo"]
+atlas = ExtResource("3_nsy3v")
+region = Rect2(804, 1026, 268, 342)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_md4wt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppyn3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ux3eb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57wsb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0la8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi6xo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlhyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nw6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmrg7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtcgl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyftx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b16bb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6e8gq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csftr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4pepm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnw7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_831rm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqbk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vniot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7v4xo")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 12.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a04kq"]
 radius = 130.0
@@ -120,9 +261,11 @@ collision_mask = 2
 position = Vector2(0, 241)
 shape = SubResource("RectangleShape2D_ebdu8")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1753513047]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1451014726]
 z_index = 1
-texture = ExtResource("1_j6a7x")
+sprite_frames = SubResource("SpriteFrames_md4wt")
+autoplay = "default"
+frame_progress = 0.13566689
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=212480805]
 
@@ -151,6 +294,6 @@ bigger_hazard_chance = 0.4
 
 [node name="GearSpawner" parent="." unique_id=1136378483 instance=ExtResource("8_gearspawner")]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=95576186]
 process_mode = 3
 stream = ExtResource("9_sfx")

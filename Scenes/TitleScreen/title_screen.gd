@@ -12,6 +12,7 @@ var _credits_shown: bool = false
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+    MusicPlayer.play_level_music()
     _start_button.pressed.connect(_on_start_pressed)
     _credits_button.pressed.connect(_on_credits_pressed)
 
@@ -26,12 +27,14 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_start_pressed() -> void:
+    SfxPlayer.play_winder_click()
     _start_button.disabled = true
     _credits_button.disabled = true
     SceneTransition.transition_to_scene(_next_level_path)
 
 
 func _on_credits_pressed() -> void:
+    SfxPlayer.play_winder_click()
     _start_button.disabled = true
     _credits_button.disabled = true
     _credits_overlay.visible = true

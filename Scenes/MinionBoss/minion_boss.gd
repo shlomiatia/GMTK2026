@@ -45,7 +45,8 @@ func _spawn_enemy(path: Path2D, loop: bool, key: bool) -> void:
     enemy.start_disabled = true
     path.add_child(enemy)
     _connect_enemy(enemy)
-
+    await get_tree().create_timer(0.5).timeout
+    SfxPlayer.play_boss_collision()
 
 func is_dead() -> bool:
     return _core.is_dead()

@@ -3,7 +3,7 @@ class_name FinalBoss extends Node2D
 signal died
 signal car_hit
 
-@onready var _body_sprite: Sprite2D = $Sprite2D
+@onready var _body_sprite: AnimatedSprite2D = $Sprite2D
 @onready var _dial: Sprite2D = $Dial
 @onready var _dial_area: Area2D = $Dial/Area2D
 @onready var _dial_collision_shape: CollisionShape2D = $Dial/Area2D/CollisionShape2D

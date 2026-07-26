@@ -42,6 +42,7 @@ func _refresh() -> void:
 
 
 func _on_level_pressed(level_number: int) -> void:
+    SfxPlayer.play_winder_click()
     _restore_always_nodes()
     visible = false
     get_tree().paused = false
@@ -50,6 +51,7 @@ func _on_level_pressed(level_number: int) -> void:
 
 
 func _on_auto_crank_pressed() -> void:
+    SfxPlayer.play_winder_click()
     GameState.set_auto_crank(!GameState.auto_crank_enabled)
     _check_mark.visible = GameState.auto_crank_enabled
 

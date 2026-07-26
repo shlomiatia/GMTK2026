@@ -22,6 +22,17 @@ func fade_out_level_music(duration: float) -> void:
     _fade_tween.tween_property(_level_player, "volume_db", _mute_db, duration)
 
 
+func play_level_music() -> void:
+    if _fade_tween:
+        _fade_tween.kill()
+    boss_active = false
+    _boss_player.stop()
+    _boss_player.volume_db = _mute_db
+    _level_player.volume_db = 0.0
+    if !_level_player.playing:
+        _level_player.play()
+
+
 func stop_boss_music(fade_seconds: float) -> void:
     if !boss_active:
         return
