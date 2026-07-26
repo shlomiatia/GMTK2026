@@ -56,10 +56,6 @@ region = Rect2(440, 418, 220, 209)
 atlas = ExtResource("3_h51hv")
 region = Rect2(660, 418, 220, 209)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jfqor"]
-atlas = ExtResource("4_jfw1m")
-region = Rect2(0, 0, 220, 209)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_2mut4"]
 atlas = ExtResource("4_jfw1m")
 region = Rect2(0, 0, 220, 209)
@@ -158,14 +154,6 @@ animations = [{
 "loop": 0,
 "name": &"attack",
 "speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jfqor")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -270,8 +258,10 @@ enemy_scene = ExtResource("3_enemy")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1545460144]
 sprite_frames = SubResource("SpriteFrames_ebdu8")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
+frame = 11
+frame_progress = 1.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=68409507]
 visible = false

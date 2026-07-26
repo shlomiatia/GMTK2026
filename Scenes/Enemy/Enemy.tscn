@@ -258,7 +258,8 @@ texture = ExtResource("3_e0oyi")
 process_mode = 3
 stream = ExtResource("4_key_sfx")
 
-[node name="SmokeParticleEmitter" parent="." instance=ExtResource("5_smoke")]
+[node name="SmokeParticleEmitter" parent="." unique_id=1835554100 instance=ExtResource("5_smoke")]
 position = Vector2(0, -55)
+amount = 3
 direction = Vector2(0, -1)
-emitting = true
+emission_rate = 6.0
