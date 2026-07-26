@@ -20,10 +20,12 @@ const _boss_collision_sfx := preload("res://Audio/SFX V1/Boss Collision NO KILL.
 @onready var _crank: Crank = $Car/Crank
 @onready var _sprite: Sprite2D = $Car
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var _attack: Sprite2D = $Car/Attack
 
 var _state: State = State.IDLE
 var _angular_velocity: float = 0.0
 var _wall_sfx_index: int = 0
+var _attack_tween: Tween
 
 
 func _ready() -> void:
@@ -63,6 +65,7 @@ func _physics_process(delta: float) -> void:
 func _handle_collision(collision: KinematicCollision2D) -> void:
 	if !collision:
 		return
+	_show_attack(-collision.get_normal())
 	var sfx: AudioStream = null
 	var boss_killed := false
 	var enemy := collision.get_collider() as Enemy
@@ -88,6 +91,15 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
 		_audio_stream_player.stream = sfx
 		_audio_stream_player.play()
 	velocity = velocity.bounce(collision.get_normal()) * 0.75
+
+
+func _show_attack(direction: Vector2) -> void:
+	if _attack_tween:
+		_attack_tween.kill()
+	_attack.global_rotation = Vector2.DOWN.angle_to(direction)
+	_attack.modulate = Color(1, 1, 1, 1)
+	_attack_tween = create_tween()
+	_attack_tween.tween_property(_attack, "modulate:a", 0.0, 0.25)
 
 
 func _apply_angular_velocity(delta: float) -> float:
