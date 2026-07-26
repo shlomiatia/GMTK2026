@@ -2,10 +2,11 @@ class_name HazardBoss extends Node2D
 
 signal died
 
-@onready var _sprite: Sprite2D = $Sprite2D
+@onready var _sprite: AnimatedSprite2D = $Sprite2D
 @onready var _collision_shape: CollisionPolygon2D = $StaticBody2D/CollisionPolygon2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _core: BossCore = $BossCore
+@onready var _hazard_spawner: HazardSpawner = $HazardSpawner
 
 var _boss_radius: float = -1.0
 
@@ -14,6 +15,8 @@ func _ready() -> void:
     _core.killed.connect(_die)
     _core.hit_taken.connect(_flash)
     _animation_player.animation_finished.connect(_on_animation_finished)
+    _sprite.animation_finished.connect(_on_animated_sprite_2d_animation_finished)
+    _hazard_spawner.hazard_spawned.connect(play_attack)
 
 
 func is_dead() -> bool:
@@ -22,6 +25,10 @@ func is_dead() -> bool:
 
 func hit() -> bool:
     return _core.hit()
+
+
+func play_attack() -> void:
+    _sprite.play("attack")
 
 
 func _flash() -> void:
@@ -46,3 +53,7 @@ func _die() -> void:
 func _on_animation_finished(anim_name: StringName) -> void:
     if anim_name == "die":
         died.emit()
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+    if _sprite.animation == "attack":
+        _sprite.play("default")

@@ -1,5 +1,7 @@
 class_name HazardSpawner extends Node
 
+signal hazard_spawned
+
 const SPAWN_ATTEMPTS := 20
 
 @export var hazard_scene: PackedScene
@@ -27,7 +29,8 @@ func _on_spawn_timer_timeout() -> void:
         return
     _pending_hazards.clear()
     _despawn_random_hazard()
-    _spawn_hazard(true)
+    if _spawn_hazard(true):
+        hazard_spawned.emit()
 
 
 func _despawn_random_hazard() -> void:
@@ -47,20 +50,21 @@ func _pick_hazard_scene() -> PackedScene:
     return biggest_hazard_scene
 
 
-func _spawn_hazard(start_disabled: bool) -> void:
+func _spawn_hazard(start_disabled: bool) -> bool:
     var arena := get_tree().get_first_node_in_group("arena") as Arena
     if !arena:
-        return
+        return false
     var hazard := _pick_hazard_scene().instantiate() as Hazard
     var hazard_radius := hazard.get_radius()
     var spawn_position: Variant = _find_spawn_position(arena, hazard_radius)
     if spawn_position == null:
         hazard.queue_free()
-        return
+        return false
     hazard.start_disabled = start_disabled
     hazard.global_position = spawn_position
     _pending_hazards.append({"position": spawn_position, "radius": hazard_radius})
     _boss.get_parent().add_child.call_deferred(hazard)
+    return true
 
 
 func _find_spawn_position(arena: Arena, hazard_radius: float) -> Variant:

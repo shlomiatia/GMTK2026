@@ -264,7 +264,6 @@ frame = 11
 frame_progress = 1.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=68409507]
-visible = false
 position = Vector2(1, -9)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1498492570]
