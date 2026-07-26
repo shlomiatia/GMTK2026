@@ -172,7 +172,7 @@ func _on_car_entered_hazard(car: Car) -> void:
     _shaking_camera.start_screen_shake()
 
 
-func _on_bullet_car_hit(_car: Car) -> void:
+func _on_bullet_car_hit(_: Car) -> void:
     if _game_over:
         return
     _shaking_camera.start_screen_shake()
