@@ -18,6 +18,7 @@ func _on_area_entered(area: Area2D) -> void:
         return
     _collision_shape.set_deferred("disabled", true)
     _animation_player.play("die")
+    _audio_stream_player.pitch_scale = randf_range(0.8, 1.2)
     _audio_stream_player.play()
     collected.emit()
 
