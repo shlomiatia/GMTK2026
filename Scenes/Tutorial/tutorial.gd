@@ -22,6 +22,7 @@ func _ready() -> void:
     _crank.crank_pressed.connect(_on_crank_pressed)
     _crank.crank_released.connect(_on_crank_released)
     _crank.cycle_completed.connect(_on_cycle_completed)
+    add_to_group("start_paused")
     get_tree().paused = true
     _show_message("To get started, hold down the left mouse button.\nDon't let go until you're ready to launch.")
 

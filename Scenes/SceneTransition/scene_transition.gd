@@ -14,4 +14,5 @@ func transition_to_scene(path: String) -> void:
 		return
 	_animation_player.play("fade_in")
 	await _animation_player.animation_finished
-	get_tree().paused = false
+	if get_tree().get_nodes_in_group("start_paused").is_empty():
+		get_tree().paused = false

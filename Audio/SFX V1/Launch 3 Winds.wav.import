@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://nnro6s3wxra3"
+path="res://.godot/imported/Launch 3 Winds.wav-43d2d9668cb55f51ef004d5dbe39b15a.sample"
+
+[deps]
+
+source_file="res://Audio/SFX V1/Launch 3 Winds.wav"
+dest_files=["res://.godot/imported/Launch 3 Winds.wav-43d2d9668cb55f51ef004d5dbe39b15a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

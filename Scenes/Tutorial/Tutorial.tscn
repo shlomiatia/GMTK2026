@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://by0ynjbjyico"]
 
 [ext_resource type="Script" uid="uid://c8x7kte00kq88" path="res://Scenes/Tutorial/tutorial.gd" id="1_tutorial"]
+[ext_resource type="FontFile" uid="uid://43m7higjcgw0" path="res://Art/Fonts/berlin-sans-fb/BRLNSR.TTF" id="2_vshlv"]
 
 [node name="Tutorial" type="CanvasLayer" unique_id=1704120866]
 process_mode = 3
@@ -22,6 +23,7 @@ theme_override_constants/margin_bottom = 32
 
 [node name="MessageLabel" type="Label" parent="MarginContainer" unique_id=1726049348]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("2_vshlv")
+theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
 vertical_alignment = 1

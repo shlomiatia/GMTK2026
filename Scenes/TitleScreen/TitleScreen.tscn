@@ -2,18 +2,111 @@
 
 [ext_resource type="Texture2D" uid="uid://u80ve0jmrlhf" path="res://Art/Assets/Title Screen/Splash.png" id="1_f6ya5"]
 [ext_resource type="Texture2D" uid="uid://bt0uykndldke3" path="res://Art/Assets/Title Screen/START.png" id="2_at0r8"]
+[ext_resource type="Texture2D" uid="uid://c8qahwpkxath0" path="res://Art/Assets/Title Screen/CREDITSButton.png" id="3_at0r8"]
 [ext_resource type="Texture2D" uid="uid://0qm7u2fofmx" path="res://Art/Assets/Title Screen/CREDITS.png" id="3_bf2sq"]
+[ext_resource type="Script" uid="uid://cp7eqwob0wqki" path="res://Scenes/TitleScreen/title_screen.gd" id="5_title"]
+[ext_resource type="Script" uid="uid://d16lnu1cnoofy" path="res://Scenes/TitleScreen/hover_button.gd" id="6_hover"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dim"]
+bg_color = Color(0, 0, 0, 0.6)
+
+[sub_resource type="Animation" id="Animation_reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fade_in"]
+resource_name = "fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fade_out"]
+resource_name = "fade_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_credits"]
+_data = {
+&"RESET": SubResource("Animation_reset"),
+&"fade_in": SubResource("Animation_fade_in"),
+&"fade_out": SubResource("Animation_fade_out")
+}
 
 [node name="TitleScreen" type="Node2D" unique_id=1003505923]
+script = ExtResource("5_title")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1370128859]
 position = Vector2(960, 540)
 texture = ExtResource("1_f6ya5")
 
-[node name="Start" type="Sprite2D" parent="." unique_id=167404153]
-position = Vector2(818, 691)
-texture = ExtResource("2_at0r8")
+[node name="StartButton" type="TextureButton" parent="." unique_id=453454438]
+offset_left = 626.5
+offset_top = 562.5
+offset_right = 1009.5
+offset_bottom = 819.5
+pivot_offset = Vector2(191.5, 128.5)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_at0r8")
+script = ExtResource("6_hover")
 
-[node name="Credits" type="Sprite2D" parent="." unique_id=160689497]
-position = Vector2(879, 785)
+[node name="CreditsButton" type="TextureButton" parent="." unique_id=1020721364]
+offset_left = 687.5
+offset_top = 656.5
+offset_right = 1070.5
+offset_bottom = 913.5
+pivot_offset = Vector2(191.5, 128.5)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_at0r8")
+script = ExtResource("6_hover")
+
+[node name="CreditsOverlay" type="Button" parent="." unique_id=1172539197]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_dim")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dim")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dim")
+theme_override_styles/focus = SubResource("StyleBoxFlat_dim")
+disabled = true
+
+[node name="CreditsImage" type="Sprite2D" parent="CreditsOverlay" unique_id=1834875061]
+position = Vector2(960, 540)
 texture = ExtResource("3_bf2sq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CreditsOverlay" unique_id=1471705820]
+libraries/ = SubResource("AnimationLibrary_credits")

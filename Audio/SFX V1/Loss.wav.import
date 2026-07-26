@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://hqjhw26enfhs"
+path="res://.godot/imported/Loss.wav-625b8f7dcd3709a623d7a54ebcb84827.sample"
+
+[deps]
+
+source_file="res://Audio/SFX V1/Loss.wav"
+dest_files=["res://.godot/imported/Loss.wav-625b8f7dcd3709a623d7a54ebcb84827.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
