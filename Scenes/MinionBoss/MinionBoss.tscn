@@ -273,7 +273,6 @@ polygon = PackedVector2Array(-34, -89, 43, -88, 50, -54, 61, -41, 56, -33, 63, -
 libraries/ = SubResource("AnimationLibrary_boss")
 
 [node name="BossCore" parent="." unique_id=1185930564 instance=ExtResource("4_bosscore")]
-modulate = Color(1, 1, 1, 0)
 position = Vector2(0, 120)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=32421724]
