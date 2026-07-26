@@ -221,7 +221,7 @@ script = ExtResource("4_hover")
 
 [node name="AutoCrankButton" type="TextureButton" parent="LevelSelect" unique_id=300000200]
 layout_mode = 0
-offset_left = 1787.0
+offset_left = 1582.5
 offset_top = 75.0
 offset_right = 1832.5
 offset_bottom = 120.5
@@ -229,9 +229,9 @@ mouse_default_cursor_shape = 2
 
 [node name="CheckMark" type="TextureRect" parent="LevelSelect/AutoCrankButton" unique_id=300000201]
 layout_mode = 0
-offset_left = 7.5
+offset_left = 212.5
 offset_top = 8.5
-offset_right = 36.5
+offset_right = 241.5
 offset_bottom = 36.5
 mouse_filter = 2
 texture = ExtResource("3_chk")
