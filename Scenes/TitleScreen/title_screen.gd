@@ -11,6 +11,7 @@ var _credits_shown: bool = false
 
 
 func _ready() -> void:
+    Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
     _start_button.pressed.connect(_on_start_pressed)
     _credits_button.pressed.connect(_on_credits_pressed)
 
