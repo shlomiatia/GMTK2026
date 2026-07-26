@@ -23,6 +23,8 @@ var _car: Car
 var _state: State = State.AIMING
 var _crank_elapsed: float = 0.0
 var _wall_sfx_index: int = 0
+var _shuddering: bool = false
+var _shudder_base_position: Vector2
 
 
 func _ready() -> void:
@@ -39,6 +41,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
     _update_core_position()
     _smoke.emitting = _state == State.LAUNCHED && velocity.length() > Constants.enemy_kill_speed
+    if _shuddering:
+        ShudderUtils.update(self, _shudder_base_position, Constants.shudder_intensity)
     if _core.is_dead() || !_car:
         return
     match _state:
@@ -64,6 +68,18 @@ func _on_aim_timer_timeout() -> void:
         return
     _state = State.CRANKING
     _crank_elapsed = 0.0
+    start_shudder()
+
+
+func start_shudder() -> void:
+    _shudder_base_position = position
+    _shuddering = true
+
+
+func stop_shudder() -> void:
+    if _shuddering:
+        position = _shudder_base_position
+    _shuddering = false
 
 
 func _advance_crank(delta: float) -> void:
@@ -75,6 +91,7 @@ func _advance_crank(delta: float) -> void:
 
 
 func _launch() -> void:
+    stop_shudder()
     _state = State.LAUNCHED
     velocity = Vector2.DOWN.rotated(rotation) * Constants.max_speed
 
@@ -129,6 +146,7 @@ func get_radius() -> float:
 
 func _die() -> void:
     _aim_timer.stop()
+    stop_shudder()
     velocity = Vector2.ZERO
     _collision_shape.set_deferred("disabled", true)
     _animation_player.play("die")

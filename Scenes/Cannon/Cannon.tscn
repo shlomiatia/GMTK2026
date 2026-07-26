@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cxy5qr35i2yve" path="res://Scenes/Bullet/Bullet.tscn" id="4_bullet"]
 [ext_resource type="PackedScene" path="res://Scenes/Turret/Turret.tscn" id="5_turret"]
 [ext_resource type="AudioStream" uid="uid://oscbotp8vhk3" path="res://Audio/SFX V1/bullet shot.wav" id="6_sfx"]
+[ext_resource type="PackedScene" uid="uid://dbmypk4a1h3tq" path="res://Scenes/SmokeParticleEmitter/SmokeParticleEmitter.tscn" id="7_smoke"]
 
 [sub_resource type="Animation" id="Animation_l6qg3"]
 length = 0.001
@@ -200,6 +201,20 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, -1), Vector2(0, 1), Vector2(-1, 0), Vector2(0, 0), Vector2(0, 0)]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_shudder"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l6qg3"]
 _data = {
@@ -224,6 +239,12 @@ offset = Vector2(0, 12)
 
 [node name="Node2D" type="Node2D" parent="Turret" unique_id=1279782099]
 position = Vector2(1, 55)
+
+[node name="SmokeParticleEmitter" parent="Turret/Node2D" instance=ExtResource("7_smoke")]
+direction = Vector2(0, -1)
+one_shot = true
+explosiveness = 1.0
+emitting = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1869932999]
 libraries/ = SubResource("AnimationLibrary_l6qg3")

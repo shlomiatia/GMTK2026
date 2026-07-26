@@ -185,6 +185,20 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(0, -27), Vector2(0, -27), Vector2(0, -26), Vector2(-1, -27), Vector2(1, -27), Vector2(0, -28), Vector2(0, -27), Vector2(0, -27)]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_shudder"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l6qg3"]
 _data = {

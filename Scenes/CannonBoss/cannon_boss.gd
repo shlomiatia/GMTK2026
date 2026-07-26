@@ -11,6 +11,9 @@ signal fired
 @onready var _core: BossCore = $BossCore
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
+var _shuddering: bool = false
+var _shudder_base_position: Vector2
+
 
 func _ready() -> void:
     _core.killed.connect(_die)
@@ -18,7 +21,24 @@ func _ready() -> void:
     _animation_player.animation_finished.connect(_on_animation_finished)
 
 
+func _process(_delta: float) -> void:
+    if _shuddering:
+        ShudderUtils.update(self, _shudder_base_position, Constants.shudder_intensity)
+
+
+func start_shudder() -> void:
+    _shudder_base_position = position
+    _shuddering = true
+
+
+func stop_shudder() -> void:
+    if _shuddering:
+        position = _shudder_base_position
+    _shuddering = false
+
+
 func fire() -> void:
+    stop_shudder()
     _turret.fire()
     _audio_stream_player.play()
     fired.emit()
@@ -46,6 +66,7 @@ func get_radius() -> float:
 
 
 func _die() -> void:
+    stop_shudder()
     _turret.stop()
     _collision_shape.set_deferred("disabled", true)
     _animation_player.play("die")
