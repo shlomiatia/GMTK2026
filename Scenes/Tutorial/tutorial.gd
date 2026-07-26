@@ -55,7 +55,7 @@ func _on_cycle_completed() -> void:
 
 func _on_crank_released(_degrees: float) -> void:
     if !_cycle_completed:
-        _show_message("Hold left mouse button to start!")
+        _show_message("Hold down the left mouse button.")
         return
     _launched = true
     _car.process_mode = Node.PROCESS_MODE_INHERIT
