@@ -19,7 +19,7 @@ func _ready() -> void:
     get_tree().paused = true
     _boss.process_mode = Node.PROCESS_MODE_PAUSABLE
     var audio_tween := create_tween()
-    audio_tween.tween_interval(Constants.boss_intro_delay_seconds - 0.5)
+    audio_tween.tween_interval(Constants.boss_intro_delay_seconds - 2.5)
     audio_tween.tween_callback(_audio_stream_player.play)
     
     var tween := create_tween()

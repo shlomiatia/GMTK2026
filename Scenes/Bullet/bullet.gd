@@ -2,9 +2,16 @@ class_name Bullet extends Node2D
 
 signal car_hit(car: Car)
 
+const _wall_collision_sfx := [
+	preload("res://Audio/SFX V1/Wall collision-001.wav"),
+	preload("res://Audio/SFX V1/Wall collision-002.wav"),
+]
+
 @onready var _area: Area2D = $Area2D
 @onready var _sprite: Sprite2D = $Sprite2D
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
+var _wall_sfx_index: int = 0
 
 
 func _ready() -> void:
@@ -20,6 +27,9 @@ func _on_body_entered(body: Node2D) -> void:
 	if car:
 		car.die()
 		car_hit.emit(car)
+	else:
+		_audio_stream_player.stream = _wall_collision_sfx[_wall_sfx_index]
+		_wall_sfx_index = 1 - _wall_sfx_index
 	_sprite.visible = false
 	_area.set_deferred("monitoring", false)
 	set_physics_process(false)
