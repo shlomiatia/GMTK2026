@@ -7,13 +7,13 @@ var shake_intensity: float = 10.0
 func _ready():
     shake_strength = 0.0
 
-func _process(_delta: float):
+func _process(delta: float):
     if shake_strength > 0:
         position = Vector2(
             randf_range(-shake_intensity, shake_intensity) * shake_strength,
             randf_range(-shake_intensity, shake_intensity) * shake_strength
         )
-        shake_strength = lerp(shake_strength, 0.0, shake_decay)
+        shake_strength = lerpf(shake_strength, 0.0, 1.0 - pow(1.0 - shake_decay, delta * 60.0))
     else:
         position = Vector2.ZERO
 

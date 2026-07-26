@@ -25,6 +25,7 @@ func _ready() -> void:
 func _on_spawn_timer_timeout() -> void:
     if _boss.call("is_dead"):
         return
+    _pending_hazards.clear()
     _despawn_random_hazard()
     _spawn_hazard(true)
 

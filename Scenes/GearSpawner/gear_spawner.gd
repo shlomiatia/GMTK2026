@@ -21,6 +21,7 @@ func _ready() -> void:
 func _on_spawn_timer_timeout() -> void:
     if _boss.call("is_dead"):
         return
+    _pending_gears.clear()
     _spawn_gear()
 
 
