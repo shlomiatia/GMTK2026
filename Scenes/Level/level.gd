@@ -71,6 +71,7 @@ func _ready() -> void:
     else:
         MusicPlayer.fade_out_level_music(Constants.boss_intro_music_fade_seconds)
     _overlay.restart_pressed.connect(_restart)
+    _overlay.win_confirmed.connect(_on_win_confirmed)
     _level_skip.skip_requested.connect(_go_to_next_level)
 
 
@@ -172,7 +173,7 @@ func _on_car_entered_hazard(car: Car) -> void:
     _shaking_camera.start_screen_shake()
 
 
-func _on_bullet_car_hit(_: Car) -> void:
+func _on_bullet_car_hit(_c: Car) -> void:
     if _game_over:
         return
     _shaking_camera.start_screen_shake()
@@ -224,7 +225,10 @@ func _win() -> void:
         return
     _game_over = true
     get_tree().paused = true
-    _go_to_next_level()
+    if ResourceLoader.exists(_next_level_path()):
+        _go_to_next_level()
+    else:
+        _overlay.show_win()
 
 
 func _lose() -> void:
@@ -237,9 +241,17 @@ func _restart() -> void:
 
 
 func _go_to_next_level() -> void:
+    var next_level_path := _next_level_path()
+    if ResourceLoader.exists(next_level_path):
+        SceneTransition.transition_to_scene(next_level_path)
+
+
+func _next_level_path() -> String:
     var current_path := get_tree().current_scene.scene_file_path
     var levels_dir := current_path.get_base_dir().get_base_dir()
     var level_number := current_path.get_base_dir().get_file().trim_prefix("Level").to_int()
-    var next_level_path := "%s/Level%d/Level.tscn" % [levels_dir, level_number + 1]
-    if ResourceLoader.exists(next_level_path):
-        SceneTransition.transition_to_scene(next_level_path)
+    return "%s/Level%d/Level.tscn" % [levels_dir, level_number + 1]
+
+
+func _on_win_confirmed() -> void:
+    SceneTransition.transition_to_scene("res://Scenes/TitleScreen/TitleScreen.tscn")

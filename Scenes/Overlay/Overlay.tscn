@@ -1,17 +1,61 @@
 [gd_scene format=3 uid="uid://cppmmjbl4yf8e"]
 
 [ext_resource type="Script" uid="uid://dk6m5qx0q7kkb" path="res://Scenes/Overlay/overlay.gd" id="1_overlay"]
+[ext_resource type="Texture2D" uid="uid://38yvp7oy1ncc" path="res://Art/Assets/Play Scene/Defeat.png" id="2_defeat"]
+[ext_resource type="Texture2D" uid="uid://djqud2ncox250" path="res://Art/Assets/Play Scene/Victory.png" id="3_victory"]
+
+[sub_resource type="Animation" id="Animation_reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fade_in"]
+resource_name = "fade_in"
+length = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.0),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_victory"]
+_data = {
+"RESET": SubResource("Animation_reset"),
+&"fade_in": SubResource("Animation_fade_in")
+}
 
 [node name="Overlay" type="CanvasLayer" unique_id=875396185]
 process_mode = 3
 layer = 5
 script = ExtResource("1_overlay")
 
-[node name="MessageLabel" type="Label" parent="." unique_id=2050366886]
+[node name="DefeatImage" type="Sprite2D" parent="." unique_id=2050366886]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme_override_font_sizes/font_size = 64
-horizontal_alignment = 1
-vertical_alignment = 1
+position = Vector2(960, 540)
+texture = ExtResource("2_defeat")
+
+[node name="VictoryImage" type="Sprite2D" parent="." unique_id=3050366887]
+visible = false
+modulate = Color(1, 1, 1, 0)
+position = Vector2(960, 540)
+texture = ExtResource("3_victory")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VictoryImage" unique_id=3050366888]
+libraries/ = SubResource("AnimationLibrary_victory")

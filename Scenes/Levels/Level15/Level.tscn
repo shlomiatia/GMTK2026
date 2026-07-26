@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://ounxg8je0wnq" path="res://Scenes/FinalBoss/FinalBoss.tscn" id="3_2pyfl"]
 [ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_e1860"]
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/BossObjective/BossObjective.tscn" id="4_oqf08"]
-[ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="5_3kj04"]
 
 [node name="Level" type="Node2D" unique_id=1733532608]
 
@@ -17,7 +16,5 @@ motion_mode = 1
 
 [node name="FinalBoss" parent="." unique_id=416965398 instance=ExtResource("3_2pyfl")]
 position = Vector2(960, 540)
-
-[node name="GearSpawner" parent="FinalBoss" unique_id=1838167398 instance=ExtResource("5_3kj04")]
 
 [node name="BossObjective" parent="." unique_id=211046973 instance=ExtResource("4_oqf08")]
