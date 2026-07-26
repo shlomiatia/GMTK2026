@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://84nyxhtpl2pj"]
+
+[ext_resource type="Texture2D" uid="uid://u80ve0jmrlhf" path="res://Art/Assets/Title Screen/Splash.png" id="1_f6ya5"]
+[ext_resource type="Texture2D" uid="uid://bt0uykndldke3" path="res://Art/Assets/Title Screen/START.png" id="2_at0r8"]
+[ext_resource type="Texture2D" uid="uid://0qm7u2fofmx" path="res://Art/Assets/Title Screen/CREDITS.png" id="3_bf2sq"]
+
+[node name="TitleScreen" type="Node2D" unique_id=1003505923]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1370128859]
+position = Vector2(960, 540)
+texture = ExtResource("1_f6ya5")
+
+[node name="Start" type="Sprite2D" parent="." unique_id=167404153]
+position = Vector2(818, 691)
+texture = ExtResource("2_at0r8")
+
+[node name="Credits" type="Sprite2D" parent="." unique_id=160689497]
+position = Vector2(879, 785)
+texture = ExtResource("3_bf2sq")
