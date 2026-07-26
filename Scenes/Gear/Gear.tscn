@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://culglce1hed48"]
 
+[ext_resource type="Texture2D" uid="uid://jon8apquet3j" path="res://Art/Assets/Play Scene/Items/Nut_Shadow.png" id="2_dtd4c"]
 [ext_resource type="Script" uid="uid://hpa2efnmaslc" path="res://Scenes/Collectible/collectible.gd" id="2_gear"]
 [ext_resource type="Texture2D" uid="uid://b1gyuj32g4uq" path="res://Art/Assets/Play Scene/Items/Nut.png" id="2_swp82"]
-[ext_resource type="AudioStream" path="res://Audio/SFX V1/Nut Collect.wav" id="3_sfx"]
+[ext_resource type="AudioStream" uid="uid://bsqlhi6762y2n" path="res://Audio/SFX V1/Nut Collect.wav" id="3_sfx"]
 
 [sub_resource type="Animation" id="Animation_swp82"]
 length = 0.001
@@ -25,6 +26,30 @@ tracks/1/path = NodePath("Sprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -60,10 +85,40 @@ tracks/1/keys = {
 "values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_dtd4c"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, -2, -2),
+"update": 0,
+"values": [Vector2(0, 2), Vector2(0, 1), Vector2(0, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, -2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1.05, 1.05)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dtd4c"]
 _data = {
 &"RESET": SubResource("Animation_swp82"),
-&"die": SubResource("Animation_h7ii4")
+&"die": SubResource("Animation_h7ii4"),
+&"idle": SubResource("Animation_dtd4c")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebdu8"]
@@ -74,6 +129,11 @@ script = ExtResource("2_gear")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=541205269]
 libraries/ = SubResource("AnimationLibrary_dtd4c")
+autoplay = &"idle"
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1481031073]
+position = Vector2(1, 14)
+texture = ExtResource("2_dtd4c")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=914141441]
 position = Vector2(0, 2)
@@ -86,6 +146,6 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=143139351]
 shape = SubResource("CircleShape2D_ebdu8")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1085050552]
 process_mode = 3
 stream = ExtResource("3_sfx")

@@ -1,11 +1,11 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dcpy0alos1da0"]
 
-[ext_resource type="Script" path="res://Scenes/Crank/VirtualCursor.gd" id="1_cursor"]
-[ext_resource type="Texture2D" uid="uid://dhcwybhoxgwhe" path="res://icon.svg" id="2_vmouse"]
+[ext_resource type="Script" uid="uid://c8y5mawcebbk8" path="res://Scenes/Crank/VirtualCursor.gd" id="1_cursor"]
+[ext_resource type="Texture2D" uid="uid://dwwl5d7wuubvb" path="res://Art/Assets/Cursor/Pinhole.png" id="1_yed1j"]
 
-[node name="VirtualCursor" type="Sprite2D" groups=["menu_pause_exempt"]]
+[node name="VirtualCursor" type="Sprite2D" unique_id=2080145496 groups=["menu_pause_exempt"]]
 process_mode = 3
+visible = false
 top_level = true
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_vmouse")
+texture = ExtResource("1_yed1j")
 script = ExtResource("1_cursor")

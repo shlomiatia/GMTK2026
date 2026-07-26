@@ -21,6 +21,7 @@ const _boss_collision_sfx := preload("res://Audio/SFX V1/Boss Collision NO KILL.
 @onready var _sprite: Sprite2D = $Car
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var _attack: Sprite2D = $Car/Attack
+@onready var _smoke: SmokeParticleEmitter = $SmokeParticleEmitter
 
 var _state: State = State.IDLE
 var _angular_velocity: float = 0.0
@@ -38,6 +39,7 @@ func _process(_delta: float) -> void:
 		return
 	var speed := velocity.length() if _state == State.LAUNCHED else _crank.get_launch_speed()
 	_sprite.self_modulate = MathUtils.speed_to_lethal_color(speed)
+	_smoke.emitting = _state == State.LAUNCHED && velocity.length() > Constants.enemy_kill_speed
 
 
 func _physics_process(delta: float) -> void:
@@ -136,6 +138,7 @@ func die() -> void:
 		return
 	_state = State.DEAD
 	_crank.set_enabled(false)
+	_smoke.emitting = false
 	velocity = Vector2.ZERO
 	_animation_player.play("die")
 
