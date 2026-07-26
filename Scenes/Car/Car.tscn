@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ds6mkts7batl7" path="res://Scenes/Car/car.gd" id="1_a0hww"]
 [ext_resource type="Texture2D" uid="uid://ds52e3qriilca" path="res://Art/Assets/Play Scene/Player/Player.png" id="2_asnge"]
 [ext_resource type="PackedScene" uid="uid://crroyrcw2et8j" path="res://Scenes/Crank/Crank.tscn" id="3_a0hww"]
+[ext_resource type="Texture2D" uid="uid://c88m7hdq6sgpt" path="res://Art/Assets/Play Scene/VFX/Attack.png" id="4_sbu84"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
 radius = 20.0
@@ -54,26 +55,31 @@ script = ExtResource("1_a0hww")
 
 [node name="Car" type="Sprite2D" parent="." unique_id=1086041179]
 z_index = 1
-position = Vector2(-1, 27)
 rotation = 3.1415927
 texture = ExtResource("2_asnge")
+offset = Vector2(0, -19)
 
 [node name="Crank" parent="Car" unique_id=1994099940 groups=["crank"] instance=ExtResource("3_a0hww")]
-position = Vector2(-2.0000005, -5)
+show_behind_parent = true
+position = Vector2(-3.000002, -24)
 rotation = 0.0
 
+[node name="Attack" type="Sprite2D" parent="Car" unique_id=717254537]
+modulate = Color(1, 1, 1, 0)
+show_behind_parent = true
+texture = ExtResource("4_sbu84")
+offset = Vector2(0, 50)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1938754536]
-position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_ebdu8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1089803300]
 libraries/ = SubResource("AnimationLibrary_dfrl7")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1822497117]
 process_mode = 3
 
 [node name="SensorArea" type="Area2D" parent="." unique_id=671008190]
-position = Vector2(0, 9)
 collision_layer = 4
 collision_mask = 0
 monitoring = false

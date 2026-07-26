@@ -10,6 +10,7 @@ rotation = 3.1415927
 script = ExtResource("1_crank")
 
 [node name="CrankSprite" type="Sprite2D" parent="." unique_id=959162804]
+z_index = 1
 texture = ExtResource("2_suga2")
 offset = Vector2(33, -1)
 
@@ -19,6 +20,7 @@ offset_left = -41.000004
 offset_top = -19.999996
 offset_right = 40.999996
 offset_bottom = 60.000004
+value = 100.0
 fill_mode = 4
 texture_progress = ExtResource("3_progress")
 
