@@ -6,6 +6,7 @@ signal died
 @onready var _collision_shape: CollisionPolygon2D = $StaticBody2D/CollisionPolygon2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _core: BossCore = $BossCore
+@onready var _hazard_spawner: HazardSpawner = $HazardSpawner
 
 var _boss_radius: float = -1.0
 
@@ -15,6 +16,7 @@ func _ready() -> void:
     _core.hit_taken.connect(_flash)
     _animation_player.animation_finished.connect(_on_animation_finished)
     _sprite.animation_finished.connect(_on_animated_sprite_2d_animation_finished)
+    _hazard_spawner.hazard_spawned.connect(play_attack)
 
 
 func is_dead() -> bool:
@@ -23,6 +25,10 @@ func is_dead() -> bool:
 
 func hit() -> bool:
     return _core.hit()
+
+
+func play_attack() -> void:
+    _sprite.play("attack")
 
 
 func _flash() -> void:

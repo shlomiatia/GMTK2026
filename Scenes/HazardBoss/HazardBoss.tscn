@@ -280,10 +280,8 @@ script = ExtResource("2_hzboss")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=884540309]
 sprite_frames = SubResource("SpriteFrames_jfw1m")
 autoplay = "default"
-frame_progress = 0.793457
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1026095742]
-visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=526713425]
 polygon = PackedVector2Array(37, -155, 63, -121, 114, -121, 141, -113, 149, -101, 147, -43, 131, -25, 121, -19, 132, 15, 146, 18, 185, 102, 196, 106, 219, 131, 195, 150, 156, 137, 140, 136, 112, 147, 83, 146, 51, 141, 17, 157, -20, 157, -56, 141, -84, 145, -110, 148, -143, 135, -178, 144, -194, 151, -216, 138, -217, 129, -193, 104, -186, 104, -148, 20, -130, 14, -120, -20, -142, -34, -148, -62, -147, -102, -138, -113, -113, -121, -64, -122, -38, -156)
@@ -299,6 +297,7 @@ position = Vector2(0, 171)
 [node name="HazardSpawner" parent="." unique_id=583134976 instance=ExtResource("11_hazardspawner")]
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=828428196]
+position = Vector2(0, 9)
 energy = 0.0
 texture = ExtResource("8_shadow")
 
