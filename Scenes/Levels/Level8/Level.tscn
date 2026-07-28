@@ -32,4 +32,4 @@ position = Vector2(1101, 481)
 position = Vector2(1228, 288)
 
 [node name="HazardBoss" parent="." unique_id=515765067 instance=ExtResource("6_7vuv1")]
-position = Vector2(963, 206)
+position = Vector2(960, 206)

@@ -3,13 +3,13 @@ class_name HazardSpawner extends Node
 signal hazard_spawned
 
 const SPAWN_ATTEMPTS := 20
-const FIXED_HAZARDS := [
-    {"size": "bigger", "position": Vector2(742, 165)},
-    {"size": "bigger", "position": Vector2(1173, 161)},
-    {"size": "normal", "position": Vector2(749, 388)},
-    {"size": "normal", "position": Vector2(1165, 389)},
-    {"size": "normal", "position": Vector2(880, 397)},
-    {"size": "normal", "position": Vector2(1045, 391)},
+const FIXED_HAZARD_POSITIONS := [
+    Vector2(772, 160),
+    Vector2(1154, 160),
+    Vector2(742, 397),
+    Vector2(898, 420),
+    Vector2(1019, 420),
+    Vector2(1180, 397),
 ]
 
 @export var hazard_scene: PackedScene
@@ -45,9 +45,8 @@ func spawn_fixed_wave() -> void:
     _pending_hazards.clear()
     for hazard in get_tree().get_nodes_in_group("hazard"):
         (hazard as Hazard).despawn()
-    for entry in FIXED_HAZARDS:
-        var scene: PackedScene = bigger_hazard_scene if entry["size"] == "bigger" else hazard_scene
-        _spawn_hazard_at(scene, entry["position"])
+    for pos in FIXED_HAZARD_POSITIONS:
+        _spawn_hazard_at(hazard_scene, pos)
     _spawn_timer.start()
 
 

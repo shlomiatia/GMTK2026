@@ -13,7 +13,6 @@ const _wall_collision_sfx := [
 	preload("res://Audio/SFX V1/Wall collision-002.wav"),
 ]
 const _enemy_collision_sfx := preload("res://Audio/SFX V1/Enemy Collision.wav")
-const _boss_collision_sfx := preload("res://Audio/SFX V1/Boss Collision NO KILL.wav")
 
 @onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -69,7 +68,7 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
 		return
 	_show_attack(-collision.get_normal())
 	var sfx: AudioStream = null
-	var boss_killed := false
+	var boss_hit_registered := false
 	var enemy := collision.get_collider() as Enemy
 	if enemy && velocity.length() >= Constants.enemy_kill_speed:
 		enemy.die()
@@ -84,9 +83,10 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
 	var boss: Node = collider if collider.is_in_group("boss") else collider.get_parent()
 	if boss && boss.is_in_group("boss") && velocity.length() >= Constants.enemy_kill_speed && boss.call("hit"):
 		boss_hit.emit(boss)
-		boss_killed = boss.call("is_dead")
-		sfx = null if boss_killed else _boss_collision_sfx
-	if !sfx && !boss_killed:
+		boss_hit_registered = true
+		if !boss.call("is_dead"):
+			SfxPlayer.play_boss_collision()
+	if !sfx && !boss_hit_registered:
 		sfx = _wall_collision_sfx[_wall_sfx_index]
 		_wall_sfx_index = 1 - _wall_sfx_index
 	if sfx:
