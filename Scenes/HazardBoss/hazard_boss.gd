@@ -14,6 +14,7 @@ var _boss_radius: float = -1.0
 func _ready() -> void:
     _core.killed.connect(_die)
     _core.hit_taken.connect(_flash)
+    _core.hit_taken.connect(_hazard_spawner.spawn_fixed_wave)
     _animation_player.animation_finished.connect(_on_animation_finished)
     _sprite.animation_finished.connect(_on_animated_sprite_2d_animation_finished)
     _hazard_spawner.hazard_spawned.connect(play_attack)
@@ -34,9 +35,7 @@ func play_attack() -> void:
 
 
 func _flash() -> void:
-    _sprite.self_modulate = Color(1.0, 1.0, 1.0, 0.3)
-    var tween := create_tween()
-    tween.tween_property(_sprite, "self_modulate", Color(1.0, 1.0, 1.0, 1.0), _core.invincibility_duration)
+    BossFlashUtils.flash([_sprite], "self_modulate", _core.invincibility_duration)
 
 
 func get_radius() -> float:

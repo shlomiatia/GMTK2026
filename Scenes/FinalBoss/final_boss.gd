@@ -14,6 +14,7 @@ signal car_hit
 
 
 func _ready() -> void:
+    _core.invincibility_duration = 360.0 / Constants.final_boss_dial_speed_degrees
     _core.killed.connect(_die)
     _core.hit_taken.connect(_flash)
     _dial_area.body_entered.connect(_on_dial_body_entered)
@@ -39,11 +40,7 @@ func get_radius() -> float:
 
 
 func _flash() -> void:
-    _body_sprite.self_modulate = Color(1.0, 1.0, 1.0, 0.3)
-    _dial.self_modulate = Color(1.0, 1.0, 1.0, 0.3)
-    var tween := create_tween()
-    tween.tween_property(_body_sprite, "self_modulate", Color(1.0, 1.0, 1.0, 1.0), _core.invincibility_duration)
-    tween.parallel().tween_property(_dial, "self_modulate", Color(1.0, 1.0, 1.0, 1.0), _core.invincibility_duration)
+    BossFlashUtils.flash([_body_sprite, _dial], "self_modulate", _core.invincibility_duration)
 
 
 func _on_dial_body_entered(body: Node2D) -> void:

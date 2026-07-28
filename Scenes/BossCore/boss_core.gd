@@ -5,7 +5,7 @@ signal hit_taken
 signal hp_changed(hits_remaining: int)
 
 @export var hits_to_kill: int = 3
-@export var invincibility_duration: float = 1
+@export var invincibility_duration: float = 3
 
 @onready var _invincibility_timer: Timer = $InvincibilityTimer
 
@@ -36,7 +36,7 @@ func hit() -> bool:
         killed.emit()
         return true
     _is_invincible = true
-    _invincibility_timer.start()
+    _invincibility_timer.start(invincibility_duration)
     return true
 
 

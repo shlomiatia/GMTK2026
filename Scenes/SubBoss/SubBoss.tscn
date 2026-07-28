@@ -5,10 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://demslo7f0kcrx" path="res://Scenes/BossCore/BossCore.tscn" id="3_bosscore"]
 [ext_resource type="PackedScene" path="res://Scenes/GearSpawner/GearSpawner.tscn" id="4_gearspawner"]
 [ext_resource type="Texture2D" uid="uid://cy1jiymeivcbx" path="res://Art/Generated/Sub Boss Shadow.png" id="5_1c02f"]
-[ext_resource type="PackedScene" uid="uid://dbossintro01" path="res://Scenes/BossIntro/BossIntro.tscn" id="6_intro"]
-[ext_resource type="AudioStream" path="res://Audio/SFX V1/Wall collision-001.wav" id="7_wall1"]
-[ext_resource type="AudioStream" path="res://Audio/SFX V1/Wall collision-002.wav" id="8_wall2"]
-[ext_resource type="AudioStream" path="res://Audio/SFX V1/Enemy Collision.wav" id="9_enemy"]
+[ext_resource type="PackedScene" path="res://Scenes/BossIntro/BossIntro.tscn" id="6_intro"]
 [ext_resource type="PackedScene" uid="uid://dbmypk4a1h3tq" path="res://Scenes/SmokeParticleEmitter/SmokeParticleEmitter.tscn" id="10_smoke"]
 
 [sub_resource type="Animation" id="Animation_reset"]
@@ -73,7 +70,7 @@ texture = ExtResource("2_gebj6")
 libraries/ = SubResource("AnimationLibrary_boss")
 
 [node name="AimTimer" type="Timer" parent="." unique_id=1246858612]
-wait_time = 3.0
+wait_time = 1.5
 one_shot = true
 
 [node name="BossCore" parent="." unique_id=1747566252 instance=ExtResource("3_bosscore")]
@@ -94,10 +91,10 @@ color = Color(0, 0, 0, 1)
 
 [node name="BossIntro" parent="." unique_id=1979154801 instance=ExtResource("6_intro")]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1641352085]
 process_mode = 3
 
-[node name="SmokeParticleEmitter" parent="." instance=ExtResource("10_smoke")]
+[node name="SmokeParticleEmitter" parent="." unique_id=1639777770 instance=ExtResource("10_smoke")]
 position = Vector2(0, -70)
-direction = Vector2(0, -1)
 emitting = false
+direction = Vector2(0, -1)
