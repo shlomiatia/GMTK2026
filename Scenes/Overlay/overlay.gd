@@ -32,7 +32,7 @@ func show_win() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if !event.is_pressed() || event.is_echo():
 		return
-	if _lost && event.is_action("restart"):
+	if _lost && _is_button_event(event):
 		get_tree().paused = false
 		restart_pressed.emit()
 		return
@@ -42,4 +42,4 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _is_button_event(event: InputEvent) -> bool:
-	return event is InputEventKey || event is InputEventMouseButton || event is InputEventJoypadButton
+	return event is InputEventKey || event is InputEventMouseButton || event is InputEventJoypadButton || event is InputEventScreenTouch

@@ -5,7 +5,6 @@
 
 [node name="VirtualCursor" type="Sprite2D" unique_id=2080145496 groups=["menu_pause_exempt"]]
 process_mode = 3
-visible = false
 top_level = true
 texture = ExtResource("1_yed1j")
 script = ExtResource("1_cursor")

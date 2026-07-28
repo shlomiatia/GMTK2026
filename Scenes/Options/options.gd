@@ -5,6 +5,7 @@ const LEVEL_COUNT := 15
 var original_paused_state = false
 var _suppressed: Dictionary = {}
 var _level_buttons: Array[TextureButton] = []
+var _standalone: bool = false
 
 @onready var _level_select: Control = $LevelSelect
 @onready var _auto_crank_button: TextureButton = $LevelSelect/AutoCrankButton
@@ -17,9 +18,16 @@ func _ready() -> void:
         _level_buttons.append(button)
         button.pressed.connect(_on_level_pressed.bind(level_number))
     _auto_crank_button.pressed.connect(_on_auto_crank_pressed)
+    _standalone = get_tree().current_scene == self
+    if _standalone:
+        _refresh()
+        Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+        visible = true
 
 
 func _process(_delta: float) -> void:
+    if _standalone:
+        return
     if Input.is_action_just_pressed("options"):
         visible = !visible
         if visible:
@@ -37,7 +45,7 @@ func _process(_delta: float) -> void:
 
 func _refresh() -> void:
     for i in range(_level_buttons.size()):
-        _level_buttons[i].visible = GameState.is_completed(i + 1)
+        _level_buttons[i].visible = GameState.is_unlocked(i + 1)
     _check_mark.visible = GameState.auto_crank_enabled
 
 

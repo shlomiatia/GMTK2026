@@ -30,6 +30,7 @@ func _ready() -> void:
         _sprite.texture = texture
     if Engine.is_editor_hint():
         return
+    GameState.mark_unlocked(_current_level_number())
     _timer.wait_time = Constants.default_level_time
     _timer.timeout.connect(_on_timer_timeout)
     _timer.start()
@@ -230,7 +231,6 @@ func _win() -> void:
     else:
         SfxPlayer.play_win_stair()
     get_tree().paused = true
-    GameState.mark_completed(_current_level_number())
     if have_next_level:
         _go_to_next_level()
     else:

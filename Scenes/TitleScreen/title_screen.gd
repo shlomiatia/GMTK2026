@@ -1,6 +1,6 @@
 extends Node2D
 
-const _next_level_path := "res://Scenes/Levels/Level1/Level.tscn"
+const _next_level_path := "res://Scenes/Options/Options.tscn"
 
 @onready var _start_button: TextureButton = $StartButton
 @onready var _credits_button: TextureButton = $CreditsButton

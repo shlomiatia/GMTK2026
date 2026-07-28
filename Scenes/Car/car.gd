@@ -21,9 +21,9 @@ const _enemy_collision_sfx := preload("res://Audio/SFX V1/Enemy Collision.wav")
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var _attack: Sprite2D = $Car/Attack
 @onready var _smoke: SmokeParticleEmitter = $SmokeParticleEmitter
+@onready var _steering: Steering = $Steering
 
 var _state: State = State.IDLE
-var _angular_velocity: float = 0.0
 var _wall_sfx_index: int = 0
 var _attack_tween: Tween
 
@@ -41,18 +41,21 @@ func _process(_delta: float) -> void:
 	_smoke.emitting = _state == State.LAUNCHED && velocity.length() > Constants.enemy_kill_speed
 
 
+func _get_steer_axis() -> float:
+	if Constants.is_mobile_input():
+		return _steering.get_axis(global_position, -transform.y)
+	return Input.get_axis("left", "right")
+
+
 func _physics_process(delta: float) -> void:
 	if _state == State.IDLE:
-		var idle_dir := Input.get_axis("left", "right")
-		_angular_velocity = deg_to_rad(Constants.steer_speed) * idle_dir
-		_apply_angular_velocity(delta)
+		rotation += deg_to_rad(Constants.steer_speed) * _get_steer_axis() * delta
 		return
 	if _state != State.LAUNCHED:
 		return
-	var dir := Input.get_axis("left", "right")
-	_angular_velocity = deg_to_rad(Constants.steer_speed) * dir
-	var steer_angle := _apply_angular_velocity(delta)
+	var steer_angle := deg_to_rad(Constants.steer_speed) * _get_steer_axis() * delta
 	if steer_angle != 0.0:
+		rotation += steer_angle
 		velocity = velocity.rotated(steer_angle)
 	velocity = velocity.move_toward(Vector2.ZERO, Constants.friction * delta)
 	_handle_collision(move_and_collide(velocity * delta))
@@ -102,14 +105,6 @@ func _show_attack(direction: Vector2) -> void:
 	_attack.modulate = Color(1, 1, 1, 1)
 	_attack_tween = create_tween()
 	_attack_tween.tween_property(_attack, "modulate:a", 0.0, 0.25)
-
-
-func _apply_angular_velocity(delta: float) -> float:
-	var angle_delta := _angular_velocity * delta
-	if angle_delta == 0.0:
-		return 0.0
-	rotation += angle_delta
-	return angle_delta
 
 
 func _on_crank_launched(power_ratio: float) -> void:

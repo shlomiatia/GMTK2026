@@ -10,9 +10,14 @@ func _ready() -> void:
     global_position = _world_pos
 
 func _input(event: InputEvent) -> void:
-    if !(event is InputEventMouseMotion):
+    var motion_relative: Vector2
+    if event is InputEventMouseMotion:
+        motion_relative = (event as InputEventMouseMotion).relative
+    elif event is InputEventScreenDrag:
+        motion_relative = (event as InputEventScreenDrag).relative
+    else:
         return
-    var relative := get_viewport().get_canvas_transform().affine_inverse().basis_xform((event as InputEventMouseMotion).relative)
+    var relative := get_viewport().get_canvas_transform().affine_inverse().basis_xform(motion_relative)
     _world_pos += relative
     _clamp_to_viewport()
     global_position = _world_pos

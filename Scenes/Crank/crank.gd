@@ -146,3 +146,7 @@ func _try_launch() -> void:
 
 func get_launch_speed() -> float:
     return _crank_degrees / Constants.max_crank_degrees * Constants.max_speed
+
+
+func get_pointer_world_position() -> Vector2:
+    return _virtual_cursor.global_position

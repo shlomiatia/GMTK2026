@@ -1,5 +1,7 @@
 class_name Constants
 
+static var force_mobile_input := true
+
 static var max_crank_degrees := 3.0 * 360.0
 static var auto_crank_degrees_per_second := 3.0 * 360.0
 static var max_speed := 1180.0
@@ -35,3 +37,7 @@ static var boss_intro_glow_delay_seconds := 0.0
 static var boss_intro_death_fade_seconds := 1.0
 static var boss_intro_music_fade_seconds := 3.0
 static var final_boss_victory_delay_seconds := 1.0
+
+
+static func is_mobile_input() -> bool:
+    return force_mobile_input || DisplayServer.is_touchscreen_available()

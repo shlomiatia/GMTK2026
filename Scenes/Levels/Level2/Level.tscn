@@ -46,4 +46,5 @@ position = Vector2(1166, 235)
 [node name="Tutorial" parent="." instance=ExtResource("8_tutorial")]
 mode = 1
 simple_message = "Don't forget to aim! Use A to turn left and D to turn right."
+simple_message_touch = "Don't forget to aim! Drag toward where you want to go."
 fade_trigger = 0
