@@ -17,7 +17,7 @@ func _input(event: InputEvent) -> void:
         motion_relative = (event as InputEventScreenDrag).relative
     else:
         return
-    var relative := get_viewport().get_canvas_transform().affine_inverse().basis_xform(motion_relative)
+    var relative := get_viewport().get_canvas_transform().affine_inverse().basis_xform(motion_relative) * Constants.virtual_cursor_sensitivity
     _world_pos += relative
     _clamp_to_viewport()
     global_position = _world_pos

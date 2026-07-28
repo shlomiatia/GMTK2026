@@ -1,12 +1,13 @@
 class_name Constants
 
-static var force_mobile_input := true
+static var force_mobile_input := false
+static var virtual_cursor_sensitivity := 2.0
 
 static var max_crank_degrees := 3.0 * 360.0
 static var auto_crank_degrees_per_second := 3.0 * 360.0
 static var max_speed := 1180.0
 static var friction := 600.0
-static var steer_speed := 200.0
+static var steer_speed := 250.0
 static var enemy_speed := 200.0
 static var enemy_kill_speed := 600.0
 static var gear_time_bonus := 3.0

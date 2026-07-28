@@ -6,8 +6,8 @@ const _full_turn_angle := deg_to_rad(90.0)
 
 
 func get_axis(car_position: Vector2, car_forward: Vector2) -> float:
-    if !Input.is_action_pressed("crank"):
-        return 0.0
+    #if !Input.is_action_pressed("crank"):
+    #    return 0.0
     var to_target := _crank.get_pointer_world_position() - car_position
     if to_target.length() < 1.0:
         return 0.0
