@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bgicfltgkayvf" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level13.png" id="17_lvl13"]
 [ext_resource type="Texture2D" uid="uid://ccjns0djklk85" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level14.png" id="18_lvl14"]
 [ext_resource type="Texture2D" uid="uid://02q6g422tgnf" path="res://Art/Assets/Play Scene/Levels/Thumbnails/Level15.png" id="19_lvl15"]
+[ext_resource type="FontFile" uid="uid://b3o032ienhnh3" path="res://Art/Fonts/crostan/Crostan-Regular.ttf" id="20_1ifka"]
 
 [node name="Options" type="CanvasLayer" unique_id=211288680]
 process_mode = 3
@@ -235,3 +236,12 @@ offset_right = 241.5
 offset_bottom = 36.5
 mouse_filter = 2
 texture = ExtResource("3_chk")
+
+[node name="Label" type="Label" parent="LevelSelect" unique_id=1388768721]
+layout_mode = 0
+offset_left = 61.5
+offset_top = 138.5
+offset_right = 188.5
+offset_bottom = 161.5
+theme_override_fonts/font = ExtResource("20_1ifka")
+text = "Press P to pause"
