@@ -102,7 +102,7 @@ _data = {
 
 [node name="SceneTransition" type="CanvasLayer" unique_id=883743098]
 process_mode = 3
-layer = 10
+layer = 11
 script = ExtResource("3_script")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=942862328]

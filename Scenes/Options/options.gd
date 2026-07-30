@@ -52,7 +52,6 @@ func _refresh() -> void:
 func _on_level_pressed(level_number: int) -> void:
     SfxPlayer.play_winder_click()
     _restore_always_nodes()
-    visible = false
     get_tree().paused = false
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
     SceneTransition.transition_to_scene("res://Scenes/Levels/Level%d/Level.tscn" % level_number)
