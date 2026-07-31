@@ -32,12 +32,24 @@ var _cranking: bool = false
 var _last_angle: float = NAN
 var _last_move_angle: float = NAN
 var _using_mouse: bool = false
+var _touch_world_pos: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
     _virtual_cursor.moved.connect(_on_virtual_cursor_moved)
     _progress_bar.min_value = 0.0
     _progress_bar.max_value = Constants.max_crank_degrees
     _progress_bar.value = 0.0
+
+
+func _input(event: InputEvent) -> void:
+    if event is InputEventScreenTouch && (event as InputEventScreenTouch).pressed:
+        _touch_world_pos = _screen_to_world((event as InputEventScreenTouch).position)
+    elif event is InputEventScreenDrag:
+        _touch_world_pos = _screen_to_world((event as InputEventScreenDrag).position)
+
+
+func _screen_to_world(screen_pos: Vector2) -> Vector2:
+    return get_viewport().get_canvas_transform().affine_inverse() * screen_pos
 
 func _on_virtual_cursor_moved(relative: Vector2) -> void:
     if !can_process():
@@ -149,4 +161,6 @@ func get_launch_speed() -> float:
 
 
 func get_pointer_world_position() -> Vector2:
+    if DisplayServer.is_touchscreen_available():
+        return _touch_world_pos
     return _virtual_cursor.global_position

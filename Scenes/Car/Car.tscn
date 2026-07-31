@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://rf87cou38mpc"]
+[gd_scene format=3 uid="uid://c0bd3f07in5tf"]
 
 [ext_resource type="Script" uid="uid://ds6mkts7batl7" path="res://Scenes/Car/car.gd" id="1_a0hww"]
 [ext_resource type="Texture2D" uid="uid://ds52e3qriilca" path="res://Art/Assets/Play Scene/Player/Player.png" id="2_asnge"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://ncs7nhhr0476" path="res://Art/Assets/Play Scene/Player/Player_Hit.png" id="3_dfrl7"]
 [ext_resource type="Texture2D" uid="uid://c88m7hdq6sgpt" path="res://Art/Assets/Play Scene/VFX/Attack.png" id="4_sbu84"]
 [ext_resource type="PackedScene" uid="uid://dbmypk4a1h3tq" path="res://Scenes/SmokeParticleEmitter/SmokeParticleEmitter.tscn" id="5_smoke"]
-[ext_resource type="Script" path="res://Scenes/Steering/steering.gd" id="6_steering"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebdu8"]
 radius = 20.0
@@ -142,6 +141,3 @@ shape = SubResource("CircleShape2D_xl6da")
 position = Vector2(0, 26)
 direction = Vector2(0, 1)
 emitting = false
-
-[node name="Steering" type="Node" parent="."]
-script = ExtResource("6_steering")

@@ -21,7 +21,6 @@ const _enemy_collision_sfx := preload("res://Audio/SFX V1/Enemy Collision.wav")
 @onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var _attack: Sprite2D = $Car/Attack
 @onready var _smoke: SmokeParticleEmitter = $SmokeParticleEmitter
-@onready var _steering: Steering = $Steering
 
 var _state: State = State.IDLE
 var _wall_sfx_index: int = 0
@@ -41,19 +40,24 @@ func _process(_delta: float) -> void:
 	_smoke.emitting = _state == State.LAUNCHED && velocity.length() > Constants.enemy_kill_speed
 
 
-func _get_steer_axis() -> float:
+func _get_steer_delta(delta: float) -> float:
 	if Constants.is_mobile_input():
-		return _steering.get_axis(global_position, -transform.y)
-	return Input.get_axis("left", "right")
+		if !Input.is_action_pressed("crank"):
+			return 0.0
+		var to_target := _crank.get_pointer_world_position() - global_position
+		if to_target.length() < 1.0:
+			return 0.0
+		return wrapf(to_target.angle() + PI / 2.0 - rotation, -PI, PI)
+	return deg_to_rad(Constants.steer_speed) * Input.get_axis("left", "right") * delta
 
 
 func _physics_process(delta: float) -> void:
 	if _state == State.IDLE:
-		rotation += deg_to_rad(Constants.steer_speed) * _get_steer_axis() * delta
+		rotation += _get_steer_delta(delta)
 		return
 	if _state != State.LAUNCHED:
 		return
-	var steer_angle := deg_to_rad(Constants.steer_speed) * _get_steer_axis() * delta
+	var steer_angle := _get_steer_delta(delta)
 	if steer_angle != 0.0:
 		rotation += steer_angle
 		velocity = velocity.rotated(steer_angle)
