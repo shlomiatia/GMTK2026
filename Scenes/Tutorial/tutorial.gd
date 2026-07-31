@@ -10,7 +10,7 @@ const _GO_MESSAGE := "Get to the stairs before time runs out!"
 
 const _HOLD_MESSAGE_TOUCH := "To get started, hold your finger on the screen.\nDon't let go until you're ready to launch."
 const _WIND_UP_MESSAGE_TOUCH := "Wind up by making a circular motion.\nThe more you wind it up, the farther you'll go."
-const _RELEASE_MESSAGE_TOUCH := "Release to launch!"
+const _RELEASE_MESSAGE_TOUCH := "Drag toward where you want to go. Release to launch!"
 
 @export var mode: Mode = Mode.LEVEL1
 @export var simple_message: String = ""

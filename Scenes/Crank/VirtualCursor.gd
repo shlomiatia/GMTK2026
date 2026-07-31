@@ -8,6 +8,7 @@ func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
     _world_pos = get_global_mouse_position()
     global_position = _world_pos
+    visible = Constants.force_mobile_input
 
 func _input(event: InputEvent) -> void:
     var motion_relative: Vector2
