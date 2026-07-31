@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b6wfreo7ajycp" path="res://Scenes/Level/Level.tscn" id="1_k7bbg"]
 [ext_resource type="PackedScene" uid="uid://bemlcu6wijhau" path="res://Scenes/Goal/Goal.tscn" id="2_66akk"]
 [ext_resource type="Texture2D" uid="uid://bowh577ksqudj" path="res://Art/Assets/Play Scene/Levels/Lv 6.png" id="2_wwk17"]
-[ext_resource type="PackedScene" uid="uid://rf87cou38mpc" path="res://Scenes/Car/Car.tscn" id="3_ci5o1"]
+[ext_resource type="PackedScene" uid="uid://c0bd3f07in5tf" path="res://Scenes/Car/car.tscn" id="3_ci5o1"]
 [ext_resource type="PackedScene" path="res://Scenes/Objectives/GoalObjective/GoalObjective.tscn" id="4_wwk17"]
 [ext_resource type="PackedScene" uid="uid://culglce1hed48" path="res://Scenes/Gear/Gear.tscn" id="5_htt4v"]
 [ext_resource type="PackedScene" uid="uid://b8dlysmmnu6em" path="res://Scenes/Hazard/BiggerHazard.tscn" id="6_66akk"]
