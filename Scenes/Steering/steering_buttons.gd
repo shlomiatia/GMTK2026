@@ -6,28 +6,49 @@ static var instance: SteeringButtons
 @onready var _right: Control = $HBoxContainer/Right
 
 var _touch_sides: Dictionary = {}
+var _mobile: bool = false
 
 
 func _ready() -> void:
 	instance = self
-	var mobile := Constants.is_mobile_input()
-	visible = mobile
-	set_process_input(mobile)
+	_mobile = Constants.is_mobile_input()
+	set_process_input(_mobile)
+	set_process(_mobile)
+	_update_visibility()
 
 
 func _exit_tree() -> void:
 	if instance == self:
 		instance = null
-	_touch_sides.clear()
-	_apply_action(&"left", false)
-	_apply_action(&"right", false)
+	_reset_touches()
 
 
 func is_point_on_buttons(pos: Vector2) -> bool:
 	return !_side_at(pos).is_empty()
 
 
+func _process(_delta: float) -> void:
+	_update_visibility()
+
+
+func _update_visibility() -> void:
+	var should_be_visible := _mobile && !get_tree().paused
+	if visible == should_be_visible:
+		return
+	visible = should_be_visible
+	if !visible:
+		_reset_touches()
+
+
+func _reset_touches() -> void:
+	_touch_sides.clear()
+	_apply_action(&"left", false)
+	_apply_action(&"right", false)
+
+
 func _input(event: InputEvent) -> void:
+	if get_tree().paused:
+		return
 	if event is InputEventScreenTouch:
 		var touch := event as InputEventScreenTouch
 		if touch.pressed:
