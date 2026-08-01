@@ -11,13 +11,11 @@ func _ready() -> void:
     visible = Constants.force_mobile_input
 
 func _input(event: InputEvent) -> void:
-    var motion_relative: Vector2
-    if event is InputEventMouseMotion:
-        motion_relative = (event as InputEventMouseMotion).relative
-    elif event is InputEventScreenDrag:
-        motion_relative = (event as InputEventScreenDrag).relative
-    else:
+    if DisplayServer.is_touchscreen_available():
         return
+    if !(event is InputEventMouseMotion):
+        return
+    var motion_relative := (event as InputEventMouseMotion).relative
     var relative := get_viewport().get_canvas_transform().affine_inverse().basis_xform(motion_relative) * Constants.virtual_cursor_sensitivity
     _world_pos += relative
     _clamp_to_viewport()

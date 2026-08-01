@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c37fpjxr4o6xy"]
+
+[ext_resource type="Script" uid="uid://dy32y86roecu6" path="res://Scenes/Steering/steering_buttons.gd" id="1_steering"]
+
+[node name="SteeringButtons" type="Control" unique_id=1832457601]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_steering")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=325886000]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -177.0
+offset_right = 358.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Left" type="Label" parent="HBoxContainer" unique_id=1640621263]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "L"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Right" type="Label" parent="HBoxContainer" unique_id=443616148]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "R"
+horizontal_alignment = 1
+vertical_alignment = 1

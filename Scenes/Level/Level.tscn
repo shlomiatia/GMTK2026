@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cvgf8n6rd2xlp" path="res://Art/Assets/Play Scene/Environment.png" id="5_ksici"]
 [ext_resource type="PackedScene" uid="uid://b0q6g075ds0mt" path="res://Scenes/Arena/Arena.tscn" id="6_ksici"]
 [ext_resource type="Texture2D" uid="uid://d2i42xbbqobcr" path="res://Art/Assets/Play Scene/Timer.png" id="7_8gphe"]
+[ext_resource type="PackedScene" uid="uid://c37fpjxr4o6xy" path="res://Scenes/Steering/SteeringButtons.tscn" id="8_steering"]
 
 [node name="Level" type="Node2D" unique_id=1740858742]
 script = ExtResource("1_level")
@@ -14,6 +15,9 @@ script = ExtResource("1_level")
 [node name="Options" parent="." unique_id=616999487 instance=ExtResource("2_optns")]
 
 [node name="Overlay" parent="." unique_id=519770986 instance=ExtResource("3_overlay")]
+
+[node name="SteeringButtons" parent="Overlay" unique_id=1067704765 instance=ExtResource("8_steering")]
+layout_mode = 3
 
 [node name="ShakingCamera" parent="." unique_id=805263946 instance=ExtResource("4_qp1lj")]
 anchor_mode = 0

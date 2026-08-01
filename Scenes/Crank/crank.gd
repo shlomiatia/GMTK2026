@@ -32,7 +32,7 @@ var _cranking: bool = false
 var _last_angle: float = NAN
 var _last_move_angle: float = NAN
 var _using_mouse: bool = false
-var _touch_world_pos: Vector2 = Vector2.ZERO
+var _winding_index: int = -1
 
 func _ready() -> void:
     _virtual_cursor.moved.connect(_on_virtual_cursor_moved)
@@ -42,58 +42,51 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-    if event is InputEventScreenTouch && (event as InputEventScreenTouch).pressed:
-        _touch_world_pos = _screen_to_world((event as InputEventScreenTouch).position)
+    if !DisplayServer.is_touchscreen_available() || !is_processing():
+        return
+    if event is InputEventScreenTouch:
+        var touch := event as InputEventScreenTouch
+        if touch.pressed:
+            if _winding_index != -1:
+                return
+            if SteeringButtons.instance && SteeringButtons.instance.is_point_on_buttons(touch.position):
+                return
+            _winding_index = touch.index
+            _begin_crank(true)
+        elif touch.index == _winding_index:
+            _winding_index = -1
+            _end_crank()
     elif event is InputEventScreenDrag:
-        _touch_world_pos = _screen_to_world((event as InputEventScreenDrag).position)
+        var drag := event as InputEventScreenDrag
+        if drag.index == _winding_index && !GameState.auto_crank_enabled:
+            _wind_from_relative(drag.relative)
 
-
-func _screen_to_world(screen_pos: Vector2) -> Vector2:
-    return get_viewport().get_canvas_transform().affine_inverse() * screen_pos
 
 func _on_virtual_cursor_moved(relative: Vector2) -> void:
     if !can_process():
         return
     if !_cranking || !_using_mouse:
         return
-    if relative.length() < min_move_pixels:
-        return
-    var move_angle := relative.angle()
-    if !is_nan(_last_move_angle):
-        _advance_crank(move_angle, _last_move_angle)
-    _last_move_angle = move_angle
+    _wind_from_relative(relative)
 
 
 func _process(delta: float) -> void:
     if GameState.auto_crank_enabled:
-        if Input.is_action_just_pressed("crank"):
-            _cranking = true
-            _audio_stream_player.stream = _winder_click_sfx
-            _audio_stream_player.play()
-            crank_pressed.emit()
-        elif Input.is_action_just_released("crank"):
-            _cranking = false
-            var degrees_before_launch := _crank_degrees
-            _try_launch()
-            crank_released.emit(degrees_before_launch)
+        if !DisplayServer.is_touchscreen_available() && Input.is_action_just_pressed("crank"):
+            _begin_crank(true)
+        elif !DisplayServer.is_touchscreen_available() && Input.is_action_just_released("crank"):
+            _end_crank()
         elif _cranking:
             _add_crank_degrees(Constants.auto_crank_degrees_per_second * delta)
         return
 
+    if DisplayServer.is_touchscreen_available():
+        return
+
     if Input.is_action_just_pressed("crank"):
-        _using_mouse = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
-        _last_move_angle = NAN
-        if !_using_mouse:
-            _last_angle = _get_crank_angle()
-        _cranking = true
-        _audio_stream_player.stream = _winder_click_sfx
-        _audio_stream_player.play()
-        crank_pressed.emit()
+        _begin_crank(Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT))
     elif Input.is_action_just_released("crank"):
-        _cranking = false
-        var degrees_before_launch := _crank_degrees
-        _try_launch()
-        crank_released.emit(degrees_before_launch)
+        _end_crank()
     elif _cranking && !_using_mouse:
         var angle := _get_crank_angle()
         if is_nan(angle):
@@ -104,10 +97,38 @@ func _process(delta: float) -> void:
             _last_angle = angle
 
 
+func _begin_crank(using_mouse: bool) -> void:
+    _using_mouse = using_mouse
+    _last_move_angle = NAN
+    if !using_mouse:
+        _last_angle = _get_crank_angle()
+    _cranking = true
+    _audio_stream_player.stream = _winder_click_sfx
+    _audio_stream_player.play()
+    crank_pressed.emit()
+
+
+func _end_crank() -> void:
+    _cranking = false
+    var degrees_before_launch := _crank_degrees
+    _try_launch()
+    crank_released.emit(degrees_before_launch)
+
+
+func _wind_from_relative(relative: Vector2) -> void:
+    if relative.length() < min_move_pixels:
+        return
+    var move_angle := relative.angle()
+    if !is_nan(_last_move_angle):
+        _advance_crank(move_angle, _last_move_angle)
+    _last_move_angle = move_angle
+
+
 func set_enabled(value: bool) -> void:
     set_process(value)
     if !value:
         _cranking = false
+        _winding_index = -1
 
 
 func _get_crank_angle() -> float:
@@ -158,9 +179,3 @@ func _try_launch() -> void:
 
 func get_launch_speed() -> float:
     return _crank_degrees / Constants.max_crank_degrees * Constants.max_speed
-
-
-func get_pointer_world_position() -> Vector2:
-    if DisplayServer.is_touchscreen_available():
-        return _touch_world_pos
-    return _virtual_cursor.global_position

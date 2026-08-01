@@ -41,13 +41,6 @@ func _process(_delta: float) -> void:
 
 
 func _get_steer_delta(delta: float) -> float:
-	if Constants.is_mobile_input():
-		if !Input.is_action_pressed("crank"):
-			return 0.0
-		var to_target := _crank.get_pointer_world_position() - global_position
-		if to_target.length() < 1.0:
-			return 0.0
-		return wrapf(to_target.angle() + PI / 2.0 - rotation, -PI, PI)
 	return deg_to_rad(Constants.steer_speed) * Input.get_axis("left", "right") * delta
 
 
